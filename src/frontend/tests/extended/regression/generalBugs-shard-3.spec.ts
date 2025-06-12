@@ -132,7 +132,7 @@ test(
 
     expect(await page.getByTestId("playground-btn-flow").isDisabled());
 
-    expect(await page.getByText("Langflow Chat").isHidden());
+    expect(await page.getByText("WorldSeek Agent Chat").isHidden());
 
     await page.getByTestId("sidebar-search-input").click();
     await page.getByTestId("sidebar-search-input").fill("chat output");
@@ -151,6 +151,6 @@ test(
 
     await page.getByTestId("playground-btn-flow-io").click({ force: true });
 
-    expect(await page.getByText("Langflow Chat").isVisible());
+    expect(await page.getByText("WorldSeek Agent Chat").isVisible());
   },
 );

@@ -72,7 +72,7 @@ withEventDeliveryModes(
 
     expect(concatAllText.length).toBeGreaterThan(100);
 
-    expect(concatAllText).toContain("Langflow");
+    expect(concatAllText).toContain("WorldSeek Agent");
     expect(concatAllText).toContain("open-source");
     expect(concatAllText).toContain("framework");
   },

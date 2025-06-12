@@ -73,7 +73,7 @@ export default function SettingsPage(): JSX.Element {
   if (!ENABLE_DATASTAX_LANGFLOW) {
     const langflowItems = [
       {
-        title: "Langflow API Keys",
+        title: "WorldSeek Agent API Keys",
         href: "/settings/api-keys",
         icon: (
           <ForwardedIconComponent
@@ -81,17 +81,7 @@ export default function SettingsPage(): JSX.Element {
             className="w-4 flex-shrink-0 justify-start stroke-[1.5]"
           />
         ),
-      },
-      {
-        title: "Langflow Store",
-        href: "/settings/store",
-        icon: (
-          <ForwardedIconComponent
-            name="Store"
-            className="w-4 flex-shrink-0 justify-start stroke-[1.5]"
-          />
-        ),
-      },
+      }
     ];
 
     sidebarNavItems.splice(2, 0, ...langflowItems);
@@ -101,7 +91,7 @@ export default function SettingsPage(): JSX.Element {
     <PageLayout
       backTo={"/"}
       title="Settings"
-      description="Manage the general settings for Langflow."
+      description="Manage the general settings for WorldSeek Agent."
     >
       <SidebarProvider width="15rem" defaultOpen={false}>
         <SideBarButtonsComponent items={sidebarNavItems} />

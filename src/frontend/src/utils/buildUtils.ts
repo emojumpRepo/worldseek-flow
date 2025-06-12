@@ -193,7 +193,7 @@ async function pollBuildEvents(
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
         errorData.detail ||
-          "Langflow was not able to connect to the server. Please make sure your connection is working properly.",
+          "WorldSeek Agent was not able to connect to the server. Please make sure your connection is working properly.",
       );
     }
 
@@ -443,7 +443,7 @@ export async function buildFlowVertices({
     }
     onBuildError!("Error Building Flow", [
       (error as Error).message ||
-        "Langflow was not able to connect to the server. Please make sure your connection is working properly.",
+        "WorldSeek Agent was not able to connect to the server. Please make sure your connection is working properly.",
     ]);
     throw error;
   }

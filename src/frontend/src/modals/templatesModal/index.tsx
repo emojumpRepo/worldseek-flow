@@ -58,24 +58,17 @@ export default function TemplatesModal({
   ];
 
   return (
-    <BaseModal size="templates" open={open} setOpen={setOpen} className="p-0">
+    <BaseModal
+      size="templates"
+      open={open}
+      setOpen={setOpen}
+      className="p-0 w-[35%]"
+    >
       <BaseModal.Content overflowHidden className="flex flex-col p-0">
         <div className="flex h-full">
           <SidebarProvider width="15rem" defaultOpen={false}>
-            <Nav
-              categories={categories}
-              currentTab={currentTab}
-              setCurrentTab={setCurrentTab}
-            />
             <main className="flex flex-1 flex-col gap-4 overflow-hidden p-6 md:gap-8">
-              {currentTab === "get-started" ? (
-                <GetStartedComponent />
-              ) : (
-                <TemplateContentComponent
-                  currentTab={currentTab}
-                  categories={categories.flatMap((category) => category.items)}
-                />
-              )}
+              <GetStartedComponent />
               <BaseModal.Footer>
                 <div className="flex w-full flex-col justify-between gap-4 pb-4 sm:flex-row sm:items-center">
                   <div className="flex flex-col items-start justify-center">

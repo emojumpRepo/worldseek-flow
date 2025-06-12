@@ -74,6 +74,7 @@ export function FlowSidebarComponent({ isLoading }: FlowSidebarComponentProps) {
   const setErrorData = useAlertStore((state) => state.setErrorData);
   const { setOpen } = useSidebar();
   const addComponent = useAddComponent();
+  console.log("data", data);
 
   // State
   const [dataFilter, setFilterData] = useState(data);
@@ -298,16 +299,6 @@ export function FlowSidebarComponent({ isLoading }: FlowSidebarComponentProps) {
     [],
   );
 
-  const hasBundleItems = useMemo(
-    () =>
-      BUNDLES.some(
-        (item) =>
-          dataFilter[item.name] &&
-          Object.keys(dataFilter[item.name]).length > 0,
-      ),
-    [dataFilter],
-  );
-
   return (
     <Sidebar
       collapsible="offcanvas"
@@ -360,22 +351,6 @@ export function FlowSidebarComponent({ isLoading }: FlowSidebarComponentProps) {
                   sensitiveSort={sensitiveSort}
                   uniqueInputsComponents={uniqueInputsComponents}
                 />
-
-                {hasBundleItems && (
-                  <MemoizedSidebarGroup
-                    BUNDLES={BUNDLES}
-                    search={search}
-                    sortedCategories={sortedCategories}
-                    dataFilter={dataFilter}
-                    nodeColors={nodeColors}
-                    onDragStart={onDragStart}
-                    sensitiveSort={sensitiveSort}
-                    openCategories={openCategories}
-                    setOpenCategories={setOpenCategories}
-                    handleKeyDownInput={handleKeyDownInput}
-                    uniqueInputsComponents={uniqueInputsComponents}
-                  />
-                )}
               </>
             ) : (
               <NoResultsMessage onClearSearch={handleClearSearch} />

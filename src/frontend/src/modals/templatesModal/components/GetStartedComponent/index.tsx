@@ -23,13 +23,6 @@ export default function GetStartedComponent() {
       flow: examples.find((example) => example.name === "Basic Prompting"),
     },
     {
-      bgImage: vectorRag,
-      bgHorizontalImage: vectorRagHorizontal,
-      icon: "Database",
-      category: "RAG",
-      flow: examples.find((example) => example.name === "Vector Store RAG"),
-    },
-    {
       bgImage: multiAgent,
       bgHorizontalImage: multiAgentHorizontal,
       icon: "Bot",
@@ -40,10 +33,10 @@ export default function GetStartedComponent() {
 
   return (
     <div className="flex flex-1 flex-col gap-4 md:gap-8">
-      <BaseModal.Header description="Start with templates showcasing Langflow's Prompting, RAG, and Agent use cases.">
+      <BaseModal.Header description="Start with templates showcasing WorldSeek Agent's Prompting and Agent use cases.">
         Get started
       </BaseModal.Header>
-      <div className="grid flex-1 grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="grid flex-1 grid-cols-2 gap-4">
         {cardData.map((card, index) => (
           <TemplateGetStartedCardComponent key={index} {...card} />
         ))}

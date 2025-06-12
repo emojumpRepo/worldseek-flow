@@ -34,6 +34,7 @@ export const useTypesStore = create<TypesStoreType>((set, get) => ({
   },
   setData: (change: APIDataType | ((old: APIDataType) => APIDataType)) => {
     let newChange = typeof change === "function" ? change(get().data) : change;
+    console.log("newChange", newChange);
     set({ data: newChange });
     get().setComponentFields(extractFieldsFromComponenents(newChange));
   },
