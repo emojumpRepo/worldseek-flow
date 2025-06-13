@@ -13,12 +13,14 @@ export default function DropdownComponent({
   name,
   dialogInputs,
   optionsMetaData,
+  placeholder,
   nodeClass,
   nodeId,
   handleNodeClass,
   toggle,
   toggleValue,
   toggleDisable,
+  hasRefreshButton,
   ...baseInputProps
 }: InputProps<string, DropDownComponentType>) {
   const onChange = (value: any, dbValue?: boolean, skipSnapshot?: boolean) => {
@@ -37,12 +39,14 @@ export default function DropdownComponent({
         handleNodeClass={handleNodeClass}
         optionsMetaData={optionsMetaData}
         onSelect={onChange}
+        placeholder={placeholder}
         combobox={combobox}
         value={value || (toggleValue === false && toggle ? options[0] : "")}
         id={`dropdown_${id}`}
         name={name}
         dialogInputs={dialogInputs}
         handleOnNewValue={handleOnNewValue}
+        hasRefreshButton={hasRefreshButton}
         {...baseInputProps}
       />
       {toggle && toggleDisable !== true ? (

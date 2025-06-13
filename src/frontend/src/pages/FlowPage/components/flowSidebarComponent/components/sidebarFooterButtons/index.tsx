@@ -2,6 +2,7 @@ import ForwardedIconComponent from "@/components/common/genericIconComponent";
 import { Button } from "@/components/ui/button";
 import { SidebarMenuButton } from "@/components/ui/sidebar";
 import { CustomLink } from "@/customization/components/custom-link";
+import { ENABLE_LANGFLOW_STORE } from "@/customization/feature-flags";
 
 const SidebarMenuButtons = ({
   hasStore = false,
@@ -11,6 +12,34 @@ const SidebarMenuButtons = ({
 }) => {
   return (
     <>
+<<<<<<< HEAD
+=======
+      {/* TODO: Remove this on cleanup */}
+      {ENABLE_LANGFLOW_STORE && hasStore && (
+        <SidebarMenuButton asChild>
+          <CustomLink
+            to="/store"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/discover"
+          >
+            <div className="flex w-full items-center gap-2">
+              <ForwardedIconComponent
+                name="Store"
+                className="h-4 w-4 text-muted-foreground"
+              />
+              <span className="flex-1 group-data-[state=open]/collapsible:font-semibold">
+                Discover more components
+              </span>
+              <ForwardedIconComponent
+                name="SquareArrowOutUpRight"
+                className="h-4 w-4 opacity-0 transition-all group-hover/discover:opacity-100"
+              />
+            </div>
+          </CustomLink>
+        </SidebarMenuButton>
+      )}
+>>>>>>> 7aee1bc1c3ff93798460ac4f8ed110de815182aa
       <SidebarMenuButton asChild>
         <Button
           unstyled

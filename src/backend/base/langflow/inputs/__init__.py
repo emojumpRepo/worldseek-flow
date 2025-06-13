@@ -14,6 +14,7 @@ from .inputs import (
     Input,
     IntInput,
     LinkInput,
+    McpInput,
     MessageInput,
     MessageTextInput,
     MultilineInput,
@@ -28,6 +29,7 @@ from .inputs import (
     StrInput,
     TabInput,
     TableInput,
+    ToolsInput,
 )
 
 __all__ = [
@@ -45,9 +47,9 @@ __all__ = [
     "FloatInput",
     "HandleInput",
     "Input",
-    "Input",
     "IntInput",
     "LinkInput",
+    "McpInput",
     "MessageInput",
     "MessageTextInput",
     "MultilineInput",
@@ -62,4 +64,5 @@ __all__ = [
     "StrInput",
     "TabInput",
     "TableInput",
+    "ToolsInput",
 ]

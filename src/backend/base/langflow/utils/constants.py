@@ -69,6 +69,8 @@ DIRECT_TYPES = [
     "auth",
     "connect",
     "query",
+    "tools",
+    "mcp",
 ]
 
 
