@@ -12,8 +12,6 @@ const SidebarMenuButtons = ({
 }) => {
   return (
     <>
-<<<<<<< HEAD
-=======
       {/* TODO: Remove this on cleanup */}
       {ENABLE_LANGFLOW_STORE && hasStore && (
         <SidebarMenuButton asChild>
@@ -39,7 +37,6 @@ const SidebarMenuButtons = ({
           </CustomLink>
         </SidebarMenuButton>
       )}
->>>>>>> 7aee1bc1c3ff93798460ac4f8ed110de815182aa
       <SidebarMenuButton asChild>
         <Button
           unstyled
