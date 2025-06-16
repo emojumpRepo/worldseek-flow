@@ -49,7 +49,6 @@ import useFileDrop from "../../hooks/use-on-file-drop";
 import { SidebarFolderSkeleton } from "../sidebarFolderSkeleton";
 import { HeaderButtons } from "./components/header-buttons";
 import { InputEditFolderName } from "./components/input-edit-folder-name";
-import { MCPServerNotice } from "./components/mcp-server-notice";
 import { SelectOptions } from "./components/select-options";
 
 type SideBarFoldersButtonsComponentProps = {
@@ -140,7 +139,7 @@ const SideBarFoldersButtonsComponent = ({
         if (objects.every((flow) => flow.data?.nodes)) {
           uploadFlow({ files }).then(() => {
             setSuccessData({
-              title: "Uploaded successfully",
+              title: "上传成功",
             });
           });
         } else {
@@ -152,13 +151,13 @@ const SideBarFoldersButtonsComponent = ({
               {
                 onSuccess: () => {
                   setSuccessData({
-                    title: "Project uploaded successfully.",
+                    title: "项目上传成功！",
                   });
                 },
                 onError: (err) => {
                   console.log(err);
                   setErrorData({
-                    title: `Error on uploading your project, try dragging it into an existing project.`,
+                    title: `项目上传失败，请尝试将文件拖入现有项目。`,
                     list: [err["response"]["data"]["message"]],
                   });
                 },
@@ -181,7 +180,7 @@ const SideBarFoldersButtonsComponent = ({
         },
         onError: (e) => {
           setErrorData({
-            title: `An error occurred while downloading your project.`,
+            title: `下载项目时出错。`,
           });
         },
       },
@@ -192,7 +191,7 @@ const SideBarFoldersButtonsComponent = ({
     mutateAddFolder(
       {
         data: {
-          name: "New Project",
+          name: "新项目",
           parent_id: null,
           description: "",
         },
@@ -463,12 +462,6 @@ const SideBarFoldersButtonsComponent = ({
           </SidebarGroupContent>
         </SidebarGroup>
         <div className="flex-1" />
-
-        {ENABLE_MCP_NOTICE && !isDismissedMcpDialog && (
-          <div className="p-2">
-            <MCPServerNotice handleDismissDialog={handleDismissMcpDialog} />
-          </div>
-        )}
       </SidebarContent>
       {ENABLE_FILE_MANAGEMENT && (
         <SidebarFooter className="border-t">
@@ -482,7 +475,7 @@ const SideBarFoldersButtonsComponent = ({
               className="text-sm"
             >
               <ForwardedIconComponent name="File" className="h-4 w-4" />
-              My Files
+              我的文件
             </SidebarMenuButton>
           </div>
         </SidebarFooter>

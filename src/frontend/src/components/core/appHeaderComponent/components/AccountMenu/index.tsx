@@ -55,77 +55,46 @@ export const AccountMenu = () => {
           </div>
         </HeaderMenuToggle>
         <HeaderMenuItems position="right">
-          {ENABLE_DATASTAX_LANGFLOW && (
-            <HeaderMenuItemsSection>
-              <CustomHeaderMenuItemsTitle />
-            </HeaderMenuItemsSection>
-          )}
-          <HeaderMenuItemsSection>
-            <div className="flex h-[46px] w-full items-center justify-between px-3">
-              <div className="pl-1 text-xs text-zinc-500">
-                <span
-                  data-testid="menu_version_button"
-                  id="menu_version_button"
-                >
-                  Theme
-                </span>
-              </div>
-            </div>
+          <HeaderMenuItemButton
+            onClick={() => {
+              navigate("/settings");
+            }}
+          >
+            <span
+              data-testid="menu_settings_button"
+              id="menu_settings_button"
+            >
+              设置
+            </span>
+          </HeaderMenuItemButton>
 
-            <div>
-              <HeaderMenuItemButton
-                onClick={() => {
-                  navigate("/settings");
-                }}
+          {isAdmin && !autoLogin && (
+            <HeaderMenuItemButton
+              onClick={() => {
+                navigate("/admin");
+              }}
+            >
+              <span
+                data-testid="menu_admin_page_button"
+                id="menu_admin_page_button"
               >
-                <span
-                  data-testid="menu_settings_button"
-                  id="menu_settings_button"
-                >
-                  Settings
-                </span>
-              </HeaderMenuItemButton>
+                管理员面板
+              </span>
+            </HeaderMenuItemButton>
+          )}
 
-              {isAdmin && !autoLogin && (
-                <div>
-                  <HeaderMenuItemButton
-                    onClick={() => {
-                      navigate("/admin");
-                    }}
-                  >
-                    <span
-                      data-testid="menu_admin_page_button"
-                      id="menu_admin_page_button"
-                    >
-                      Admin Page
-                    </span>
-                  </HeaderMenuItemButton>
-                )}
-              </>
-            )}
-          </HeaderMenuItemsSection>
-          {ENABLE_DATASTAX_LANGFLOW ? (
-            <HeaderMenuItemsSection>
-              <HeaderMenuItemLink href="/session/logout" icon="log-out">
-                Logout
-              </HeaderMenuItemLink>
+          <div className="flex items-center justify-between px-4 py-[6.5px]">
+            <div className="text-sm">主题</div>
+            <div>
+              <ThemeButtons />
             </div>
-
-            <div className="flex items-center justify-between px-4 py-[6.5px] text-sm">
-              <span className="">Theme</span>
-              <div className="relative top-[1px] float-right">
-                <ThemeButtons />
-              </div>
-            </div>
-
-            {!autoLogin && (
-              <div>
-                <HeaderMenuItemButton onClick={handleLogout} icon="log-out">
-                  Logout
-                </HeaderMenuItemButton>
-              </div>
-            )}
           </div>
+
+          {!autoLogin && (
+            <HeaderMenuItemButton onClick={handleLogout} icon="log-out">
+              登出
+            </HeaderMenuItemButton>
+          )}
         </HeaderMenuItems>
       </HeaderMenu>
     </>

@@ -26,32 +26,13 @@ export const useGetTypes: useQueryFunctionType<
       const response = await api.get<APIObjectType>(
         `${getURL("ALL")}?force_refresh=true`,
       );
-      const data = response?.data; 
+      const data = response?.data;
+      console.log("data", data);
+      console.log("Original data keys:", data ? Object.keys(data) : "No data");
+      
       // 过滤数据
       if (data) {
-        // 删除不需要的顶级对象
-        delete data.embeddings;
-        delete data.memories;
         delete data.vectorstores;
-        
-        // 过滤models对象，只保留指定的组件
-        if (data.models) {
-          const filteredModels: { [key: string]: any } = {};
-          filteredModels.OpenAIModel = data.models.OpenAIModel;
-          filteredModels.LanguageModelComponent = data.models.LanguageModelComponent;
-          data.models = filteredModels;
-        }
-
-        if (data.tools) {
-          const filteredTools: { [key: string]: any } = {};
-          filteredTools.MCPTools = data.tools.MCPTools;
-          filteredTools.CalculatorTool = data.tools.CalculatorTool;
-          filteredTools.CalculatorComponent = data.tools.CalculatorComponent;
-          filteredTools.GoogleSearchAPI = data.tools.GoogleSearchAPI;
-          filteredTools.GoogleSearchAPICore = data.tools.GoogleSearchAPICore;
-          filteredTools.BingSearchAPI = data.tools.BingSearchAPI;
-          data.tools = filteredTools;
-        }
       }
       
       setTypes(data);

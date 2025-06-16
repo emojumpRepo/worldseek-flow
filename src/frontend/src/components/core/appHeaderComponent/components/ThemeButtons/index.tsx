@@ -49,44 +49,62 @@ export const ThemeButtons = () => {
       ></div>
 
       {/* Light Theme Button */}
-      <Button
-        unstyled
-        className={`relative z-10 inline-flex items-center rounded-full px-1 ${
+      <div
+        role="button"
+        tabIndex={0}
+        className={`relative z-10 inline-flex cursor-pointer items-center rounded-full px-1 ${
           selectedTheme === "light"
             ? "text-foreground"
             : "text-foreground hover:bg-amber-400 hover:text-background"
         }`}
         onClick={() => handleThemeChange("light")}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            handleThemeChange("light");
+          }
+        }}
         data-testid="menu_light_button"
         id="menu_light_button"
       >
         <ForwardedIconComponent strokeWidth={2} name="Sun" className="w-4" />
-      </Button>
+      </div>
 
       {/* Dark Theme Button */}
-      <Button
-        unstyled
-        className={`relative z-10 mx-1 inline-flex items-center rounded-full px-1 ${
+      <div
+        role="button"
+        tabIndex={0}
+        className={`relative z-10 mx-1 inline-flex cursor-pointer items-center rounded-full px-1 ${
           selectedTheme === "dark"
             ? "bg-indigo-foreground text-primary hover:bg-indigo-foreground"
             : "text-foreground hover:bg-indigo-foreground hover:text-background"
         }`}
         onClick={() => handleThemeChange("dark")}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            handleThemeChange("dark");
+          }
+        }}
         data-testid="menu_dark_button"
         id="menu_dark_button"
       >
         <ForwardedIconComponent strokeWidth={2} name="Moon" className="w-4" />
-      </Button>
+      </div>
 
       {/* System Theme Button */}
-      <Button
-        unstyled
-        className={`relative z-10 inline-flex items-center rounded-full px-1 ${
+      <div
+        role="button"
+        tabIndex={0}
+        className={`relative z-10 inline-flex cursor-pointer items-center rounded-full px-1 ${
           selectedTheme === "system"
             ? "bg-foreground text-background"
             : "hover:bg-foreground hover:text-background"
         }`}
         onClick={() => handleThemeChange("system")}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            handleThemeChange("system");
+          }
+        }}
         data-testid="menu_system_button"
         id="menu_system_button"
       >
@@ -95,7 +113,7 @@ export const ThemeButtons = () => {
           className="w-4"
           strokeWidth={2}
         />
-      </Button>
+      </div>
     </div>
   );
 };

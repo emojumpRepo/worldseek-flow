@@ -65,7 +65,7 @@ export default function LoginPage(): JSX.Element {
       className="h-screen w-full"
     >
       <div className="flex h-full w-full flex-col items-center justify-center bg-muted">
-        <div className="flex w-72 flex-col items-center justify-center gap-2">
+        <div className="flex w-80 flex-col items-center justify-center gap-2">
           <LangflowLogo
             title="WorldSeek Agent logo"
             className="mb-4 h-10 w-10 scale-[1.5]"
