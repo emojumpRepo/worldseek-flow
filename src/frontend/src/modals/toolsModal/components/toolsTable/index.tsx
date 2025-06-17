@@ -141,7 +141,7 @@ export default function ToolsTable({
   const columnDefs: ColDef[] = [
     {
       field: isAction ? "display_name" : "name",
-      headerName: isAction ? "Flow Name" : "Name",
+      headerName: isAction ? "工作流名称" : "名称",
       flex: 1,
       valueGetter: (params) =>
         !isAction
@@ -155,13 +155,13 @@ export default function ToolsTable({
     },
     {
       field: "description",
-      headerName: "Description",
+      headerName: "描述",
       flex: 2,
       cellClass: "text-muted-foreground",
     },
     {
       field: "name",
-      headerName: isAction ? "Action" : "Slug",
+      headerName: isAction ? "操作" : "别名",
       flex: 1,
       resizable: false,
       valueGetter: (params) =>
@@ -185,7 +185,7 @@ export default function ToolsTable({
     },
     {
       field: "tags",
-      headerName: "Tags",
+      headerName: "标签",
       flex: 1,
       hide: true,
     },
@@ -264,7 +264,7 @@ export default function ToolsTable({
         <div className="flex-none px-4">
           <Input
             icon="Search"
-            placeholder="Search actions..."
+            placeholder="查找..."
             inputClassName="h-8"
             value={searchQuery}
             onChange={handleSearchChange}
@@ -301,7 +301,7 @@ export default function ToolsTable({
                     className="text-mmd font-medium"
                     htmlFor="sidebar-name-input"
                   >
-                    Name
+                    名称
                   </label>
 
                   <Input
@@ -309,13 +309,13 @@ export default function ToolsTable({
                     value={sidebarName}
                     onChange={handleNameChange}
                     maxLength={46}
-                    placeholder="Edit name..."
+                    placeholder="编辑名称..."
                     data-testid="input_update_name"
                   />
                   <div className="text-xs text-muted-foreground">
                     {isAction
-                      ? "Used as the function name when this flow is exposed to clients."
-                      : "Used as the function name when this tool is exposed to the agent."}
+                      ? "当此工作流暴露给客户端时，用作函数名称。"
+                      : "当此工具暴露给智能体时，用作函数名称。"}
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
@@ -323,21 +323,21 @@ export default function ToolsTable({
                     className="text-mmd font-medium"
                     htmlFor="sidebar-desc-input"
                   >
-                    Description
+                    描述
                   </label>
 
                   <Textarea
                     id="sidebar-desc-input"
                     value={sidebarDescription}
                     onChange={handleDescriptionChange}
-                    placeholder="Edit description..."
+                    placeholder="编辑描述..."
                     className="h-24"
                     data-testid="input_update_description"
                   />
                   <div className="text-xs text-muted-foreground">
                     {isAction
-                      ? "This is the description for the action exposed to the clients."
-                      : "This is the description for the tool exposed to the agents."}
+                      ? "当此工作流暴露给客户端时，用作描述。"
+                      : "当此工具暴露给智能体时，用作描述。"}
                   </div>
                 </div>
               </div>
@@ -368,10 +368,10 @@ export default function ToolsTable({
                     {actionArgs.length > 0 && (
                       <div className="flex flex-col gap-1.5">
                         <h3 className="mt-2 text-base font-medium">
-                          Parameters
+                          参数
                         </h3>
                         <p className="text-mmd text-muted-foreground">
-                          Manage inputs for this action
+                          管理此处的输入参数。
                         </p>
                       </div>
                     )}

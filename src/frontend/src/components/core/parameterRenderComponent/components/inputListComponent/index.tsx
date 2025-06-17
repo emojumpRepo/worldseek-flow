@@ -85,7 +85,7 @@ export default function InputListComponent({
           disabled={disabled}
           editNode={editNode}
           componentName={componentName || ""}
-          listAddLabel={listAddLabel || "Add More"}
+          listAddLabel={listAddLabel || "添加更多"}
         />
       )}
 
@@ -146,7 +146,7 @@ export default function InputListComponent({
             className="btn-add-input-list"
             data-testid={`input-list-add-more-${editNode ? "edit" : "view"}`}
           >
-            <span className="mr-2 text-lg">+</span> {listAddLabel || "Add More"}
+            <span className="mr-2 text-lg">+</span> {listAddLabel || "添加更多"}
           </Button>
         )}
       </div>

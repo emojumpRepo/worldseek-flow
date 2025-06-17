@@ -17,14 +17,14 @@ export default function ShortcutsPage() {
   // Column Definitions: Defines the columns to be displayed.
   const colDefs: ColDef[] = [
     {
-      headerName: "Functionality",
+      headerName: "功能",
       field: "display_name",
       flex: 1,
       editable: false,
       resizable: false,
     }, //This column will be twice as wide as the others
     {
-      headerName: "Keyboard Shortcut",
+      headerName: "键盘快捷键",
       field: "shortcut",
       flex: 2,
       editable: false,
@@ -60,14 +60,14 @@ export default function ShortcutsPage() {
       <div className="flex w-full items-start justify-between gap-6">
         <div className="flex w-full flex-col">
           <h2 className="flex items-center text-lg font-semibold tracking-tight">
-            Shortcuts
+            快捷键
             <ForwardedIconComponent
               name="Keyboard"
               className="ml-2 h-5 w-5 text-primary"
             />
           </h2>
           <p className="text-sm text-muted-foreground">
-            Manage Shortcuts for quick access to frequently used actions.
+            管理快捷键以便快速访问经常使用的操作。
           </p>
         </div>
         <div>
@@ -91,7 +91,7 @@ export default function ShortcutsPage() {
                 onClick={handleRestore}
               >
                 <ForwardedIconComponent name="RotateCcw" className="w-4" />
-                Restore
+                恢复
               </Button>
             </div>
           </div>

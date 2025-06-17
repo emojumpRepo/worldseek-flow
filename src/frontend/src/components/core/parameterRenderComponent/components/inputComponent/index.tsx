@@ -20,7 +20,7 @@ export default function InputComponent({
   isForm = false,
   password,
   editNode = false,
-  placeholder = "Type something...",
+  placeholder = "请输入...",
   className,
   id = "",
   blurOnEnter = false,
@@ -30,7 +30,7 @@ export default function InputComponent({
   selectedOptions = [],
   setSelectedOptions,
   options = [],
-  optionsPlaceholder = "Search options...",
+  optionsPlaceholder = "查找选项...",
   optionsButton,
   optionButton,
   objectOptions,
@@ -81,7 +81,7 @@ export default function InputComponent({
               password && !editNode ? "pr-10" : "",
               className!,
             )}
-            placeholder={password && editNode ? "Key" : placeholder}
+            placeholder={password && editNode ? "密钥" : placeholder}
             onChange={(e) => {
               if (onChangeFolderName) {
                 return onChangeFolderName(e);

@@ -75,12 +75,12 @@ export default function ChatMessage({
         setStreamUrl(undefined);
         if (JSON.parse(event.data)?.error) {
           setErrorData({
-            title: "Error on Streaming",
+            title: "流式传输错误",
             list: [JSON.parse(event.data)?.error],
           });
         }
         updateChat(chat, chatMessageRef.current);
-        reject(new Error("Streaming failed"));
+        reject(new Error("流式传输失败"));
       };
       eventSource.current.addEventListener("close", (event) => {
         setStreamUrl(undefined); // Update state to reflect the stream is closed
@@ -150,7 +150,7 @@ export default function ChatMessage({
         },
         onError: () => {
           setErrorData({
-            title: "Error updating messages.",
+            title: "更新消息错误",
           });
         },
       },
@@ -178,7 +178,7 @@ export default function ChatMessage({
       {
         onError: () => {
           setErrorData({
-            title: "Error updating messages.",
+            title: "更新消息错误",
           });
         },
       },

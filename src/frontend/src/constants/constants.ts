@@ -98,116 +98,116 @@ export const limitScrollFieldsModal = 10;
  * The base text for subtitle of Export Dialog (Toolbar)
  * @constant
  */
-export const EXPORT_DIALOG_SUBTITLE = "Export flow as JSON file.";
+export const EXPORT_DIALOG_SUBTITLE = "导出流程为JSON文件。";
 /**
  * The base text for subtitle of Flow Settings (Menubar)
  * @constant
  */
 export const SETTINGS_DIALOG_SUBTITLE =
-  "Customize your flow details and settings.";
+  "自定义您的工作流细节和设置。";
 
 /**
  * The base text for subtitle of Flow Logs (Menubar)
  * @constant
  */
 export const LOGS_DIALOG_SUBTITLE =
-  "Explore detailed logs of events and transactions between components.";
+  "查看组件之间事件和交互过程日志。";
 
 /**
  * The base text for subtitle of Code Dialog (Toolbar)
  * @constant
  */
 export const CODE_DIALOG_SUBTITLE =
-  "Export your flow to integrate it using this code.";
+  "导出您的工作流以便使用此代码进行集成";
 
 /**
  * The base text for subtitle of Chat Form
  * @constant
  */
 export const CHAT_FORM_DIALOG_SUBTITLE =
-  "Interact with your AI. Monitor inputs, outputs and memories.";
+  "与您的 AI 进行交互。监控输入、输出和记忆数据。";
 
 /**
  * The base text for subtitle of Edit Node Dialog
  * @constant
  */
 export const EDIT_DIALOG_SUBTITLE =
-  "Adjust component's settings and define parameter visibility. Remember to save your changes.";
+  "调整组件设置并定义参数可见性。请注意保存您的更改。";
 
 /**
  * The base text for subtitle of Code Dialog
  * @constant
  */
 export const CODE_PROMPT_DIALOG_SUBTITLE =
-  "Edit your Python code snippet. Refer to the WorldSeek Agent documentation for more information on how to write your own component.";
+  "编辑您的 Python 代码片段。有关如何编写自定义组件的更多信息，请参考 WorldSeek Agent 文档。";
 
 export const CODE_DICT_DIALOG_SUBTITLE =
-  "Customize your dictionary, adding or editing key-value pairs as needed. Supports adding new objects {} or arrays [].";
+  "可根据自身需求对字典进行定制，添加或编辑键值对。同时，它支持添加新对象 `{}` 或者数组 `[]`。";
 
 /**
  * The base text for subtitle of Prompt Dialog
  * @constant
  */
 export const PROMPT_DIALOG_SUBTITLE =
-  "Create your prompt. Prompts can help guide the behavior of a Language Model. Use curly brackets {} to introduce variables.";
+  "创建您的提示词。提示词有助于引导语言模型的行为。使用花括号 `{}` 来引入变量。";
 
-export const CHAT_CANNOT_OPEN_TITLE = "Chat Cannot Open";
+export const CHAT_CANNOT_OPEN_TITLE = "无法开启聊天";
 
-export const CHAT_CANNOT_OPEN_DESCRIPTION = "This is not a chat flow.";
+export const CHAT_CANNOT_OPEN_DESCRIPTION = "这不是一个聊天工作流。";
 
-export const FLOW_NOT_BUILT_TITLE = "Flow not built";
+export const FLOW_NOT_BUILT_TITLE = "工作流未构建";
 
 export const FLOW_NOT_BUILT_DESCRIPTION =
-  "Please build the flow before chatting.";
+  "请先构建工作流再进行聊天。";
 
 /**
  * The base text for subtitle of Text Dialog
  * @constant
  */
-export const TEXT_DIALOG_TITLE = "Edit text content";
+export const TEXT_DIALOG_TITLE = "编辑文本内容";
 
 /**
  * The base text for subtitle of Import Dialog
  * @constant
  */
 export const IMPORT_DIALOG_SUBTITLE =
-  "Import flows from a JSON file or choose from pre-existing examples.";
+  "从 JSON 文件导入工作流，也能从现有的示例里进行挑选。";
 
 /**
  * The text that shows when a tooltip is empty
  * @constant
  */
-export const TOOLTIP_EMPTY = "No compatible components found.";
+export const TOOLTIP_EMPTY = "未找到兼容的组件。";
 
-export const CSVViewErrorTitle = "CSV output";
+export const CSVViewErrorTitle = "导出CSV文件";
 
-export const CSVNoDataError = "No data available";
+export const CSVNoDataError = "没有数据可用";
 
-export const PDFViewConstant = "Expand the ouptut to see the PDF";
+export const PDFViewConstant = "展开查看 PDF";
 
-export const CSVError = "Error loading CSV";
+export const CSVError = "加载 CSV 文件时出错";
 
-export const PDFLoadErrorTitle = "Error loading PDF";
+export const PDFLoadErrorTitle = "加载 PDF 文件时出错";
 
-export const PDFCheckFlow = "Please check your flow and try again";
+export const PDFCheckFlow = "请检查您的工作流并重试";
 
-export const PDFErrorTitle = "PDF Output";
+export const PDFErrorTitle = "导出PDF文件";
 
-export const PDFLoadError = "Run the flow to see the pdf";
+export const PDFLoadError = "运行工作流以查看 PDF";
 
-export const IMGViewConstant = "Expand the view to see the image";
+export const IMGViewConstant = "展开查看图片";
 
 export const IMGViewErrorMSG =
-  "Run the flow or inform a valid url to see your image";
+  "运行工作流或提供有效的 URL 以查看图片";
 
-export const IMGViewErrorTitle = "Image output";
+export const IMGViewErrorTitle = "导出图片";
 
 /**
  * The base text for subtitle of code dialog
  * @constant
  */
 export const EXPORT_CODE_DIALOG =
-  "Generate the code to integrate your flow into an external application.";
+  "生成将工作流集成到外部应用程序的代码。";
 
 /**
  * The base text for subtitle of code dialog
@@ -224,27 +224,27 @@ export const NAV_DISPLAY_STYLE =
  * @constant
  */
 export const DESCRIPTIONS: string[] = [
-  "Chain the Words, Master Language!",
-  "Language Architect at Work!",
-  "Empowering Language Engineering.",
-  "Craft Language Connections Here.",
-  "Create, Connect, Converse.",
-  "Smart Chains, Smarter Conversations.",
-  "Bridging Prompts for Brilliance.",
-  "Language Models, Unleashed.",
-  "Your Hub for Text Generation.",
-  "Promptly Ingenious!",
-  "Building Linguistic Labyrinths.",
-  "WorldSeek Agent: Create, Chain, Communicate.",
-  "Connect the Dots, Craft Language.",
-  "Interactive Language Weaving.",
-  "Generate, Innovate, Communicate.",
-  "Conversation Catalyst Engine.",
-  "Language Chainlink Master.",
-  "Design Dialogues with WorldSeek Agent.",
-  "Nurture NLP Nodes Here.",
-  "Conversational Cartography Unlocked.",
-  "Design, Develop, Dialogize.",
+  "词语接龙，驭语言之术！",
+  "语言架构师，匠心构筑中！",
+  "赋能语言工程，激活智链未来。",
+  "在此雕琢语言纽带，编织语义脉络。",
+  "创作・连接・对话 —— 三维语言引擎启动。",
+  "智能链构底层，智愈对话上层。",
+  "桥接提示词，点亮语言灵光。",
+  "语言模型已解缚，语义洪流任驰骋。",
+  "文本生成中枢，尽在您的掌控。",
+  "Prompt 即启，巧思天成！",
+  "构筑语言迷宮，探索语义秘境。",
+  "WorldSeek Agent: 创作・链联・沟通三位一体。",
+  "连点成线，琢语成篇。",
+  "交互式语言编织，经纬之间见智联。",
+  "生成・革新・传意 —— 语言技术三角驱动。",
+  "对话催化引擎：让交流迸发智核反应。",
+  "语言链联大师，串起语义万维网。",
+  "与 WorldSeek Agent 共设计，让对话成为交互艺术品。",
+  "在此培育 NLP 节点，浇灌语义智能之树。",
+  "对话绘图学已解锁，绘制交流认知图谱。",
+  "设计・开发・对话化 —— 三步构建智能交互生态。",
 ];
 export const BUTTON_DIV_STYLE =
   " flex gap-2 focus:ring-1 focus:ring-offset-1 focus:ring-ring focus:outline-none ";
@@ -254,113 +254,113 @@ export const BUTTON_DIV_STYLE =
  * @constant
  */
 export const ADJECTIVES: string[] = [
-  "admiring",
-  "adoring",
-  "agitated",
-  "amazing",
-  "angry",
-  "awesome",
-  "backstabbing",
-  "berserk",
-  "big",
-  "boring",
-  "clever",
-  "cocky",
-  "compassionate",
-  "condescending",
-  "cranky",
-  "desperate",
-  "determined",
-  "distracted",
-  "dreamy",
-  "drunk",
-  "ecstatic",
-  "elated",
-  "elegant",
-  "evil",
-  "fervent",
-  "focused",
-  "furious",
-  "gigantic",
-  "gloomy",
-  "goofy",
-  "grave",
-  "happy",
-  "high",
-  "hopeful",
-  "hungry",
-  "insane",
-  "jolly",
-  "jovial",
-  "kickass",
-  "lonely",
-  "loving",
-  "mad",
-  "modest",
-  "naughty",
-  "nauseous",
-  "nostalgic",
-  "pedantic",
-  "pensive",
-  "prickly",
-  "reverent",
-  "romantic",
-  "sad",
-  "serene",
-  "sharp",
-  "sick",
-  "silly",
-  "sleepy",
-  "small",
-  "stoic",
-  "stupefied",
-  "suspicious",
-  "tender",
-  "thirsty",
-  "tiny",
-  "trusting",
-  "bubbly",
-  "charming",
-  "cheerful",
-  "comical",
-  "dazzling",
-  "delighted",
-  "dynamic",
-  "effervescent",
-  "enthusiastic",
-  "exuberant",
-  "fluffy",
-  "friendly",
-  "funky",
-  "giddy",
-  "giggly",
-  "gleeful",
-  "goofy",
-  "graceful",
-  "grinning",
-  "hilarious",
-  "inquisitive",
-  "joyous",
-  "jubilant",
-  "lively",
-  "mirthful",
-  "mischievous",
-  "optimistic",
-  "peppy",
-  "perky",
-  "playful",
-  "quirky",
-  "radiant",
-  "sassy",
-  "silly",
-  "spirited",
-  "sprightly",
-  "twinkly",
-  "upbeat",
-  "vibrant",
-  "witty",
-  "zany",
-  "zealous",
+  "钦佩的",
+  "崇拜的",
+  "焦虑的",
+  "神奇的",
+  "愤怒的",
+  "令人敬畏的",
+  "背叛的",
+  "失控的",
+  "巨大的",
+  "无聊的",
+  "聪明的",
+  "自大的",
+  "有同情心的",
+  "轻蔑的",
+  "易怒的",
+  "绝望的",
+  "坚定的",
+  "分心的",
+  "梦幻的",
+  "醉酒的",
+  "狂喜的",
+  "高兴的",
+  "优雅的",
+  "邪恶的",
+  "热情的",
+  "专注的",
+  "暴怒的",
+  "庞大的",
+  "阴郁的",
+  "滑稽的",
+  "庄重的",
+  "快乐的",
+  "高贵的",
+  "有希望的",
+  "饥饿的",
+  "疯狂的",
+  "愉快的",
+  "友好的",
+  "疯狂的",
+  "孤独的",
+  "喜爱的",
+  "疯狂的",
+  "谦虚的",
+  "顽皮的",
+  "恶心的",
+  "怀旧的",
+  "迂腐的",
+  "沉思的",
+  "尖锐的",
+  "虔诚的",
+  "浪漫的",
+  "悲伤的",
+  "宁静的",
+  "锋利的",
+  "恶心的",
+  "愚蠢的",
+  "困倦的",
+  "微小的",
+  "隐忍的",
+  "震惊的",
+  "可疑的",
+  "温柔的",
+  "渴望的",
+  "极小的",
+  "信任的",
+  "活泼的",
+  "迷人的",
+  "愉快的",
+  "滑稽的",
+  "闪耀的",
+  "欣喜的",
+  "充满活力的",
+  "热情的",
+  "热心的",
+  "兴高采烈的",
+  "毛茸茸的",
+  "友善的",
+  "古怪的",
+  "轻快的",
+  "滑稽的",
+  "欢快的",
+  "愚蠢的",
+  "优雅的",
+  "笑嘻嘻的",
+  "可笑的",
+  "好奇的",
+  "喜悦的",
+  "欢呼的",
+  "活跃的",
+  "欢快的",
+  "调皮的",
+  "乐观的",
+  "活泼的",
+  "自信的",
+  "淘气的",
+  "古怪的",
+  "灿烂的",
+  "时髦的",
+  "傻气的",
+  "生机勃勃的",
+  "敏捷的",
+  "闪烁的",
+  "积极向上的",
+  "鲜艳的",
+  "机智的",
+  "荒唐的",
+  "狂热的",
 ];
 /**
  * Nouns for the name of the flow
@@ -368,180 +368,180 @@ export const ADJECTIVES: string[] = [
  *
  */
 export const NOUNS: string[] = [
-  "albattani",
-  "allen",
-  "almeida",
-  "archimedes",
-  "ardinghelli",
-  "aryabhata",
-  "austin",
-  "babbage",
-  "banach",
-  "bardeen",
-  "bartik",
-  "bassi",
-  "bell",
-  "bhabha",
-  "bhaskara",
-  "blackwell",
-  "bohr",
-  "booth",
-  "borg",
-  "bose",
-  "boyd",
-  "brahmagupta",
-  "brattain",
-  "brown",
-  "carson",
-  "chandrasekhar",
-  "colden",
-  "cori",
-  "cray",
-  "curie",
-  "darwin",
-  "davinci",
-  "dijkstra",
-  "dubinsky",
-  "easley",
-  "einstein",
-  "elion",
-  "engelbart",
-  "euclid",
-  "euler",
-  "fermat",
-  "fermi",
-  "feynman",
-  "franklin",
-  "galileo",
-  "gates",
-  "goldberg",
-  "goldstine",
-  "goldwasser",
-  "golick",
-  "goodall",
-  "hamilton",
-  "hawking",
-  "heisenberg",
-  "heyrovsky",
-  "hodgkin",
-  "hoover",
-  "hopper",
-  "hugle",
-  "hypatia",
-  "jang",
-  "jennings",
-  "jepsen",
-  "joliot",
-  "jones",
-  "kalam",
-  "kare",
-  "keller",
-  "khorana",
-  "kilby",
-  "kirch",
-  "knuth",
-  "kowalevski",
-  "lalande",
-  "lamarr",
-  "leakey",
-  "leavitt",
-  "lichterman",
-  "liskov",
-  "lovelace",
-  "lumiere",
-  "mahavira",
-  "mayer",
-  "mccarthy",
-  "mcclintock",
-  "mclean",
-  "mcnulty",
-  "meitner",
-  "meninsky",
-  "mestorf",
-  "minsky",
-  "mirzakhani",
-  "morse",
-  "murdock",
-  "newton",
-  "nobel",
-  "noether",
-  "northcutt",
-  "noyce",
-  "panini",
-  "pare",
-  "pasteur",
-  "payne",
-  "perlman",
-  "pike",
-  "poincare",
-  "poitras",
-  "ptolemy",
-  "raman",
-  "ramanujan",
-  "ride",
-  "ritchie",
-  "roentgen",
-  "rosalind",
-  "saha",
-  "sammet",
-  "shaw",
-  "shirley",
-  "shockley",
-  "sinoussi",
-  "snyder",
-  "spence",
-  "stallman",
-  "stonebraker",
-  "swanson",
-  "swartz",
-  "swirles",
-  "tesla",
-  "thompson",
-  "torvalds",
-  "turing",
-  "varahamihira",
-  "visvesvaraya",
-  "volhard",
-  "wescoff",
-  "williams",
-  "wilson",
-  "wing",
-  "wozniak",
-  "wright",
-  "yalow",
-  "yonath",
-  "coulomb",
-  "degrasse",
-  "dewey",
-  "edison",
-  "eratosthenes",
-  "faraday",
-  "galton",
-  "gauss",
-  "herschel",
-  "hubble",
-  "joule",
-  "kaku",
-  "kepler",
-  "khayyam",
-  "lavoisier",
-  "maxwell",
-  "mendel",
-  "mendeleev",
-  "ohm",
-  "pascal",
-  "planck",
-  "riemann",
-  "schrodinger",
-  "sagan",
-  "tesla",
-  "tyson",
-  "volta",
-  "watt",
-  "weber",
-  "wien",
-  "zoBell",
-  "zuse",
+  "阿尔巴塔尼",
+  "艾伦",
+  "阿尔梅达",
+  "阿基米德",
+  "阿德里安",
+  "阿尔耶波多",
+  "奥斯汀",
+  "巴贝奇",
+  "巴纳赫",
+  "巴丁",
+  "巴提克",
+  "巴西",
+  "贝尔",
+  "巴巴",
+  "巴什卡拉",
+  "布莱克韦尔",
+  "玻尔",
+  "布斯",
+  "博尔",
+  "博斯",
+  "博伊德",
+  "布雷纳",
+  "布雷特恩",
+  "布朗",
+  "卡森",
+  "钱德拉塞卡",
+  "科尔登",
+  "科里",
+  "克雷",
+  "居里",
+  "达尔文",
+  "达维",
+  "迪杰斯特拉",
+  "杜比尼",
+  "埃斯利",
+  "爱因斯坦",
+  "伊利翁",
+  "恩格尔巴特",
+  "欧几里得",
+  "欧拉",
+  "费马",
+  "费米",
+  "费恩曼",
+  "富兰克林",
+  "伽利略",
+  "盖茨",
+  "戈德堡",
+  "戈尔德斯坦",
+  "戈尔德瓦瑟",
+  "戈勒克",
+  "古德尔",
+  "汉密尔顿",
+  "霍金",
+  "海森堡",
+  "赫耶罗夫斯基",
+  "霍奇金",
+  "胡佛",
+  "霍珀",
+  "胡格勒",
+  "希帕蒂娅",
+  "张",
+  "詹宁斯",
+  "杰普森",
+  "约里奥",
+  "琼斯",
+  "卡拉姆",
+  "凯勒",
+  "科勒",
+  "科拉纳",
+  "基尔比",
+  "基尔",
+  "克努斯",
+  "科瓦列夫斯基",
+  "拉兰德",
+  "拉马尔",
+  "莱基",
+  "莱维特",
+  "利特曼",
+  "利斯科夫",
+  "洛夫莱斯",
+  "卢米埃尔",
+  "马哈维拉",
+  "迈耶",
+  "麦卡锡",
+  "麦克林",
+  "麦克纳尔蒂",
+  "麦克尼尔蒂",
+  "迈特纳",
+  "曼宁斯基",
+  "梅斯特尔",
+  "明斯基",
+  "米尔扎哈尼",
+  "摩尔斯",
+  "穆德克",
+  "牛顿",
+  "诺贝尔",
+  "诺特",
+  "诺斯库特",
+  "诺伊斯",
+  "帕尼尼",
+  "帕尔",
+  "帕斯特",
+  "佩恩",
+  "佩尔曼",
+  "皮克",
+  "庞加莱",
+  "波伊特拉斯",
+  "托勒密",
+  "拉曼",
+  "拉马努金",
+  "里德",
+  "里奇",
+  "伦琴",
+  "罗莎琳",
+  "萨哈",
+  "萨姆梅特",
+  "肖",
+  "夏普利",
+  "肖克利",
+  "辛诺斯",
+  "斯奈德",
+  "斯普恩斯",
+  "斯塔曼",
+  "斯通布雷克",
+  "斯旺森",
+  "斯瓦茨",
+  "斯威尔斯",
+  "特斯拉",
+  "汤普森",
+  "托瓦兹",
+  "图灵",
+  "瓦拉哈米希拉",
+  "维韦斯瓦拉",
+  "沃尔哈德",
+  "韦斯考夫",
+  "威廉姆斯",
+  "威尔逊",
+  "韦恩",
+  "沃兹尼亚克",
+  "赖特",
+  "亚洛",
+  "约纳特",
+  "库仑",
+  "德格拉斯",
+  "德威",
+  "爱迪生",
+  "埃拉托斯特尼",
+  "法拉第",
+  "高尔顿",
+  "高斯",
+  "赫歇尔",
+  "哈勃",
+  "焦耳",
+  "卡库",
+  "开普勒",
+  "卡西尼",
+  "拉瓦锡",
+  "麦克斯韦",
+  "孟德尔",
+  "门捷列夫",
+  "欧姆",
+  "帕斯卡",
+  "普朗克",
+  "黎曼",
+  "薛定谔",
+  "萨根",
+  "特斯拉",
+  "泰森",
+  "伏特",
+  "瓦特",
+  "韦伯",
+  "维恩",
+  "佐贝尔",
+  "祖斯",
 ];
 
 /**
@@ -549,9 +549,9 @@ export const NOUNS: string[] = [
  * @constant
  *
  */
-export const USER_PROJECTS_HEADER = "My Collection";
+export const USER_PROJECTS_HEADER = "我的收藏";
 
-export const DEFAULT_FOLDER = "Starter Project";
+export const DEFAULT_FOLDER = "我的项目";
 export const DEFAULT_FOLDER_DEPRECATED = "My Projects";
 
 export const MAX_MCP_SERVER_NAME_LENGTH = 30;
@@ -561,7 +561,7 @@ export const MAX_MCP_SERVER_NAME_LENGTH = 30;
  * @constant
  *
  */
-export const ADMIN_HEADER_TITLE = "Admin Page";
+export const ADMIN_HEADER_TITLE = "管理员页面";
 
 /**
  * Header description for admin page
@@ -569,7 +569,7 @@ export const ADMIN_HEADER_TITLE = "Admin Page";
  *
  */
 export const ADMIN_HEADER_DESCRIPTION =
-  "Navigate through this section to efficiently oversee all application users. From here, you can seamlessly manage user accounts.";
+  "通过此部分高效管理所有应用用户。从这里，您可以无缝管理用户账户。";
 
 export const BASE_URL_API = custom.BASE_URL_API || "/api/v1/";
 
@@ -623,26 +623,26 @@ export const CONTROL_NEW_USER = {
 
 export const tabsCode = [];
 
-export const FETCH_ERROR_MESSAGE = "Couldn't establish a connection.";
+export const FETCH_ERROR_MESSAGE = "无法建立连接。";
 export const FETCH_ERROR_DESCRIPION =
-  "Check if everything is working properly and try again.";
+  "请检查所有组件是否正常运行，然后重试。";
 
 export const TIMEOUT_ERROR_MESSAGE =
-  "Please wait a few moments while the server processes your request.";
-export const TIMEOUT_ERROR_DESCRIPION = "Server is busy.";
+  "服务器正在处理您的请求，请稍候片刻。";
+export const TIMEOUT_ERROR_DESCRIPION = "服务器繁忙。";
 
-export const SIGN_UP_SUCCESS = "Account created! Await admin activation. ";
+export const SIGN_UP_SUCCESS = "账户创建成功！等待管理员激活。";
 
 export const API_PAGE_PARAGRAPH =
-  "Your secret WorldSeek Agent API keys are listed below. Do not share your API key with others, or expose it in the browser or other client-side code.";
+  "您的WorldSeek Agent API密钥列表如下。请不要与他人分享您的API密钥，或将其暴露在浏览器或其他客户端代码中。";
 
 export const API_PAGE_USER_KEYS =
-  "This user does not have any keys assigned at the moment.";
+  "此用户目前没有分配任何密钥。";
 
-export const LAST_USED_SPAN_1 = "The last time this key was used.";
+export const LAST_USED_SPAN_1 = "此密钥最近使用的时间。";
 
 export const LAST_USED_SPAN_2 =
-  "Accurate to within the hour from the most recent usage.";
+  "精确到最近使用时间的小时。";
 
 export const LANGFLOW_SUPPORTED_TYPES = new Set([
   "str",
@@ -691,49 +691,49 @@ export const OUTPUT_TYPES = new Set([
 ]);
 
 export const CHAT_FIRST_INITIAL_TEXT =
-  "Start a conversation and click the agent's memories";
+  "启动对话并点击智能体的记忆功能";
 
 export const TOOLTIP_OUTDATED_NODE =
-  "Your component is outdated. Click to update (data may be lost)";
+  "您的组件已过时。点击更新（数据可能丢失）";
 
-export const CHAT_SECOND_INITIAL_TEXT = "to inspect previous messages.";
+export const CHAT_SECOND_INITIAL_TEXT = "查看历史消息。";
 
-export const TOOLTIP_OPEN_HIDDEN_OUTPUTS = "Expand hidden outputs";
-export const TOOLTIP_HIDDEN_OUTPUTS = "Collapse hidden outputs";
+export const TOOLTIP_OPEN_HIDDEN_OUTPUTS = "展开结果";
+export const TOOLTIP_HIDDEN_OUTPUTS = "折叠结果";
 
-export const ZERO_NOTIFICATIONS = "No new notifications";
+export const ZERO_NOTIFICATIONS = "没有新的通知";
 
-export const SUCCESS_BUILD = "Built sucessfully ✨";
+export const SUCCESS_BUILD = "构建成功 ✨";
 
 export const ALERT_SAVE_WITH_API =
-  "Caution: Unchecking this box only removes API keys from fields specifically designated for API keys.";
+  "警告：取消选中此框只会从专门指定用于 API 密钥的字段中删除 API 密钥。";
 
-export const SAVE_WITH_API_CHECKBOX = "Save with my API keys";
-export const EDIT_TEXT_MODAL_TITLE = "Edit Text";
-export const EDIT_TEXT_PLACEHOLDER = "Type message here.";
-export const INPUT_HANDLER_HOVER = "Avaliable input components:";
-export const OUTPUT_HANDLER_HOVER = "Avaliable output components:";
-export const TEXT_INPUT_MODAL_TITLE = "Inputs";
-export const OUTPUTS_MODAL_TITLE = "Outputs";
-export const LANGFLOW_CHAT_TITLE = "WorldSeek Agent Chat";
+export const SAVE_WITH_API_CHECKBOX = "使用我的API密钥保存";
+export const EDIT_TEXT_MODAL_TITLE = "编辑文本";
+export const EDIT_TEXT_PLACEHOLDER = "在此输入消息。";
+export const INPUT_HANDLER_HOVER = "可用的输入组件：";
+export const OUTPUT_HANDLER_HOVER = "可用的输出组件：";
+export const TEXT_INPUT_MODAL_TITLE = "输入";
+export const OUTPUTS_MODAL_TITLE = "输出";
+export const LANGFLOW_CHAT_TITLE = "WorldSeek Agent 聊天";
 export const CHAT_INPUT_PLACEHOLDER =
-  "No chat input variables found. Click to run your flow.";
-export const CHAT_INPUT_PLACEHOLDER_SEND = "Send a message...";
-export const EDIT_CODE_TITLE = "Edit Code";
+  "没有找到聊天输入变量。点击运行您的工作流。";
+export const CHAT_INPUT_PLACEHOLDER_SEND = "发送消息...";
+export const EDIT_CODE_TITLE = "编辑代码";
 export const MY_COLLECTION_DESC =
-  "Manage your projects. Download and upload entire collections.";
-export const STORE_DESC = "Explore community-shared flows and components.";
-export const STORE_TITLE = "WorldSeek Agent Store";
-export const NO_API_KEY = "You don't have an API key.";
-export const INSERT_API_KEY = "Insert your WorldSeek Agent API key.";
-export const INVALID_API_KEY = "Your API key is not valid. ";
-export const CREATE_API_KEY = `Don't have an API key? Sign up at`;
-export const STATUS_BUILD = "Build to validate status.";
-export const STATUS_INACTIVE = "Execution blocked";
-export const STATUS_BUILDING = "Building...";
-export const SAVED_HOVER = "Last saved: ";
-export const RUN_TIMESTAMP_PREFIX = "Last Run: ";
-export const STARTER_FOLDER_NAME = "Starter Projects";
+  "管理您的项目。下载和上传整个集合。";
+export const STORE_DESC = "探索社区共享的工作流和组件。";
+export const STORE_TITLE = "WorldSeek Agent 商店";
+export const NO_API_KEY = "您没有API密钥。";
+export const INSERT_API_KEY = "新建您的WorldSeek Agent API密钥。";
+export const INVALID_API_KEY = "您的API密钥无效。";
+export const CREATE_API_KEY = `没有API密钥？注册`;
+export const STATUS_BUILD = "构建以验证状态。";
+export const STATUS_INACTIVE = "执行被阻止";
+export const STATUS_BUILDING = "构建中...";
+export const SAVED_HOVER = "最后保存：";
+export const RUN_TIMESTAMP_PREFIX = "最后运行：";
+export const STARTER_FOLDER_NAME = "新手项目";
 export const PRIORITY_SIDEBAR_ORDER = [
   "saved_components",
   "inputs",
@@ -768,7 +768,7 @@ export const AUTHORIZED_DUPLICATE_REQUESTS = [
 ];
 
 export const BROKEN_EDGES_WARNING =
-  "Some connections were removed because they were invalid:";
+  "部分连接因无效已被移除：";
 
 export const SAVE_DEBOUNCE_TIME = 300;
 
@@ -778,150 +778,150 @@ export const IS_MAC =
 
 export const defaultShortcuts = [
   {
-    display_name: "Controls",
-    name: "Advanced Settings",
+    display_name: "控制",
+    name: "高级设置",
     shortcut: "mod+shift+a",
   },
   {
-    display_name: "Search Components on Sidebar",
-    name: "Search Components Sidebar",
+    display_name: "侧边栏搜索组件",
+    name: "侧边栏搜索组件",
     shortcut: "/",
   },
   {
-    display_name: "Minimize",
-    name: "Minimize",
+    display_name: "最小化",
+    name: "最小化",
     shortcut: "mod+.",
   },
   {
-    display_name: "Code",
-    name: "Code",
+    display_name: "代码",
+    name: "代码",
     shortcut: "space",
   },
   {
-    display_name: "Copy",
-    name: "Copy",
+    display_name: "复制",
+    name: "复制",
     shortcut: "mod+c",
   },
   {
-    display_name: "Duplicate",
-    name: "Duplicate",
+    display_name: "复制（副本）",
+    name: "复制（副本）",
     shortcut: "mod+d",
   },
   {
-    display_name: "Component Share",
-    name: "Component Share",
+    display_name: "组件共享",
+    name: "组件共享",
     shortcut: "mod+shift+s",
   },
   {
-    display_name: "Docs",
-    name: "Docs",
+    display_name: "文档",
+    name: "文档",
     shortcut: "mod+shift+d",
   },
   {
-    display_name: "Changes Save",
-    name: "Changes Save",
+    display_name: "保存更改",
+    name: "保存更改",
     shortcut: "mod+s",
   },
   {
-    display_name: "Save Component",
-    name: "Save Component",
+    display_name: "保存组件",
+    name: "保存组件",
     shortcut: "mod+alt+s",
   },
   {
-    display_name: "Delete",
-    name: "Delete",
+    display_name: "删除",
+    name: "删除",
     shortcut: "backspace",
   },
   {
-    display_name: "Open Playground",
-    name: "Open Playground",
+    display_name: "打开游乐场",
+    name: "打开游乐场",
     shortcut: "mod+k",
   },
   {
-    display_name: "Undo",
-    name: "Undo",
+    display_name: "撤销",
+    name: "撤销",
     shortcut: "mod+z",
   },
   {
-    display_name: "Redo",
-    name: "Redo",
+    display_name: "重做",
+    name: "重做",
     shortcut: "mod+y",
   },
   {
-    display_name: "Redo (alternative)",
-    name: "Redo Alt",
+    display_name: "重做（替代）",
+    name: "重做（替代）",
     shortcut: "mod+shift+z",
   },
   {
-    display_name: "Group",
-    name: "Group",
+    display_name: "分组",
+    name: "分组",
     shortcut: "mod+g",
   },
   {
-    display_name: "Cut",
-    name: "Cut",
+    display_name: "剪切",
+    name: "剪切",
     shortcut: "mod+x",
   },
   {
-    display_name: "Paste",
-    name: "Paste",
+    display_name: "粘贴",
+    name: "粘贴",
     shortcut: "mod+v",
   },
   {
-    display_name: "API",
-    name: "API",
+    display_name: "API密钥",
+    name: "API密钥",
     shortcut: "r",
   },
   {
-    display_name: "Download",
-    name: "Download",
+    display_name: "下载",
+    name: "下载",
     shortcut: "mod+j",
   },
   {
-    display_name: "Update",
-    name: "Update",
+    display_name: "更新",
+    name: "更新",
     shortcut: "mod+u",
   },
   {
-    display_name: "Freeze",
-    name: "Freeze Path",
+    display_name: "冻结",
+    name: "冻结",
     shortcut: "mod+shift+f",
   },
   {
-    display_name: "Flow Share",
-    name: "Flow Share",
+    display_name: "工作流共享",
+    name: "工作流共享",
     shortcut: "mod+shift+b",
   },
   {
-    display_name: "Play",
-    name: "Play",
+    display_name: "运行",
+    name: "运行",
     shortcut: "p",
   },
   {
-    display_name: "Output Inspection",
-    name: "Output Inspection",
+    display_name: "输出检查",
+    name: "输出检查",
     shortcut: "o",
   },
   {
-    display_name: "Tool Mode",
-    name: "Tool Mode",
+    display_name: "工具模式",
+    name: "工具模式",
     shortcut: "mod+shift+m",
   },
   {
-    display_name: "Toggle Sidebar",
-    name: "Toggle Sidebar",
+    display_name: "切换侧边栏",
+    name: "切换侧边栏",
     shortcut: "mod+b",
   },
 ];
 
-export const DEFAULT_TABLE_ALERT_MSG = `Oops! It seems there's no data to display right now. Please check back later.`;
+export const DEFAULT_TABLE_ALERT_MSG = `哎呀！看起来现在没有数据可以显示。请稍后再试。`;
 
-export const DEFAULT_TABLE_ALERT_TITLE = "No Data Available";
+export const DEFAULT_TABLE_ALERT_TITLE = "没有数据";
 
-export const NO_COLUMN_DEFINITION_ALERT_TITLE = "No Column Definitions";
+export const NO_COLUMN_DEFINITION_ALERT_TITLE = "没有列定义";
 
 export const NO_COLUMN_DEFINITION_ALERT_DESCRIPTION =
-  "There are no column definitions available for this table.";
+  "此表没有可用的列定义。";
 
 export const LOCATIONS_TO_RETURN = ["/flow/", "/settings/"];
 
@@ -935,17 +935,17 @@ export const ALLOWED_IMAGE_INPUT_EXTENSIONS = ["png", "jpg", "jpeg"];
 export const componentsToIgnoreUpdate = ["CustomComponent"];
 
 export const FS_ERROR_TEXT =
-  "Please ensure your file has one of the following extensions:";
+  "请确保您的文件具有以下扩展名之一：";
 export const SN_ERROR_TEXT = ALLOWED_IMAGE_INPUT_EXTENSIONS.join(", ");
 
 export const ERROR_UPDATING_COMPONENT =
-  "An unexpected error occurred while updating the Component. Please try again.";
+  "更新组件时发生意外错误。请重试。";
 export const TITLE_ERROR_UPDATING_COMPONENT =
-  "Error while updating the Component";
+  "更新组件时出错";
 
-export const EMPTY_INPUT_SEND_MESSAGE = "No input message provided.";
+export const EMPTY_INPUT_SEND_MESSAGE = "没有提供输入消息。";
 
-export const EMPTY_OUTPUT_SEND_MESSAGE = "Message empty.";
+export const EMPTY_OUTPUT_SEND_MESSAGE = "消息为空。";
 
 export const TABS_ORDER = [
   "curl",
@@ -1011,20 +1011,20 @@ export const GRADIENT_CLASS =
 export const GRADIENT_CLASS_DISABLED =
   "linear-gradient(to right, hsl(var(--muted) / 0.3), hsl(var(--muted)))";
 
-export const RECEIVING_INPUT_VALUE = "Receiving input";
-export const SELECT_AN_OPTION = "Select an option";
+export const RECEIVING_INPUT_VALUE = "接收输入";
+export const SELECT_AN_OPTION = "选择一个选项";
 
 export const ICON_STROKE_WIDTH = 1.5;
 
-export const DEFAULT_PLACEHOLDER = "Type something...";
+export const DEFAULT_PLACEHOLDER = "输入一些内容...";
 
-export const DEFAULT_TOOLSET_PLACEHOLDER = "Used as a tool";
+export const DEFAULT_TOOLSET_PLACEHOLDER = "用作工具";
 
-export const SAVE_API_KEY_ALERT = "API key saved successfully";
-export const PLAYGROUND_BUTTON_NAME = "Playground";
+export const SAVE_API_KEY_ALERT = "API密钥保存成功";
+export const PLAYGROUND_BUTTON_NAME = "游乐场";
 export const POLLING_MESSAGES = {
-  ENDPOINT_NOT_AVAILABLE: "Endpoint not available",
-  STREAMING_NOT_SUPPORTED: "Streaming not supported",
+  ENDPOINT_NOT_AVAILABLE: "端点不可用",
+  STREAMING_NOT_SUPPORTED: "流式传输不支持",
 } as const;
 
 export const BUILD_POLLING_INTERVAL = 25;
@@ -1045,7 +1045,7 @@ export const ALL_LANGUAGES = [
   { value: "de-DE", name: "German" },
   { value: "ja-JP", name: "Japanese" },
   { value: "pt-BR", name: "Portuguese (Brazil)" },
-  { value: "zh-CN", name: "Chinese (Simplified)" },
+  { value: "zh-CN", name: "中文 (简体)" },
   { value: "ru-RU", name: "Russian" },
   { value: "ar-SA", name: "Arabic" },
   { value: "hi-IN", name: "Hindi" },

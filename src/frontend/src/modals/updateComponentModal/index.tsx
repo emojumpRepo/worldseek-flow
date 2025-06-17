@@ -35,7 +35,7 @@ export default function UpdateComponentModal({
 
   const { handleDuplicate } = useDuplicateFlows({
     flow: currentFlow
-      ? { ...currentFlow, name: currentFlow.name + " (Backup)" }
+      ? { ...currentFlow, name: currentFlow.name + " (副本)" }
       : undefined,
   });
 
@@ -61,7 +61,7 @@ export default function UpdateComponentModal({
   const columnDefs: ColDef[] = [
     { field: "id", hide: true },
     {
-      headerName: "Component",
+      headerName: "组件",
       field: "display_name",
       headerClass: "!text-mmd !font-normal",
       flex: 1,
@@ -83,7 +83,7 @@ export default function UpdateComponentModal({
       },
     },
     {
-      headerName: "Update Type",
+      headerName: "更新类型",
       field: "breakingChange",
       headerClass: "!text-mmd !font-normal",
       resizable: false,
@@ -133,8 +133,8 @@ export default function UpdateComponentModal({
       <BaseModal.Trigger asChild>{children ?? <></>}</BaseModal.Trigger>
       <BaseModal.Header>
         <span className="">
-          Update{" "}
-          {isMultiple ? "components" : (components?.[0]?.display_name ?? "")}
+          更新{" "}
+          {isMultiple ? "组件" : (components?.[0]?.display_name ?? "")}
         </span>
       </BaseModal.Header>
       <BaseModal.Content overflowHidden>
@@ -142,28 +142,23 @@ export default function UpdateComponentModal({
           <div className="flex flex-col gap-3 text-sm text-muted-foreground">
             {isMultiple ? (
               <p>
-                Updates marked as{" "}
+                标记为{" "}
                 <span className="font-semibold text-accent-amber-foreground">
-                  breaking
+                  破坏性的
                 </span>{" "}
-                may change inputs, outputs, or component behavior. In some
-                cases, they will disconnect components from your flow, requiring
-                you to review or reconnect them afterward. Components added from
-                the sidebar always use the latest version.
+                的更新可能会改变输入、输出或组件行为。在某些情况下，它们会断开流程中的组件连接，需要您在之后重新检查或重新连接。从侧边栏添加的组件始终使用最新版本。
               </p>
             ) : (
               <>
                 <p>
-                  This update may change inputs, outputs, or component behavior.
-                  In some cases, it will{" "}
+                  此更新可能会改变输入、输出或组件行为。在某些情况下，它将{" "}
                   <span className="font-semibold text-accent-amber-foreground">
-                    disconnect this component from your flow
+                    断开此组件与流程的连接
                   </span>
-                  , requiring you to review or reconnect it afterward.
+                  , 需要您在之后重新检查或重新连接。
                 </p>
                 <p>
-                  Components added from the sidebar always use the latest
-                  version.
+                  从侧边栏添加的组件始终使用最新版本。
                 </p>
               </>
             )}
@@ -207,14 +202,14 @@ export default function UpdateComponentModal({
               data-testid="backup-flow-checkbox"
             />
             <label htmlFor="backupFlow" className="cursor-pointer select-none">
-              Create backup flow before updating
+              更新前请创建备份工作流
             </label>
           </div>
         </div>
       </BaseModal.Content>
       <BaseModal.Footer
         submit={{
-          label: "Update Component" + (components.length > 1 ? "s" : ""),
+          label: "更新组件" + (components.length > 1 ? "s" : ""),
           onClick: handleUpdate,
           disabled: isMultiple && selectedComponents.size === 0,
           loading,

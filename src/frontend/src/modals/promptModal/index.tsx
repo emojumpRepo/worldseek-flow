@@ -225,7 +225,7 @@ export default function PromptModal({
               aria-hidden="true"
             />
             <span className="pl-2" data-testid="modal-title">
-              Edit Prompt
+              编辑提示词
             </span>
           </div>
         </div>
@@ -278,7 +278,7 @@ export default function PromptModal({
                     className="flex h-4 w-4 text-primary"
                   />
                   <span className="text-md font-semibold text-primary">
-                    Prompt Variables:
+                    提示词变量:
                   </span>
 
                   {Array.from(wordsHighlight).map((word, index) => (
@@ -306,8 +306,7 @@ export default function PromptModal({
                 </div>
               </div>
               <span className="mt-2 text-xs text-muted-foreground">
-                Prompt variables can be created with any chosen name inside
-                curly brackets, e.g. {"{variable_name}"}
+                提示词变量可以使用任何选择的名称，括号内，例如 {"{变量名}"}
               </span>
             </div>
           </div>
@@ -320,7 +319,7 @@ export default function PromptModal({
             }}
             type="submit"
           >
-            Check & Save
+            检查并保存
           </Button>
         </div>
       </BaseModal.Footer>

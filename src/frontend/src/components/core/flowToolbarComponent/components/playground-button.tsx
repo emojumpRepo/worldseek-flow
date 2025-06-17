@@ -59,7 +59,7 @@ const PlaygroundButton = ({
       <ActiveButton />
     </CustomIOModal>
   ) : (
-    <ShadTooltip content="Add a Chat Input or Chat Output to use the playground">
+    <ShadTooltip content="添加一个Chat输入或Chat输出以使用游乐场">
       <div>
         <DisabledButton />
       </div>

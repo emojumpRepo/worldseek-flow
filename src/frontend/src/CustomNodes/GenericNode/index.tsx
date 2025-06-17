@@ -143,10 +143,10 @@ function GenericNode({
 
   if (!data.node!.template) {
     setErrorData({
-      title: `Error in component ${data.node!.display_name}`,
+      title: `组件 ${data.node!.display_name} 发生错误`,
       list: [
-        `The component ${data.node!.display_name} has no template.`,
-        `Please contact the developer of the component to fix this issue.`,
+        `组件 ${data.node!.display_name} 没有模板。`,
+        `请联系组件开发者修复此问题。`,
       ],
     });
     takeSnapshot();
@@ -184,10 +184,10 @@ function GenericNode({
             },
             onError: (error) => {
               setErrorData({
-                title: "Error updating Component code",
+                title: "更新组件代码错误",
                 list: [
-                  "There was an error updating the Component.",
-                  "If the error persists, please report it on our Discord or GitHub.",
+                  "更新组件代码时发生错误。",
+                  "如果错误持续存在，请向开发者反馈。",
                 ],
               });
               console.error(error);

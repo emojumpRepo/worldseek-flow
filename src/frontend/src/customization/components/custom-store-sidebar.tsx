@@ -8,7 +8,7 @@ export const CustomStoreSidebar = (
 
   if (hasApiKey) {
     items.push({
-      title: "Langflow API Keys",
+      title: "WorldSeek Agent API密钥",
       href: "/settings/api-keys",
       icon: (
         <ForwardedIconComponent
@@ -21,7 +21,7 @@ export const CustomStoreSidebar = (
 
   if (hasStore) {
     items.push({
-      title: "Langflow Store",
+      title: "WorldSeek Agent商店",
       href: "/settings/store",
       icon: (
         <ForwardedIconComponent

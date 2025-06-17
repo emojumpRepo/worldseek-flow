@@ -95,7 +95,7 @@ export default function InputFileComponent({
                       onError: (error) => {
                         console.error(CONSOLE_ERROR_MSG);
                         setErrorData({
-                          title: "Error uploading file",
+                          title: "上传文件错误",
                           list: [error.response?.data?.detail],
                         });
                         resolve(null);
@@ -268,7 +268,7 @@ export default function InputFileComponent({
                             strokeWidth={ICON_STROKE_WIDTH}
                           />
                         ) : (
-                          <div>Select file{isList ? "s" : ""}</div>
+                          <div>选择文件{isList ? "s" : ""}</div>
                         )}
                       </Button>
                     </div>
@@ -287,7 +287,7 @@ export default function InputFileComponent({
                     !value && "text-placeholder-foreground",
                     editNode && "h-6",
                   )}
-                  value={value || "Upload a file..."}
+                  value={value || "上传文件..."}
                   readOnly
                   disabled={isDisabled}
                   onClick={handleButtonClick}

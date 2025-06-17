@@ -20,8 +20,8 @@ export default function McpComponent({
       mcpServers?.map((server) => ({
         name: server.name,
         description: !server.toolsCount
-          ? "No actions found"
-          : `${server.toolsCount} action${server.toolsCount === 1 ? "" : "s"}`,
+          ? "未找到操作"
+          : `${server.toolsCount} 操作${server.toolsCount === 1 ? "" : "s"}`,
       })),
     [mcpServers],
   );
@@ -83,7 +83,7 @@ export default function McpComponent({
                 <span className="truncate">
                   {selectedItem[0]?.name
                     ? selectedItem[0]?.name
-                    : "Select a server..."}
+                    : "选择一个服务..."}
                 </span>
                 <ForwardedIconComponent
                   name="ChevronsUpDown"
@@ -93,7 +93,7 @@ export default function McpComponent({
             </Button>
           ) : (
             <Button size="sm" onClick={handleAddButtonClick}>
-              <span>Add MCP Server</span>
+              <span>添加 MCP 服务</span>
             </Button>
           )}
           <ListSelectionComponent
@@ -107,10 +107,10 @@ export default function McpComponent({
             id={id}
             value={value}
             editNode={editNode}
-            headerSearchPlaceholder="Search MCP Servers..."
+            headerSearchPlaceholder="查找 MCP 服务..."
             handleOnNewValue={handleOnNewValue}
             disabled={disabled}
-            addButtonText="Add MCP Server"
+            addButtonText="添加 MCP 服务"
             onAddButtonClick={handleAddButtonClick}
           />
         </>

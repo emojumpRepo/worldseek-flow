@@ -29,6 +29,12 @@ interface HeaderComponentProps {
   selectedFlows: string[];
 }
 
+enum FlowType {
+  flows = "工作流",
+  components = "组件",
+  mcp = "MCP 服务",
+}
+
 const HeaderComponent = ({
   folderName = "",
   flowType,
@@ -82,7 +88,7 @@ const HeaderComponent = ({
 
   const handleDownload = () => {
     downloadFlows({ ids: selectedFlows });
-    setSuccessData({ title: "Flows downloaded successfully" });
+    setSuccessData({ title: "工作流下载成功！" });
   };
 
   const handleDelete = () => {
@@ -90,7 +96,7 @@ const HeaderComponent = ({
       { flow_ids: selectedFlows },
       {
         onSuccess: () => {
-          setSuccessData({ title: "Flows deleted successfully" });
+          setSuccessData({ title: "工作流已删除！" });
         },
       },
     );
@@ -135,9 +141,7 @@ const HeaderComponent = ({
                 } text-nowrap px-2 pb-2 pt-1 text-mmd`}
               >
                 <div className={flowType === type ? "-mb-px" : ""}>
-                  {type === "mcp"
-                    ? "MCP Server"
-                    : type.charAt(0).toUpperCase() + type.slice(1)}
+                  {FlowType[type]}
                 </div>
               </Button>
             ))}
@@ -150,7 +154,7 @@ const HeaderComponent = ({
                   icon="Search"
                   data-testid="search-store-input"
                   type="text"
-                  placeholder={`Search ${flowType}...`}
+                  placeholder={`查找${FlowType[flowType]}...`}
                   className="mr-2 !text-mmd"
                   inputClassName="!text-mmd"
                   value={debouncedSearch}
@@ -208,12 +212,8 @@ const HeaderComponent = ({
 
                   <DeleteConfirmationModal
                     onConfirm={handleDelete}
-                    description={"flow" + (selectedFlows.length > 1 ? "s" : "")}
-                    note={
-                      "and " +
-                      (selectedFlows.length > 1 ? "their" : "its") +
-                      " message history"
-                    }
+                    description={FlowType[flowType]}
+                    note={"和其消息记录"}
                   >
                     <Button
                       variant="destructive"
@@ -223,11 +223,11 @@ const HeaderComponent = ({
                       loading={isDeleting}
                     >
                       <ForwardedIconComponent name="Trash2" />
-                      Delete
+                      删除
                     </Button>
                   </DeleteConfirmationModal>
                 </div>
-                <ShadTooltip content="New Flow" side="bottom">
+                <ShadTooltip content="添加工作流" side="bottom">
                   <Button
                     variant="default"
                     size="iconMd"
@@ -242,7 +242,7 @@ const HeaderComponent = ({
                       className="h-4 w-4"
                     />
                     <span className="hidden whitespace-nowrap font-semibold md:inline">
-                      New Flow
+                      添加工作流
                     </span>
                   </Button>
                 </ShadTooltip>

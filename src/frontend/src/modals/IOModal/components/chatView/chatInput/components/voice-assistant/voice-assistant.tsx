@@ -392,7 +392,7 @@ export function VoiceAssistant({
           )}
         >
           <ShadTooltip
-            content={isRecording ? "Mute" : "Unmute"}
+            content={isRecording ? "静音" : "取消静音"}
             delayDuration={500}
           >
             <Button unstyled onClick={handleToggleRecording}>

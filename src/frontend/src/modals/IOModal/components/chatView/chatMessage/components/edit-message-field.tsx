@@ -51,7 +51,7 @@ export default function EditMessageField({
               }}
               className="mt-2 bg-primary text-background hover:bg-primary-hover hover:text-secondary"
             >
-              Save
+              保存
             </Button>
             <Button
               variant={"secondary"}
@@ -63,12 +63,11 @@ export default function EditMessageField({
               }}
               className="mt-2 !bg-transparent text-foreground hover:!bg-secondary-hover"
             >
-              Cancel
+              取消
             </Button>
           </div>
           <div className="text-mmd font-medium text-muted-foreground word-break-break-word">
-            Editing messages will update the memory but won't restart the
-            conversation.
+            编辑消息将更新内存，但不会重新启动对话。
           </div>
         </div>
         <div></div>

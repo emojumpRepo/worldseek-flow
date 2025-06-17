@@ -9,14 +9,14 @@ const FeatureToggles = ({
 }) => {
   const toggles = [
     {
-      label: "Beta",
+      label: "测试版",
       checked: showBeta,
       onChange: setShowBeta,
       badgeVariant: "pinkStatic" as const,
       testId: "sidebar-beta-switch",
     },
     {
-      label: "Legacy",
+      label: "已弃用",
       checked: showLegacy,
       onChange: setShowLegacy,
       badgeVariant: "secondaryStatic" as const,
@@ -30,7 +30,7 @@ const FeatureToggles = ({
         <div key={toggle.label} className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <span className="flex gap-2 text-sm font-medium">
-              Show
+              显示
               <Badge variant={toggle.badgeVariant} size="xq">
                 {toggle.label}
               </Badge>

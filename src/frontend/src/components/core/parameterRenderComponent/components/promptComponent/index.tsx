@@ -61,7 +61,7 @@ export default function PromptAreaComponent({
         />
       ) : (
         <span className="text-sm text-muted-foreground">
-          {getPlaceholder(disabled, "Type your prompt here...")}
+          {getPlaceholder(disabled, "在此输入提示词...")}
         </span>
       )}
     </span>

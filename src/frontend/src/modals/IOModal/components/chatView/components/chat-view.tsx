@@ -138,7 +138,7 @@ export default function ChatView({
     if (chat.componentId)
       updateFlowPool(chat.componentId, {
         message,
-        sender_name: chat.sender_name ?? "Bot",
+        sender_name: chat.sender_name ?? "AI",
         sender: chat.isSend ? "User" : "Machine",
       });
   }
@@ -257,14 +257,14 @@ export default function ChatView({
                   />
                   <div className="flex flex-col items-center justify-center">
                     <h3 className="mt-2 pb-2 text-2xl font-semibold text-primary">
-                      New chat
+                      新聊天
                     </h3>
                     <p
                       className="text-lg text-muted-foreground"
                       data-testid="new-chat-text"
                     >
                       <TextEffectPerChar>
-                        Test your flow with a chat prompt
+                        使用聊天提示测试您的工作流
                       </TextEffectPerChar>
                     </p>
                   </div>

@@ -196,9 +196,9 @@ export function ParameterRenderComponent({
         return (
           <TableNodeComponent
             {...baseInputProps}
-            description={templateData.info || "Add or edit data"}
+            description={templateData.info || "添加或编辑数据"}
             columns={templateData?.table_schema?.columns}
-            tableTitle={templateData?.display_name ?? "Table"}
+            tableTitle={templateData?.display_name ?? "表格"}
             table_options={templateData?.table_options}
             trigger_icon={templateData?.trigger_icon}
             trigger_text={templateData?.trigger_text}
@@ -209,8 +209,8 @@ export function ParameterRenderComponent({
         return (
           <ToolsComponent
             {...baseInputProps}
-            description={templateData.info || "Add or edit data"}
-            title={nodeClass?.display_name ?? "Tools"}
+            description={templateData.info || "添加或编辑数据"}
+            title={nodeClass?.display_name ?? "工具"}
             icon={nodeClass?.icon ?? ""}
             template={nodeClass?.template}
           />

@@ -79,18 +79,18 @@ export const EditFlowSettings: React.FC<
       <Form.Field name="name">
         <div className="edit-flow-arrangement">
           <Form.Label className="text-mmd font-medium">
-            Name{setName ? "" : ":"}
+            名称{setName ? "" : ":"}
           </Form.Label>
           {isMaxLength && (
-            <span className="edit-flow-span">Character limit reached</span>
+            <span className="edit-flow-span">已达到字符限制</span>
           )}
           {isMinLength && (
             <span className="edit-flow-span">
-              Minimum {minLength} character(s) required
+              至少需要 {minLength} 个字符
             </span>
           )}
           {isInvalidName && (
-            <span className="edit-flow-span">Flow name already exists</span>
+            <span className="edit-flow-span">工作流名称已存在</span>
           )}
         </div>
         {setName ? (
@@ -101,7 +101,7 @@ export const EditFlowSettings: React.FC<
               type="text"
               name="name"
               value={name ?? ""}
-              placeholder="Flow name"
+              placeholder="工作流名称"
               id="name"
               maxLength={maxLength}
               minLength={minLength}
@@ -117,22 +117,22 @@ export const EditFlowSettings: React.FC<
           </span>
         )}
         <Form.Message match="valueMissing" className="field-invalid">
-          Please enter a name
+          请输入名称
         </Form.Message>
         <Form.Message
           match={(value) => !!(value && invalidNameList.includes(value))}
           className="field-invalid"
         >
-          Flow name already exists
+          工作流名称已存在
         </Form.Message>
       </Form.Field>
       <Form.Field name="description">
         <div className="edit-flow-arrangement mt-3">
           <Form.Label className="text-mmd font-medium">
-            Description{setDescription ? "" : ":"}
+            描述{setDescription ? "" : ":"}
           </Form.Label>
           {isMaxDescriptionLength && (
-            <span className="edit-flow-span">Character limit reached</span>
+            <span className="edit-flow-span">已达到字符限制</span>
           )}
         </div>
         {setDescription ? (
@@ -142,7 +142,7 @@ export const EditFlowSettings: React.FC<
               id="description"
               onChange={handleDescriptionChange}
               value={description!}
-              placeholder="Flow description"
+              placeholder="工作流描述"
               data-testid="input-flow-description"
               className="mt-2 max-h-[250px] resize-none font-normal"
               rows={5}
@@ -158,11 +158,11 @@ export const EditFlowSettings: React.FC<
               description === "" ? "font-light italic" : "",
             )}
           >
-            {description === "" ? "No description" : description}
+            {description === "" ? "没有描述" : description}
           </div>
         )}
         <Form.Message match="valueMissing" className="field-invalid">
-          Please enter a description
+          请输入描述
         </Form.Message>
       </Form.Field>
     </>

@@ -69,8 +69,8 @@ const ListComponent = ({
       })
       .catch(() => {
         setErrorData({
-          title: "Error deleting items",
-          list: ["Please try again"],
+          title: "删除失败",
+          list: ["请重试"],
         });
       });
   };
@@ -91,7 +91,7 @@ const ListComponent = ({
   const handleExport = () => {
     if (flowData.is_component) {
       downloadFlow(flowData, flowData.name, flowData.description);
-      setSuccessData({ title: `${flowData.name} exported successfully` });
+      setSuccessData({ title: `${flowData.name} 已导出！` });
     } else {
       setOpenExportModal(true);
     }
@@ -169,7 +169,7 @@ const ListComponent = ({
                 </span>
               </div>
               <div className="item-baseline flex text-xs text-muted-foreground">
-                Edited {timeElapsed(flowData.updated_at)} ago
+                {timeElapsed(flowData.updated_at)}前编辑
               </div>
             </div>
             <div className="overflow-hidden text-mmd text-muted-foreground">
@@ -219,7 +219,7 @@ const ListComponent = ({
           setOpen={setOpenDelete}
           onConfirm={handleDelete}
           description={descriptionModal}
-          note={!flowData.is_component ? "and its message history" : ""}
+          note={!flowData.is_component ? "和其消息记录" : ""}
         />
       )}
       <ExportModal

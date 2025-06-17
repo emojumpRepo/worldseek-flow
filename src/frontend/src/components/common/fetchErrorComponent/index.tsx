@@ -33,7 +33,7 @@ export default function FetchErrorComponent({
 
         <BaseModal.Footer
           submit={{
-            label: "Retry",
+            label: "重试",
             loading: isLoadingHealth,
             onClick: () => {
               setRetry();

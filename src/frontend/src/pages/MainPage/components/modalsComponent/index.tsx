@@ -27,8 +27,8 @@ const ModalsComponent = ({
           handleDeleteFolder();
           setOpenDeleteFolderModal(false);
         }}
-        description="folder"
-        note={"and all associated flows and components"}
+        description="文件夹"
+        note={"和所有关联的工作流和组件"}
       >
         <></>
       </DeleteConfirmationModal>

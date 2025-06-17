@@ -76,7 +76,7 @@ export default function FilePreview({
               <ForwardedIconComponent name="File" className="h-8 w-8" />
               <div className="flex flex-col">
                 <span className="font-bold">{formatFileName(file.name)}</span>
-                <span>File</span>
+                <span>文件</span>
               </div>
             </div>
           )}

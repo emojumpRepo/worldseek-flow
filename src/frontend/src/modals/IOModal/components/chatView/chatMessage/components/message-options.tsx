@@ -35,7 +35,7 @@ export function EditMessageButton({
   return (
     <div className="flex items-center rounded-md border border-border bg-background">
       {!isAudioMessage && (
-        <ShadTooltip styleClasses="z-50" content="Edit message" side="top">
+        <ShadTooltip styleClasses="z-50" content="编辑消息" side="top">
           <div className="p-1">
             <Button
               variant="ghost"
@@ -51,7 +51,7 @@ export function EditMessageButton({
 
       <ShadTooltip
         styleClasses="z-50"
-        content={isCopied ? "Copied!" : "Copy message"}
+        content={isCopied ? "已复制!" : "复制消息"}
         side="top"
       >
         <div className="p-1">
@@ -71,7 +71,7 @@ export function EditMessageButton({
 
       {isBotMessage && (
         <div className="flex">
-          <ShadTooltip styleClasses="z-50" content="Helpful" side="top">
+          <ShadTooltip styleClasses="z-50" content="有用" side="top">
             <div className="p-1">
               <Button
                 variant="ghost"
@@ -88,7 +88,7 @@ export function EditMessageButton({
             </div>
           </ShadTooltip>
 
-          <ShadTooltip styleClasses="z-50" content="Not helpful" side="top">
+          <ShadTooltip styleClasses="z-50" content="没有帮助" side="top">
             <div className="p-1">
               <Button
                 variant="ghost"

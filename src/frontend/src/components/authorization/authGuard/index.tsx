@@ -6,12 +6,14 @@ import {
 import { useRefreshAccessToken } from "@/controllers/API/queries/auth";
 import { CustomNavigate } from "@/customization/components/custom-navigate";
 import useAuthStore from "@/stores/authStore";
+import { log } from "console";
 import { useEffect } from "react";
 
 export const ProtectedRoute = ({ children }) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const { mutate: mutateRefresh } = useRefreshAccessToken();
   const autoLogin = useAuthStore((state) => state.autoLogin);
+  console.log("autoLogin", autoLogin);
   const isAutoLoginEnv = IS_AUTO_LOGIN;
   const testMockAutoLogin = sessionStorage.getItem("testMockAutoLogin");
 

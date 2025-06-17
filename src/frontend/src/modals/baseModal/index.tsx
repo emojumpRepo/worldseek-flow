@@ -128,7 +128,7 @@ const Footer: React.FC<{
                 type="button"
                 data-testid="btn-cancel-modal"
               >
-                Cancel
+                取消
               </Button>
             </DialogClose>
             <Button
@@ -149,7 +149,7 @@ const Footer: React.FC<{
       {close && (
         <DialogClose asChild>
           <Button data-testid="btn-close-modal" type="button">
-            Close
+            关闭
           </Button>
         </DialogClose>
       )}

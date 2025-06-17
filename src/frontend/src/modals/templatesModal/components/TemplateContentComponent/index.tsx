@@ -82,7 +82,7 @@ export default function TemplateContentComponent({
         />
         <Input
           type="search"
-          placeholder="Search..."
+          placeholder="查找..."
           data-testid="search-input-template"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -102,14 +102,14 @@ export default function TemplateContentComponent({
         ) : (
           <div className="flex flex-col items-center justify-center px-4 py-12 text-center">
             <p className="text-sm text-secondary-foreground">
-              No templates found.{" "}
+              未找到模板。{" "}
               <a
                 className="cursor-pointer underline underline-offset-4"
                 onClick={handleClearSearch}
               >
-                Clear your search
+                清除您的搜索
               </a>{" "}
-              and try a different query.
+              并尝试不同的查询条件。
             </p>
           </div>
         )}

@@ -41,7 +41,7 @@ export const SelectOptions = ({
         }
         value=""
       >
-        <ShadTooltip content="Options" side="right" styleClasses="z-50">
+        <ShadTooltip content="选项" side="right" styleClasses="z-50">
           <SelectTrigger
             className="w-fit"
             id={`options-trigger-${item.name}`}
@@ -64,7 +64,7 @@ export const SelectOptions = ({
               data-testid="btn-rename-project"
               className="text-xs"
             >
-              <FolderSelectItem name="Rename" iconName="SquarePen" />
+              <FolderSelectItem name="重命名" iconName="SquarePen" />
             </SelectItem>
           )}
           <SelectItem
@@ -72,7 +72,7 @@ export const SelectOptions = ({
             data-testid="btn-download-project"
             className="text-xs"
           >
-            <FolderSelectItem name="Download" iconName="Download" />
+            <FolderSelectItem name="下载" iconName="Download" />
           </SelectItem>
           {index > 0 && (
             <SelectItem
@@ -80,7 +80,7 @@ export const SelectOptions = ({
               data-testid="btn-delete-project"
               className="text-xs"
             >
-              <FolderSelectItem name="Delete" iconName="Trash2" />
+              <FolderSelectItem name="删除" iconName="Trash2" />
             </SelectItem>
           )}
         </SelectContent>

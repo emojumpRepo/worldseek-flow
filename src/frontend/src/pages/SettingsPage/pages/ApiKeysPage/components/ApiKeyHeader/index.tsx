@@ -20,7 +20,7 @@ const ApiKeyHeaderComponent = ({
       <div className="flex w-full items-start justify-between gap-6">
         <div className="flex w-full flex-col">
           <h2 className="flex items-center text-lg font-semibold tracking-tight">
-            WorldSeek Agent API Keys
+            WorldSeek Agent API密钥
             <ForwardedIconComponent
               name="Key"
               className="ml-2 h-5 w-5 text-primary"
@@ -36,7 +36,7 @@ const ApiKeyHeaderComponent = ({
           >
             <Button data-testid="api-key-button-store" variant="primary">
               <ForwardedIconComponent name="Plus" className="w-4" />
-              Add New
+              添加密钥
             </Button>
           </SecretKeyModal>
         </div>

@@ -36,12 +36,12 @@ export default function SessionView({
       deleteMessagesStore(selectedRows);
       setSelectedRows([]);
       setSuccessData({
-        title: "Messages deleted successfully.",
+        title: "消息删除成功",
       });
     },
     onError: () => {
       setErrorData({
-        title: "Error deleting messages.",
+        title: "消息删除失败",
       });
     },
   });
@@ -63,12 +63,12 @@ export default function SessionView({
           updateMessage(data);
           // Set success message
           setSuccessData({
-            title: "Messages updated successfully.",
+            title: "消息更新成功",
           });
         },
         onError: () => {
           setErrorData({
-            title: "Error updating messages.",
+            title: "消息更新失败",
           });
           event.data[field] = event.oldValue;
           event.api.refreshCells();

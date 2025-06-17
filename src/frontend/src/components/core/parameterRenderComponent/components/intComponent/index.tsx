@@ -102,7 +102,7 @@ export default function IntComponent({
           onKeyDown={(event) => handleKeyDown(event, value, "")}
           onInput={handleInputChange}
           disabled={disabled || readonly}
-          placeholder={editNode ? "Integer number" : "Type an integer number"}
+          placeholder={editNode ? "整数" : "输入一个整数"}
           data-testid={id}
           ref={inputRef}
         />

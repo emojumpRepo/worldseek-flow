@@ -20,11 +20,11 @@ const TextAreaWrapper = ({
     noInput: boolean,
   ): string => {
     if (isDragging) {
-      return "Drop here";
+      return "拖拽文件到这里";
     } else if (noInput) {
       return CHAT_INPUT_PLACEHOLDER;
     } else {
-      return "Send a message...";
+      return "发送消息...";
     }
   };
 

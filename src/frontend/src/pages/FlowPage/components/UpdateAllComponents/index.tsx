@@ -16,11 +16,11 @@ import { useMemo, useRef, useState } from "react";
 
 const ERROR_MESSAGE_UPDATING_COMPONENTS = "Error updating components";
 const ERROR_MESSAGE_UPDATING_COMPONENTS_LIST = [
-  "There was an error updating the components.",
-  "If the error persists, please report it on our Discord or GitHub.",
+  "更新组件时出错。",
+  "如果错误持续存在，请向我们反馈。",
 ];
 const ERROR_MESSAGE_EDGES_LOST =
-  "Some edges were lost after updating the components. Please review the flow and reconnect them.";
+  "更新组件后，一些浏览器连接丢失了。请检查工作流并重新连接它们。";
 
 const CONTAINER_VARIANTS = {
   hidden: { opacity: 0, y: 20 },
@@ -85,9 +85,7 @@ export default function UpdateAllComponents({}: {}) {
 
   const getSuccessTitle = (updatedCount: number) => {
     resetEdgesUpdateRef();
-    return `Successfully updated ${updatedCount} component${
-      updatedCount > 1 ? "s" : ""
-    }`;
+    return `成功更新 ${updatedCount} 个组件`;
   };
 
   const breakingChanges = componentsToUpdateFiltered.filter(
@@ -219,12 +217,7 @@ export default function UpdateAllComponents({}: {}) {
             >
               <div className="flex items-center gap-3">
                 <span>
-                  Update
-                  {componentsToUpdateFiltered.length > 1 ? "s are" : " is"}{" "}
-                  available for{" "}
-                  {componentsToUpdateFiltered.length +
-                    " component" +
-                    (componentsToUpdateFiltered.length > 1 ? "s" : "")}
+                  更新 {componentsToUpdateFiltered.length} 个组件
                 </span>
               </div>
               <div className="flex items-center gap-4">
@@ -234,7 +227,7 @@ export default function UpdateAllComponents({}: {}) {
                   className="shrink-0 text-sm"
                   onClick={handleDismissAllComponents}
                 >
-                  Dismiss {componentsToUpdateFiltered.length > 1 ? "All" : ""}
+                  忽略 {componentsToUpdateFiltered.length > 1 ? "全部" : ""}
                 </Button>
                 <Button
                   size="sm"
@@ -243,7 +236,7 @@ export default function UpdateAllComponents({}: {}) {
                   loading={loadingUpdate}
                   data-testid="update-all-button"
                 >
-                  {breakingChanges.length > 0 ? "Review All" : "Update All"}
+                  {breakingChanges.length > 0 ? "预览全部" : "更新全部"}
                 </Button>
               </div>
               <UpdateComponentModal

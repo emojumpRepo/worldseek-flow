@@ -98,15 +98,15 @@ const useSaveFlow = () => {
                     resolve();
                   } else {
                     setErrorData({
-                      title: "Failed to save flow",
-                      list: ["Flows variable undefined"],
+                      title: "工作流保存失败",
+                      list: ["工作流变量未定义"],
                     });
-                    reject(new Error("Flows variable undefined"));
+                    reject(new Error("工作流变量未定义"));
                   }
                 },
                 onError: (e) => {
                   setErrorData({
-                    title: "Failed to save flow",
+                    title: "工作流保存失败",
                     list: [e.message],
                   });
                   setSaveLoading(false);
@@ -119,10 +119,10 @@ const useSaveFlow = () => {
           }
         } else {
           setErrorData({
-            title: "Failed to save flow",
-            list: ["Flow not found"],
+            title: "工作流保存失败",
+            list: ["工作流未找到"],
           });
-          reject(new Error("Flow not found"));
+          reject(new Error("工作流未找到"));
         }
       });
     }

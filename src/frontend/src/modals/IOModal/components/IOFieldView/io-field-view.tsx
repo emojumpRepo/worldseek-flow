@@ -67,7 +67,7 @@ export default function IOFieldView({
     : { handleOnNewValue: (value: any, options?: any) => {} };
 
   function handleOutputType() {
-    if (!node) return <>"No node found!"</>;
+    if (!node) return <>"未找到节点!"</>;
     switch (type) {
       case InputOutput.INPUT:
         switch (fieldType) {
@@ -77,7 +77,7 @@ export default function IOFieldView({
                 className={`w-full custom-scroll ${
                   left ? "min-h-32" : "h-full"
                 }`}
-                placeholder={"Enter text..."}
+                placeholder={"输入文本..."}
                 value={node.data.node!.template["input_value"].value}
                 onChange={(e) => {
                   e.target.value;
@@ -157,7 +157,7 @@ export default function IOFieldView({
                 className={`w-full custom-scroll ${
                   left ? "min-h-32" : "h-full"
                 }`}
-                placeholder={"Enter text..."}
+                placeholder={"输入文本..."}
                 value={node.data.node!.template["input_value"]}
                 onChange={(e) => {
                   e.target.value;
@@ -196,7 +196,7 @@ export default function IOFieldView({
             );
           case IOOutputTypes.IMAGE:
             return left ? (
-              <div>Expand the view to see the image</div>
+              <div>展开查看图片</div>
             ) : (
               <ImageViewer
                 image={

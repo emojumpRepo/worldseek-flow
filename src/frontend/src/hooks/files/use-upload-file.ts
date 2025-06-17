@@ -41,14 +41,14 @@ const useUploadFile = ({
         const fileExtension = file.name.split(".").pop()?.toLowerCase();
         if (!fileExtension || (types && !types.includes(fileExtension))) {
           throw new Error(
-            `File type ${fileExtension} not allowed. Allowed types: ${types?.join(", ")}`,
+            `文件类型 ${fileExtension} 不允许。允许的类型: ${types?.join(", ")}`,
           );
         }
         if (!fileExtension) {
-          throw new Error("File type not allowed");
+          throw new Error("文件类型不允许");
         }
         if (!multiple && filesToUpload.length !== 1) {
-          throw new Error("Multiple files are not allowed");
+          throw new Error("不允许上传多个文件");
         }
 
         const res = await uploadFileMutation({

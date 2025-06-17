@@ -33,7 +33,7 @@ const ListSelectionComponent = ({
   selectedList = [],
   options,
   limit = 1,
-  headerSearchPlaceholder = "Search...",
+  headerSearchPlaceholder = "查找...",
   addButtonText,
   onAddButtonClick,
   ...baseInputProps
@@ -244,7 +244,7 @@ const ListSelectionComponent = ({
             ))
           ) : (
             <div className="py-3 text-center text-gray-500">
-              No items match your search
+              没有匹配的项
             </div>
           )}
         </div>

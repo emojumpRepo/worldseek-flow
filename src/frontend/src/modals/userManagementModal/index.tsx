@@ -100,7 +100,7 @@ export default function UserManagementModal({
                 }}
               >
                 <Form.Label className="data-[invalid]:label-invalid">
-                  Username{" "}
+                  用户名{" "}
                   <span className="font-medium text-destructive">*</span>
                 </Form.Label>
               </div>
@@ -113,11 +113,11 @@ export default function UserManagementModal({
                   value={username}
                   className="primary-input"
                   required
-                  placeholder="Username"
+                  placeholder="请输入用户名"
                 />
               </Form.Control>
               <Form.Message match="valueMissing" className="field-invalid">
-                Please enter your username
+                请输入用户名
               </Form.Message>
             </Form.Field>
 
@@ -135,7 +135,7 @@ export default function UserManagementModal({
                     }}
                   >
                     <Form.Label className="data-[invalid]:label-invalid flex">
-                      Password{" "}
+                      密码{" "}
                       <span className="ml-1 mr-1 font-medium text-destructive">
                         *
                       </span>
@@ -169,12 +169,12 @@ export default function UserManagementModal({
                   </Form.Control>
 
                   <Form.Message className="field-invalid" match="valueMissing">
-                    Please enter a password
+                    请输入密码
                   </Form.Message>
 
                   {password != confirmPassword && (
                     <Form.Message className="field-invalid">
-                      Passwords do not match
+                      两次密码不匹配
                     </Form.Message>
                   )}
                 </Form.Field>
@@ -193,7 +193,7 @@ export default function UserManagementModal({
                     }}
                   >
                     <Form.Label className="data-[invalid]:label-invalid flex">
-                      Confirm password{" "}
+                      确认密码{" "}
                       <span className="ml-1 mr-1 font-medium text-destructive">
                         *
                       </span>
@@ -229,7 +229,7 @@ export default function UserManagementModal({
                     />
                   </Form.Control>
                   <Form.Message className="field-invalid" match="valueMissing">
-                    Please confirm your password
+                    请确认密码
                   </Form.Message>
                 </Form.Field>
               </div>
@@ -238,7 +238,7 @@ export default function UserManagementModal({
               <Form.Field name="is_active">
                 <div>
                   <Form.Label className="data-[invalid]:label-invalid mr-3">
-                    Active
+                    激活
                   </Form.Label>
                   <Form.Control asChild>
                     <Checkbox
@@ -258,7 +258,7 @@ export default function UserManagementModal({
                 <Form.Field name="is_superuser">
                   <div>
                     <Form.Label className="data-[invalid]:label-invalid mr-3">
-                      Superuser
+                      管理员
                     </Form.Label>
                     <Form.Control asChild>
                       <Checkbox

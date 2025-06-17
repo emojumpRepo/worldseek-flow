@@ -49,7 +49,7 @@ export const useStartRecording = async (
           err instanceof DOMException &&
           err.message.includes("already been loaded")
         ) {
-          console.log("AudioWorklet module already loaded, continuing...");
+          console.log("音频工作模块已加载，继续执行...");
         } else {
           throw err;
         }
@@ -91,13 +91,13 @@ export const useStartRecording = async (
 
       setIsRecording(true);
     } catch (err) {
-      console.error("AudioWorklet failed to load:", err);
-      setStatus("Error initializing audio: " + (err as Error).message);
+      console.error("音频工作模块加载失败:", err);
+      setStatus("错误: 初始化音频失败: " + (err as Error).message);
     } finally {
       URL.revokeObjectURL(workletUrl);
     }
   } catch (err) {
-    console.error("Error accessing microphone:", err);
-    setStatus("Error: " + (err as Error).message);
+    console.error("访问麦克风时出错:", err);
+    setStatus("错误: " + (err as Error).message);
   }
 };

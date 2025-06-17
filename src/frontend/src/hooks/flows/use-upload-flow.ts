@@ -37,7 +37,7 @@ const useUploadFlow = () => {
       files = await createFileUpload();
     }
     if (!files.every((file) => file.type === "application/json")) {
-      throw new Error("Invalid file type");
+      throw new Error("无效的文件类型");
     }
     return await getFlowsFromFiles({
       files,
@@ -69,7 +69,7 @@ const useUploadFlow = () => {
         )
       ) {
         throw new Error(
-          "You cannot upload a component as a flow or vice versa",
+          "不能将组件作为工作流上传，反之亦然",
         );
       } else {
         let currentPosition = position;
@@ -85,7 +85,7 @@ const useUploadFlow = () => {
               await addFlow({ flow });
             }
           } else {
-            throw new Error("Invalid flow data");
+            throw new Error("无效的工作流数据");
           }
         }
       }

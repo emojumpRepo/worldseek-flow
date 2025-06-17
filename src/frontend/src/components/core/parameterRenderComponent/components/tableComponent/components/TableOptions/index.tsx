@@ -43,9 +43,9 @@ export default function TableOptions({
             <ShadTooltip
               content={
                 !hasSelection ? (
-                  <span>Select items to duplicate</span>
+                  <span>选择要复制的项</span>
                 ) : (
-                  <span>Duplicate selected items</span>
+                  <span>复制选定的项</span>
                 )
               }
             >
@@ -73,9 +73,9 @@ export default function TableOptions({
             <ShadTooltip
               content={
                 !hasSelection ? (
-                  <span>Select items to delete</span>
+                  <span>选择要删除的项</span>
                 ) : (
-                  <span>Delete selected items</span>
+                  <span>删除选定的项</span>
                 )
               }
             >
@@ -99,7 +99,7 @@ export default function TableOptions({
           </div>
         )}{" "}
         <div>
-          <ShadTooltip content="Reset Columns">
+          <ShadTooltip content="重置列">
             <Button
               data-testid="reset-columns-button"
               unstyled
@@ -123,7 +123,7 @@ export default function TableOptions({
         </div>
         {paginationInfo && (
           <div className="ml-2 text-xs text-muted-foreground">
-            <ShadTooltip content="Pagination Info">
+            <ShadTooltip content="分页信息">
               <span>{paginationInfo}</span>
             </ShadTooltip>
           </div>

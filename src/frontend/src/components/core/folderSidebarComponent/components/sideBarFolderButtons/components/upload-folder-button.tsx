@@ -3,7 +3,7 @@ import ShadTooltip from "@/components/common/shadTooltipComponent";
 import { Button } from "@/components/ui/button";
 
 export const UploadFolderButton = ({ onClick, disabled }) => (
-  <ShadTooltip content="Upload a flow" styleClasses="z-50">
+  <ShadTooltip content="上传工作流" styleClasses="z-50">
     <Button
       variant="ghost"
       size="icon"

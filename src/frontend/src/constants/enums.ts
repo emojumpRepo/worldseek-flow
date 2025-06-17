@@ -8,39 +8,39 @@ export enum TypeModal {
 }
 
 export enum BuildStatus {
-  BUILDING = "BUILDING",
-  TO_BUILD = "TO_BUILD",
-  BUILT = "BUILT",
-  INACTIVE = "INACTIVE",
-  ERROR = "ERROR",
+  BUILDING = "构件中",
+  TO_BUILD = "待构建",
+  BUILT = "已构建",
+  INACTIVE = "未激活",
+  ERROR = "错误",
 }
 
 export enum InputOutput {
-  INPUT = "input",
-  OUTPUT = "output",
+  INPUT = "输入",
+  OUTPUT = "输出",
 }
 
 export enum IOInputTypes {
-  TEXT = "TextInput",
-  FILE_LOADER = "FileLoader",
-  KEYPAIR = "KeyPairInput",
-  JSON = "JsonInput",
-  STRING_LIST = "StringListInput",
+  TEXT = "文本输入",
+  FILE_LOADER = "文件加载",
+  KEYPAIR = "密钥对输入",
+  JSON = "Json输入",
+  STRING_LIST = "字符串列表输入",
 }
 
 export enum IOOutputTypes {
-  TEXT = "TextOutput",
-  PDF = "PDFOutput",
-  CSV = "CSVOutput",
-  IMAGE = "ImageOutput",
-  JSON = "JsonOutput",
-  KEY_PAIR = "KeyPairOutput",
-  STRING_LIST = "StringListOutput",
-  DATA = "DataOutput",
+  TEXT = "文本输出",
+  PDF = "PDF输出",
+  CSV = "CSV输出",
+  IMAGE = "图像输出",
+  JSON = "Json输出",
+  KEY_PAIR = "密钥对输出",
+  STRING_LIST = "字符串列表输出",
+  DATA = "数据输出",
 }
 
 export enum EventDeliveryType {
-  STREAMING = "streaming",
-  POLLING = "polling",
-  DIRECT = "direct",
+  STREAMING = "流式传输",
+  POLLING = "轮询",
+  DIRECT = "直接",
 }

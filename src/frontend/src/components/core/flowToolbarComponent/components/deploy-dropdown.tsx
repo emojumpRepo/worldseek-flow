@@ -87,7 +87,7 @@ export default function PublishDropdown() {
             className="!px-2.5 font-normal"
             data-testid="publish-button"
           >
-            Share
+            分享
             <IconComponent name="ChevronDown" className="!h-5 !w-5" />
           </Button>
         </DropdownMenuTrigger>
@@ -104,14 +104,14 @@ export default function PublishDropdown() {
             data-testid="api-access-item"
           >
             <IconComponent name="Code2" className={`icon-size mr-2`} />
-            <span>API access</span>
+            <span>API访问</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             className="deploy-dropdown-item group"
             onClick={() => setOpenExportModal(true)}
           >
             <IconComponent name="Download" className={`icon-size mr-2`} />
-            <span>Export</span>
+            <span>导出</span>
           </DropdownMenuItem>
           <CustomLink
             className={cn("flex-1")}
@@ -124,7 +124,7 @@ export default function PublishDropdown() {
               data-testid="mcp-server-item"
             >
               <IconComponent name="Mcp" className={`icon-size mr-2`} />
-              <span>MCP Server</span>
+              <span>MCP服务</span>
               <IconComponent
                 name="ExternalLink"
                 className={`icon-size ml-auto hidden group-hover:block`}
@@ -137,7 +137,7 @@ export default function PublishDropdown() {
               className="deploy-dropdown-item group"
             >
               <IconComponent name="Columns2" className={`icon-size mr-2`} />
-              <span>Embed into site</span>
+              <span>嵌入到网站</span>
             </DropdownMenuItem>
           )}
 
@@ -157,8 +157,8 @@ export default function PublishDropdown() {
                       hasIO
                         ? isPublished
                           ? encodeURI(`${domain}/playground/${flowId}`)
-                          : "Activate to share a public version of this Playground"
-                        : "Add a Chat Input or Chat Output to access your flow"
+                          : "激活以分享此游乐场的公共版本"
+                        : "添加一个Chat输入或Chat输出以访问您的工作流"
                     }
                   >
                     <div className="flex items-center">
@@ -176,11 +176,11 @@ export default function PublishDropdown() {
                           to={`/playground/${flowId}`}
                           target="_blank"
                         >
-                          <span>Shareable Playground</span>
+                          <span>可分享的游乐场</span>
                         </CustomLink>
                       ) : (
                         <span className={cn(!isPublished && "opacity-50")}>
-                          Shareable Playground
+                          可分享的游乐场
                         </span>
                       )}
                     </div>

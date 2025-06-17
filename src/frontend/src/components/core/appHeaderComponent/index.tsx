@@ -89,20 +89,12 @@ export default function AppHeader(): JSX.Element {
         className={`relative left-3 z-30 flex items-center gap-3`}
         data-testid="header_right_section_wrapper"
       >
-        <>
-          <Button
-            unstyled
-            className="hidden items-center whitespace-nowrap pr-2 lg:inline"
-          >
-            <CustomLangflowCounts />
-          </Button>
-        </>
         <AlertDropdown
           notificationRef={notificationContentRef}
           onClose={() => setActiveState(null)}
         >
           <ShadTooltip
-            content="Notifications and errors"
+            content="通知和错误"
             side="bottom"
             styleClasses="z-10"
           >
@@ -129,7 +121,7 @@ export default function AppHeader(): JSX.Element {
                     strokeWidth={2}
                   />
                   <span className="hidden whitespace-nowrap">
-                    Notifications
+                    通知
                   </span>
                 </div>
               </Button>

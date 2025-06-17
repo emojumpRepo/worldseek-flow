@@ -127,7 +127,7 @@ export default function AddMcpServerModal({
     setError(null);
     if (type === "STDIO") {
       if (!stdioName.trim() || !stdioCommand.trim()) {
-        setError("Name and command are required.");
+        setError("名称和命令是必需的。");
         return;
       }
       const name = parseString(stdioName, [
@@ -155,13 +155,13 @@ export default function AddMcpServerModal({
         setStdioEnv([{ "": "" }]);
         setError(null);
       } catch (err: any) {
-        setError(err?.message || "Failed to add MCP server.");
+        setError(err?.message || "添加MCP服务器失败。");
       }
       return;
     }
     if (type === "SSE") {
       if (!sseName.trim() || !sseUrl.trim()) {
-        setError("Name and URL are required.");
+        setError("名称和URL是必需的。");
         return;
       }
       const name = parseString(sseName, [
@@ -189,7 +189,7 @@ export default function AddMcpServerModal({
         setSseHeaders([{ "": "" }]);
         setError(null);
       } catch (err: any) {
-        setError(err?.message || "Failed to add MCP server.");
+        setError(err?.message || "添加MCP服务器失败。");
       }
       return;
     }
@@ -205,11 +205,11 @@ export default function AddMcpServerModal({
         ]).slice(0, 30),
       }));
     } catch (e: any) {
-      setError(e.message || "Invalid input");
+      setError(e.message || "无效的输入");
       return;
     }
     if (servers.length === 0) {
-      setError("No valid MCP server found in the input.");
+      setError("输入中未找到有效的MCP服务器。");
       return;
     }
     try {
@@ -230,7 +230,7 @@ export default function AddMcpServerModal({
       setJsonValue("");
       setError(null);
     } catch (err: any) {
-      setError(err?.message || "Failed to add one or more MCP servers.");
+      setError(err?.message || "添加一个或多个MCP服务器失败。");
     }
   }
 
@@ -252,14 +252,14 @@ export default function AddMcpServerModal({
                 className="h-4 w-4 text-primary"
                 aria-hidden="true"
               />
-              {initialData ? "Update MCP Server" : "Add MCP Server"}
+              {initialData ? "更新 MCP 服务" : "添加 MCP 服务"}
             </div>
             <span className="text-mmd font-normal text-muted-foreground">
-              Save MCP Servers. Manage added connections in{" "}
+              保存 MCP 服务器。管理添加的连接{" "}
               <CustomLink className="underline" to="/settings/mcp-servers">
-                settings
+                设置
               </CustomLink>
-              .
+              。
             </span>
           </div>
           <div className="flex h-full w-full flex-col gap-4 overflow-hidden">
@@ -304,13 +304,13 @@ export default function AddMcpServerModal({
                 )}
                 <TabsContent value="JSON">
                   <div className="flex flex-col gap-2">
-                    <Label className="!text-mmd">Paste in JSON config</Label>
+                    <Label className="!text-mmd">粘贴 JSON 配置</Label>
                     <Textarea
                       value={jsonValue}
                       data-testid="json-input"
                       onChange={(e) => setJsonValue(e.target.value)}
                       className="min-h-[225px] font-mono text-mmd"
-                      placeholder="Paste in JSON config to add server"
+                      placeholder="粘贴 JSON 配置以添加服务"
                       disabled={isPending}
                     />
                   </div>
@@ -319,35 +319,35 @@ export default function AddMcpServerModal({
                   <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
                       <Label className="flex items-start gap-1 !text-mmd">
-                        Name <span className="text-red-500">*</span>
+                        名称 <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         value={stdioName}
                         onChange={(e) => setStdioName(e.target.value)}
-                        placeholder="Type server name..."
+                        placeholder="输入服务名称..."
                         data-testid="stdio-name-input"
                         disabled={isPending}
                       />
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label className="flex items-start gap-1 !text-mmd">
-                        Command<span className="text-red-500">*</span>
+                        命令<span className="text-red-500">*</span>
                       </Label>
                       <Input
                         value={stdioCommand}
                         onChange={(e) => setStdioCommand(e.target.value)}
-                        placeholder="Type command..."
+                        placeholder="输入命令..."
                         data-testid="stdio-command-input"
                         disabled={isPending}
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Label className="!text-mmd">Arguments</Label>
+                      <Label className="!text-mmd">参数</Label>
                       <InputListComponent
                         value={stdioArgs}
                         handleOnNewValue={({ value }) => setStdioArgs(value)}
                         disabled={isPending}
-                        placeholder="Type argument..."
+                        placeholder="输入参数..."
                         listAddLabel="Add Argument"
                         editNode={false}
                         id="stdio-args"
@@ -369,12 +369,12 @@ export default function AddMcpServerModal({
                   <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
                       <Label className="flex items-start gap-1 !text-mmd">
-                        Name<span className="text-red-500">*</span>
+                        名称<span className="text-red-500">*</span>
                       </Label>
                       <Input
                         value={sseName}
                         onChange={(e) => setSseName(e.target.value)}
-                        placeholder="Name"
+                        placeholder="输入名称..."
                         disabled={isPending}
                       />
                     </div>
@@ -390,7 +390,7 @@ export default function AddMcpServerModal({
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Label className="!text-mmd">Headers</Label>
+                      <Label className="!text-mmd">Header</Label>
                       <IOKeyPairInput
                         value={sseHeaders}
                         onChange={setSseHeaders}
@@ -400,7 +400,7 @@ export default function AddMcpServerModal({
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Label className="!text-mmd">Environment Variables</Label>
+                      <Label className="!text-mmd">环境变量</Label>
                       <IOKeyPairInput
                         value={sseEnv}
                         onChange={setSseEnv}
@@ -417,7 +417,7 @@ export default function AddMcpServerModal({
         </div>
         <div className="flex justify-end gap-2 p-4">
           <Button variant="outline" size="sm" onClick={() => setOpen(false)}>
-            <span className="text-mmd font-normal">Cancel</span>
+            <span className="text-mmd font-normal">取消</span>
           </Button>
           <Button
             size="sm"
@@ -426,7 +426,7 @@ export default function AddMcpServerModal({
             loading={isPending}
           >
             <span className="text-mmd">
-              {initialData ? "Update Server" : "Add Server"}
+              {initialData ? "更新服务" : "添加服务"}
             </span>
           </Button>
         </div>

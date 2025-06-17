@@ -69,18 +69,18 @@ export const useStartConversation = (
         // 1000 is normal closure
         console.warn(`WebSocket closed with code ${event.code}`);
       }
-      setStatus(`Disconnected (${event.code})`);
+      setStatus(`连接断开 (${event.code})`);
       stopRecording();
     };
 
     wsRef.current.onerror = (error) => {
       console.error("WebSocket Error:", error);
-      setStatus("Connection error");
+      setStatus("连接错误");
       stopRecording();
     };
   } catch (error) {
     console.error("Failed to create WebSocket:", error);
-    setStatus("Connection failed");
+    setStatus("连接失败");
     stopRecording();
   }
 };

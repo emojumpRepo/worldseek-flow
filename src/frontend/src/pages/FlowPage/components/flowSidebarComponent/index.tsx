@@ -62,7 +62,6 @@ export function FlowSidebarComponent({ isLoading }: FlowSidebarComponentProps) {
   const hasStore = useStoreStore((state) => state.hasStore);
   const { setOpen } = useSidebar();
   const addComponent = useAddComponent();
-  console.log("data", data);
 
   // State
   const [dataFilter, setFilterData] = useState(data);

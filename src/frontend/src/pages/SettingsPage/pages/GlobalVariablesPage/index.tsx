@@ -46,12 +46,12 @@ export default function GlobalVariablesPage() {
   // Column Definitions: Defines the columns to be displayed.
   const colDefs: ColDef[] = [
     {
-      headerName: "Variable Name",
+      headerName: "变量名称",
       field: "name",
       flex: 2,
     }, //This column will be twice as wide as the others
     {
-      headerName: "Type",
+      headerName: "类型",
       field: "type",
       cellRenderer: BadgeRenderer,
       cellEditor: DropdownEditor,
@@ -61,10 +61,10 @@ export default function GlobalVariablesPage() {
       flex: 1,
     },
     {
-      field: "value",
+      field: "",
     },
     {
-      headerName: "Apply To Fields",
+      headerName: "应用到字段/域",
       field: "default_fields",
       valueFormatter: (params) => {
         return params.value?.join(", ") ?? "";
@@ -87,8 +87,8 @@ export default function GlobalVariablesPage() {
         {
           onError: () => {
             setErrorData({
-              title: `Error deleting variable`,
-              list: [`ID not found for variable: ${row}`],
+              title: `删除变量失败`,
+              list: [`未找到对应ID的变量: ${row}`],
             });
           },
         },
@@ -106,21 +106,21 @@ export default function GlobalVariablesPage() {
       <div className="flex w-full items-start justify-between gap-6">
         <div className="flex w-full flex-col">
           <h2 className="flex items-center text-lg font-semibold tracking-tight">
-            Global Variables
+            全局变量
             <ForwardedIconComponent
               name="Globe"
               className="ml-2 h-5 w-5 text-primary"
             />
           </h2>
           <p className="text-sm text-muted-foreground">
-            Manage global variables and assign them to fields.
+            管理全局变量并将其分配给字段。
           </p>
         </div>
         <div className="flex flex-shrink-0 items-center gap-2">
           <GlobalVariableModal asChild>
             <Button data-testid="api-key-button-store" variant="primary">
               <IconComponent name="Plus" className="w-4" />
-              Add New
+              添加变量
             </Button>
           </GlobalVariableModal>
         </div>
@@ -129,7 +129,7 @@ export default function GlobalVariablesPage() {
       <div className="flex h-full w-full flex-col justify-between">
         <TableComponent
           key={"globalVariables"}
-          overlayNoRowsTemplate="No data available"
+          overlayNoRowsTemplate="没有数据"
           onSelectionChanged={(event: SelectionChangedEvent) => {
             setSelectedRows(event.api.getSelectedRows().map((row) => row.name));
           }}

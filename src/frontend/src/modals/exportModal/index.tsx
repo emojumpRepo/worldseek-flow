@@ -88,7 +88,7 @@ const ExportModal = forwardRef(
               description,
             ).then(() => {
               setSuccessData({
-                title: "Flow exported successfully",
+                title: "工作流导出成功",
               });
             });
           setOpen(false);
@@ -97,7 +97,7 @@ const ExportModal = forwardRef(
       >
         <BaseModal.Trigger asChild>{props.children ?? <></>}</BaseModal.Trigger>
         <BaseModal.Header description={EXPORT_DIALOG_SUBTITLE}>
-          <span className="pr-2">Export</span>
+          <span className="pr-2">导出</span>
           <IconComponent
             name="Download"
             className="h-6 w-6 pl-1 text-foreground"
@@ -130,7 +130,7 @@ const ExportModal = forwardRef(
 
         <BaseModal.Footer
           submit={{
-            label: "Export",
+            label: "导出",
             loading: isBuilding,
             dataTestId: "modal-export-button",
           }}

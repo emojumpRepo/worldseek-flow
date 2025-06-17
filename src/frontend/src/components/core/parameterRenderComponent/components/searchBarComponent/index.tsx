@@ -20,7 +20,7 @@ const SearchBarComponent = ({
   searchCategories,
   search,
   setSearch,
-  placeholder = "Search tools...",
+  placeholder = "查找工具...",
   onCategoryChange,
 }: SearchBarComponentProps) => {
   const [selectedCategory, setSelectedCategory] = useState(

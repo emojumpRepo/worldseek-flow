@@ -32,7 +32,7 @@ const GeneralDeleteConfirmationModal = ({
           },
           onError: () => {
             setErrorData({
-              title: "Error deleting variable",
+              title: "删除变量失败",
               list: [cn("ID not found for variable: ", key)],
             });
           },
@@ -40,7 +40,7 @@ const GeneralDeleteConfirmationModal = ({
       );
     } else {
       setErrorData({
-        title: "Error deleting variable",
+        title: "删除变量失败",
         list: [cn("ID not found for variable: ", key)],
       });
     }
@@ -54,7 +54,7 @@ const GeneralDeleteConfirmationModal = ({
           e.preventDefault();
           handleDelete(option);
         }}
-        description={'variable "' + option + '"'}
+        description={'变量 "' + option + '"'}
         asChild
       >
         <button

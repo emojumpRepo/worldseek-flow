@@ -18,10 +18,10 @@ import { cloneDeep } from "lodash";
 import { useParams } from "react-router-dom";
 import useDeleteFlow from "./use-delete-flow";
 
-const FLOW_CREATION_ERROR = "Flow creation error";
-const FOLDER_NOT_FOUND_ERROR = "Folder not found. Redirecting to flows...";
+const FLOW_CREATION_ERROR = "工作流创建错误";
+const FOLDER_NOT_FOUND_ERROR = "文件夹未找到。重定向到工作流...";
 const FLOW_CREATION_ERROR_MESSAGE =
-  "An unexpected error occurred, please try again";
+  "发生意外错误，请重试";
 const REDIRECT_DELAY = 3000;
 const useAddFlow = () => {
   const flows = useFlowsManagerStore((state) => state.flows);

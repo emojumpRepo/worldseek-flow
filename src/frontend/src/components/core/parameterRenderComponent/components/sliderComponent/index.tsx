@@ -21,14 +21,14 @@ const LIGHT_COLOR_BACKGROUND = "#e4e4e7";
 const LIGHT_COLOR_TEXT = "#52525b";
 
 const DEFAULT_SLIDER_BUTTONS_OPTIONS = [
-  { id: 0, label: "Precise" },
-  { id: 1, label: "Balanced" },
-  { id: 2, label: "Creative" },
-  { id: 3, label: "Wild" },
+  { id: 0, label: "精确" },
+  { id: 1, label: "平衡" },
+  { id: 2, label: "创意" },
+  { id: 3, label: "大胆" },
 ];
 
-const MIN_LABEL = "Precise";
-const MAX_LABEL = "Creative";
+const MIN_LABEL = "精确";
+const MAX_LABEL = "创意";
 const MIN_LABEL_ICON = "pencil-ruler";
 const MAX_LABEL_ICON = "palette";
 
