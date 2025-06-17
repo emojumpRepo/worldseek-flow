@@ -100,7 +100,7 @@ export default function FloatComponent({
           onKeyDown={(event) => handleKeyDown(event, localValue, "")}
           onInput={handleInputChange}
           disabled={disabled}
-          placeholder={editNode ? "Float number" : "Type a float number"}
+          placeholder={editNode ? "浮点数" : "请输入一个浮点数。"}
           data-testid={id}
           ref={inputRef}
           onBlur={handleBlur}

@@ -29,10 +29,10 @@ export default function HandleTooltipComponent({
           {isConnecting ? (
             isCompatible ? (
               <span>
-                <span className="font-semibold">Connect</span> to
+                <span className="font-semibold">连接</span>
               </span>
             ) : (
-              <span>Incompatible with</span>
+              <span>不兼容</span>
             )
           ) : (
             <span className="text-xs">
@@ -59,17 +59,16 @@ export default function HandleTooltipComponent({
               {word}
             </Badge>
           ))}
-          {isConnecting && <span>{isInput ? `input` : `output`}</span>}
+          {isConnecting && <span>{isInput ? `输入` : `输出`}</span>}
         </div>
       )}
       {!isConnecting && (
         <div className="mt-2 flex flex-col gap-0.5 text-xs leading-6">
           <div>
-            <b>Drag</b> to connect compatible {!isInput ? "inputs" : "outputs"}
+            <b>拖拽</b> 以连接兼容的 {!isInput ? "输入" : "输出"}
           </div>
           <div>
-            <b>Click</b> to filter compatible {!isInput ? "inputs" : "outputs"}{" "}
-            and components
+            <b>点击</b> 以过滤兼容的 {!isInput ? "输入" : "输出"} 和组件
           </div>
         </div>
       )}

@@ -51,7 +51,7 @@ export default function FileRendererComponent({
 
   return (
     <ShadTooltip
-      content={file.disabled ? "Type not supported by component" : ""}
+      content={file.disabled ? "组件不支持的类型" : ""}
       side="bottom"
       align="start"
     >
@@ -166,7 +166,7 @@ export default function FileRendererComponent({
                       }
                     }}
                   >
-                    try again?
+                    重试？
                   </span>
                 </span>
               ) : (

@@ -48,12 +48,12 @@ export default function PaginatorComponent({
         {(pageIndex - 1) * pageSize + 1}-
         {Math.min(totalRowsCount, (pageIndex - 1) * pageSize + pageSize)}{" "}
         <span className="text-muted-foreground">
-          of {totalRowsCount}{" "}
+          共 {totalRowsCount}{" "}
           {isComponent === undefined
-            ? "items"
+            ? "项"
             : isComponent
-              ? "components"
-              : "flows"}
+              ? "组件"
+              : "工作流"}
         </span>
       </div>
       <div className={"flex items-center gap-2"}>
@@ -76,7 +76,7 @@ export default function PaginatorComponent({
               ))}
             </SelectContent>
           </Select>
-          <span className="text-muted-foreground">of {maxIndex} pages</span>
+          <span className="text-muted-foreground">共 {maxIndex} 页</span>
         </div>
         <div className="flex items-center gap-1">
           <Button
@@ -89,7 +89,7 @@ export default function PaginatorComponent({
             variant="ghost"
             size={"iconMd"}
           >
-            <span className="sr-only">Go to previous page</span>
+            <span className="sr-only">上一页</span>
             <IconComponent name="ChevronLeft" className="h-4 w-4" />
           </Button>
           <Button
@@ -100,7 +100,7 @@ export default function PaginatorComponent({
             variant="ghost"
             size={"iconMd"}
           >
-            <span className="sr-only">Go to next page</span>
+            <span className="sr-only">下一页</span>
             <IconComponent name="ChevronRight" className="h-4 w-4" />
           </Button>
         </div>

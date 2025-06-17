@@ -26,13 +26,13 @@ export const EmptyPage = ({ setOpenModal }: EmptyPageProps) => {
               className="pt-5 font-chivo text-2xl font-semibold text-foreground"
               data-testid="mainpage_title"
             >
-              {folders?.length > 1 ? "Empty project" : "Start building"}
+              {folders?.length > 1 ? "空项目" : "开始构建"}
             </h3>
             <p
               data-testid="empty-project-description"
               className="pb-5 text-sm text-secondary-foreground"
             >
-              Begin with a template, or start from scratch.
+              从模板开始，或从头开始。
             </p>
             <Button
               variant="default"
@@ -46,7 +46,7 @@ export const EmptyPage = ({ setOpenModal }: EmptyPageProps) => {
                 className="h-4 w-4"
               />
               <span className="hidden whitespace-nowrap font-semibold md:inline">
-                New Flow
+                添加工作流
               </span>
             </Button>
           </div>

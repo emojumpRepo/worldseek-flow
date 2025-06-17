@@ -20,7 +20,7 @@ export default function DictComponent({
       handleOnNewValue({ value: {} }, { skipSnapshot: true });
     }
   }, [disabled]);
-  const placeholderName = `Edit ${toTitleCase(name)}`;
+  const placeholderName = `编辑 ${toTitleCase(name)}`;
 
   return (
     <div

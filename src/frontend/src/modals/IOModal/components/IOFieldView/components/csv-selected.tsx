@@ -11,10 +11,10 @@ export default function CsvSelect({ node, handleChangeSelect }): JSX.Element {
   return (
     <>
       <div className="flex justify-between">
-        Expand the ouptut to see the CSV
+        展开查看 CSV
       </div>
       <div className="flex items-center justify-between pt-5">
-        <span>CSV separator </span>
+        <span>CSV 分隔符 </span>
         <Select
           value={node.data.node.template.separator.value}
           onValueChange={(e) => handleChangeSelect(e)}

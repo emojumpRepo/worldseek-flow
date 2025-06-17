@@ -105,7 +105,7 @@ export default function ComponentTextModal({
             }}
             type="submit"
           >
-            Finish Editing
+            完成编辑
           </Button>
         </div>
       </BaseModal.Footer>

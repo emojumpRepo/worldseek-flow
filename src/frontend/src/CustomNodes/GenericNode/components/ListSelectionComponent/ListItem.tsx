@@ -96,7 +96,7 @@ const ListItem = ({
         {isHovered || isFocused ? (
           <div className="ml-auto flex items-center justify-start rounded-md">
             <div className="flex items-center pr-1.5 text-mmd font-semibold text-muted-foreground">
-              Select
+              选择
             </div>
             <div className="flex items-center justify-center rounded-md">
               <ForwardedIconComponent

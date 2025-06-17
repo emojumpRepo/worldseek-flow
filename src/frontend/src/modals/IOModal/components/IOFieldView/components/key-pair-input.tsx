@@ -51,7 +51,7 @@ const IOKeyPairInput = ({
                   type="text"
                   value={key.trim()}
                   className={classNames(duplicateKey ? "input-invalid" : "")}
-                  placeholder="Type key..."
+                  placeholder="输入键..."
                   onChange={(event) => handleChangeKey(event, index)}
                   disabled={!isInputField}
                 />
@@ -59,7 +59,7 @@ const IOKeyPairInput = ({
                 <Input
                   type="text"
                   value={obj[key]}
-                  placeholder="Type a value..."
+                  placeholder="输入值..."
                   onChange={(event) =>
                     handleChangeValue(event.target.value, index)
                   }

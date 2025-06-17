@@ -56,13 +56,13 @@ export default function DragFilesComponent({
         if (filesIds.length > 0) {
           onUpload(filesIds);
           setSuccessData({
-            title: `File${filesIds.length > 1 ? "s" : ""} uploaded successfully`,
+            title: `文件${filesIds.length > 1 ? "s" : ""} 上传成功`,
           });
         }
       } catch (error: any) {
         setErrorData({
-          title: "Error uploading file",
-          list: [error.message || "An error occurred while uploading the file"],
+          title: "文件上传错误",
+          list: [error.message || "文件上传时发生错误"],
         });
       }
     }
@@ -74,13 +74,13 @@ export default function DragFilesComponent({
       if (filesIds.length > 0) {
         onUpload(filesIds);
         setSuccessData({
-          title: `File${filesIds.length > 1 ? "s" : ""} uploaded successfully`,
+          title: `文件${filesIds.length > 1 ? "s" : ""} 上传成功`,
         });
       }
     } catch (error: any) {
       setErrorData({
-        title: "Error uploading file",
-        list: [error.message || "An error occurred while uploading the file"],
+        title: "文件上传错误",
+        list: [error.message || "文件上传时发生错误"],
       });
     }
   };
@@ -101,7 +101,7 @@ export default function DragFilesComponent({
         tabIndex={0}
       >
         <h3 className="text-sm font-semibold">
-          {isDragging ? "Drop files here" : "Click or drag files here"}
+          {isDragging ? "拖拽文件到这里" : "点击或拖拽文件到这里"}
         </h3>
         <p className="flex items-center gap-1 text-xs text-muted-foreground">
           <span>{types.slice(0, 3).join(", ")}</span>

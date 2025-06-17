@@ -66,7 +66,7 @@ const MemoizedCodeTag = memo(
               aria-hidden="true"
             />
             <span>
-              {apiKey === "" ? "Generate API key" : "API key generated"}
+              {apiKey === "" ? "生成 API 密钥" : "API 密钥已生成"}
             </span>
           </Button>
         )}
@@ -249,30 +249,28 @@ const McpServerTab = ({ folderName }: { folderName: string }) => {
   return (
     <div>
       <div className="pb-2 text-sm font-medium" data-testid="mcp-server-title">
-        MCP Server
+        MCP 服务
       </div>
       <div className="pb-4 text-mmd text-muted-foreground">
-        Access your Project's flows as Actions within a MCP Server. Learn more
-        in our
+        将您的项目中的工作流作为 MCP 服务器中的操作。了解更多信息，请参阅
         <a
           className="text-accent-pink-foreground"
           href={MCP_SERVER_DEPLOY_TUTORIAL_LINK}
           target="_blank"
           rel="noreferrer"
         >
-          {" "}
-          Projects as MCP Servers guide.
+        {" "}MCP 服务器指南。
         </a>
       </div>
       <div className="flex flex-col justify-between gap-8 xl:flex-row">
         <div className="w-full xl:w-2/5">
           <div className="flex flex-row justify-between">
             <ShadTooltip
-              content="Flows in this project can be exposed as callable MCP actions."
+              content="您项目中的工作流可以作为 MCP 服务器中的可调用操作。"
               side="right"
             >
               <div className="flex items-center text-mmd font-medium hover:cursor-help">
-                Flows/Actions
+                工作流/操作
                 <ForwardedIconComponent
                   name="info"
                   className="ml-1.5 h-4 w-4 text-muted-foreground"
@@ -284,11 +282,11 @@ const McpServerTab = ({ folderName }: { folderName: string }) => {
           <div className="flex flex-row flex-wrap gap-2 pt-2">
             <ToolsComponent
               value={flowsMCPData}
-              title="MCP Server Actions"
-              description="Select actions to add to this server"
+              title="MCP 服务操作"
+              description="选择要添加到此服务器的操作"
               handleOnNewValue={handleOnNewValue}
               id="mcp-server-tools"
-              button_description="Edit Actions"
+              button_description="编辑操作"
               editNode={false}
               isAction
               disabled={false}
@@ -310,7 +308,7 @@ const McpServerTab = ({ folderName }: { folderName: string }) => {
                     } px-3 py-2 text-[13px]`}
                     onClick={() => setSelectedMode(item.name)}
                   >
-                    <span>{item.name}</span>
+                    <span>{item.name === "Auto install" ? "一键安装" : "JSON"}</span>
                   </Button>
                 ),
               )}
@@ -361,14 +359,14 @@ const McpServerTab = ({ folderName }: { folderName: string }) => {
                 </div>
               </div>
               <div className="px-2 text-mmd text-muted-foreground">
-                Add this config to your client of choice. Need help? See the{" "}
+                将此配置添加到您选择的客户端。需要帮助？请参阅
                 <a
                   href={MCP_SERVER_TUTORIAL_LINK}
                   target="_blank"
                   rel="noreferrer"
                   className="text-accent-pink-foreground"
                 >
-                  setup guide
+                  设置指南
                 </a>
                 .
               </div>
@@ -384,9 +382,7 @@ const McpServerTab = ({ folderName }: { folderName: string }) => {
                       className="h-4 w-4 shrink-0"
                     />
                     <span>
-                      One-click install is disabled because the Langflow server
-                      is not running on your local machine. Use the JSON tab to
-                      configure your client manually.
+                      一键安装已禁用，因为 WorldSeek Agent 服务器未在您的本地机器上运行。使用 JSON 选项卡手动配置您的客户端。
                     </span>
                   </div>
                 </div>
@@ -409,7 +405,7 @@ const McpServerTab = ({ folderName }: { folderName: string }) => {
                       {
                         onSuccess: () => {
                           setSuccessData({
-                            title: `MCP Server installed successfully on ${installer.title}`,
+                            title: `MCP 服务已成功安装在 ${installer.title} 上`,
                           });
                           setLoadingMCP(
                             loadingMCP.filter(
@@ -419,7 +415,7 @@ const McpServerTab = ({ folderName }: { folderName: string }) => {
                         },
                         onError: (e) => {
                           setErrorData({
-                            title: `Failed to install MCP Server on ${installer.title}`,
+                            title: `在 ${installer.title} 上安装 MCP 服务失败`,
                             list: [e.message],
                           });
                           setLoadingMCP(

@@ -31,8 +31,8 @@ export default function ApiKeysPage() {
     if (data !== undefined) {
       const updatedKeysList = data["api_keys"].map((apikey) => ({
         ...apikey,
-        name: apikey.name && apikey.name !== "" ? apikey.name : "Untitled",
-        last_used_at: apikey.last_used_at ?? "Never",
+        name: apikey.name && apikey.name !== "" ? apikey.name : "未命名",
+        last_used_at: apikey.last_used_at ?? "从未使用",
       }));
       setKeysList(updatedKeysList);
       setUserId(data["user_id"]);
@@ -93,7 +93,7 @@ export default function ApiKeysPage() {
         <TableComponent
           key={"apiKeys"}
           onDelete={handleDeleteApi}
-          overlayNoRowsTemplate="No data available"
+          overlayNoRowsTemplate="没有数据"
           onSelectionChanged={(event: SelectionChangedEvent) => {
             setSelectedRows(event.api.getSelectedRows().map((row) => row.id));
           }}

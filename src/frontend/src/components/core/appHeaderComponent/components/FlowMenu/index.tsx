@@ -139,7 +139,7 @@ export const MenuBar = memo((): JSX.Element => {
                 aria-hidden="true"
                 data-testid="flow_name"
               >
-                {currentFlowName || "Untitled Flow"}
+                {currentFlowName || "未命名工作流"}
               </span>
 
               <IconComponent
@@ -158,15 +158,15 @@ export const MenuBar = memo((): JSX.Element => {
                 content={
                   changesNotSaved
                     ? saveLoading
-                      ? "Saving..."
-                      : "Save Changes"
+                      ? "保存中..."
+                      : "保存更改"
                     : SAVED_HOVER +
                       (updatedAt
                         ? new Date(updatedAt).toLocaleString("en-US", {
                             hour: "numeric",
                             minute: "numeric",
                           })
-                        : "Never")
+                        : "从不")
                 }
                 side="bottom"
                 styleClasses="cursor-default z-10"
@@ -196,7 +196,7 @@ export const MenuBar = memo((): JSX.Element => {
         align="center"
         sideOffset={15}
       >
-        <span className="text-sm font-semibold">Flow Details</span>
+        <span className="text-sm font-semibold">工作流详情</span>
         <FlowSettingsComponent
           close={() => setOpenSettings(false)}
           open={openSettings}

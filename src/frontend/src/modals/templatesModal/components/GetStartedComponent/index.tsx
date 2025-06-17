@@ -19,22 +19,22 @@ export default function GetStartedComponent() {
       bgImage: memoryChatbot,
       bgHorizontalImage: memoryChatbotHorizontal,
       icon: "MessagesSquare",
-      category: "prompting",
-      flow: examples.find((example) => example.name === "Basic Prompting"),
+      category: "提示词",
+      flow: examples.find((example) => example.name === "基础提示词"),
     },
     {
       bgImage: multiAgent,
       bgHorizontalImage: multiAgentHorizontal,
       icon: "Bot",
-      category: "Agents",
-      flow: examples.find((example) => example.name === "Simple Agent"),
+      category: "智能体",
+      flow: examples.find((example) => example.name === "简易智能体"),
     },
   ];
 
   return (
     <div className="flex flex-1 flex-col gap-4 md:gap-8">
-      <BaseModal.Header description="Start with templates showcasing WorldSeek Agent's Prompting and Agent use cases.">
-        Get started
+      <BaseModal.Header description="从模板开始，展示 WorldSeek Agent 的基础提示词工作流和 Agent 用例。">
+        开始
       </BaseModal.Header>
       <div className="grid flex-1 grid-cols-2 gap-4">
         {cardData.map((card, index) => (

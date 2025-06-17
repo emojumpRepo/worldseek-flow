@@ -106,7 +106,7 @@ export const GeneralPage = () => {
 
   const { mutate } = usePostAddApiKey({
     onSuccess: () => {
-      setSuccessData({ title: "API key saved successfully" });
+      setSuccessData({ title: "API密钥已保存" });
       setHasApiKey(true);
       setValidApiKey(true);
       setLoadingApiKey(false);
@@ -114,7 +114,7 @@ export const GeneralPage = () => {
     },
     onError: (error) => {
       setErrorData({
-        title: "API key save error",
+        title: "API密钥保存失败",
         list: [(error as any)?.response?.data?.detail],
       });
       setHasApiKey(false);

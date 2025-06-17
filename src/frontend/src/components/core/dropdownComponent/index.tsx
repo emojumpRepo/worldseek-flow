@@ -90,7 +90,7 @@ export default function Dropdown({
   // Initialize utilities and constants
   const placeholderName = name
     ? formatPlaceholderName(name)
-    : "Choose an option...";
+    : "选择一个选项...";
   const { firstWord } = formatName(name);
   const fuse = new Fuse(validOptions, { keys: ["name", "value"] });
   const PopoverContentDropdown =
@@ -364,7 +364,7 @@ export default function Dropdown({
       <input
         onChange={searchRoleByTerm}
         onKeyDown={handleInputKeyDown}
-        placeholder="Search options..."
+        placeholder="查找选项..."
         className="flex h-9 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
         autoComplete="off"
         data-testid="dropdown_search_input"
@@ -387,7 +387,7 @@ export default function Dropdown({
               name="Plus"
               className="h-3 w-3 text-primary"
             />
-            {`New ${firstWord}`}
+            {`新${firstWord}`}
           </div>
         </Button>
       </CommandItem>
@@ -404,7 +404,7 @@ export default function Dropdown({
               name="RefreshCcw"
               className={cn("refresh-icon h-3 w-3 text-primary")}
             />
-            Refresh list
+            刷新列表
           </div>
         </Button>
       </CommandItem>
@@ -521,7 +521,7 @@ export default function Dropdown({
           ))
         ) : (
           <CommandItem disabled className="text-center text-sm">
-            No options found
+            没有找到选项
           </CommandItem>
         )}
       </CommandGroup>
@@ -550,7 +550,7 @@ export default function Dropdown({
   if (Object.keys(validOptions).length === 0 && !combobox && isLoading) {
     return (
       <div>
-        <span className="text-sm italic">Loading...</span>
+        <span className="text-sm italic">加载中...</span>
       </div>
     );
   }

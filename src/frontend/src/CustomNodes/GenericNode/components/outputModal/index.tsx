@@ -25,7 +25,7 @@ export default function OutputModal({
           className="flex items-center"
           data-testid={`${nodeId}-${outputName}-output-modal`}
         >
-          <span className="pr-2">Component Output</span>
+          <span className="pr-2">组件输出</span>
         </div>
       </BaseModal.Header>
       <BaseModal.Content>
@@ -37,8 +37,8 @@ export default function OutputModal({
           }
         >
           <TabsList>
-            <TabsTrigger value="Outputs">Outputs</TabsTrigger>
-            <TabsTrigger value="Logs">Logs</TabsTrigger>
+            <TabsTrigger value="Outputs">输出</TabsTrigger>
+            <TabsTrigger value="Logs">日志</TabsTrigger>
           </TabsList>
         </Tabs>
         <SwitchOutputView

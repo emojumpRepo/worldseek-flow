@@ -104,7 +104,7 @@ export default function ToolsComponent({
             ))}
             {remainingCount > 0 && (
               <span className="ml-1 self-center text-xs font-normal text-muted-foreground">
-                +{remainingCount} more
+                +{remainingCount} 更多
               </span>
             )}
           </div>
@@ -113,10 +113,10 @@ export default function ToolsComponent({
           isAction && (
             <div className="mt-2 flex w-full flex-col items-center gap-2 rounded-md border border-dashed p-8">
               <span className="text-sm text-muted-foreground">
-                No actions added to this server
+                未添加操作到此服务
               </span>
               <Button size={"sm"} onClick={() => setIsModalOpen(true)}>
-                <span>Add actions</span>
+                <span>添加操作</span>
               </Button>
             </div>
           )
@@ -133,7 +133,7 @@ export default function ToolsComponent({
             onClick={() => setIsModalOpen(true)}
           >
             <span>
-              {value.length === 0 ? "No actions available" : "Select actions"}
+              {value.length === 0 ? "没有可用的操作" : "选择操作"}
             </span>
           </Button>
         )}

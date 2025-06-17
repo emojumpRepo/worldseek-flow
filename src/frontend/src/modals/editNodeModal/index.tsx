@@ -50,7 +50,7 @@ const EditNodeModal = ({
       </BaseModal.Content>
       <BaseModal.Footer>
         <div className="flex w-full justify-end gap-2 pt-2">
-          <Button onClick={() => setOpen(false)}>Close</Button>
+          <Button onClick={() => setOpen(false)}>关闭</Button>
         </div>
       </BaseModal.Footer>
     </BaseModal>

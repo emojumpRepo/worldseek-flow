@@ -528,7 +528,7 @@ export function updateIds(
 export function validateNode(node: AllNodeType, edges: Edge[]): Array<string> {
   if (!node.data?.node?.template || !Object.keys(node.data.node.template)) {
     return [
-      "We've noticed a potential issue with a Component in the flow. Please review it and, if necessary, submit a bug report with your exported flow file. Thank you for your help!",
+      "我们注意到流程中的某个组件可能存在问题。请检查该组件，如有必要，请提交包含导出流程文件的错误报告。感谢您的帮助！",
     ];
   }
 
@@ -572,14 +572,14 @@ export function validateNode(node: AllNodeType, edges: Edge[]): Array<string> {
           `${displayName || type} (${getFieldTitle(
             template,
             t,
-          )}) contains duplicate keys with the same values.`,
+          )}) 包含重复的键值对。`,
         );
       if (hasEmptyKey(template[t].value))
         errors.push(
           `${displayName || type} (${getFieldTitle(
             template,
             t,
-          )}) field must not be empty.`,
+          )}) 字段不能为空。`,
         );
     }
     return errors;
@@ -596,7 +596,7 @@ Array<{ id: string; errors: Array<string> }> {
       {
         id: "",
         errors: [
-          "No components found in the flow. Please add at least one component to the flow.",
+          "未找到组件。请添加至少一个组件到工作流中。",
         ],
       },
     ];
@@ -1205,7 +1205,7 @@ export function validateSelection(
   let errorsArray: Array<string> = [];
   // check if there is more than one node
   if (clonedSelection.nodes.length < 2) {
-    errorsArray.push("Please select more than one component");
+    errorsArray.push("请选择至少两个组件。");
   }
   if (
     clonedSelection.nodes.some(
@@ -1214,7 +1214,7 @@ export function validateSelection(
         isOutputNode(node.data as NodeDataType),
     )
   ) {
-    errorsArray.push("Select non-input/output components only");
+    errorsArray.push("只选择了非 输入/输出 组件。");
   }
   //check if there are two or more nodes with free outputs
   if (
@@ -1222,7 +1222,7 @@ export function validateSelection(
       (n) => !clonedSelection.edges.some((e) => e.source === n.id),
     ).length > 1
   ) {
-    errorsArray.push("Select only one component with free outputs");
+    errorsArray.push("仅选择一个具有自由输出的组件。");
   }
 
   // check if there is any node that does not have any connection
@@ -1233,7 +1233,7 @@ export function validateSelection(
         !clonedSelection.edges.some((edge) => edge.source === node.id),
     )
   ) {
-    errorsArray.push("Select only connected components");
+    errorsArray.push("仅选择连接的组件。");
   }
   return errorsArray;
 }
@@ -1724,7 +1724,7 @@ export function extractFieldsFromComponenents(data: APIObjectType) {
 
   // Check if data exists
   if (!data) {
-    console.warn("[Types] Data is undefined in extractFieldsFromComponenents");
+    console.warn("[Types] extractFieldsFromComponenents函数中data未定义");
     return fields;
   }
 
@@ -1732,7 +1732,7 @@ export function extractFieldsFromComponenents(data: APIObjectType) {
     // Check if data[key] exists
     if (!data[key]) {
       console.warn(
-        `[Types] data["${key}"] is undefined in extractFieldsFromComponenents`,
+        `[Types] data["${key}"] 在 extractFieldsFromComponenents 函数中未定义`,
       );
       return;
     }
@@ -1741,7 +1741,7 @@ export function extractFieldsFromComponenents(data: APIObjectType) {
       // Check if data[key][kind] exists
       if (!data[key][kind]) {
         console.warn(
-          `[Types] data["${key}"]["${kind}"] is undefined in extractFieldsFromComponenents`,
+          `[Types] data["${key}"]["${kind}"] 在 extractFieldsFromComponenents 函数中未定义`,
         );
         return;
       }
@@ -1749,7 +1749,7 @@ export function extractFieldsFromComponenents(data: APIObjectType) {
       // Check if template exists
       if (!data[key][kind].template) {
         console.warn(
-          `[Types] data["${key}"]["${kind}"].template is undefined in extractFieldsFromComponenents`,
+          `[Types] data["${key}"]["${kind}"].template 在 extractFieldsFromComponenents 函数中未定义`,
         );
         return;
       }
@@ -1843,7 +1843,7 @@ export const createNewFlow = (
 ) => {
   return {
     description: flow?.description ?? getRandomDescription(),
-    name: flow?.name ? flow.name : "Untitled document",
+    name: flow?.name ? flow.name : "未命名文档",
     data: flowData,
     id: "",
     icon: flow?.icon ?? undefined,

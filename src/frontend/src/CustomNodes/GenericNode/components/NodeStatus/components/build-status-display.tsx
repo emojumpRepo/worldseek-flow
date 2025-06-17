@@ -19,7 +19,7 @@ const TimeStamp = ({ prefix, time }) => (
 
 const Duration = ({ duration }) => (
   <div className="flex items-center text-secondary-foreground">
-    <div>Duration:</div>
+    <div>时长:</div>
     <div className="ml-1">{duration}</div>
   </div>
 );

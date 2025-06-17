@@ -177,7 +177,7 @@ const NodeToolbarComponent = memo(
       }
       setNoticeData({
         title:
-          "Minimization only available for components with one handle or fewer.",
+          "仅当组件具有一个或更少设置时，才能进行最小化操作。",
       });
     }, [isMinimal, showNode, data.id]);
 
@@ -223,7 +223,7 @@ const NodeToolbarComponent = memo(
 
     const handleCodeModal = useCallback(() => {
       if (!hasCode) {
-        setNoticeData({ title: `You can not access ${data.id} code` });
+        setNoticeData({ title: `您无法访问 ${data.id} 代码` });
       }
       setOpenModal((state) => !state);
     }, [hasCode, data.id]);
@@ -237,7 +237,7 @@ const NodeToolbarComponent = memo(
         flow: flowComponent,
         override: false,
       });
-      setSuccessData({ title: `${data.id} saved successfully` });
+      setSuccessData({ title: `${data.id} 已保存！` });
     }, [isSaved, data.id, flowComponent, addFlow]);
 
     const openDocs = useCallback(() => {
@@ -245,7 +245,7 @@ const NodeToolbarComponent = memo(
         return customOpenNewTab(data.node.documentation);
       }
       setNoticeData({
-        title: `${data.id} docs is not available at the moment.`,
+        title: `${data.id} 文档暂时不可访问。`,
       });
     }, [data.id, data.node?.documentation]);
 
@@ -431,10 +431,10 @@ const NodeToolbarComponent = memo(
             <ToolbarButton
               className={isCustomComponent ? "animate-pulse-pink" : ""}
               icon="Code"
-              label="Code"
+              label="代码"
               onClick={() => setOpenModal(true)}
               shortcut={shortcuts.find((s) =>
-                s.name.toLowerCase().startsWith("code"),
+                s.name === "代码",
               )}
               dataTestId="code-button-modal"
             />
@@ -442,10 +442,10 @@ const NodeToolbarComponent = memo(
           {nodeLength > 0 && (
             <ToolbarButton
               icon="SlidersHorizontal"
-              label="Controls"
+              label="高级设置"
               onClick={() => setShowModalAdvanced(true)}
               shortcut={shortcuts.find((s) =>
-                s.name.toLowerCase().startsWith("advanced"),
+                s.name === "高级设置",
               )}
               dataTestId="edit-button-modal"
             />
@@ -453,7 +453,7 @@ const NodeToolbarComponent = memo(
           {!hasToolMode && (
             <ToolbarButton
               icon="FreezeAll"
-              label="Freeze"
+              label="冻结"
               onClick={() => {
                 takeSnapshot();
                 FreezeAllVertices({
@@ -462,7 +462,7 @@ const NodeToolbarComponent = memo(
                 });
               }}
               shortcut={shortcuts.find((s) =>
-                s.name.toLowerCase().startsWith("freeze"),
+                s.name === "冻结",
               )}
               className={cn("node-toolbar-buttons", frozen && "text-blue-500")}
             />
@@ -472,7 +472,7 @@ const NodeToolbarComponent = memo(
               content={
                 <ShortcutDisplay
                   {...shortcuts.find(
-                    ({ name }) => name.toLowerCase() === "tool mode",
+                    ({ name }) => name === "工具模式",
                   )!}
                 />
               }
@@ -499,7 +499,7 @@ const NodeToolbarComponent = memo(
                     toolMode ? "text-primary" : "",
                   )}
                 />
-                <span className="text-mmd font-medium">Tool Mode</span>
+                <span className="text-mmd font-medium">工具模式</span>
                 <ToggleShadComponent
                   value={toolMode}
                   editNode={false}

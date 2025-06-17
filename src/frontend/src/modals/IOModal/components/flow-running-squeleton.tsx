@@ -8,7 +8,7 @@ export default function FlowRunningSqueleton() {
       <div className="flex items-center">
         <div>
           <TextShimmer className="" duration={1}>
-            Flow running...
+            工作流运行中...
           </TextShimmer>
         </div>
       </div>

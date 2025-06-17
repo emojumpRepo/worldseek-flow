@@ -378,9 +378,9 @@ function NodeOutputField({
             content={
               displayOutputPreview
                 ? unknownOutput || emptyOutput
-                  ? "Output can't be displayed"
-                  : "Inspect output"
-                : "Please build the component first"
+                  ? "无法显示输出"
+                  : "检查输出"
+                : "请先构建组件"
             }
             styleClasses="z-40"
           >
@@ -405,7 +405,7 @@ function NodeOutputField({
               </OutputModal>
               {looping && (
                 <Badge variant="pinkStatic" size="xq" className="px-1">
-                  Looping
+                  循环
                 </Badge>
               )}
             </div>

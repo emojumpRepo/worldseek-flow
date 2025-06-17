@@ -285,9 +285,9 @@ export default function NodeStatus({
 
   const getTooltipContent = () => {
     if (BuildStatus.BUILDING === buildStatus && isHovered) {
-      return "Stop build";
+      return "停止构建";
     }
-    return "Run component";
+    return "运行组件";
   };
 
   const handleClickConnect = () => {

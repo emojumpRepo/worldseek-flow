@@ -113,15 +113,15 @@ export default function ApiModal({
             autoLogin ? undefined : (
               <>
                 <span className="pr-2">
-                  API access requires an API key. You can{" "}
+                访问 API 需要API密钥。您可以在{" "}
                   <a
                     href="/settings/api-keys"
                     className="text-accent-pink-foreground"
                   >
                     {" "}
-                    create an API key
+                    创建一个API密钥
                   </a>{" "}
-                  in settings.
+                  在设置中。
                 </span>
               </>
             )
@@ -132,7 +132,7 @@ export default function ApiModal({
             className="h-6 w-6 text-gray-800 dark:text-white"
             aria-hidden="true"
           />
-          <span className="pl-2">API access</span>
+          <span className="pl-2">API 访问</span>
           {nodes.length > 0 && (
             <div className="border-r-1 absolute right-12 flex items-center text-mmd font-medium leading-[16px]">
               <Button
@@ -146,7 +146,7 @@ export default function ApiModal({
                   name="SlidersHorizontal"
                   className="h-3.5 w-3.5"
                 />
-                <span>Input Schema ({Object.keys(tweaks)?.length}) </span>
+                <span>输入格式 ({Object.keys(tweaks)?.length}) </span>
               </Button>
               <Separator orientation="vertical" className="ml-2 h-8" />
             </div>
@@ -172,22 +172,22 @@ export default function ApiModal({
             autoLogin ? undefined : (
               <>
                 <span className="pr-2">
-                  API access requires an API key. You can{" "}
+                访问 API 需要API密钥。您可以在{" "}
                   <a
                     href="/settings/api-keys"
                     className="text-accent-pink-foreground"
                   >
                     {" "}
-                    create an API key
+                    创建一个API密钥
                   </a>{" "}
-                  in settings.
+                  在设置中。
                 </span>
               </>
             )
           }
         >
           <IconComponent name="SlidersHorizontal" className="text-f h-6 w-6" />
-          <span className="pl-2">Input Schema</span>
+          <span className="pl-2">输入格式</span>
         </BaseModal.Header>
         <BaseModal.Content overflowHidden className="flex flex-col gap-4">
           {true && (
@@ -198,8 +198,8 @@ export default function ApiModal({
                 </span>
                 {!validEndpointName && (
                   <span className="edit-flow-span">
-                    Use only letters, numbers, hyphens, and underscores (
-                    {MAX_LENGTH} characters max).
+                    仅使用字母、数字、连字符和下划线（{MAX_LENGTH}
+                    个字符最大值）。
                   </span>
                 )}
               </div>
@@ -209,7 +209,7 @@ export default function ApiModal({
                 type="text"
                 name="endpoint_name"
                 value={endpointName ?? ""}
-                placeholder="An alternative name to run the endpoint"
+                placeholder="输入一个替代名称以运行端点"
                 maxLength={MAX_LENGTH}
                 minLength={MIN_LENGTH}
                 id="endpoint_name"

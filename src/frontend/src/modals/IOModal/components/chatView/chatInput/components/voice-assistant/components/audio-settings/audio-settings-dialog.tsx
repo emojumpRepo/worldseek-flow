@@ -274,9 +274,9 @@ const SettingsVoiceModal = ({
               <div className="w-full space-y-4 p-4">
                 <div className="grid w-full items-center gap-2">
                   <span className="flex items-center text-sm">
-                    OpenAI API Key
+                    OpenAI API 密钥
                     <span className="ml-1 text-destructive">*</span>
-                    <ShadTooltip content="OpenAI API key is required to use the voice assistant.">
+                    <ShadTooltip content="OpenAI API 密钥是使用语音助手所必需的。">
                       <div>
                         <IconComponent
                           name="Info"
@@ -296,13 +296,13 @@ const SettingsVoiceModal = ({
                         popoverWidth="16rem"
                         placeholder={getPlaceholder(
                           false,
-                          "Enter your OpenAI API key",
+                          "输入您的 OpenAI API 密钥",
                         )}
                         id="openai-api-key"
                         options={
                           globalVariables?.map((variable) => variable) ?? []
                         }
-                        optionsPlaceholder={"Global Variables"}
+                        optionsPlaceholder={"全局变量"}
                         optionsIcon="Globe"
                         optionsButton={<GeneralGlobalVariableModal />}
                         optionButton={(option) => (
@@ -331,7 +331,7 @@ const SettingsVoiceModal = ({
                         onClick={() => setIsEditingOpenAIKey(true)}
                         size="md"
                       >
-                        Edit
+                        编辑
                       </Button>
                     </>
                   )}
@@ -346,7 +346,7 @@ const SettingsVoiceModal = ({
                       className="w-full"
                       data-testid="voice-assistant-settings-modal-cancel-button"
                     >
-                      Cancel
+                      取消
                     </Button>
                     <Button
                       onClick={() => handleClickSaveApiKey(openaiApiKey)}
@@ -355,7 +355,7 @@ const SettingsVoiceModal = ({
                       size="md"
                       data-testid="voice-assistant-settings-modal-save-button"
                     >
-                      {isEditingOpenAIKey ? "Update" : "Save"}
+                      {isEditingOpenAIKey ? "更新" : "保存"}
                     </Button>
                   </div>
                 )}
@@ -364,8 +364,8 @@ const SettingsVoiceModal = ({
                   <>
                     <div className="grid w-full items-center gap-2">
                       <span className="flex items-center text-sm">
-                        ElevenLabs API Key
-                        <ShadTooltip content="If you have an ElevenLabs API key, you can select ElevenLabs voices.">
+                        ElevenLabs API 密钥
+                        <ShadTooltip content="如果您有 ElevenLabs API 密钥，则可以选择 ElevenLabs 语音。">
                           <div>
                             <IconComponent
                               name="Info"
@@ -383,13 +383,13 @@ const SettingsVoiceModal = ({
                         popoverWidth="16rem"
                         placeholder={getPlaceholder(
                           false,
-                          "Enter your ElevenLabs API key",
+                          "输入您的 ElevenLabs API 密钥",
                         )}
                         id="eleven-labs-api-key"
                         options={
                           globalVariables?.map((variable) => variable) ?? []
                         }
-                        optionsPlaceholder={"Global Variables"}
+                        optionsPlaceholder={"全局变量"}
                         optionsIcon="Globe"
                         optionsButton={<GeneralGlobalVariableModal />}
                         optionButton={(option) => (

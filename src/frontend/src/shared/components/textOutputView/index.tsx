@@ -25,7 +25,7 @@ const TextOutputView = ({
       />
       {isTruncated && (
         <div className="mt-2 text-xs text-muted-foreground">
-          This output has been truncated due to its size.
+          由于输出内容过长，已被截断。
         </div>
       )}
     </>

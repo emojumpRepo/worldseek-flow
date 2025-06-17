@@ -124,7 +124,7 @@ export default function MultiselectComponent({
           {treatedValue.length > 0 &&
           options.find((option) => treatedValue.includes(option))
             ? treatedValue.join(", ")
-            : "Choose an option..."}
+            : "选择一个选项..."}
         </span>
         <ForwardedIconComponent
           name="ChevronsUpDown"
@@ -144,7 +144,7 @@ export default function MultiselectComponent({
         onChange={(event) => {
           setSearchValue(event.target.value);
         }}
-        placeholder="Search options..."
+        placeholder="查找选项..."
         className="flex h-9 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
       />
       <Button
@@ -162,7 +162,7 @@ export default function MultiselectComponent({
 
   const renderOptionsList = () => (
     <CommandList className="overflow-y-scroll">
-      <CommandEmpty>No values found.</CommandEmpty>
+      <CommandEmpty>未找到值。</CommandEmpty>
       <CommandGroup>
         {filteredOptions.map((option, index) => (
           <ShadTooltip key={index} delayDuration={700} content={option}>
@@ -174,7 +174,7 @@ export default function MultiselectComponent({
                 data-testid={`${option}-${id ?? ""}-option`}
               >
                 {(customValues.includes(option) || searchValue === option) && (
-                  <span className="text-muted-foreground">Text:&nbsp;</span>
+                  <span className="text-muted-foreground">文本:&nbsp;</span>
                 )}
                 <span className="truncate">{option}</span>
                 <ForwardedIconComponent
@@ -196,7 +196,7 @@ export default function MultiselectComponent({
     return (
       <div>
         <span className="text-sm italic">
-          No parameters are available for display.
+          没有可显示的参数。
         </span>
       </div>
     );

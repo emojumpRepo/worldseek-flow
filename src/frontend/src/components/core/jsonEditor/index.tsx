@@ -112,18 +112,18 @@ const JsonEditor = ({
               return;
             } catch (jsonError) {
               setErrorData({
-                title: "Invalid Result",
+                title: "无效结果",
                 list: [
-                  "The filtered result contains values that cannot be serialized to JSON",
+                  "过滤结果包含无法序列化的值",
                 ],
               });
               return;
             }
           } else {
             setErrorData({
-              title: "Invalid Result",
+              title: "无效结果",
               list: [
-                "The filtered result must be a JSON object or array, not a primitive value",
+                "过滤结果必须是JSON对象或数组，而不是原始值",
               ],
             });
             return;
@@ -132,7 +132,7 @@ const JsonEditor = ({
       } catch (jsonQueryError) {
         // If JSONQuery fails, continue with our path-based method
         console.debug(
-          "JSONQuery parsing failed, falling back to path-based method:",
+          "JSONQuery解析失败，回退到基于路径的方法:",
           jsonQueryError,
         );
       }
@@ -145,8 +145,8 @@ const JsonEditor = ({
       for (const key of path) {
         if (result === undefined || result === null) {
           setErrorData({
-            title: "Invalid Path",
-            list: [`Path '${transformQuery}' led to undefined or null value`],
+            title: "无效路径",
+            list: [`路径 '${transformQuery}' 导致未定义或空值`],
           });
           return;
         }
@@ -157,9 +157,9 @@ const JsonEditor = ({
             const index = parseInt(indexMatch[1]);
             if (index >= result.length) {
               setErrorData({
-                title: "Invalid Array Index",
+                title: "无效数组索引",
                 list: [
-                  `Index ${index} is out of bounds for array of length ${result.length}`,
+                  `索引 ${index} 超出数组长度 ${result.length} 的边界`,
                 ],
               });
               return;
@@ -172,8 +172,8 @@ const JsonEditor = ({
             .map((item) => {
               if (!(key in item)) {
                 setErrorData({
-                  title: "Invalid Property",
-                  list: [`Property '${key}' does not exist in array items`],
+                  title: "无效属性",
+                  list: [`数组项中不存在属性 '${key}'`],
                 });
                 return undefined;
               }
@@ -183,8 +183,8 @@ const JsonEditor = ({
         } else {
           if (!(key in result)) {
             setErrorData({
-              title: "Invalid Property",
-              list: [`Property '${key}' does not exist in object`],
+              title: "无效属性",
+              list: [`对象中不存在属性 '${key}'`],
             });
             return;
           }
@@ -210,30 +210,30 @@ const JsonEditor = ({
             return;
           } catch (jsonError) {
             setErrorData({
-              title: "Invalid Result",
+              title: "无效结果",
               list: [
-                "The filtered result contains values that cannot be serialized to JSON",
+                "过滤结果包含无法序列化的值",
               ],
             });
           }
         } else {
           setErrorData({
-            title: "Invalid Result",
+            title: "无效结果",
             list: [
-              "The filtered result must be a JSON object or array, not a primitive value",
+              "过滤结果必须是JSON对象或数组，而不是原始值",
             ],
           });
         }
       } else {
         setErrorData({
-          title: "Invalid Result",
-          list: ["Transform resulted in undefined value"],
+          title: "无效结果",
+          list: ["转换导致未定义值"],
         });
       }
     } catch (error) {
-      console.error("Error applying transform:", error);
+      console.error("转换时出错:", error);
       setErrorData({
-        title: "Transform Error",
+        title: "转换错误",
         list: [(error as Error).message],
       });
     }
@@ -273,7 +273,7 @@ const JsonEditor = ({
       }
     } catch (jsonQueryError) {
       console.debug(
-        "JSONQuery parsing failed, falling back to path-based method:",
+        "JSONQuery解析失败，回退到基于路径的方法:",
         jsonQueryError,
       );
     }
@@ -329,7 +329,7 @@ const JsonEditor = ({
           initialContent = filtered;
         }
       } catch (error) {
-        console.error("Error applying initial filter:", error);
+        console.error("初始过滤时出错:", error);
       }
     }
 

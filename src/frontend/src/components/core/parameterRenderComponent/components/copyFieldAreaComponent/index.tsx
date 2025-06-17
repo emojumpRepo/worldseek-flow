@@ -95,7 +95,7 @@ export default function CopyFieldAreaComponent({
     navigator.clipboard.writeText(valueToRender);
 
     setSuccessData({
-      title: "Endpoint URL copied",
+      title: "端点 URL 已复制",
     });
 
     event?.stopPropagation();

@@ -109,10 +109,10 @@ export default function IOFileInput({ field, updateValue }: IOFileInputProps) {
           },
           onError: (error) => {
             setErrorData({
-              title: "Error uploading file",
+              title: "文件上传错误",
               list: [error.response?.data?.detail],
             });
-            console.error("Error occurred while uploading file");
+            console.error("文件上传错误");
           },
         },
       );
@@ -143,14 +143,14 @@ export default function IOFileInput({ field, updateValue }: IOFileInputProps) {
       >
         {!isDragging && (
           <Button variant="primary" onClick={handleButtonClick}>
-            Upload or drop your file
+            上传或拖拽您的文件
           </Button>
         )}
 
         {isDragging ? (
           <>
             <IconComponent name="ArrowUpToLine" className="h-5 w-5 stroke-1" />
-            "Drop your file here"
+            拖拽您的文件到这里
           </>
         ) : image ? (
           <img

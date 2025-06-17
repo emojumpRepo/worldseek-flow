@@ -94,7 +94,7 @@ export default function AppHeader(): JSX.Element {
           onClose={() => setActiveState(null)}
         >
           <ShadTooltip
-            content="Notifications and errors"
+            content="通知和错误"
             side="bottom"
             styleClasses="z-10"
           >
@@ -121,7 +121,7 @@ export default function AppHeader(): JSX.Element {
                     strokeWidth={2}
                   />
                   <span className="hidden whitespace-nowrap">
-                    Notifications
+                    通知
                   </span>
                 </div>
               </Button>

@@ -13,8 +13,8 @@ const useSelectOptionsChange = (
       const hasSelected = selectedFlowsComponentsCards?.length! > 0;
       if (!hasSelected) {
         setErrorData({
-          title: "No items selected",
-          list: ["Please select items to delete"],
+          title: "未选择项",
+          list: ["请选择要删除的项"],
         });
         return;
       }

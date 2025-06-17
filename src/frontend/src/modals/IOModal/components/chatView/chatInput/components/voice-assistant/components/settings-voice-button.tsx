@@ -13,7 +13,7 @@ const SettingsVoiceButton = ({
 }: SettingsVoiceButtonProps) => {
   return (
     <>
-      <ShadTooltip content="Audio Settings" side="top">
+      <ShadTooltip content="语音设置" side="top">
         <div>
           <Button
             className={`btn-playground-actions cursor-pointer text-muted-foreground hover:text-primary`}

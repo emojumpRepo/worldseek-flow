@@ -45,7 +45,7 @@ function DataOutputComponent({
         defaultMinWidth: maxItemsLength,
       }}
       key={"dataOutputComponent"}
-      overlayNoRowsTemplate="No data available"
+      overlayNoRowsTemplate="没有可用数据"
       paginationInfo={
         rows.length > maxItemsLength ? rows[maxItemsLength] : undefined
       }

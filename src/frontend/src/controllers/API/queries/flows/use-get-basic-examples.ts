@@ -18,6 +18,7 @@ export const useGetBasicExamplesQuery: useQueryFunctionType<
 
   const responseFn = async () => {
     const { data } = await getBasicExamplesFn();
+    console.log("getBasicExamplesFn data", data);
     if (data) {
       setExamples(data);
     }

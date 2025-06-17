@@ -92,10 +92,10 @@ export const GetStartedProgress: FC<{
         >
           {percentageGetStarted >= 100 ? (
             <>
-              <span>All Set</span> <span className="pl-1"> 🎉 </span>
+              <span>全部完成</span> <span className="pl-1"> 🎉 </span>
             </>
           ) : (
-            "Get started"
+            "新手引导"
           )}
         </span>
         <button
@@ -160,7 +160,7 @@ export const GetStartedProgress: FC<{
                 isGithubStarredChild && "text-muted-foreground line-through",
               )}
             >
-              Star repo for updates
+              关注GitHub以获取更新
             </span>
           </div>
         </Button>
@@ -202,7 +202,7 @@ export const GetStartedProgress: FC<{
                 isDiscordJoinedChild && "text-muted-foreground line-through",
               )}
             >
-              Join the community
+              加入社区
             </span>
           </div>
         </Button>
@@ -229,7 +229,7 @@ export const GetStartedProgress: FC<{
               />
             </span>
             <span className={cn("text-sm", hasFlows && "line-through")}>
-              Create a flow
+              创建一个工作流
             </span>
           </div>
         </Button>

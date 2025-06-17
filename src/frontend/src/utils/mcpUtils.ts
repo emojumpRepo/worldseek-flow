@@ -17,7 +17,7 @@ export function extractFirstMcpServerFromJson(json: string | object): {
     try {
       parsed = JSON.parse(json);
     } catch (e) {
-      throw new Error("Invalid JSON format.");
+      throw new Error("无效的 JSON 格式。");
     }
   }
 
@@ -66,12 +66,12 @@ export function extractFirstMcpServerFromJson(json: string | object): {
   }
 
   if (serverEntries.length === 0) {
-    throw new Error("No valid MCP server found in the input.");
+    throw new Error("未找到有效的 MCP 服务。");
   }
   const [name, server] = serverEntries[0];
   if (!server.command || !Array.isArray(server.args)) {
     throw new Error(
-      "Each MCP server must have a 'command' and an 'args' array.",
+      "每个 MCP 服务必须有一个 'command' 和一个 'args' 数组。",
     );
   }
   return { name, server };
@@ -96,7 +96,7 @@ export function extractMcpServersFromJson(
       try {
         parsed = JSON.parse(`{${json}}`);
       } catch (e) {
-        throw new Error("Invalid JSON format.");
+        throw new Error("无效的 JSON 格式。");
       }
     }
   }
@@ -143,14 +143,14 @@ export function extractMcpServersFromJson(
   }
 
   if (serverEntries.length === 0) {
-    throw new Error("No valid MCP server found in the input.");
+    throw new Error("未找到有效的 MCP 服务。");
   }
   // Validate and map all servers
   const validServers = serverEntries.filter(
     ([, server]) => server.command && Array.isArray(server.args),
   );
   if (validServers.length === 0) {
-    throw new Error("No valid MCP server found in the input.");
+    throw new Error("未找到有效的 MCP 服务。");
   }
   return validServers.map(([name, server]) => ({
     name: name.slice(0, 30),

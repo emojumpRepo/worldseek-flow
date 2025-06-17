@@ -155,7 +155,7 @@ export default function SecretKeyModal({
       </BaseModal.Content>
       <BaseModal.Footer
         submit={{
-          label: renderKey ? "Done" : (modalConfigProps?.buttonText ?? ""),
+          label: renderKey ? "完成" : (modalConfigProps?.buttonText ?? ""),
         }}
       />
     </BaseModal>

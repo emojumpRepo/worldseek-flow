@@ -33,9 +33,9 @@ export const useFileHandler = (currentFlowId: string) => {
         !fileExtension ||
         !ALLOWED_IMAGE_INPUT_EXTENSIONS.includes(fileExtension)
       ) {
-        console.log("Error uploading file");
+        console.log("文件上传错误");
         setErrorData({
-          title: "Error uploading file",
+          title: "文件上传错误",
           list: [FS_ERROR_TEXT, SN_ERROR_TEXT],
         });
         return;
@@ -76,7 +76,7 @@ export const useFileHandler = (currentFlowId: string) => {
               return newFiles;
             });
             setErrorData({
-              title: "Error uploading file",
+              title: "文件上传错误",
               list: [error.response?.data?.detail],
             });
           },

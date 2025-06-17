@@ -107,7 +107,7 @@ export default function ShareModal({
         saveFlow(flow);
       }
       setSuccessData({
-        title: `${is_component ? "Component" : "Flow"} shared successfully!`,
+        title: `${is_component ? "组件" : "工作流"} 共享成功!`,
       });
     }
 
@@ -118,7 +118,7 @@ export default function ShareModal({
         sharePublic,
       ).then(successShare, (err) => {
         setErrorData({
-          title: "Error sharing " + (is_component ? "component" : "flow"),
+          title: (is_component ? "组件" : "工作流") + " 分享失败",
           list: [err["response"]["data"]["detail"]],
         });
       });
@@ -130,7 +130,7 @@ export default function ShareModal({
         unavaliableNames.find((e) => e.name === name)!.id,
       ).then(successShare, (err) => {
         setErrorData({
-          title: "Error sharing " + is_component ? "component" : "flow",
+          title: (is_component ? "组件" : "工作流") + " 分享失败",
           list: [err["response"]["data"]["detail"]],
         });
       });
@@ -152,8 +152,8 @@ export default function ShareModal({
         <ConfirmationModal
           open={openConfirmationModal}
           title={`Replace`}
-          cancelText="Cancel"
-          confirmationText="Replace"
+          cancelText="取消"
+          confirmationText="替换"
           size={"x-small"}
           icon={"SaveAll"}
           index={6}
@@ -167,12 +167,11 @@ export default function ShareModal({
         >
           <ConfirmationModal.Content>
             <span>
-              It seems {name} already exists. Do you want to replace it with the
-              current?
+              看起来 {name} 已经存在。您想用当前的替换它吗？
             </span>
             <br></br>
             <span className="text-xs text-destructive">
-              Note: This action is irreversible.
+              注意: 此操作是不可逆的。
             </span>
           </ConfirmationModal.Content>
         </ConfirmationModal>
@@ -209,11 +208,11 @@ export default function ShareModal({
           {children ? children : <></>}
         </BaseModal.Trigger>
         <BaseModal.Header
-          description={`Publish ${
-            is_component ? "your component" : "workflow"
-          } to the WorldSeek Agent Store.`}
+          description={`发布 ${
+            is_component ? "您的组件" : "工作流"
+          } 到 WorldSeek Agent 商店。`}
         >
-          <span className="pr-2">Share</span>
+          <span className="pr-2">分享</span>
           <IconComponent
             name="Share3"
             className="-m-0.5 h-6 w-6 text-foreground"
@@ -248,12 +247,11 @@ export default function ShareModal({
                   htmlFor="public"
                   className="export-modal-save-api text-sm"
                 >
-                  Set {nameComponent} status to public
+                  将 {nameComponent} 状态设置为公开
                 </label>
               </div>
               <span className="text-xs text-destructive">
-                <b>Attention:</b> API keys in specified fields are automatically
-                removed upon sharing.
+                <b>注意:</b> 指定字段中的 API 密钥在分享时会自动删除。
               </span>
             </>
           )}
@@ -261,7 +259,7 @@ export default function ShareModal({
 
         <BaseModal.Footer
           submit={{
-            label: `Share ${is_component ? "Component" : "Flow"}`,
+            label: `分享 ${is_component ? "组件" : "工作流"}`,
             loading: loadingNames,
             dataTestId: "share-modal-button-flow",
           }}
@@ -278,7 +276,7 @@ export default function ShareModal({
                   }}
                 >
                   <IconComponent name="Download" className="h-4 w-4" />
-                  Export
+                  导出
                 </Button>
               </ExportModal>
             )}
@@ -293,7 +291,7 @@ export default function ShareModal({
                 }}
               >
                 <IconComponent name="Download" className="h-4 w-4" />
-                Export
+                导出
               </Button>
             )}
           </>

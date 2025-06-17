@@ -34,7 +34,7 @@ export default function MCPServersPage() {
       setEditInitialData(data);
       setEditOpen(true);
     } catch (e: any) {
-      setErrorData({ title: "Error fetching server", list: [e.message] });
+      setErrorData({ title: "获取服务失败", list: [e.message] });
     } finally {
     }
   };
@@ -44,7 +44,7 @@ export default function MCPServersPage() {
       { name: server.name },
       {
         onError: (e: any) =>
-          setErrorData({ title: "Error deleting server", list: [e.message] }),
+          setErrorData({ title: "删除服务失败", list: [e.message] }),
       },
     );
   };
@@ -59,14 +59,14 @@ export default function MCPServersPage() {
       <div className="flex w-full items-start justify-between gap-6">
         <div className="flex flex-col">
           <h2 className="flex items-center text-lg font-semibold tracking-tight">
-            MCP Connections
+            MCP 连接
             <ForwardedIconComponent
               name="Mcp"
               className="ml-2 h-5 w-5 text-primary"
             />
           </h2>
           <p className="text-sm text-muted-foreground">
-            Manage MCP Servers for use in your flows.
+            管理 MCP 服务以在您的流程中使用。
           </p>
         </div>
         <div className="flex flex-shrink-0 items-center gap-2">
@@ -76,7 +76,7 @@ export default function MCPServersPage() {
             data-testid="add-mcp-server-button-page"
           >
             <ForwardedIconComponent name="Plus" className="w-4" />
-            Add MCP Server
+            添加 MCP 服务
           </Button>
           <AddMcpServerModal open={addOpen} setOpen={setAddOpen} />
         </div>
@@ -86,11 +86,11 @@ export default function MCPServersPage() {
           <>
             {servers.length === 0 ? (
               <div className="w-full pt-8 text-center text-sm text-muted-foreground">
-                No MCP servers added
+                没有添加 MCP 服务
               </div>
             ) : (
               <div className="text-sm font-medium text-muted-foreground">
-                Servers
+                MCP 服务
               </div>
             )}
             <div className="flex flex-col gap-1">
@@ -126,7 +126,7 @@ export default function MCPServersPage() {
                           name="SquarePen"
                           className="mr-2 h-4 w-4"
                         />
-                        Edit
+                        编辑
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => openDeleteModal(server)}
@@ -136,7 +136,7 @@ export default function MCPServersPage() {
                           name="Trash2"
                           className="mr-2 h-4 w-4"
                         />
-                        Delete
+                        删除
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -158,7 +158,7 @@ export default function MCPServersPage() {
                 setDeleteModalOpen(false);
                 setServerToDelete(null);
               }}
-              description={"MCP Server"}
+              description={"MCP 服务"}
             />
           </>
         ) : (

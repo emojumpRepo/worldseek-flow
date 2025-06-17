@@ -61,7 +61,7 @@ export default function FileManagerModal({
         onSubmit={() => {
           if (internalSelectedFiles.length === 0) {
             setErrorData({
-              title: "Please select at least one file",
+              title: "请至少选择一个文件",
             });
             return;
           }
@@ -77,7 +77,7 @@ export default function FileManagerModal({
             <div className="rounded-md bg-muted p-1.5">
               <ForwardedIconComponent name="File" className="h-5 w-5" />
             </div>
-            My Files
+            我的文件
           </span>
         </BaseModal.Header>
         <BaseModal.Content overflowHidden>
@@ -103,7 +103,7 @@ export default function FileManagerModal({
 
         <BaseModal.Footer
           submit={{
-            label: `Select files`,
+            label: `选择文件`,
             dataTestId: "select-files-modal-button",
           }}
         ></BaseModal.Footer>

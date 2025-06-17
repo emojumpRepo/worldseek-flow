@@ -13,7 +13,7 @@ const SidebarMenuButtons = ({
   return (
     <>
       {/* TODO: Remove this on cleanup */}
-      {ENABLE_LANGFLOW_STORE && hasStore && (
+      {/* {ENABLE_LANGFLOW_STORE && hasStore && (
         <SidebarMenuButton asChild>
           <CustomLink
             to="/store"
@@ -27,7 +27,7 @@ const SidebarMenuButtons = ({
                 className="h-4 w-4 text-muted-foreground"
               />
               <span className="flex-1 group-data-[state=open]/collapsible:font-semibold">
-                Discover more components
+                发现更多组件
               </span>
               <ForwardedIconComponent
                 name="SquareArrowOutUpRight"
@@ -36,7 +36,7 @@ const SidebarMenuButtons = ({
             </div>
           </CustomLink>
         </SidebarMenuButton>
-      )}
+      )} */}
       <SidebarMenuButton asChild>
         <Button
           unstyled
@@ -54,7 +54,7 @@ const SidebarMenuButtons = ({
             className="h-4 w-4 text-muted-foreground"
           />
           <span className="group-data-[state=open]/collapsible:font-semibold">
-            New Custom Component
+            添加新组件
           </span>
         </Button>
       </SidebarMenuButton>

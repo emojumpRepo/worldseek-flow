@@ -59,7 +59,7 @@ export default function EmbedModal({
       <BaseModal.Header>
         <div className="flex items-center gap-2 text-base font-semibold">
           <IconComponent name="Columns2" className="icon-size" />
-          Embed into site
+          嵌入网站
         </div>
       </BaseModal.Header>
       <BaseModal.Content className="">

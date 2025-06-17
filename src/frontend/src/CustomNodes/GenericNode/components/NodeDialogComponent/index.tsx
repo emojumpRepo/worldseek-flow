@@ -127,7 +127,7 @@ export const NodeDialog: React.FC<NodeDialogProps> = ({
 
     if (missingRequiredFields.length > 0) {
       handleErrorData({
-        title: "Missing required fields",
+        title: "缺少必填字段",
         list: missingRequiredFields,
       });
       return;
@@ -222,7 +222,7 @@ export const NodeDialog: React.FC<NodeDialogProps> = ({
 
         <DialogFooter className="px-5 pt-3">
           <Button variant="secondary" onClick={handleCloseDialog}>
-            Cancel
+            取消
           </Button>
           <Button
             variant="default"

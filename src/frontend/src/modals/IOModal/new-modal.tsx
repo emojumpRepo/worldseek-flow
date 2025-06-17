@@ -80,7 +80,7 @@ export default function IOModal({
   const [visibleSession, setvisibleSession] = useState<string | undefined>(
     currentFlowId,
   );
-  const PlaygroundTitle = playgroundPage && flowName ? flowName : "Playground";
+  const PlaygroundTitle = playgroundPage && flowName ? flowName : "游乐场";
 
   useEffect(() => {
     setIOModalOpen(open);
@@ -99,7 +99,7 @@ export default function IOModal({
       {
         onSuccess: () => {
           setSuccessData({
-            title: "Session deleted successfully.",
+            title: "会话删除成功",
           });
           deleteSession(session_id);
           if (visibleSession === session_id) {
@@ -108,7 +108,7 @@ export default function IOModal({
         },
         onError: () => {
           setErrorData({
-            title: "Error deleting Session.",
+            title: "会话删除失败",
           });
         },
       },
@@ -322,7 +322,7 @@ export default function IOModal({
                   <ShadTooltip
                     styleClasses="z-50"
                     side="right"
-                    content="Hide sidebar"
+                    content="隐藏侧边栏"
                   >
                     <Button
                       variant="ghost"
@@ -350,7 +350,7 @@ export default function IOModal({
                 {sidebarOpen && showPublishOptions && (
                   <div className="absolute bottom-2 left-0 flex w-full flex-col gap-8 border-t border-border px-2 py-4 transition-all">
                     <div className="flex items-center justify-between px-2">
-                      <div className="text-sm">Theme</div>
+                      <div className="text-sm">主题</div>
                       <ThemeButtons />
                     </div>
                     <Button
@@ -359,7 +359,7 @@ export default function IOModal({
                       className="w-full !rounded-xl shadow-lg"
                     >
                       <WorldSeekAgentLogoColor />
-                      <div className="text-sm">Built with WorldSeek Agent</div>
+                      <div className="text-sm">使用 WorldSeek Agent 构建</div>
                     </Button>
                   </div>
                 )}
@@ -370,7 +370,7 @@ export default function IOModal({
                 <ShadTooltip
                   styleClasses="z-50"
                   side="right"
-                  content="Built with WorldSeek Agent"
+                  content="使用 WorldSeek Agent 构建"
                 >
                   <Button
                     variant="primary"

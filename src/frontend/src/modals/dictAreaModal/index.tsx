@@ -42,8 +42,8 @@ export default function DictAreaModal({
       } catch (error) {
         console.error("Error getting JSON:", error);
         setErrorData({
-          title: "Error getting dictionary",
-          list: ["Check your dictionary format"],
+          title: "获取字典错误",
+          list: ["检查您的字典格式"],
         });
       }
     }
@@ -91,7 +91,7 @@ export default function DictAreaModal({
   const renderHeader = () => (
     <BaseModal.Header description={onChange ? IteractiveReader() : null}>
       <span className="pr-2">
-        {onChange ? "Edit Dictionary" : "View Dictionary"}
+        {onChange ? "编辑字典" : "查看字典"}
       </span>
       <IconComponent
         name="BookMarked"

@@ -71,12 +71,12 @@ export default function LoginPage(): JSX.Element {
             className="mb-4 h-10 w-10 scale-[1.5]"
           />
           <span className="mb-6 text-2xl font-semibold text-primary">
-            Sign in to WorldSeek Agent
+            登录 WorldSeek Agent
           </span>
           <div className="mb-3 w-full">
             <Form.Field name="username">
               <Form.Label className="data-[invalid]:label-invalid">
-                Username <span className="font-medium text-destructive">*</span>
+                用户名 <span className="font-medium text-destructive">*</span>
               </Form.Label>
 
               <Form.Control asChild>
@@ -88,19 +88,19 @@ export default function LoginPage(): JSX.Element {
                   value={username}
                   className="w-full"
                   required
-                  placeholder="Username"
+                  placeholder="用户名"
                 />
               </Form.Control>
 
               <Form.Message match="valueMissing" className="field-invalid">
-                Please enter your username
+                请输入用户名
               </Form.Message>
             </Form.Field>
           </div>
           <div className="mb-3 w-full">
             <Form.Field name="password">
               <Form.Label className="data-[invalid]:label-invalid">
-                Password <span className="font-medium text-destructive">*</span>
+                密码 <span className="font-medium text-destructive">*</span>
               </Form.Label>
 
               <InputComponent
@@ -111,26 +111,26 @@ export default function LoginPage(): JSX.Element {
                 isForm
                 password={true}
                 required
-                placeholder="Password"
+                placeholder="密码"
                 className="w-full"
               />
 
               <Form.Message className="field-invalid" match="valueMissing">
-                Please enter your password
+                请输入密码
               </Form.Message>
             </Form.Field>
           </div>
           <div className="w-full">
             <Form.Submit asChild>
               <Button className="mr-3 mt-6 w-full" type="submit">
-                Sign in
+                登录
               </Button>
             </Form.Submit>
           </div>
           <div className="w-full">
             <CustomLink to="/signup">
               <Button className="w-full" variant="outline" type="button">
-                Don't have an account?&nbsp;<b>Sign Up</b>
+                没有账户？&nbsp;<b>注册</b>
               </Button>
             </CustomLink>
           </div>

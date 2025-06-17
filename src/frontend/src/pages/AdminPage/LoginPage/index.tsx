@@ -51,13 +51,13 @@ export default function LoginAdminPage() {
     <div className="flex h-full w-full flex-col items-center justify-center bg-muted">
       <div className="flex w-72 flex-col items-center justify-center gap-2">
         <LangflowLogo title="WorldSeek Agent logo" className="h-10 w-10 scale-[1.5]" />
-        <span className="mb-6 text-2xl font-semibold text-primary">Admin</span>
+        <span className="mb-6 text-2xl font-semibold text-primary">管理员登录</span>
         <Input
           onChange={({ target: { value } }) => {
             handleInput({ target: { name: "username", value } });
           }}
           className="bg-background"
-          placeholder="Username"
+          placeholder="请输入用户名"
         />
         <Input
           type="password"
@@ -65,7 +65,7 @@ export default function LoginAdminPage() {
             handleInput({ target: { name: "password", value } });
           }}
           className="bg-background"
-          placeholder="Password"
+          placeholder="请输入密码"
         />
         <Button
           onClick={() => {
@@ -74,7 +74,7 @@ export default function LoginAdminPage() {
           variant="default"
           className="w-full"
         >
-          Login
+          登录
         </Button>
       </div>
     </div>

@@ -23,17 +23,17 @@ export default function DeleteAccountPage() {
           className="mb-4 h-10 w-10 scale-[1.5]"
         />
         <span className="mb-4 text-center text-2xl font-semibold text-primary">
-          Delete your account
+          删除您的账户
         </span>
-        <Input className="bg-background" placeholder="Confirm password" />
+        <Input className="bg-background" placeholder="确认密码" />
 
         <BaseModal
           open={showConfirmation}
           setOpen={setShowConfirmation}
           size="x-small"
         >
-          <BaseModal.Header description="This action is irreversible and will permanently erase all your data and information associated with the account. ">
-            <h3>Are you sure ?</h3>
+          <BaseModal.Header description="此操作不可撤销，将永久删除您的所有数据和与账户相关的信息。">
+            <h3>您确定吗？</h3>
           </BaseModal.Header>
           <BaseModal.Trigger>
             <Button
@@ -41,7 +41,7 @@ export default function DeleteAccountPage() {
               className="w-full hover:bg-status-red"
               onClick={() => setShowConfirmation(true)}
             >
-              Delete account
+              删除账户
             </Button>
           </BaseModal.Trigger>
           <BaseModal.Content>
@@ -51,7 +51,7 @@ export default function DeleteAccountPage() {
                 className="w-full hover:bg-status-red"
                 onClick={() => handleDeleteAccount()}
               >
-                Delete account
+                删除账户
               </Button>
             </div>
           </BaseModal.Content>

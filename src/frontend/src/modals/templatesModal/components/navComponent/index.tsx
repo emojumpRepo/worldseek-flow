@@ -37,7 +37,7 @@ export function Nav({ categories, currentTab, setCurrentTab }: NavProps) {
               "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
             )}
           >
-            Templates
+            模板
           </div>
         </div>
 

@@ -199,7 +199,7 @@ async function pollBuildEvents(
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
         errorData.detail ||
-          "WorldSeek Agent was not able to connect to the server. Please make sure your connection is working properly.",
+          "WorldSeek Agent 无法连接到服务器。请检查您的连接是否正常。",
       );
     }
 
@@ -346,17 +346,17 @@ export async function buildFlowVertices({
         },
         onError: (statusCode) => {
           if (statusCode === 404) {
-            throw new Error("Flow not found");
+            throw new Error("未找到工作流");
           }
-          throw new Error("Error processing build events");
+          throw new Error("处理构建过程失败");
         },
         onNetworkError: (error: Error) => {
           if (error.name === "AbortError") {
             onBuildStopped && onBuildStopped();
             return;
           }
-          onBuildError!("Error Building Component", [
-            "Network error. Please check the connection to the server.",
+          onBuildError!("构建失败", [
+            "网络错误。请检查您的连接是否正常。",
           ]);
         },
         buildController,
@@ -379,9 +379,9 @@ export async function buildFlowVertices({
 
     if (!buildResponse.ok) {
       if (buildResponse.status === 404) {
-        throw new Error("Flow not found");
+        throw new Error("未找到工作流");
       }
-      throw new Error("Error starting build process");
+      throw new Error("开始构建失败");
     }
 
     const { job_id } = await buildResponse.json();
@@ -399,7 +399,7 @@ export async function buildFlowVertices({
           },
         });
       } catch (error) {
-        console.error("Error canceling build:", error);
+        console.error("取消构建失败:", error);
       }
     });
     useFlowStore.getState().setBuildController(buildController);
@@ -426,17 +426,17 @@ export async function buildFlowVertices({
         },
         onError: (statusCode) => {
           if (statusCode === 404) {
-            throw new Error("Build job not found");
+            throw new Error("未找到构建任务");
           }
-          throw new Error("Error processing build events");
+          throw new Error("处理构建失败");
         },
         onNetworkError: (error: Error) => {
           if (error.name === "AbortError") {
             onBuildStopped && onBuildStopped();
             return;
           }
-          onBuildError!("Error Building Component", [
-            "Network error. Please check the connection to the server.",
+          onBuildError!("构建失败", [
+            "网络错误。请检查您的连接是否正常。",
           ]);
         },
         buildController,
@@ -464,9 +464,9 @@ export async function buildFlowVertices({
       onBuildStopped && onBuildStopped();
       return;
     }
-    onBuildError!("Error Building Flow", [
+    onBuildError!("构建失败", [
       (error as Error).message ||
-        "WorldSeek Agent was not able to connect to the server. Please make sure your connection is working properly.",
+        "WorldSeek Agent 无法连接到服务器。请检查您的连接是否正常。",
     ]);
     throw error;
   }
@@ -583,7 +583,7 @@ async function onEvent(
             },
           );
           onBuildError &&
-            onBuildError("Error Building Component", errorMessages, [
+            onBuildError("构建组件失败", errorMessages, [
               { id: buildData.id },
             ]);
           onBuildUpdate(buildData, BuildStatus.ERROR, "");
@@ -639,7 +639,7 @@ async function onEvent(
         useMessagesStore.getState().addMessage(data);
         // Use a falsy check to correctly determine if the source ID is missing.
         if (!data?.properties?.source?.id) {
-          onBuildError && onBuildError("Error Building Flow", [data.text]);
+          onBuildError && onBuildError("构建工作流失败", [data.text]);
         }
       }
       buildResults.push(false);

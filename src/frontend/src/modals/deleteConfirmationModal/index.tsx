@@ -40,13 +40,13 @@ export default function DeleteConfirmationModal({
                 className="h-6 w-6 pr-1 text-foreground"
                 strokeWidth={1.5}
               />
-              <span className="pl-2">Delete</span>
+              <span className="pl-2">删除</span>
             </div>
           </DialogTitle>
         </DialogHeader>
         <span className="pb-3 text-sm">
-          This will permanently delete the {description ?? "flow"}
-          {note ? " " + note : ""}.<br></br>This can't be undone.
+          这将永久删除该{description ?? "工作流"}
+          {note || ""}。<br></br>无法撤销。
         </span>
         <DialogFooter>
           <DialogClose asChild>
@@ -56,7 +56,7 @@ export default function DeleteConfirmationModal({
               variant="outline"
               data-testid="btn_cancel_delete_confirmation_modal"
             >
-              Cancel
+              取消
             </Button>
           </DialogClose>
           <DialogClose asChild>
@@ -68,7 +68,7 @@ export default function DeleteConfirmationModal({
               }}
               data-testid="btn_delete_delete_confirmation_modal"
             >
-              Delete
+              删除
             </Button>
           </DialogClose>
         </DialogFooter>

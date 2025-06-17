@@ -88,7 +88,7 @@ const MicrophoneSelect = ({
 
       <Select value={selectedMicrophone} onValueChange={handleSetMicrophone}>
         <SelectTrigger className="h-9 w-full">
-          <SelectValue placeholder="Select microphone" />
+          <SelectValue placeholder="选择麦克风" />
         </SelectTrigger>
         <SelectContent className="max-h-[200px]">
           <SelectGroup>
@@ -96,13 +96,13 @@ const MicrophoneSelect = ({
               <SelectItem key={device?.deviceId} value={device?.deviceId}>
                 <div className="max-w-[220px] truncate text-left">
                   {device?.label ||
-                    `Microphone ${device?.deviceId?.slice(0, 5)}...`}
+                    `麦克风 ${device?.deviceId?.slice(0, 5)}...`}
                 </div>
               </SelectItem>
             ))}
             {microphones?.length === 0 && (
               <SelectItem value="no-microphones" disabled>
-                No microphones found
+                未找到麦克风
               </SelectItem>
             )}
           </SelectGroup>

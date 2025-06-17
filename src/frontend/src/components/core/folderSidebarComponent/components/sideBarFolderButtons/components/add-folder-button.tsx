@@ -11,7 +11,7 @@ export const AddFolderButton = ({
   disabled: boolean;
   loading: boolean;
 }) => (
-  <ShadTooltip content="Create new project" styleClasses="z-50">
+  <ShadTooltip content="创建新项目" styleClasses="z-50">
     <Button
       variant="ghost"
       size="icon"

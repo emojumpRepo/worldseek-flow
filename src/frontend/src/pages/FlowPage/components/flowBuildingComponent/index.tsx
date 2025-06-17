@@ -70,7 +70,7 @@ export default function FlowBuildingComponent() {
   const displayTime = duration ?? 0;
   const secondsValue = displayTime / 1000;
   const humanizedTime =
-    normalizeTimeString(`${secondsValue.toFixed(1)}seconds`) ??
+    normalizeTimeString(`${secondsValue.toFixed(1)}秒`) ??
     `${secondsValue.toFixed(1)}s`;
 
   const buildingContent = useMemo(() => {
@@ -78,8 +78,8 @@ export default function FlowBuildingComponent() {
     return (
       <TextShimmer duration={1}>
         {statusBuilding.length > 0
-          ? `Running ${statusBuilding[0]?.id}`
-          : "Running flow"}
+          ? `运行 ${statusBuilding[0]?.id}`
+          : "运行工作流"}
       </TextShimmer>
     );
   }, [isBuilding, statusBuilding]);
@@ -149,14 +149,14 @@ export default function FlowBuildingComponent() {
                         {buildingContent ? (
                           buildingContent
                         ) : buildInfo?.success ? (
-                          "Flow built successfully"
+                          "工作流构建成功"
                         ) : (
                           <div className="flex items-center gap-2">
                             <ForwardedIconComponent
                               name="CircleAlert"
                               className="h-5 w-5"
                             />
-                            Flow build failed
+                            工作流构建失败
                           </div>
                         )}
                       </div>
@@ -192,7 +192,7 @@ export default function FlowBuildingComponent() {
                                   transition={{ duration: 0.2 }}
                                 >
                                   <Button size="sm" onClick={handleRetry}>
-                                    Retry
+                                    重试
                                   </Button>
                                 </motion.div>
                                 <motion.div
@@ -208,7 +208,7 @@ export default function FlowBuildingComponent() {
                                     className="text-primary"
                                     onClick={handleDismiss}
                                   >
-                                    Dismiss
+                                    忽略
                                   </Button>
                                 </motion.div>
                               </motion.div>
@@ -228,7 +228,7 @@ export default function FlowBuildingComponent() {
                                   size="sm"
                                   onClick={handleStop}
                                 >
-                                  Stop
+                                  停止
                                 </Button>
                               </motion.div>
                             )}

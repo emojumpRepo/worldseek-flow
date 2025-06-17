@@ -1217,12 +1217,12 @@
       "zoom": 0.74075714647776
     }
   },
-  "description": "Perform basic prompting with an OpenAI model.",
+  "description": "使用 OpenAI 模型执行基础提示词工作流。",
   "endpoint_name": null,
   "id": "c04a179a-a582-402e-9628-4af37767208c",
   "is_component": false,
   "last_tested_version": "1.4.3",
-  "name": "Basic Prompting",
+  "name": "基础提示词",
   "tags": [
     "chatbots"
   ]

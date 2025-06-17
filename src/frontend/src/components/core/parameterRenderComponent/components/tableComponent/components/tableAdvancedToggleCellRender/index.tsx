@@ -38,11 +38,11 @@ export default function TableAdvancedToggleCellRender({
         content={
           disabled
             ? isTweaks
-              ? "Cannot enable input of connected handles"
-              : "Cannot change visibility of connected handles"
+              ? "无法为已连接操作启用输入功能"
+              : "无法更改已连接操作的可见性"
             : isTweaks
-              ? "Toggle input of the field in the API"
-              : "Change visibility of the field"
+              ? "切换API中的操作输入"
+              : "更改字段可见性"
         }
         styleClasses="z-50"
       >

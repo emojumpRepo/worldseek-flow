@@ -148,7 +148,7 @@ export default function RecentFilesComponent({
         <div className="flex-1">
           <Input
             icon="Search"
-            placeholder="Search files..."
+            placeholder="查找文件..."
             inputClassName="h-8"
             data-testid="search-files-input"
             value={searchQuery}
@@ -174,14 +174,14 @@ export default function RecentFilesComponent({
           <div className="flex h-full w-full items-center justify-center text-sm">
             <span>
               {searchQuery !== ""
-                ? "No files found, try again "
-                : "Upload or import files, "}
-              or visit{" "}
+                ? "未找到文件，请重试"
+                : "上传或导入文件，"}
+              或访问{" "}
               <CustomLink
                 className="text-accent-pink-foreground underline"
                 to="/files"
               >
-                My Files.
+                我的文件。
               </CustomLink>
             </span>
           </div>

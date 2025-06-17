@@ -25,7 +25,7 @@ const DropdownComponent = ({
   const duplicateFlow = () => {
     handleDuplicate().then(() =>
       setSuccessData({
-        title: `${flowData.is_component ? "Component" : "Flow"} duplicated successfully`,
+        title: `${flowData.is_component ? "组件" : "工作流"} 已复制！`,
       }),
     );
   };
@@ -54,7 +54,7 @@ const DropdownComponent = ({
           aria-hidden="true"
           className="mr-2 h-4 w-4"
         />
-        Edit details
+        编辑详情
       </DropdownMenuItem>
       <DropdownMenuItem
         onClick={(e) => {
@@ -69,7 +69,7 @@ const DropdownComponent = ({
           aria-hidden="true"
           className="mr-2 h-4 w-4"
         />
-        Export
+        导出
       </DropdownMenuItem>
       <DropdownMenuItem
         onClick={(e) => {
@@ -84,7 +84,7 @@ const DropdownComponent = ({
           aria-hidden="true"
           className="mr-2 h-4 w-4"
         />
-        Duplicate
+        复制
       </DropdownMenuItem>
       <DropdownMenuItem
         onClick={(e) => {
@@ -99,7 +99,7 @@ const DropdownComponent = ({
           aria-hidden="true"
           className="mr-2 h-4 w-4"
         />
-        Delete
+        删除
       </DropdownMenuItem>
     </>
   );

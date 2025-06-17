@@ -102,12 +102,12 @@ export const FilesPage = () => {
         files: files,
       });
       setSuccessData({
-        title: `File${filesIds.length > 1 ? "s" : ""} uploaded successfully`,
+        title: `文件已上传！`,
       });
     } catch (error: any) {
       setErrorData({
-        title: "Error uploading file",
-        list: [error.message || "An error occurred while uploading the file"],
+        title: "上传文件失败",
+        list: [error.message || "上传文件时出错"],
       });
     }
   };
@@ -116,7 +116,7 @@ export const FilesPage = () => {
 
   const colDefs: ColDef[] = [
     {
-      headerName: "Name",
+      headerName: "文件名",
       field: "name",
       flex: 2,
       headerCheckboxSelection: true,
@@ -160,7 +160,7 @@ export const FilesPage = () => {
             {params.data.progress !== undefined &&
             params.data.progress === -1 ? (
               <span className="text-xs text-primary">
-                Upload failed,{" "}
+                上传失败
                 <span
                   className="cursor-pointer text-accent-pink-foreground underline"
                   onClick={(e) => {
@@ -170,7 +170,7 @@ export const FilesPage = () => {
                     }
                   }}
                 >
-                  try again?
+                  请重试
                 </span>
               </span>
             ) : (
@@ -181,7 +181,7 @@ export const FilesPage = () => {
       }, //This column will be twice as wide as the others
     }, //This column will be twice as wide as the others
     {
-      headerName: "Type",
+      headerName: "类型",
       field: "path",
       flex: 1,
       filter: "agTextColumnFilter",
@@ -193,7 +193,7 @@ export const FilesPage = () => {
         "text-muted-foreground cursor-text select-text group-[.no-select-cells]:cursor-default group-[.no-select-cells]:select-none",
     },
     {
-      headerName: "Size",
+      headerName: "大小",
       field: "size",
       flex: 1,
       valueFormatter: (params) => {
@@ -204,7 +204,7 @@ export const FilesPage = () => {
         "text-muted-foreground cursor-text select-text group-[.no-select-cells]:cursor-default group-[.no-select-cells]:select-none",
     },
     {
-      headerName: "Modified",
+      headerName: "修改时间",
       field: "updated_at",
       valueFormatter: (params) => {
         return params.data.progress
@@ -262,9 +262,9 @@ export const FilesPage = () => {
         },
         onError: (error) => {
           setErrorData({
-            title: "Error downloading files",
+            title: "下载文件失败",
             list: [
-              error.message || "An error occurred while downloading the files",
+              error.message || "下载文件时出错",
             ],
           });
         },
@@ -282,9 +282,9 @@ export const FilesPage = () => {
         },
         onError: (error) => {
           setErrorData({
-            title: "Error deleting files",
+            title: "删除文件失败",
             list: [
-              error.message || "An error occurred while deleting the files",
+              error.message || "删除文件时出错",
             ],
           });
         },
@@ -309,7 +309,7 @@ export const FilesPage = () => {
             className="h-4 w-4"
           />
           <span className="hidden whitespace-nowrap font-semibold md:inline">
-            Upload
+            上传文件
           </span>
         </Button>
       </ShadTooltip>
@@ -341,7 +341,7 @@ export const FilesPage = () => {
                   </SidebarTrigger>
                 </div>
               </div>
-              My Files
+              我的文件
             </div>
             {files && files.length !== 0 ? (
               <div className="flex justify-between">
@@ -423,7 +423,7 @@ export const FilesPage = () => {
                     >
                       <div className="pointer-events-auto ml-12 flex h-full flex-1 items-center justify-between bg-background">
                         <span className="text-xs text-muted-foreground">
-                          {quantitySelected} selected
+                          已选择 {quantitySelected} 项
                         </span>
                         <div className="flex items-center gap-2">
                           <Button
@@ -439,7 +439,7 @@ export const FilesPage = () => {
                           <DeleteConfirmationModal
                             onConfirm={handleDelete}
                             description={
-                              "file" + (quantitySelected > 1 ? "s" : "")
+                              "文件"
                             }
                           >
                             <Button
@@ -450,7 +450,7 @@ export const FilesPage = () => {
                               data-testid="bulk-delete-btn"
                             >
                               <ForwardedIconComponent name="Trash2" />
-                              Delete
+                              删除
                             </Button>
                           </DeleteConfirmationModal>
                         </div>
@@ -461,13 +461,13 @@ export const FilesPage = () => {
               ) : (
                 <CardsWrapComponent
                   onFileDrop={onFileDrop}
-                  dragMessage="Drop files to upload"
+                  dragMessage="拖动文件上传"
                 >
                   <div className="flex h-full w-full flex-col items-center justify-center gap-8 pb-8">
                     <div className="flex flex-col items-center gap-2">
-                      <h3 className="text-2xl font-semibold">No files</h3>
+                      <h3 className="text-2xl font-semibold">没有文件</h3>
                       <p className="text-lg text-secondary-foreground">
-                        Upload files or import from your preferred cloud.
+                        上传文件或从您的云端导入。
                       </p>
                     </div>
                     <div className="flex items-center gap-2">

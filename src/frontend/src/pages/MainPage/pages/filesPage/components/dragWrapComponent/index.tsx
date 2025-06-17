@@ -110,7 +110,7 @@ export default function DragWrapComponent({
         >
           <div className="w-44 rounded-2xl bg-accent-indigo-foreground px-2.5 py-0.5 text-center backdrop-blur-sm">
             <span className="font-mono text-xs text-primary-foreground">
-              Drop file{filesCount > 1 ? "s" : ""} to upload
+              拖动文件上传
             </span>
           </div>
         </div>

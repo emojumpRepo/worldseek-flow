@@ -50,7 +50,7 @@ export default function FlowSettingsComponent({
       saveFlow(newFlow)
         ?.then(() => {
           setIsSaving(false);
-          setSuccessData({ title: "Changes saved successfully" });
+          setSuccessData({ title: "更改已保存" });
           close();
         })
         .catch(() => {
@@ -110,7 +110,7 @@ export default function FlowSettingsComponent({
             type="button"
             onClick={() => close()}
           >
-            Cancel
+            取消
           </Button>
           <Form.Submit asChild>
             <Button
@@ -120,7 +120,7 @@ export default function FlowSettingsComponent({
               loading={isSaving}
               disabled={disableSave}
             >
-              Save
+              保存
             </Button>
           </Form.Submit>
         </div>

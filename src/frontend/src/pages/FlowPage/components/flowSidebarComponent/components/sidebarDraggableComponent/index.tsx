@@ -167,7 +167,7 @@ export const SidebarDraggableComponent = forwardRef(
                     size="xq"
                     className="ml-1.5 shrink-0"
                   >
-                    Beta
+                    测试版
                   </Badge>
                 )}
                 {legacy && (
@@ -176,7 +176,7 @@ export const SidebarDraggableComponent = forwardRef(
                     size="xq"
                     className="ml-1.5 shrink-0"
                   >
-                    Legacy
+                    已弃用
                   </Badge>
                 )}
               </div>
@@ -220,7 +220,7 @@ export const SidebarDraggableComponent = forwardRef(
                           name="Download"
                           className="relative top-0.5 mr-2 h-4 w-4"
                         />{" "}
-                        Download{" "}
+                        下载
                       </div>{" "}
                     </SelectItem>
                     {!official && (
@@ -230,7 +230,7 @@ export const SidebarDraggableComponent = forwardRef(
                             name="Trash2"
                             className="relative top-0.5 mr-2 h-4 w-4"
                           />{" "}
-                          Delete{" "}
+                          删除
                         </div>{" "}
                       </SelectItem>
                     )}

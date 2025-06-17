@@ -29,7 +29,7 @@ export default function NodeUpdateComponent({
         )}
       />
       <div className="mb-px flex-1 truncate text-mmd font-medium">
-        {showNode && (hasBreakingChange ? "Update available" : "Update ready")}
+        {showNode && (hasBreakingChange ? "可更新" : "更新准备就绪")}
       </div>
 
       <Button
@@ -43,7 +43,7 @@ export default function NodeUpdateComponent({
         aria-label="Dismiss warning bar"
         data-testid="dismiss-warning-bar"
       >
-        Dismiss
+        忽略
       </Button>
       <Button
         size="sm"
@@ -55,7 +55,7 @@ export default function NodeUpdateComponent({
         loading={loadingUpdate}
         data-testid={hasBreakingChange ? "review-button" : "update-button"}
       >
-        {hasBreakingChange ? "Review" : "Update"}
+        {hasBreakingChange ? "查看" : "更新"}
       </Button>
     </div>
   );

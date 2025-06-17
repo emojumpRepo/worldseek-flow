@@ -28,7 +28,7 @@ export function SidebarFilterComponent({
           className={`h-4 w-4 shrink-0 stroke-2`}
         />
         <div className="flex flex-1">
-          {isInput ? "Input" : "Output"}
+          {isInput ? "输入" : "输出"}
           {plural}:{" "}
           <div className="w-[5.7rem] flex-1 overflow-hidden truncate pl-1">
             {tooltips.join(", ")}
@@ -38,7 +38,7 @@ export function SidebarFilterComponent({
       <ShadTooltip
         side="right"
         styleClasses="max-w-full"
-        content="Remove filter"
+        content="清除过滤器"
       >
         <Button
           unstyled

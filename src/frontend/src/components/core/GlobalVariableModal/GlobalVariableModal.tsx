@@ -69,7 +69,7 @@ export default function GlobalVariableModal({
         setFields([referenceField]);
       }
     } else {
-      setAvailableFields(["System", "System Message", "System Prompt"]);
+      setAvailableFields(["系统", "系统消息", "系统提示"]);
     }
   }, [globalVariables, componentFields, initialData]);
 
@@ -98,16 +98,16 @@ export default function GlobalVariableModal({
         setOpen(false);
 
         setSuccessData({
-          title: `Variable ${name} ${initialData ? "updated" : "created"} successfully`,
+          title: `变量 ${name} ${initialData ? "更新" : "创建"} 成功`,
         });
       },
       onError: (error) => {
         let responseError = error as ResponseErrorDetailAPI;
         setErrorData({
-          title: `Error ${initialData ? "updating" : "creating"} variable`,
+          title: `变量 ${initialData ? "更新" : "创建"} 失败`,
           list: [
             responseError?.response?.data?.detail ??
-              `An unexpected error occurred while ${initialData ? "updating a new" : "creating"} variable. Please try again.`,
+              `变量 ${initialData ? "更新" : "创建"} 失败，请重试。`,
           ],
         });
       },
@@ -136,13 +136,13 @@ export default function GlobalVariableModal({
       onSubmit={submitForm}
       disable={disabled}
     >
-      <BaseModal.Header description="This variable will be available for use across your flows.">
+      <BaseModal.Header description="此变量可在您的工作流中使用。">
         <ForwardedIconComponent
           name="Globe"
           className="h-6 w-6 pr-1 text-primary"
           aria-hidden="true"
         />
-        {initialData ? "Update Variable" : "Create Variable"}
+        {initialData ? "更新变量" : "创建变量"}
       </BaseModal.Header>
       <BaseModal.Trigger disable={disabled} asChild={asChild}>
         {children}
@@ -150,7 +150,7 @@ export default function GlobalVariableModal({
       <BaseModal.Content>
         <div className="flex h-full w-full flex-col gap-4">
           <div className="space-y-2">
-            <Label>Type*</Label>
+            <Label>类型*</Label>
             <Tabs
               defaultValue={type}
               onValueChange={setType}
@@ -176,54 +176,54 @@ export default function GlobalVariableModal({
           </div>
 
           <div className="space-y-2" id="global-variable-modal-inputs">
-            <Label>Name*</Label>
+            <Label>名称*</Label>
             <Input
               value={key}
               onChange={(e) => setKey(e.target.value)}
-              placeholder="Enter a name for the variable..."
+              placeholder="输入变量名称..."
             />
           </div>
 
           <div className="space-y-2">
-            <Label>Value*</Label>
+            <Label>值*</Label>
             {type === "Credential" ? (
               <InputComponent
                 password
                 value={value}
                 onChange={(e) => setValue(e)}
-                placeholder="Enter a value for the variable..."
+                placeholder="输入变量值..."
                 nodeStyle
               />
             ) : (
               <Input
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                placeholder="Enter a value for the variable..."
+                placeholder="输入变量值..."
               />
             )}
           </div>
 
           <div className="space-y-2">
-            <Label>Apply to fields</Label>
+            <Label>应用到字段</Label>
             <InputComponent
               setSelectedOptions={(value) => setFields(value)}
               selectedOptions={fields}
               options={availableFields}
               password={false}
-              placeholder="Choose a field for the variable..."
+              placeholder="给变量选择一个字段..."
               id="apply-to-fields"
               popoverWidth="29rem"
               optionsPlaceholder="Fields"
             />
             <div className="text-xs text-muted-foreground">
-              Selected fields will auto-apply the variable as a default value.
+              选中的字段将自动应用变量作为默认值。
             </div>
           </div>
         </div>
       </BaseModal.Content>
       <BaseModal.Footer
         submit={{
-          label: `${initialData ? "Update" : "Save"} Variable`,
+          label: `${initialData ? "更新" : "保存"} 变量`,
           dataTestId: "save-variable-btn",
         }}
       />

@@ -14,11 +14,10 @@ const AudioSettingsHeader = () => {
           strokeWidth={ICON_STROKE_WIDTH}
           className="h-4 w-4 text-muted-foreground hover:text-foreground"
         />
-        Voice settings
+        语音设置
       </p>
       <p className="text-mmd leading-4 text-muted-foreground">
-        Voice chat is powered by OpenAI. You can also add more voices with
-        ElevenLabs.
+        语音聊天由 OpenAI 提供支持。您还可以使用 ElevenLabs 添加更多声音。
       </p>
     </div>
   );
