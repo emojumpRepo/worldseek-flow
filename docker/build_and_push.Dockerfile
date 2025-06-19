@@ -20,7 +20,10 @@ ENV UV_COMPILE_BYTECODE=1
 # Copy from the cache instead of linking since it's a mounted volume
 ENV UV_LINK_MODE=copy
 
-RUN apt-get update \
+# Add mirror configuration for builder stage
+RUN sed -i 's|http://deb.debian.org/debian|http://mirrors.ustc.edu.cn/debian|g' /etc/apt/sources.list.d/debian.sources && \
+    sed -i 's|http://deb.debian.org/debian-security|http://mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources && \
+    apt-get update \
     && apt-get upgrade -y \
     && apt-get install --no-install-recommends -y \
     # deps for building python deps
@@ -66,16 +69,22 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 ################################
 FROM python:3.12.3-slim AS runtime
 
-RUN apt-get update \
+# Configure apt sources to use mirror
+RUN sed -i 's|http://deb.debian.org/debian|https://mirrors.aliyun.com/debian|g' /etc/apt/sources.list.d/debian.sources && \
+    sed -i 's|http://deb.debian.org/debian-security|https://mirrors.aliyun.com/debian-security|g' /etc/apt/sources.list.d/debian.sources && \
+    apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y curl git libpq5 gnupg \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && curl -fsSL https://mirrors.ustc.edu.cn/nodesource/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && useradd user -u 1000 -g 0 --no-create-home --home-dir /app/data
 
 COPY --from=builder --chown=1000 /app/.venv /app/.venv
+
+# Create symlink for frontend files to fix static files path issue
+RUN ln -s /app/.venv/lib/python3.12/site-packages/langflow/frontend /app/.venv/lib/frontend
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"

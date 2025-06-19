@@ -40,14 +40,14 @@ export default function CollectionPage(): JSX.Element {
       {
         onSuccess: () => {
           setSuccessData({
-            title: "Project deleted successfully.",
+            title: "项目删除成功！",
           });
           navigate("/all");
         },
         onError: (err) => {
           console.error(err);
           setErrorData({
-            title: "Error deleting project.",
+            title: "删除项目失败",
           });
         },
       },

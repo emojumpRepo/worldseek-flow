@@ -1,3 +1,3 @@
-DEFAULT_FOLDER_DESCRIPTION = "Manage your own flows. Download and upload projects."
-DEFAULT_FOLDER_NAME = "My Projects"
-NEW_FOLDER_NAME = "Starter Project"
+DEFAULT_FOLDER_DESCRIPTION = "管理您的工作流，下载和上传项目"
+DEFAULT_FOLDER_NAME = "我的项目"
+NEW_FOLDER_NAME = "入门项目"

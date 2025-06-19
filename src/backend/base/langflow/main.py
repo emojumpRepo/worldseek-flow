@@ -362,7 +362,7 @@ def setup_static_files(app: FastAPI, static_files_dir: Path) -> None:
 
 def get_static_files_dir():
     """Get the static files directory relative to Langflow's main.py file."""
-    frontend_path = Path(__file__).parent
+    frontend_path = Path(__file__).parent.parent.parent.parent
     return frontend_path / "frontend"
 
 
