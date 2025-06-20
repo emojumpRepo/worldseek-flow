@@ -53,7 +53,7 @@ class AstraDBCQLToolComponent(LCToolComponent):
         StrInput(
             name="api_endpoint",
             display_name="API Endpoint",
-            info="API endpoint URL for the Astra DB service.",
+            info="API endpoint 网址 for the Astra DB service.",
             value="ASTRA_DB_API_ENDPOINT",
             required=True,
         ),

@@ -19,7 +19,9 @@ from langflow.template.field.base import Output
 
 class SaveToFileComponent(Component):
     display_name = "Save File"
+    display_name_zh = "保存文件"
     description = "Save data to a local file in the selected format."
+    description_zh = "将数据保存到本地文件，选择格式。"
     icon = "save"
     name = "SaveToFile"
 
@@ -30,29 +32,29 @@ class SaveToFileComponent(Component):
     inputs = [
         HandleInput(
             name="input",
-            display_name="Input",
-            info="The input to save.",
+            display_name="输入",
+            info="要保存的输入。",
             dynamic=True,
             input_types=["Data", "DataFrame", "Message"],
             required=True,
         ),
         StrInput(
             name="file_name",
-            display_name="File Name",
-            info="Name file will be saved as (without extension).",
+            display_name="文件名",
+            info="文件将被保存的名称（不包括扩展名）。",
             required=True,
         ),
         DropdownInput(
             name="file_format",
-            display_name="File Format",
+            display_name="文件格式",
             options=DATA_FORMAT_CHOICES + MESSAGE_FORMAT_CHOICES,
-            info="Select the file format to save the input. If not provided, the default format will be used.",
+            info="选择要保存的文件格式。如果未提供，将使用默认格式。",
             value="",
             advanced=True,
         ),
     ]
 
-    outputs = [Output(display_name="File Path", name="result", method="save_to_file")]
+    outputs = [Output(display_name="文件路径", name="result", method="save_to_file")]
 
     async def save_to_file(self) -> Message:
         """Save the input to a file and upload it, returning a confirmation message."""

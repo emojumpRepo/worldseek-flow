@@ -23,7 +23,7 @@ class YouTubeTranscriptsComponent(Component):
         MultilineInput(
             name="url",
             display_name="Video URL",
-            info="Enter the YouTube video URL to get transcripts from.",
+            info="Enter the YouTube video 网址 to get transcripts from.",
             tool_mode=True,
             required=True,
         ),

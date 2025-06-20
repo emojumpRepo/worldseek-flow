@@ -27,20 +27,20 @@ class ScrapeGraphSmartScraperApi(Component):
         ),
         MessageTextInput(
             name="url",
-            display_name="URL",
+            display_name="网址",
             tool_mode=True,
-            info="The URL to scrape.",
+            info="The 网址 to scrape.",
         ),
         MessageTextInput(
             name="prompt",
-            display_name="Prompt",
+            display_name="提示词",
             tool_mode=True,
             info="The prompt to use for the smart scraper.",
         ),
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="scrape"),
+        Output(display_name="数据", name="data", method="scrape"),
     ]
 
     def scrape(self) -> list[Data]:

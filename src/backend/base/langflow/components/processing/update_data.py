@@ -16,7 +16,9 @@ from langflow.schema.dotdict import dotdict
 
 class UpdateDataComponent(Component):
     display_name: str = "Update Data"
+    display_name_zh: str = "更新数据"
     description: str = "Dynamically update or append data with the specified fields."
+    description_zh: str = "动态更新或附加数据，指定字段。"
     name: str = "UpdateData"
     MAX_FIELDS = 15  # Define a constant for maximum number of fields
     icon = "FolderSync"
@@ -25,35 +27,35 @@ class UpdateDataComponent(Component):
     inputs = [
         DataInput(
             name="old_data",
-            display_name="Data",
-            info="The record to update.",
+            display_name="数据",
+            info="要更新的记录。",
             is_list=True,  # Changed to True to handle list of Data objects
             required=True,
         ),
         IntInput(
             name="number_of_fields",
-            display_name="Number of Fields",
-            info="Number of fields to be added to the record.",
+            display_name="字段数量",
+            info="要添加到记录的字段数量。",
             real_time_refresh=True,
             value=0,
             range_spec=RangeSpec(min=1, max=MAX_FIELDS, step=1, step_type="int"),
         ),
         MessageTextInput(
             name="text_key",
-            display_name="Text Key",
-            info="Key that identifies the field to be used as the text content.",
+            display_name="文本键",
+            info="用于标识要作为文本内容的字段的键。",
             advanced=True,
         ),
         BoolInput(
             name="text_key_validator",
-            display_name="Text Key Validator",
+            display_name="文本键验证器",
             advanced=True,
-            info="If enabled, checks if the given 'Text Key' is present in the given 'Data'.",
+            info="如果启用，检查给定的'文本键'是否存在于给定的'数据'中。",
         ),
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="build_data"),
+        Output(display_name="数据", name="data", method="build_data"),
     ]
 
     def update_build_config(self, build_config: dotdict, field_value: Any, field_name: str | None = None):

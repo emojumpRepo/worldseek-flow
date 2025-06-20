@@ -11,8 +11,8 @@ class ZepChatMemory(LCChatMemoryComponent):
     legacy = True
 
     inputs = [
-        MessageTextInput(name="url", display_name="Zep URL", info="URL of the Zep instance."),
-        SecretStrInput(name="api_key", display_name="API Key", info="API Key for the Zep instance."),
+        MessageTextInput(name="url", display_name="Zep URL", info="网址 of the Zep instance."),
+        SecretStrInput(name="api_key", display_name="API密钥", info="API密钥 for the Zep instance."),
         DropdownInput(
             name="api_base_path",
             display_name="API Base Path",
@@ -21,7 +21,7 @@ class ZepChatMemory(LCChatMemoryComponent):
             advanced=True,
         ),
         MessageTextInput(
-            name="session_id", display_name="Session ID", info="Session ID for the message.", advanced=True
+            name="session_id", display_name="会话ID", info="会话ID for the message.", advanced=True
         ),
     ]
 

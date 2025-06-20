@@ -9,7 +9,9 @@ from langflow.schema.data import Data
 
 class AssemblyAITranscriptionJobPoller(Component):
     display_name = "AssemblyAI Poll Transcript"
+    display_name_zh = "AssemblyAI 轮询转录"
     description = "Poll for the status of a transcription job using AssemblyAI"
+    description_zh = "使用AssemblyAI轮询转录状态。"
     documentation = "https://www.assemblyai.com/docs"
     icon = "AssemblyAI"
 

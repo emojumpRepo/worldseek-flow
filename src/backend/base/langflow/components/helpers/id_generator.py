@@ -11,7 +11,9 @@ from langflow.schema.message import Message
 
 class IDGeneratorComponent(Component):
     display_name = "ID Generator"
+    display_name_zh = "ID生成器"
     description = "Generates a unique ID."
+    description_zh = "生成一个唯一的ID。"
     icon = "fingerprint"
     name = "IDGenerator"
     legacy = True
@@ -19,8 +21,8 @@ class IDGeneratorComponent(Component):
     inputs = [
         MessageTextInput(
             name="unique_id",
-            display_name="Value",
-            info="The generated unique ID.",
+            display_name="值",
+            info="生成的唯一ID。",
             refresh_button=True,
             tool_mode=True,
         ),

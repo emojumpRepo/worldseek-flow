@@ -15,7 +15,7 @@ class GetEnvVar(Component):
         StrInput(
             name="env_var_name",
             display_name="Env var name",
-            info="Name of the environment variable to get",
+            info="名称 of the environment variable to get",
         )
     ]
 

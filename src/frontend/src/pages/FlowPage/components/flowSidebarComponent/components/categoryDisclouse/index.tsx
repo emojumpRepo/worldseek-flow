@@ -68,7 +68,7 @@ export const CategoryDisclosure = memo(function CategoryDisclosure({
                 className="h-4 w-4 group-aria-expanded/collapsible:text-accent-pink-foreground"
               />
               <span className="flex-1 group-aria-expanded/collapsible:font-semibold">
-                {item.display_name}
+                {item.display_name_zh || item.display_name}
               </span>
               <ForwardedIconComponent
                 name="ChevronRight"

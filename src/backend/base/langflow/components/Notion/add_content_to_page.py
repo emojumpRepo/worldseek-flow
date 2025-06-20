@@ -26,7 +26,7 @@ class AddContentToPage(LCToolComponent):
         MultilineInput(
             name="markdown_text",
             display_name="Markdown Text",
-            info="The markdown text to convert to Notion blocks.",
+            info="The markdown text to convert to 否tion blocks.",
         ),
         StrInput(
             name="block_id",
@@ -36,7 +36,7 @@ class AddContentToPage(LCToolComponent):
         SecretStrInput(
             name="notion_secret",
             display_name="Notion Secret",
-            info="The Notion integration token.",
+            info="The 否tion integration token.",
             required=True,
         ),
     ]

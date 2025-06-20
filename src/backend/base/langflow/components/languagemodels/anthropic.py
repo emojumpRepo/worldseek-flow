@@ -19,7 +19,9 @@ from langflow.schema.dotdict import dotdict
 
 class AnthropicModelComponent(LCModelComponent):
     display_name = "Anthropic"
+    display_name_zh = "Anthropic"
     description = "Generate text using Anthropic Chat&Completion LLMs with prefill support."
+    description_zh = "使用Anthropic聊天和补全大语言模型生成文本，支持预填充功能。"
     icon = "Anthropic"
     name = "AnthropicModel"
 
@@ -27,14 +29,14 @@ class AnthropicModelComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             value=4096,
             info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             options=ANTHROPIC_MODELS,
             refresh_button=True,
             value=ANTHROPIC_MODELS[0],
@@ -50,7 +52,7 @@ class AnthropicModelComponent(LCModelComponent):
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             info="Run inference with this temperature. Must by in the closed interval [0.0, 1.0].",
             range_spec=RangeSpec(min=0, max=1, step=0.01),

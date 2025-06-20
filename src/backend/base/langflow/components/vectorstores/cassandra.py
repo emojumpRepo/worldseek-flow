@@ -28,18 +28,18 @@ class CassandraVectorStoreComponent(LCVectorStoreComponent):
             required=True,
         ),
         MessageTextInput(
-            name="username", display_name="Username", info="Username for the database (leave empty for AstraDB)."
+            name="username", display_name="用户名", info="用户名 for the database (leave empty for AstraDB)."
         ),
         SecretStrInput(
             name="token",
             display_name="Password / AstraDB Token",
-            info="User password for the database (or AstraDB token).",
+            info="用户 password for the database (or AstraDB token).",
             required=True,
         ),
         MessageTextInput(
             name="keyspace",
             display_name="Keyspace",
-            info="Table Keyspace (or AstraDB namespace).",
+            info="表 键space (or AstraDB namespace).",
             required=True,
         ),
         MessageTextInput(
@@ -51,13 +51,13 @@ class CassandraVectorStoreComponent(LCVectorStoreComponent):
         IntInput(
             name="ttl_seconds",
             display_name="TTL Seconds",
-            info="Optional time-to-live for the added texts.",
+            info="可选 time-to-live for the added texts.",
             advanced=True,
         ),
         IntInput(
             name="batch_size",
             display_name="Batch Size",
-            info="Optional number of data to process in a single batch.",
+            info="可选 number of data to process in a single batch.",
             value=16,
             advanced=True,
         ),
@@ -72,7 +72,7 @@ class CassandraVectorStoreComponent(LCVectorStoreComponent):
         DictInput(
             name="cluster_kwargs",
             display_name="Cluster arguments",
-            info="Optional dictionary of additional keyword arguments for the Cassandra cluster.",
+            info="可选 dictionary of additional keyword arguments for the Cassandra cluster.",
             advanced=True,
             list=True,
         ),
@@ -88,7 +88,7 @@ class CassandraVectorStoreComponent(LCVectorStoreComponent):
         DropdownInput(
             name="search_type",
             display_name="Search Type",
-            info="Search type to use",
+            info="搜索 type to use",
             options=["Similarity", "Similarity with score threshold", "MMR (Max Marginal Relevance)"],
             value="Similarity",
             advanced=True,
@@ -104,7 +104,7 @@ class CassandraVectorStoreComponent(LCVectorStoreComponent):
         DictInput(
             name="search_filter",
             display_name="Search Metadata Filter",
-            info="Optional dictionary of filters to apply to the search query.",
+            info="可选 dictionary of filters to apply to the search query.",
             advanced=True,
             list=True,
         ),

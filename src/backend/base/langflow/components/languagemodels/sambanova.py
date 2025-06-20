@@ -11,6 +11,7 @@ from langflow.io import DropdownInput, IntInput, SecretStrInput, SliderInput, St
 class SambaNovaComponent(LCModelComponent):
     display_name = "SambaNova"
     description = "Generate text using Sambanova LLMs."
+    description_zh = "使用Sambanova LLMs生成文本。"
     documentation = "https://cloud.sambanova.ai/"
     icon = "SambaNova"
     name = "SambaNovaModel"
@@ -21,13 +22,13 @@ class SambaNovaComponent(LCModelComponent):
             name="base_url",
             display_name="SambaNova Cloud Base Url",
             advanced=True,
-            info="The base URL of the Sambanova Cloud API. "
+            info="The base 网址 of the Sambanova Cloud API. "
             "Defaults to https://api.sambanova.ai/v1/chat/completions. "
             "You can change this to use other urls like Sambastudio",
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             options=SAMBANOVA_MODEL_NAMES,
             value=SAMBANOVA_MODEL_NAMES[0],
@@ -35,17 +36,17 @@ class SambaNovaComponent(LCModelComponent):
         SecretStrInput(
             name="api_key",
             display_name="Sambanova API Key",
-            info="The Sambanova API Key to use for the Sambanova model.",
+            info="The Sambanova API密钥 to use for the Sambanova model.",
             advanced=False,
             value="SAMBANOVA_API_KEY",
             required=True,
         ),
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             value=2048,
-            info="The maximum number of tokens to generate.",
+            info="要生成的最大令牌数。",
         ),
         SliderInput(
             name="top_p",
@@ -53,11 +54,11 @@ class SambaNovaComponent(LCModelComponent):
             advanced=True,
             value=1.0,
             range_spec=RangeSpec(min=0, max=1, step=0.01),
-            info="Model top_p",
+            info="模型 top_p",
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             range_spec=RangeSpec(min=0, max=2, step=0.01),
             advanced=True,

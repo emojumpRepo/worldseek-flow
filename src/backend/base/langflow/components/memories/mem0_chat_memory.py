@@ -48,13 +48,13 @@ class Mem0MemoryComponent(LCChatMemoryComponent):
             name="existing_memory",
             display_name="Existing Memory Instance",
             input_types=["Memory"],
-            info="Optional existing Mem0 memory instance. If not provided, a new instance will be created.",
+            info="可选 existing Mem0 memory instance. If not provided, a new instance will be created.",
         ),
         MessageTextInput(
             name="user_id", display_name="User ID", info="Identifier for the user associated with the messages."
         ),
         MessageTextInput(
-            name="search_query", display_name="Search Query", info="Input text for searching related memories in Mem0."
+            name="search_query", display_name="Search Query", info="输入 text for searching related memories in Mem0."
         ),
         SecretStrInput(
             name="mem0_api_key",
@@ -63,7 +63,7 @@ class Mem0MemoryComponent(LCChatMemoryComponent):
         ),
         DictInput(
             name="metadata",
-            display_name="Metadata",
+            display_name="元数据",
             info="Additional metadata to associate with the ingested message.",
             advanced=True,
         ),
@@ -71,7 +71,7 @@ class Mem0MemoryComponent(LCChatMemoryComponent):
             name="openai_api_key",
             display_name="OpenAI API Key",
             required=False,
-            info="API key for OpenAI. Required if using OpenAI Embeddings without a provided configuration.",
+            info="API key for OpenAI. 必需 if using OpenAI Embeddings without a provided configuration.",
         ),
     ]
 

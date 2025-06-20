@@ -7,7 +7,9 @@ from langflow.schema.data import Data
 
 class GoogleSearchAPIComponent(LCToolComponent):
     display_name = "Google Search API [DEPRECATED]"
+    display_name_zh = "Google搜索API [已弃用]"
     description = "Call Google Search API."
+    description_zh = "调用Google搜索API。"
     name = "GoogleSearchAPI"
     icon = "Google"
     legacy = True
@@ -16,7 +18,7 @@ class GoogleSearchAPIComponent(LCToolComponent):
         SecretStrInput(name="google_cse_id", display_name="Google CSE ID", required=True),
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
         ),
         IntInput(name="k", display_name="Number of results", value=4, required=True),
     ]

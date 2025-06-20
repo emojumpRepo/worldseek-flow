@@ -28,7 +28,7 @@ class LanguageRecursiveTextSplitterComponent(LCTextSplitterComponent):
         ),
         DataInput(
             name="data_input",
-            display_name="Input",
+            display_name="输入",
             info="The texts to split.",
             input_types=["Document", "Data"],
             required=True,

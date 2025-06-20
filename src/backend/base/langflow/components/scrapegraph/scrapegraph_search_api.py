@@ -34,7 +34,7 @@ class ScrapeGraphSearchApi(Component):
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="search"),
+        Output(display_name="数据", name="data", method="search"),
     ]
 
     def search(self) -> list[Data]:

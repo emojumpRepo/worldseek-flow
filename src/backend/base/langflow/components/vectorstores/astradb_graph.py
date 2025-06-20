@@ -35,8 +35,8 @@ class AstraDBGraphVectorStoreComponent(LCVectorStoreComponent):
         ),
         SecretStrInput(
             name="api_endpoint",
-            display_name="Database" if os.getenv("ASTRA_ENHANCED", "false").lower() == "true" else "API Endpoint",
-            info="API endpoint URL for the Astra DB service.",
+            display_name="数据库" if os.getenv("ASTRA_ENHANCED", "false").lower() == "true" else "API Endpoint",
+            info="API endpoint 网址 for the Astra DB service.",
             value="ASTRA_DB_API_ENDPOINT",
             required=True,
         ),
@@ -49,14 +49,14 @@ class AstraDBGraphVectorStoreComponent(LCVectorStoreComponent):
         StrInput(
             name="metadata_incoming_links_key",
             display_name="Metadata incoming links key",
-            info="Metadata key used for incoming links.",
+            info="元数据 key used for incoming links.",
             advanced=True,
         ),
         *LCVectorStoreComponent.inputs,
         StrInput(
             name="keyspace",
             display_name="Keyspace",
-            info="Optional keyspace within Astra DB to use for the collection.",
+            info="可选 keyspace within Astra DB to use for the collection.",
             advanced=True,
         ),
         HandleInput(
@@ -68,7 +68,7 @@ class AstraDBGraphVectorStoreComponent(LCVectorStoreComponent):
         DropdownInput(
             name="metric",
             display_name="Metric",
-            info="Optional distance metric for vector comparisons in the vector store.",
+            info="可选 distance metric for vector comparisons in the vector store.",
             options=["cosine", "dot_product", "euclidean"],
             value="cosine",
             advanced=True,
@@ -76,25 +76,25 @@ class AstraDBGraphVectorStoreComponent(LCVectorStoreComponent):
         IntInput(
             name="batch_size",
             display_name="Batch Size",
-            info="Optional number of data to process in a single batch.",
+            info="可选 number of data to process in a single batch.",
             advanced=True,
         ),
         IntInput(
             name="bulk_insert_batch_concurrency",
             display_name="Bulk Insert Batch Concurrency",
-            info="Optional concurrency level for bulk insert operations.",
+            info="可选 concurrency level for bulk insert operations.",
             advanced=True,
         ),
         IntInput(
             name="bulk_insert_overwrite_concurrency",
             display_name="Bulk Insert Overwrite Concurrency",
-            info="Optional concurrency level for bulk insert operations that overwrite existing data.",
+            info="可选 concurrency level for bulk insert operations that overwrite existing data.",
             advanced=True,
         ),
         IntInput(
             name="bulk_delete_concurrency",
             display_name="Bulk Delete Concurrency",
-            info="Optional concurrency level for bulk delete operations.",
+            info="可选 concurrency level for bulk delete operations.",
             advanced=True,
         ),
         DropdownInput(
@@ -115,14 +115,14 @@ class AstraDBGraphVectorStoreComponent(LCVectorStoreComponent):
         StrInput(
             name="metadata_indexing_include",
             display_name="Metadata Indexing Include",
-            info="Optional list of metadata fields to include in the indexing.",
+            info="可选 list of metadata fields to include in the indexing.",
             advanced=True,
             list=True,
         ),
         StrInput(
             name="metadata_indexing_exclude",
             display_name="Metadata Indexing Exclude",
-            info="Optional list of metadata fields to exclude from the indexing.",
+            info="可选 list of metadata fields to exclude from the indexing.",
             advanced=True,
             list=True,
         ),
@@ -143,7 +143,7 @@ class AstraDBGraphVectorStoreComponent(LCVectorStoreComponent):
         DropdownInput(
             name="search_type",
             display_name="Search Type",
-            info="Search type to use",
+            info="搜索 type to use",
             options=[
                 "Similarity",
                 "Similarity with score threshold",
@@ -165,7 +165,7 @@ class AstraDBGraphVectorStoreComponent(LCVectorStoreComponent):
         DictInput(
             name="search_filter",
             display_name="Search Metadata Filter",
-            info="Optional dictionary of filters to apply to the search query.",
+            info="可选 dictionary of filters to apply to the search query.",
             advanced=True,
             is_list=True,
         ),

@@ -9,7 +9,9 @@ from langflow.io import DropdownInput, IntInput, SecretStrInput, SliderInput
 
 class AzureChatOpenAIComponent(LCModelComponent):
     display_name: str = "Azure OpenAI"
+    display_name_zh: str = "Azure OpenAI"
     description: str = "Generate text using Azure OpenAI LLMs."
+    description_zh: str = "使用Azure OpenAI大语言模型生成文本。"
     documentation: str = "https://python.langchain.com/docs/integrations/llms/azure_openai"
     beta = False
     icon = "Azure"
@@ -39,7 +41,7 @@ class AzureChatOpenAIComponent(LCModelComponent):
             required=True,
         ),
         MessageTextInput(name="azure_deployment", display_name="Deployment Name", required=True),
-        SecretStrInput(name="api_key", display_name="API Key", required=True),
+        SecretStrInput(name="api_key", display_name="API密钥", required=True),
         DropdownInput(
             name="api_version",
             display_name="API Version",
@@ -55,7 +57,7 @@ class AzureChatOpenAIComponent(LCModelComponent):
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.7,
             range_spec=RangeSpec(min=0, max=2, step=0.01),
             info="Controls randomness. Lower values are more deterministic, higher values are more creative.",
@@ -63,7 +65,7 @@ class AzureChatOpenAIComponent(LCModelComponent):
         ),
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
         ),

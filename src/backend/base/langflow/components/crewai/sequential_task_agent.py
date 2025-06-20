@@ -7,13 +7,15 @@ from langflow.io import BoolInput, DictInput, HandleInput, MultilineInput, Outpu
 
 class SequentialTaskAgentComponent(Component):
     display_name = "Sequential Task Agent"
+    display_name_zh = "顺序任务代理"
     description = "Creates a CrewAI Task and its associated Agent."
+    description_zh = "创建一个CrewAI任务及其关联的代理。"
     documentation = "https://docs.crewai.com/how-to/LLM-Connections/"
     icon = "CrewAI"
 
     inputs = [
         # Agent inputs
-        MultilineInput(name="role", display_name="Role", info="The role of the agent."),
+        MultilineInput(name="role", display_name="角色", info="The role of the agent."),
         MultilineInput(name="goal", display_name="Goal", info="The objective of the agent."),
         MultilineInput(
             name="backstory",
@@ -22,7 +24,7 @@ class SequentialTaskAgentComponent(Component):
         ),
         HandleInput(
             name="tools",
-            display_name="Tools",
+            display_name="工具",
             input_types=["Tool"],
             is_list=True,
             info="Tools at agent's disposal",
@@ -31,12 +33,12 @@ class SequentialTaskAgentComponent(Component):
         HandleInput(
             name="llm",
             display_name="Language Model",
-            info="Language model that will run the agent.",
+            info="语言 model that will run the agent.",
             input_types=["LanguageModel"],
         ),
         BoolInput(
             name="memory",
-            display_name="Memory",
+            display_name="记忆",
             info="Whether the agent should have memory or not",
             advanced=True,
             value=True,

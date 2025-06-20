@@ -22,7 +22,7 @@ class GitExtractorComponent(Component):
         MessageTextInput(
             name="repository_url",
             display_name="Repository URL",
-            info="URL of the Git repository (e.g., https://github.com/username/repo)",
+            info="网址 of the Git repository (e.g., https://github.com/username/repo)",
             value="",
         ),
     ]

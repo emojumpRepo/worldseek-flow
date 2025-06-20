@@ -39,17 +39,17 @@ class SerpComponent(Component):
         SecretStrInput(name="serpapi_api_key", display_name="SerpAPI API Key", required=True),
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
             tool_mode=True,
         ),
-        DictInput(name="search_params", display_name="Parameters", advanced=True, is_list=True),
+        DictInput(name="search_params", display_name="参数", advanced=True, is_list=True),
         IntInput(name="max_results", display_name="Max Results", value=5, advanced=True),
         IntInput(name="max_snippet_length", display_name="Max Snippet Length", value=100, advanced=True),
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="fetch_content"),
-        Output(display_name="Text", name="text", method="fetch_content_text"),
+        Output(display_name="数据", name="data", method="fetch_content"),
+        Output(display_name="文本", name="text", method="fetch_content_text"),
     ]
 
     def _build_wrapper(self, params: dict[str, Any] | None = None) -> SerpAPIWrapper:

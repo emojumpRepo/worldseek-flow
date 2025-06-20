@@ -13,11 +13,11 @@ import { HeaderRender } from "./components/header-render";
 // Add this interface for the modal props
 interface ModalConfigProps {
   title?: string;
-  description?: React.ReactNode;
+  description?: string | React.ReactElement;
   inputLabel?: React.ReactNode;
   inputPlaceholder?: string;
   buttonText?: string;
-  generatedKeyMessage?: React.ReactNode;
+  generatedKeyMessage?: string | React.ReactElement;
   showIcon?: boolean;
 }
 
@@ -58,8 +58,43 @@ export default function SecretKeyModal({
   }
 
   const handleCopyClick = async () => {
-    if (apiKeyValue) {
-      await navigator.clipboard.writeText(apiKeyValue);
+    if (!apiKeyValue) return;
+
+    try {
+      // 检查 Clipboard API 是否可用
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(apiKeyValue);
+      } else {
+        // 回退方案：使用传统的复制方法适用于HTTP环境
+        const textArea = document.createElement('textarea');
+        textArea.value = apiKeyValue;
+        
+        // 设置样式使其不可见但仍然可以被选中
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        textArea.style.opacity = '0';
+        textArea.style.pointerEvents = 'none';
+        textArea.style.zIndex = '-1';
+        
+        document.body.appendChild(textArea);
+        
+        // 确保元素获得焦点并选中文本
+        textArea.focus();
+        textArea.select();
+        textArea.setSelectionRange(0, 99999); // 移动端兼容
+        
+        // 执行复制命令
+        const successful = document.execCommand('copy');
+        
+        // 清理DOM
+        document.body.removeChild(textArea);
+        
+        if (!successful) {
+          throw new Error('复制失败');
+        }
+      }
+      
       inputRef?.current?.focus();
       inputRef?.current?.select();
       setSuccessData({
@@ -70,6 +105,12 @@ export default function SecretKeyModal({
       setTimeout(() => {
         setTextCopied(true);
       }, 3000);
+    } catch (error) {
+      console.error('复制到剪贴板失败:', error);
+      // 可以添加错误提示
+      setSuccessData({
+        title: "复制失败，请手动复制",
+      });
     }
   };
 
@@ -120,11 +161,13 @@ export default function SecretKeyModal({
       <BaseModal.Header
         clampDescription={3}
         description={
-          renderKey ? (
-            <>{modalConfigProps?.generatedKeyMessage}</>
-          ) : (
-            <>{modalConfigProps?.description}</>
-          )
+          renderKey 
+            ? (typeof modalConfigProps?.generatedKeyMessage === 'string' 
+                ? modalConfigProps.generatedKeyMessage 
+                : modalConfigProps?.generatedKeyMessage || null)
+            : (typeof modalConfigProps?.description === 'string' 
+                ? modalConfigProps.description 
+                : modalConfigProps?.description || null)
         }
       >
         <HeaderRender

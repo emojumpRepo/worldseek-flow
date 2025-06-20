@@ -47,22 +47,24 @@ def convert_to_dataframe(v: DataFrame | Data | Message | dict) -> DataFrame:
 
 class TypeConverterComponent(Component):
     display_name = "Type Convert"
+    display_name_zh = "类型转换"
     description = "Convert between different types (Message, Data, DataFrame)"
+    description_zh = "将不同类型（Message、Data、DataFrame）之间进行转换。"
     icon = "repeat"
 
     inputs = [
         HandleInput(
             name="input_data",
-            display_name="Input",
+            display_name="输入",
             input_types=["Message", "Data", "DataFrame"],
-            info="Accept Message, Data or DataFrame as input",
+            info="接受Message、Data或DataFrame三种类型作为输入",
             required=True,
         ),
         TabInput(
             name="output_type",
-            display_name="Output Type",
+            display_name="输出类型",
             options=["Message", "Data", "DataFrame"],
-            info="Select the desired output data type",
+            info="选择所需的输出数据类型",
             real_time_refresh=True,
             value="Message",
         ),
@@ -70,7 +72,7 @@ class TypeConverterComponent(Component):
 
     outputs = [
         Output(
-            display_name="Message Output",
+            display_name="Message输出",
             name="message_output",
             method="convert_to_message",
         )

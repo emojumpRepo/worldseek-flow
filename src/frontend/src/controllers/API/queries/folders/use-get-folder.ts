@@ -34,6 +34,11 @@ export const useGetFolderQuery: useQueryFunctionType<
   const getFolderFn = async (
     params: IGetFolder,
   ): Promise<PaginatedFolderType | undefined> => {
+    // 检查 params.id 是否为有效值（不为空字符串、null 或 undefined）
+    if (!params.id || params.id.trim() === "") {
+      return;
+    }
+
     if (params.id) {
       if (latestIdRef.current !== params.id) {
         params.page = 1;

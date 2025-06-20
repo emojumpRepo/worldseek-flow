@@ -21,18 +21,20 @@ from langflow.schema.dotdict import dotdict
 
 class GoogleGenerativeAIComponent(LCModelComponent):
     display_name = "Google Generative AI"
+    display_name_zh = "Google生成式AI"
     description = "Generate text using Google Generative AI."
+    description_zh = "使用Google生成式AI生成文本。"
     icon = "GoogleGenerativeAI"
     name = "GoogleGenerativeAIModel"
 
     inputs = [
         *LCModelComponent._base_inputs,
         IntInput(
-            name="max_output_tokens", display_name="Max Output Tokens", info="The maximum number of tokens to generate."
+            name="max_output_tokens", display_name="Max Output Tokens", info="要生成的最大令牌数。"
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model",
+            display_name="模型",
             info="The name of the model to use.",
             options=GOOGLE_GENERATIVE_AI_MODELS,
             value="gemini-1.5-pro",
@@ -42,7 +44,7 @@ class GoogleGenerativeAIComponent(LCModelComponent):
         SecretStrInput(
             name="api_key",
             display_name="Google API Key",
-            info="The Google API Key to use for the Google Generative AI.",
+            info="The Google API密钥 to use for the Google Generative AI.",
             required=True,
             real_time_refresh=True,
         ),
@@ -54,7 +56,7 @@ class GoogleGenerativeAIComponent(LCModelComponent):
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             range_spec=RangeSpec(min=0, max=1, step=0.01),
             info="Controls randomness. Lower values are more deterministic, higher values are more creative.",

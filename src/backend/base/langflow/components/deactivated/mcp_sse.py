@@ -36,7 +36,7 @@ class MCPSse(Component):
     ]
 
     outputs = [
-        Output(display_name="Tools", name="tools", method="build_output"),
+        Output(display_name="工具", name="tools", method="build_output"),
     ]
 
     async def build_output(self) -> list[Tool]:

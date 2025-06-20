@@ -8,6 +8,7 @@ from langflow.io import DictInput, DropdownInput
 class AmazonBedrockComponent(LCModelComponent):
     display_name: str = "Amazon Bedrock"
     description: str = "Generate text using Amazon Bedrock LLMs."
+    description_zh: str = "使用Amazon Bedrock模型生成文本。"
     icon = "Amazon"
     name = "AmazonBedrockModel"
 
@@ -72,7 +73,7 @@ class AmazonBedrockComponent(LCModelComponent):
             name="endpoint_url",
             display_name="Endpoint URL",
             advanced=True,
-            info="The URL of the Bedrock endpoint to use.",
+            info="The 网址 of the Bedrock endpoint to use.",
         ),
     ]
 

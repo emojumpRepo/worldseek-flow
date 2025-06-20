@@ -15,7 +15,7 @@ class MistralAIEmbeddingsComponent(LCModelComponent):
     inputs = [
         DropdownInput(
             name="model",
-            display_name="Model",
+            display_name="模型",
             advanced=False,
             options=["mistral-embed"],
             value="mistral-embed",

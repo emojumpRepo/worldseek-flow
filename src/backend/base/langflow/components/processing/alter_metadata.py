@@ -7,7 +7,9 @@ from langflow.schema.dataframe import DataFrame
 
 class AlterMetadataComponent(Component):
     display_name = "Alter Metadata"
+    display_name_zh = "修改元数据"
     description = "Adds/Removes Metadata Dictionary on inputs"
+    description_zh = "在输入上添加/删除元数据字典。"
     icon = "merge"
     name = "AlterMetadata"
     legacy = True
@@ -15,29 +17,29 @@ class AlterMetadataComponent(Component):
     inputs = [
         HandleInput(
             name="input_value",
-            display_name="Input",
-            info="Object(s) to which Metadata should be added",
+            display_name="输入",
+            info="要添加元数据的对象",
             required=False,
             input_types=["Message", "Data"],
             is_list=True,
         ),
         StrInput(
             name="text_in",
-            display_name="User Text",
-            info="Text input; value will be in 'text' attribute of Data object. Empty text entries are ignored.",
+            display_name="用户文本",
+            info="文本输入；值将位于Data对象的'text'属性中。空文本条目将被忽略。",
             required=False,
         ),
         NestedDictInput(
             name="metadata",
-            display_name="Metadata",
-            info="Metadata to add to each object",
+            display_name="元数据",
+            info="要添加到每个对象的元数据",
             input_types=["Data"],
             required=True,
         ),
         MessageTextInput(
             name="remove_fields",
-            display_name="Fields to Remove",
-            info="Metadata Fields to Remove",
+            display_name="要删除的字段",
+            info="要删除的元数据字段",
             required=False,
             is_list=True,
         ),
@@ -46,14 +48,14 @@ class AlterMetadataComponent(Component):
     outputs = [
         Output(
             name="data",
-            display_name="Data",
-            info="List of Input objects each with added Metadata",
+            display_name="数据",
+            info="输入对象列表，每个对象都添加了元数据",
             method="process_output",
         ),
         Output(
             display_name="DataFrame",
             name="dataframe",
-            info="Data objects as a DataFrame, with metadata as columns",
+            info="数据对象作为DataFrame，元数据作为列",
             method="as_dataframe",
         ),
     ]

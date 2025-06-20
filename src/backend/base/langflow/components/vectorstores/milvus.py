@@ -31,7 +31,7 @@ class MilvusVectorStoreComponent(LCVectorStoreComponent):
         ),
         SecretStrInput(
             name="password",
-            display_name="Token",
+            display_name="令牌",
             value="",
             info="Ignore this field if no token is required to make connection.",
         ),
@@ -49,7 +49,7 @@ class MilvusVectorStoreComponent(LCVectorStoreComponent):
         DictInput(name="index_params", display_name="Index Parameters", advanced=True),
         DictInput(name="search_params", display_name="Search Parameters", advanced=True),
         BoolInput(name="drop_old", display_name="Drop Old Collection", value=False, advanced=True),
-        FloatInput(name="timeout", display_name="Timeout", advanced=True),
+        FloatInput(name="timeout", display_name="超时", advanced=True),
         *LCVectorStoreComponent.inputs,
         HandleInput(name="embedding", display_name="Embedding", input_types=["Embeddings"]),
         IntInput(

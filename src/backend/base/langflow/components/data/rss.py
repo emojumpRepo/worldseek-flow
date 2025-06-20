@@ -10,28 +10,30 @@ from langflow.schema import DataFrame
 
 class RSSReaderComponent(Component):
     display_name = "RSS Reader"
+    display_name_zh = "RSS阅读器"
     description = "Fetches and parses an RSS feed."
+    description_zh = "获取并解析RSS源。"
     icon = "rss"
     name = "RSSReaderSimple"
 
     inputs = [
         MessageTextInput(
             name="rss_url",
-            display_name="RSS Feed URL",
-            info="URL of the RSS feed to parse.",
+            display_name="RSS源网址",
+            info="要解析的RSS源的网址。",
             tool_mode=True,
             required=True,
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
-            info="Timeout for the RSS feed request.",
+            display_name="超时",
+            info="RSS请求的超时时间。",
             value=5,
             advanced=True,
         ),
     ]
 
-    outputs = [Output(name="articles", display_name="Articles", method="read_rss")]
+    outputs = [Output(name="articles", display_name="文章", method="read_rss")]
 
     def read_rss(self) -> DataFrame:
         try:

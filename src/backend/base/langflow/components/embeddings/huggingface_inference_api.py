@@ -22,20 +22,20 @@ class HuggingFaceInferenceAPIEmbeddingsComponent(LCEmbeddingsModel):
     inputs = [
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             advanced=False,
-            info="Required for non-local inference endpoints. Local inference does not require an API Key.",
+            info="必需 for non-local inference endpoints. Local inference does not require an API密钥.",
         ),
         MessageTextInput(
             name="inference_endpoint",
             display_name="Inference Endpoint",
             required=True,
             value="https://api-inference.huggingface.co/models/",
-            info="Custom inference endpoint URL.",
+            info="Custom inference endpoint 网址.",
         ),
         MessageTextInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             value="BAAI/bge-large-en-v1.5",
             info="The name of the model to use for text embeddings.",
             required=True,

@@ -17,7 +17,7 @@ class WikidataComponent(Component):
     inputs = [
         MultilineInput(
             name="query",
-            display_name="Query",
+            display_name="查询",
             info="The text query for similarity search on Wikidata.",
             required=True,
             tool_mode=True,

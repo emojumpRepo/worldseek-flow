@@ -37,7 +37,7 @@ class MongoVectorStoreComponent(LCVectorStoreComponent):
             name="index_name",
             display_name="Index Name",
             required=True,
-            info="The name of Atlas Search index, it should be a Vector Search.",
+            info="The name of Atlas 搜索 index, it should be a Vector 搜索.",
         ),
         *LCVectorStoreComponent.inputs,
         DropdownInput(
@@ -70,7 +70,7 @@ class MongoVectorStoreComponent(LCVectorStoreComponent):
         IntInput(
             name="number_dimensions",
             display_name="Number of Dimensions",
-            info="Embedding Context Length.",
+            info="Embedding Context 长度.",
             value=1536,
             advanced=True,
             required=True,

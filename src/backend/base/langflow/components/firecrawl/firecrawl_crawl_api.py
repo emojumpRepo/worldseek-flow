@@ -15,27 +15,27 @@ class FirecrawlCrawlApi(Component):
     inputs = [
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             required=True,
             password=True,
             info="The API key to use Firecrawl API.",
         ),
         MultilineInput(
             name="url",
-            display_name="URL",
+            display_name="网址",
             required=True,
-            info="The URL to scrape.",
+            info="The 网址 to scrape.",
             tool_mode=True,
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
-            info="Timeout in milliseconds for the request.",
+            display_name="超时",
+            info="超时 in milliseconds for the request.",
         ),
         StrInput(
             name="idempotency_key",
             display_name="Idempotency Key",
-            info="Optional idempotency key to ensure unique requests.",
+            info="可选 idempotency key to ensure unique requests.",
         ),
         DataInput(
             name="crawlerOptions",
@@ -50,7 +50,7 @@ class FirecrawlCrawlApi(Component):
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="crawl"),
+        Output(display_name="数据", name="data", method="crawl"),
     ]
     idempotency_key: str | None = None
 

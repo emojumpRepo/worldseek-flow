@@ -9,20 +9,21 @@ from langflow.inputs.inputs import DropdownInput, FloatInput, IntInput, SecretSt
 class MaritalkModelComponent(LCModelComponent):
     display_name = "Maritalk"
     description = "Generates text using Maritalk LLMs."
+    description_zh = "使用Maritalk LLMs生成文本。"
     icon = "Maritalk"
     name = "Maritalk"
     inputs = [
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             value=512,
             info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             options=["sabia-2-small", "sabia-2-medium"],
             value=["sabia-2-small"],
@@ -30,10 +31,10 @@ class MaritalkModelComponent(LCModelComponent):
         SecretStrInput(
             name="api_key",
             display_name="Maritalk API Key",
-            info="The Maritalk API Key to use for the OpenAI model.",
+            info="The Maritalk API密钥 to use for the OpenAI model.",
             advanced=False,
         ),
-        FloatInput(name="temperature", display_name="Temperature", value=0.1, range_spec=RangeSpec(min=0, max=1)),
+        FloatInput(name="temperature", display_name="温度", value=0.1, range_spec=RangeSpec(min=0, max=1)),
     ]
 
     def build_model(self) -> LanguageModel:  # type: ignore[type-var]

@@ -17,7 +17,9 @@ DEFAULT_MODEL = "meta-llama/Llama-3.3-70B-Instruct"
 
 class HuggingFaceEndpointsComponent(LCModelComponent):
     display_name: str = "HuggingFace"
+    display_name_zh: str = "HuggingFace"
     description: str = "Generate text using Hugging Face Inference APIs."
+    description_zh: str = "使用HuggingFace推理API生成文本。"
     icon = "HuggingFace"
     name = "HuggingFaceModel"
 
@@ -77,7 +79,7 @@ class HuggingFaceEndpointsComponent(LCModelComponent):
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.8,
             range_spec=RangeSpec(min=0, max=2, step=0.01),
             info="The value used to module the logits distribution",
@@ -93,12 +95,12 @@ class HuggingFaceEndpointsComponent(LCModelComponent):
             name="inference_endpoint",
             display_name="Inference Endpoint",
             value="https://api-inference.huggingface.co/models/",
-            info="Custom inference endpoint URL.",
+            info="Custom inference endpoint 网址.",
             required=True,
         ),
         DropdownInput(
             name="task",
-            display_name="Task",
+            display_name="任务",
             options=["text2text-generation", "text-generation", "summarization", "translation"],
             value="text-generation",
             advanced=True,

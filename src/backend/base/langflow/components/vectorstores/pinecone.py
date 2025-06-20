@@ -14,7 +14,7 @@ class PineconeVectorStoreComponent(LCVectorStoreComponent):
     icon = "Pinecone"
     inputs = [
         StrInput(name="index_name", display_name="Index Name", required=True),
-        StrInput(name="namespace", display_name="Namespace", info="Namespace for the index."),
+        StrInput(name="namespace", display_name="Namespace", info="名称space for the index."),
         DropdownInput(
             name="distance_strategy",
             display_name="Distance Strategy",
@@ -26,7 +26,7 @@ class PineconeVectorStoreComponent(LCVectorStoreComponent):
         StrInput(
             name="text_key",
             display_name="Text Key",
-            info="Key in the record to use as text.",
+            info="键 in the record to use as text.",
             value="text",
             advanced=True,
         ),

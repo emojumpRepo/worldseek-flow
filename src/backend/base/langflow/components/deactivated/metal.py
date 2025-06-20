@@ -15,7 +15,7 @@ class MetalRetrieverComponent(CustomComponent):
     inputs = [
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             required=True,
         ),
         SecretStrInput(
@@ -30,7 +30,7 @@ class MetalRetrieverComponent(CustomComponent):
         ),
         DictInput(
             name="params",
-            display_name="Parameters",
+            display_name="参数",
             required=False,
         ),
     ]

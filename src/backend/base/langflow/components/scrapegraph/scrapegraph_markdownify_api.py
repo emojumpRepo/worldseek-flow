@@ -27,14 +27,14 @@ class ScrapeGraphMarkdownifyApi(Component):
         ),
         MessageTextInput(
             name="url",
-            display_name="URL",
+            display_name="网址",
             tool_mode=True,
-            info="The URL to markdownify.",
+            info="The 网址 to markdownify.",
         ),
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="scrape"),
+        Output(display_name="数据", name="data", method="scrape"),
     ]
 
     def scrape(self) -> list[Data]:

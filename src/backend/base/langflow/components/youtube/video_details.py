@@ -22,14 +22,14 @@ class YouTubeVideoDetailsComponent(Component):
         MessageTextInput(
             name="video_url",
             display_name="Video URL",
-            info="The URL of the YouTube video.",
+            info="The 网址 of the YouTube video.",
             tool_mode=True,
             required=True,
         ),
         SecretStrInput(
             name="api_key",
             display_name="YouTube API Key",
-            info="Your YouTube Data API key.",
+            info="Your YouTube 数据 API key.",
             required=True,
         ),
         BoolInput(
@@ -56,7 +56,7 @@ class YouTubeVideoDetailsComponent(Component):
             name="include_thumbnails",
             display_name="Include Thumbnails",
             value=True,
-            info="Include video thumbnail URLs in different resolutions.",
+            info="Include video thumbnail 网址s in different resolutions.",
             advanced=True,
         ),
     ]

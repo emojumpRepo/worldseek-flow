@@ -6,9 +6,11 @@ from langflow.io import HandleInput
 
 class HierarchicalCrewComponent(BaseCrewComponent):
     display_name: str = "Hierarchical Crew"
+    display_name_zh: str = "分层 Crew"
     description: str = (
         "Represents a group of agents, defining how they should collaborate and the tasks they should perform."
     )
+    description_zh: str = "表示一组代理，定义它们如何协作以及它们应该执行的任务。"
     documentation: str = "https://docs.crewai.com/how-to/Hierarchical/"
     icon = "CrewAI"
 

@@ -37,17 +37,19 @@ class CleanlabRemediator(Component):
     """
 
     display_name = "Cleanlab Remediator"
+    display_name_zh = "Cleanlab 修复器"
     description = (
         "Remediates an untrustworthy response based on trust score from the Cleanlab Evaluator, "
         "score threshold, and message handling settings."
     )
+    description_zh = "根据Cleanlab评估器的信任分数、阈值和消息处理设置，修复不可信的响应。"
     icon = "Cleanlab"
     name = "CleanlabRemediator"
 
     inputs = [
         MessageTextInput(
             name="response",
-            display_name="Response",
+            display_name="响应",
             info="The response to the user's query.",
             required=True,
         ),
@@ -86,7 +88,7 @@ class CleanlabRemediator(Component):
         PromptInput(
             name="untrustworthy_warning_text",
             display_name="Warning for Untrustworthy Response",
-            info="Warning to append to the response if Show Untrustworthy Response is enabled and trust score is "
+            info="Warning to append to the response if Show Untrustworthy 响应 is enabled and trust score is "
             "below the threshold.",
             value="⚠️ WARNING: The following response is potentially untrustworthy.",
         ),

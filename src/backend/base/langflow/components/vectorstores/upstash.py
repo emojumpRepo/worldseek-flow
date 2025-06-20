@@ -22,7 +22,7 @@ class UpstashVectorStoreComponent(LCVectorStoreComponent):
         StrInput(
             name="index_url",
             display_name="Index URL",
-            info="The URL of the Upstash index.",
+            info="The 网址 of the Upstash index.",
             required=True,
         ),
         SecretStrInput(
@@ -47,7 +47,7 @@ class UpstashVectorStoreComponent(LCVectorStoreComponent):
         MultilineInput(
             name="metadata_filter",
             display_name="Metadata Filter",
-            info="Filters documents by metadata. Look at the documentation for more information.",
+            info="过滤器s documents by metadata. Look at the documentation for more information.",
         ),
         HandleInput(
             name="embedding",

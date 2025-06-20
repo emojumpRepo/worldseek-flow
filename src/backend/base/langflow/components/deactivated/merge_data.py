@@ -23,7 +23,7 @@ class MergeDataComponent(Component):
             name="data_inputs",
             display_name="Data Inputs",
             is_list=True,
-            info="A list of Data inputs objects to be merged.",
+            info="A list of 数据 inputs objects to be merged.",
         ),
     ]
 

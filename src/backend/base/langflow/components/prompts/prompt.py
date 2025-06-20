@@ -8,24 +8,26 @@ from langflow.template.utils import update_template_values
 
 class PromptComponent(Component):
     display_name: str = "Prompt"
+    display_name_zh: str = "提示词"
     description: str = "Create a prompt template with dynamic variables."
+    description_zh: str = "创建带有动态变量的提示词模板。"
     icon = "braces"
     trace_type = "prompt"
     name = "Prompt"
 
     inputs = [
-        PromptInput(name="template", display_name="Template"),
+        PromptInput(name="template", display_name="模板"),
         MessageTextInput(
             name="tool_placeholder",
-            display_name="Tool Placeholder",
+            display_name="工具模式占位符",
             tool_mode=True,
             advanced=True,
-            info="A placeholder input for tool mode.",
+            info="工具模式的占位符输入。",
         ),
     ]
 
     outputs = [
-        Output(display_name="Prompt", name="prompt", method="build_prompt"),
+        Output(display_name="提示词", name="prompt", method="build_prompt"),
     ]
 
     async def build_prompt(self) -> Message:

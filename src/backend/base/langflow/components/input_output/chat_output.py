@@ -21,7 +21,9 @@ from langflow.utils.constants import (
 
 class ChatOutput(ChatComponent):
     display_name = "Chat Output"
+    display_name_zh = "聊天输出"
     description = "Display a chat message in the Playground."
+    description_zh = "在游乐场中显示聊天消息。"
     icon = "MessagesSquare"
     name = "ChatOutput"
     minimized = True
@@ -29,75 +31,75 @@ class ChatOutput(ChatComponent):
     inputs = [
         HandleInput(
             name="input_value",
-            display_name="Inputs",
-            info="Message to be passed as output.",
+            display_name="输入",
+            info="要作为输出传递的消息。",
             input_types=["Data", "DataFrame", "Message"],
             required=True,
         ),
         BoolInput(
             name="should_store_message",
-            display_name="Store Messages",
-            info="Store the message in the history.",
+            display_name="存储消息",
+            info="将消息存储在历史记录中。",
             value=True,
             advanced=True,
         ),
         DropdownInput(
             name="sender",
-            display_name="Sender Type",
+            display_name="发送者类型",
             options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],
             value=MESSAGE_SENDER_AI,
             advanced=True,
-            info="Type of sender.",
+            info="发送者类型。",
         ),
         MessageTextInput(
             name="sender_name",
-            display_name="Sender Name",
-            info="Name of the sender.",
+            display_name="发送者名称",
+            info="发送者名称。",
             value=MESSAGE_SENDER_NAME_AI,
             advanced=True,
         ),
         MessageTextInput(
             name="session_id",
-            display_name="Session ID",
-            info="The session ID of the chat. If empty, the current session ID parameter will be used.",
+            display_name="会话ID",
+            info="聊天的会话ID。如果为空，将使用当前会话ID参数。",
             advanced=True,
         ),
         MessageTextInput(
             name="data_template",
-            display_name="Data Template",
+            display_name="数据模板",
             value="{text}",
             advanced=True,
-            info="Template to convert Data to Text. If left empty, it will be dynamically set to the Data's text key.",
+            info="将数据转换为文本的模板。如果留空，将动态设置为数据的文本键。",
         ),
         MessageTextInput(
             name="background_color",
-            display_name="Background Color",
-            info="The background color of the icon.",
+            display_name="背景颜色",
+            info="图标的背景颜色。",
             advanced=True,
         ),
         MessageTextInput(
             name="chat_icon",
-            display_name="Icon",
-            info="The icon of the message.",
+            display_name="图标",
+            info="消息的图标。",
             advanced=True,
         ),
         MessageTextInput(
             name="text_color",
-            display_name="Text Color",
-            info="The text color of the name",
+            display_name="文本颜色",
+            info="名称的文本颜色。",
             advanced=True,
         ),
         BoolInput(
             name="clean_data",
-            display_name="Basic Clean Data",
+            display_name="基础数据清理",
             value=True,
-            info="Whether to clean the data",
+            info="是否清理数据。",
             advanced=True,
         ),
     ]
     outputs = [
         Output(
-            display_name="Output Message",
+            display_name="输出消息",
             name="message",
             method="message_response",
         ),

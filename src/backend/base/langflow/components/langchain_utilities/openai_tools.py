@@ -31,7 +31,7 @@ class OpenAIToolsAgentComponent(LCToolsAgentComponent):
             value="You are a helpful assistant",
         ),
         MultilineInput(
-            name="user_prompt", display_name="Prompt", info="This prompt must contain 'input' key.", value="{input}"
+            name="user_prompt", display_name="提示词", info="This prompt must contain 'input' key.", value="{input}"
         ),
         DataInput(name="chat_history", display_name="Chat History", is_list=True, advanced=True),
     ]

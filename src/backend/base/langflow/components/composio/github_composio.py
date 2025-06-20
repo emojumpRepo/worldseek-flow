@@ -16,7 +16,9 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
     """GitHub API component for interacting with GitHub services."""
 
     display_name: str = "GitHub"
+    display_name_zh: str = "GitHub"
     description: str = "GitHub API"
+    description_zh: str = "GitHub API"
     icon = "Github"
     documentation: str = "https://docs.composio.dev"
     app_name = "github"
@@ -157,7 +159,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GITHUB_CREATE_AN_ISSUE_body",
-            display_name="Body",
+            display_name="请求体",
             info="The contents of the issue.",
             show=False,
         ),
@@ -178,14 +180,14 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="GITHUB_CREATE_AN_ISSUE_labels",
             display_name="Labels",
-            info="Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._ ",  # noqa: E501
+            info="标签s to associate with this issue. _NOTE: Only users with push access can set labels for new issues. 标签s are silently dropped otherwise._ ",  # noqa: E501
             show=False,
             advanced=True,
         ),
         MessageTextInput(
             name="GITHUB_CREATE_AN_ISSUE_assignees",
             display_name="Assignees",
-            info="Logins for Users to assign to this issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ ",  # noqa: E501
+            info="Logins for 用户s to assign to this issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ ",  # noqa: E501
             show=False,
             advanced=True,
         ),
@@ -205,7 +207,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GITHUB_LIST_PULL_REQUESTS_state",
-            display_name="State",
+            display_name="状态",
             info="Either `open`, `closed`, or `all` to filter by state.",
             show=False,
             value="open",
@@ -214,20 +216,20 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="GITHUB_LIST_PULL_REQUESTS_head",
             display_name="Head",
-            info="Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`. ",  # noqa: E501
+            info="过滤器 pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`. ",  # noqa: E501
             show=False,
             advanced=True,
         ),
         MessageTextInput(
             name="GITHUB_LIST_PULL_REQUESTS_base",
             display_name="Base",
-            info="Filter pulls by base branch name. Example: `gh-pages`.",
+            info="过滤器 pulls by base branch name. Example: `gh-pages`.",
             show=False,
             advanced=True,
         ),
         MessageTextInput(
             name="GITHUB_LIST_PULL_REQUESTS_sort",
-            display_name="Sort",
+            display_name="排序",
             info="What to sort results by. `popularity` will sort by the number of comments. `long-running` will sort by date created and will limit the results to pull requests that have been open for more than a month and have had activity within the past month. ",  # noqa: E501
             show=False,
             value="created",
@@ -235,7 +237,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GITHUB_LIST_PULL_REQUESTS_direction",
-            display_name="Direction",
+            display_name="方向",
             info="The direction of the sort. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`. ",  # noqa: E501
             show=False,
             advanced=True,
@@ -250,7 +252,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         IntInput(
             name="GITHUB_LIST_PULL_REQUESTS_page",
-            display_name="Page",
+            display_name="页面",
             info="The page number of the results to fetch",
             show=False,
             value=1,
@@ -273,7 +275,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="GITHUB_CREATE_A_PULL_REQUEST_title",
             display_name="Title",
-            info="The title of the new pull request. Required unless `issue` is specified.",
+            info="The title of the new pull request. 必需 unless `issue` is specified.",
             show=False,
         ),
         MessageTextInput(
@@ -299,7 +301,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GITHUB_CREATE_A_PULL_REQUEST_body",
-            display_name="Body",
+            display_name="请求体",
             info="The contents of the pull request.",
             show=False,
         ),
@@ -320,7 +322,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         IntInput(
             name="GITHUB_CREATE_A_PULL_REQUEST_issue",
             display_name="Issue",
-            info="An issue in the repository to convert to a pull request. The issue title, body, and comments will become the title, body, and comments on the new pull request. Required unless `title` is specified. ",  # noqa: E501
+            info="An issue in the repository to convert to a pull request. The issue title, body, and comments will become the title, body, and comments on the new pull request. 必需 unless `title` is specified. ",  # noqa: E501
             show=False,
             advanced=True,
         ),
@@ -347,7 +349,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GITHUB_LIST_REPOSITORY_ISSUES_state",
-            display_name="State",
+            display_name="状态",
             info="Indicates the state of the issues to return.",
             show=False,
             value="open",
@@ -383,7 +385,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GITHUB_LIST_REPOSITORY_ISSUES_sort",
-            display_name="Sort",
+            display_name="排序",
             info="What to sort results by",
             show=False,
             value="created",
@@ -391,7 +393,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GITHUB_LIST_REPOSITORY_ISSUES_direction",
-            display_name="Direction",
+            display_name="方向",
             info="The direction to sort the results by",
             show=False,
             value="desc",
@@ -414,7 +416,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         IntInput(
             name="GITHUB_LIST_REPOSITORY_ISSUES_page",
-            display_name="Page",
+            display_name="页面",
             info="The page number of the results to fetch",
             show=False,
             value=1,
@@ -450,7 +452,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         IntInput(
             name="GITHUB_LIST_BRANCHES_page",
-            display_name="Page",
+            display_name="页面",
             info="The page number of the results to fetch",
             show=False,
             value=1,
@@ -514,7 +516,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GITHUB_LIST_COMMITS_path",
-            display_name="Path",
+            display_name="路径",
             info="Only commits containing this file path will be returned.",
             show=False,
             advanced=True,
@@ -557,7 +559,7 @@ class ComposioGitHubAPIComponent(ComposioBaseComponent):
         ),
         IntInput(
             name="GITHUB_LIST_COMMITS_page",
-            display_name="Page",
+            display_name="页面",
             info="The page number of the results to fetch",
             show=False,
             value=1,

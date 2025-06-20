@@ -8,7 +8,9 @@ from langflow.schema.data import Data
 
 class AssemblyAIListTranscripts(Component):
     display_name = "AssemblyAI List Transcripts"
+    display_name_zh = "AssemblyAI 列表转录"
     description = "Retrieve a list of transcripts from AssemblyAI with filtering options"
+    description_zh = "从AssemblyAI检索转录列表，并提供过滤选项。"
     documentation = "https://www.assemblyai.com/docs"
     icon = "AssemblyAI"
 
@@ -21,7 +23,7 @@ class AssemblyAIListTranscripts(Component):
         ),
         IntInput(
             name="limit",
-            display_name="Limit",
+            display_name="限制",
             info="Maximum number of transcripts to retrieve (default: 20, use 0 for all)",
             value=20,
         ),
@@ -30,7 +32,7 @@ class AssemblyAIListTranscripts(Component):
             display_name="Status Filter",
             options=["all", "queued", "processing", "completed", "error"],
             value="all",
-            info="Filter by transcript status",
+            info="过滤器 by transcript status",
             advanced=True,
         ),
         MessageTextInput(

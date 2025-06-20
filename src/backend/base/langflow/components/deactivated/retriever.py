@@ -22,14 +22,14 @@ class RetrieverToolComponent(CustomComponent):
         ),
         StrInput(
             name="name",
-            display_name="Name",
-            info="Name of the tool",
+            display_name="名称",
+            info="名称 of the tool",
             required=True,
         ),
         StrInput(
             name="description",
-            display_name="Description",
-            info="Description of the tool",
+            display_name="描述",
+            info="描述 of the tool",
             required=True,
         ),
     ]

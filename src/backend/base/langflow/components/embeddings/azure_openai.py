@@ -25,7 +25,7 @@ class AzureOpenAIEmbeddingsComponent(LCModelComponent):
     inputs = [
         DropdownInput(
             name="model",
-            display_name="Model",
+            display_name="模型",
             advanced=False,
             options=OPENAI_EMBEDDING_MODEL_NAMES,
             value=OPENAI_EMBEDDING_MODEL_NAMES[0],
@@ -50,7 +50,7 @@ class AzureOpenAIEmbeddingsComponent(LCModelComponent):
         ),
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             required=True,
         ),
         IntInput(

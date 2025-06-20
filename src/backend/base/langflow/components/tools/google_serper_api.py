@@ -36,7 +36,7 @@ class GoogleSerperAPIComponent(LCToolComponent):
         SecretStrInput(name="serper_api_key", display_name="Serper API Key", required=True),
         MultilineInput(
             name="query",
-            display_name="Query",
+            display_name="查询",
         ),
         IntInput(name="k", display_name="Number of results", value=4, required=True),
         DropdownInput(

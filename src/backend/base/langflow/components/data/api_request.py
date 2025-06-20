@@ -44,15 +44,17 @@ DEFAULT_FIELDS = ["mode"]
 
 class APIRequestComponent(Component):
     display_name = "API Request"
+    display_name_zh = "API请求"
     description = "Make HTTP requests using URL or cURL commands."
+    description_zh = "使用URL或cURL命令发出HTTP请求。"
     icon = "Globe"
     name = "APIRequest"
 
     inputs = [
         MessageTextInput(
             name="url_input",
-            display_name="URL",
-            info="Enter the URL for the request.",
+            display_name="网址",
+            info="输入请求的网址。",
             advanced=False,
             tool_mode=True,
         ),
@@ -60,8 +62,8 @@ class APIRequestComponent(Component):
             name="curl_input",
             display_name="cURL",
             info=(
-                "Paste a curl command to populate the fields. "
-                "This will fill in the dictionary fields for headers and body."
+                "粘贴一个curl命令来填充字段。 "
+                "这将填充请求头和请求体字段。"
             ),
             real_time_refresh=True,
             tool_mode=True,
@@ -70,41 +72,41 @@ class APIRequestComponent(Component):
         ),
         DropdownInput(
             name="method",
-            display_name="Method",
+            display_name="方法",
             options=["GET", "POST", "PATCH", "PUT", "DELETE"],
             value="GET",
-            info="The HTTP method to use.",
+            info="要使用的HTTP方法。",
             real_time_refresh=True,
         ),
         TabInput(
             name="mode",
-            display_name="Mode",
+            display_name="模式",
             options=["URL", "cURL"],
             value="URL",
-            info="Enable cURL mode to populate fields from a cURL command.",
+            info="启用 cURL 模式以从 cURL 命令填充字段。",
             real_time_refresh=True,
         ),
         DataInput(
             name="query_params",
-            display_name="Query Parameters",
-            info="The query parameters to append to the URL.",
+            display_name="查询参数",
+            info="要附加到网址的查询参数。",
             advanced=True,
         ),
         TableInput(
             name="body",
-            display_name="Body",
-            info="The body to send with the request as a dictionary (for POST, PATCH, PUT).",
+            display_name="请求体",
+            info="要发送的请求体作为字典（用于 POST、PATCH、PUT）。",
             table_schema=[
                 {
                     "name": "key",
-                    "display_name": "Key",
+                    "display_name": "键",
                     "type": "str",
-                    "description": "Parameter name",
+                    "description": "参数名称",
                 },
                 {
                     "name": "value",
-                    "display_name": "Value",
-                    "description": "Parameter value",
+                    "display_name": "值",
+                    "description": "参数值",
                 },
             ],
             value=[],
@@ -114,20 +116,20 @@ class APIRequestComponent(Component):
         ),
         TableInput(
             name="headers",
-            display_name="Headers",
-            info="The headers to send with the request",
+            display_name="请求头",
+            info="要发送的请求头",
             table_schema=[
                 {
                     "name": "key",
-                    "display_name": "Header",
+                    "display_name": "请求头",
                     "type": "str",
-                    "description": "Header name",
+                    "description": "请求头名称",
                 },
                 {
                     "name": "value",
-                    "display_name": "Value",
+                    "display_name": "值",
                     "type": "str",
-                    "description": "Header value",
+                    "description": "请求头值",
                 },
             ],
             value=[{"key": "User-Agent", "value": get_settings_service().settings.user_agent}],
@@ -137,39 +139,38 @@ class APIRequestComponent(Component):
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
+            display_name="超时",
             value=30,
-            info="The timeout to use for the request.",
+            info="请求的超时时间。",
             advanced=True,
         ),
         BoolInput(
             name="follow_redirects",
-            display_name="Follow Redirects",
+            display_name="重定向",
             value=True,
-            info="Whether to follow http redirects.",
+            info="是否跟随HTTP重定向。",
             advanced=True,
         ),
         BoolInput(
             name="save_to_file",
-            display_name="Save to File",
+            display_name="保存到文件",
             value=False,
-            info="Save the API response to a temporary file",
+            info="将API响应保存到临时文件",
             advanced=True,
         ),
         BoolInput(
             name="include_httpx_metadata",
-            display_name="Include HTTPx Metadata",
+            display_name="包含HTTPx元数据",
             value=False,
             info=(
-                "Include properties such as headers, status_code, response_headers, "
-                "and redirection_history in the output."
+                "包含属性，如请求头、状态码、响应头、重定向历史记录等。"
             ),
             advanced=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="API Response", name="data", method="make_api_request"),
+        Output(display_name="API响应", name="data", method="make_api_request"),
     ]
 
     def _parse_json_value(self, value: Any) -> Any:

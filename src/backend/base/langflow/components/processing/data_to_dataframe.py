@@ -6,10 +6,16 @@ from langflow.schema.dataframe import DataFrame
 
 class DataToDataFrameComponent(Component):
     display_name = "Data → DataFrame"
+    display_name_zh = "数据 → DataFrame"
     description = (
         "Converts one or multiple Data objects into a DataFrame. "
         "Each Data object corresponds to one row. Fields from `.data` become columns, "
         "and the `.text` (if present) is placed in a 'text' column."
+    )
+    description_zh = (
+        "将一个或多个数据对象转换为DataFrame。"
+        "每个数据对象对应一行。`.data`中的字段成为列，"
+        "`.text`（如果存在）被放置在'text'列中。"
     )
     icon = "table"
     name = "DataToDataFrame"
@@ -18,8 +24,8 @@ class DataToDataFrameComponent(Component):
     inputs = [
         DataInput(
             name="data_list",
-            display_name="Data or Data List",
-            info="One or multiple Data objects to transform into a DataFrame.",
+            display_name="数据或数据列表",
+            info="一个或多个数据对象转换为DataFrame。",
             is_list=True,
         ),
     ]
@@ -29,7 +35,7 @@ class DataToDataFrameComponent(Component):
             display_name="DataFrame",
             name="dataframe",
             method="build_dataframe",
-            info="A DataFrame built from each Data object's fields plus a 'text' column.",
+            info="每个数据对象的字段以及一个'text'列构建的DataFrame。",
         ),
     ]
 

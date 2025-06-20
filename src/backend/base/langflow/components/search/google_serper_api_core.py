@@ -19,7 +19,7 @@ class GoogleSerperAPICore(Component):
         ),
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
             tool_mode=True,
         ),
         IntInput(

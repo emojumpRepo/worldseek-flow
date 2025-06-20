@@ -11,45 +11,46 @@ from langflow.utils.constants import MESSAGE_SENDER_AI, MESSAGE_SENDER_NAME_AI
 
 class MessageStoreComponent(Component):
     display_name = "Message Store"
+    display_name_zh = "消息存储"
     description = "Stores a chat message or text into Langflow tables or an external memory."
+    description_zh = "将聊天消息或文本存储到Langflow表或外部内存中。"
     icon = "message-square-text"
     name = "StoreMessage"
     legacy = True
 
     inputs = [
         MessageTextInput(
-            name="message", display_name="Message", info="The chat message to be stored.", required=True, tool_mode=True
+            name="message", display_name="消息", info="要存储的聊天消息。", required=True, tool_mode=True
         ),
         HandleInput(
             name="memory",
-            display_name="External Memory",
+            display_name="外部内存",
             input_types=["Memory"],
-            info="The external memory to store the message. If empty, it will use the Langflow tables.",
+            info="要存储消息的外部内存。如果为空，将使用Langflow表。",
         ),
         MessageTextInput(
             name="sender",
-            display_name="Sender",
-            info="The sender of the message. Might be Machine or User. "
-            "If empty, the current sender parameter will be used.",
+            display_name="发送者",
+            info="消息的发送者。可能是机器或用户。如果为空，将使用当前发送者参数。",
             advanced=True,
         ),
         MessageTextInput(
             name="sender_name",
-            display_name="Sender Name",
-            info="The name of the sender. Might be AI or User. If empty, the current sender parameter will be used.",
+            display_name="发送者名称",
+            info="消息发送者的名称。可能是AI或用户。如果为空，将使用当前发送者参数。",
             advanced=True,
         ),
         MessageTextInput(
             name="session_id",
-            display_name="Session ID",
-            info="The session ID of the chat. If empty, the current session ID parameter will be used.",
+            display_name="会话ID",
+            info="聊天会话ID。如果为空，将使用当前会话ID参数。",
             value="",
             advanced=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Stored Messages", name="stored_messages", method="store_message", hidden=True),
+        Output(display_name="存储的消息", name="stored_messages", method="store_message", hidden=True),
     ]
 
     async def store_message(self) -> Message:

@@ -10,9 +10,11 @@ from langflow.schema.data import Data
 
 class JSONToDataComponent(Component):
     display_name = "Load JSON"
+    display_name_zh = "加载JSON"
     description = (
         "Convert a JSON file, JSON from a file path, or a JSON string to a Data object or a list of Data objects"
     )
+    description_zh = "将JSON文件、文件路径或有效的JSON字符串转换为Data对象或Data对象列表"
     icon = "braces"
     name = "JSONtoData"
     legacy = True
@@ -20,19 +22,19 @@ class JSONToDataComponent(Component):
     inputs = [
         FileInput(
             name="json_file",
-            display_name="JSON File",
+            display_name="JSON文件",
             file_types=["json"],
-            info="Upload a JSON file to convert to a Data object or list of Data objects",
+            info="上传JSON文件以转换为Data对象或Data对象列表",
         ),
         MessageTextInput(
             name="json_path",
-            display_name="JSON File Path",
-            info="Provide the path to the JSON file as pure text",
+            display_name="JSON文件路径",
+            info="提供JSON文件的纯文本路径",
         ),
         MultilineInput(
             name="json_string",
-            display_name="JSON String",
-            info="Enter a valid JSON string (object or array) to convert to a Data object or list of Data objects",
+            display_name="JSON字符串",
+            info="输入一个有效的JSON字符串（对象或数组）以转换为Data对象或Data对象列表",
         ),
     ]
 

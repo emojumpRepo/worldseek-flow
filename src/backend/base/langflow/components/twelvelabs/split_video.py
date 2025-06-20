@@ -24,7 +24,7 @@ class SplitVideoComponent(Component):
         HandleInput(
             name="videodata",
             display_name="Video Data",
-            info="Input video data from VideoFile component",
+            info="输入 video data from Video文件 component",
             required=True,
             input_types=["Data"],
         ),

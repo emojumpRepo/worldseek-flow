@@ -49,8 +49,8 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
                         "template": {
                             "01_new_database_name": StrInput(
                                 name="new_database_name",
-                                display_name="Name",
-                                info="Name of the new database to create in Astra DB.",
+                                display_name="名称",
+                                info="名称 of the new database to create in Astra DB.",
                                 required=True,
                             ),
                             "02_cloud_provider": DropdownInput(
@@ -93,8 +93,8 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
                         "template": {
                             "01_new_collection_name": StrInput(
                                 name="new_collection_name",
-                                display_name="Name",
-                                info="Name of the new collection to create in Astra DB.",
+                                display_name="名称",
+                                info="名称 of the new collection to create in Astra DB.",
                                 required=True,
                             ),
                             "02_embedding_generation_provider": DropdownInput(
@@ -113,7 +113,7 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
                             "03_embedding_generation_model": DropdownInput(
                                 name="embedding_generation_model",
                                 display_name="Embedding model",
-                                info="Model to use for generating embeddings.",
+                                info="模型 to use for generating embeddings.",
                                 real_time_refresh=True,
                                 options=[],
                             ),
@@ -141,7 +141,7 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
         ),
         DropdownInput(
             name="environment",
-            display_name="Environment",
+            display_name="环境",
             info="The environment for the Astra DB API Endpoint.",
             options=["prod", "test", "dev"],
             value="prod",
@@ -151,8 +151,8 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
         ),
         DropdownInput(
             name="database_name",
-            display_name="Database",
-            info="The Database name for the Astra DB instance.",
+            display_name="数据库",
+            info="The 数据base name for the Astra DB instance.",
             required=True,
             refresh_button=True,
             real_time_refresh=True,
@@ -168,7 +168,7 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
         DropdownInput(
             name="keyspace",
             display_name="Keyspace",
-            info="Optional keyspace within Astra DB to use for the collection.",
+            info="可选 keyspace within Astra DB to use for the collection.",
             advanced=True,
             options=[],
             real_time_refresh=True,
@@ -188,7 +188,7 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
             name="embedding_model",
             display_name="Embedding Model",
             input_types=["Embeddings"],
-            info="Specify the Embedding Model. Not required for Astra Vectorize collections.",
+            info="Specify the Embedding 模型. 否t required for Astra Vectorize collections.",
             required=False,
             show=False,
         ),
@@ -234,7 +234,7 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
         DropdownInput(
             name="search_type",
             display_name="Search Type",
-            info="Search type to use",
+            info="搜索 type to use",
             options=["Similarity", "Similarity with score threshold", "MMR (Max Marginal Relevance)"],
             value="Similarity",
             advanced=True,
@@ -250,7 +250,7 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
         NestedDictInput(
             name="advanced_search_filter",
             display_name="Search Metadata Filter",
-            info="Optional dictionary of filters to apply to the search query.",
+            info="可选 dictionary of filters to apply to the search query.",
             advanced=True,
         ),
         BoolInput(
@@ -283,7 +283,7 @@ class AstraDBVectorStoreComponent(LCVectorStoreComponent):
         NestedDictInput(
             name="astradb_vectorstore_kwargs",
             display_name="AstraDBVectorStore Parameters",
-            info="Optional dictionary of additional parameters for the AstraDBVectorStore.",
+            info="可选 dictionary of additional parameters for the AstraDBVectorStore.",
             advanced=True,
         ),
     ]

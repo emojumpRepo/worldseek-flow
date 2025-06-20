@@ -38,7 +38,7 @@ class ExaSearchToolkit(Component):
     ]
 
     outputs = [
-        Output(name="tools", display_name="Tools", method="build_toolkit"),
+        Output(name="tools", display_name="工具", method="build_toolkit"),
     ]
 
     def build_toolkit(self) -> Tool:

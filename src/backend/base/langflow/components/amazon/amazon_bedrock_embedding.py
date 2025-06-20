@@ -7,7 +7,9 @@ from langflow.io import DropdownInput, MessageTextInput, Output
 
 class AmazonBedrockEmbeddingsComponent(LCModelComponent):
     display_name: str = "Amazon Bedrock Embeddings"
+    display_name_zh: str = "Amazon Bedrock嵌入"
     description: str = "Generate embeddings using Amazon Bedrock models."
+    description_zh: str = "使用Amazon Bedrock模型生成嵌入。"
     icon = "Amazon"
     name = "AmazonBedrockEmbeddings"
 
@@ -63,7 +65,7 @@ class AmazonBedrockEmbeddingsComponent(LCModelComponent):
             name="endpoint_url",
             display_name="Endpoint URL",
             advanced=True,
-            info="The URL of the AWS Bedrock endpoint to use.",
+            info="The 网址 of the AWS Bedrock endpoint to use.",
         ),
     ]
 

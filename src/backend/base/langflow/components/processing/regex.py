@@ -8,21 +8,23 @@ from langflow.schema.message import Message
 
 class RegexExtractorComponent(Component):
     display_name = "Regex Extractor"
+    display_name_zh = "正则提取器"
     description = "Extract patterns from text using regular expressions."
+    description_zh = "使用正则表达式从文本中提取模式。"
     icon = "regex"
     legacy = True
 
     inputs = [
         MessageTextInput(
             name="input_text",
-            display_name="Input Text",
-            info="The text to analyze",
+            display_name="输入文本",
+            info="要分析的文本",
             required=True,
         ),
         MessageTextInput(
             name="pattern",
-            display_name="Regex Pattern",
-            info="The regular expression pattern to match",
+            display_name="正则表达式模式",
+            info="要匹配的正则表达式模式",
             value=r"",
             required=True,
             tool_mode=True,
@@ -30,8 +32,8 @@ class RegexExtractorComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="extract_matches"),
-        Output(display_name="Message", name="text", method="get_matches_text"),
+        Output(display_name="数据", name="data", method="extract_matches"),
+        Output(display_name="消息", name="text", method="get_matches_text"),
     ]
 
     def extract_matches(self) -> list[Data]:

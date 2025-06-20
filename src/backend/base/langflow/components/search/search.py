@@ -20,7 +20,7 @@ class SearchComponent(Component):
         SecretStrInput(name="api_key", display_name="SearchAPI API Key", required=True),
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
             tool_mode=True,
         ),
         DictInput(name="search_params", display_name="Search parameters", advanced=True, is_list=True),

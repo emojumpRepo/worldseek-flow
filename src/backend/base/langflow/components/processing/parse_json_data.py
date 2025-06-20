@@ -14,7 +14,9 @@ from langflow.schema.message import Message
 
 class ParseJSONDataComponent(Component):
     display_name = "Parse JSON"
+    display_name_zh = "JSON → 数据"
     description = "Convert and extract JSON fields."
+    description_zh = "将JSON字符串转换为数据对象。"
     icon = "braces"
     name = "ParseJSONData"
     legacy: bool = True
@@ -22,21 +24,21 @@ class ParseJSONDataComponent(Component):
     inputs = [
         HandleInput(
             name="input_value",
-            display_name="Input",
-            info="Data object to filter.",
+            display_name="输入",
+            info="要过滤的数据对象。",
             required=True,
             input_types=["Message", "Data"],
         ),
         MessageTextInput(
             name="query",
-            display_name="JQ Query",
-            info="JQ Query to filter the data. The input is always a JSON list.",
+            display_name="JQ查询",
+            info="JQ查询，用于过滤数据。输入始终是JSON列表。",
             required=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Filtered Data", name="filtered_data", method="filter_data"),
+        Output(display_name="过滤后的数据", name="filtered_data", method="filter_data"),
     ]
 
     def _parse_data(self, input_value) -> str:

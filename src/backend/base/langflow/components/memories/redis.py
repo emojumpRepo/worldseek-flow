@@ -17,17 +17,17 @@ class RedisIndexChatMemory(LCChatMemoryComponent):
         StrInput(
             name="host", display_name="hostname", required=True, value="localhost", info="IP address or hostname."
         ),
-        IntInput(name="port", display_name="port", required=True, value=6379, info="Redis Port Number."),
+        IntInput(name="port", display_name="port", required=True, value=6379, info="Redis 端口 Number."),
         StrInput(name="database", display_name="database", required=True, value="0", info="Redis database."),
         MessageTextInput(
-            name="username", display_name="Username", value="", info="The Redis user name.", advanced=True
+            name="username", display_name="用户名", value="", info="The Redis user name.", advanced=True
         ),
         SecretStrInput(
-            name="password", display_name="Password", value="", info="The password for username.", advanced=True
+            name="password", display_name="密码", value="", info="The password for username.", advanced=True
         ),
-        StrInput(name="key_prefix", display_name="Key prefix", info="Key prefix.", advanced=True),
+        StrInput(name="key_prefix", display_name="Key prefix", info="键 prefix.", advanced=True),
         MessageTextInput(
-            name="session_id", display_name="Session ID", info="Session ID for the message.", advanced=True
+            name="session_id", display_name="会话ID", info="会话ID for the message.", advanced=True
         ),
     ]
 

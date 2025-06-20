@@ -9,7 +9,9 @@ from langflow.io import SecretStrInput, SliderInput
 
 class CohereComponent(LCModelComponent):
     display_name = "Cohere"
+    display_name_zh = "Cohere"
     description = "Generate text using Cohere LLMs."
+    description_zh = "使用Cohere大语言模型生成文本。"
     documentation = "https://python.langchain.com/docs/modules/model_io/models/llms/integrations/cohere"
     icon = "Cohere"
     name = "CohereModel"
@@ -19,14 +21,14 @@ class CohereComponent(LCModelComponent):
         SecretStrInput(
             name="cohere_api_key",
             display_name="Cohere API Key",
-            info="The Cohere API Key to use for the Cohere model.",
+            info="The Cohere API密钥 to use for the Cohere model.",
             advanced=False,
             value="COHERE_API_KEY",
             required=True,
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.75,
             range_spec=RangeSpec(min=0, max=2, step=0.01),
             info="Controls randomness. Lower values are more deterministic, higher values are more creative.",

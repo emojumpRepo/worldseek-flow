@@ -43,7 +43,7 @@ class HCDVectorStoreComponent(LCVectorStoreComponent):
         SecretStrInput(
             name="api_endpoint",
             display_name="HCD API Endpoint",
-            info="API endpoint URL for the HCD service.",
+            info="API endpoint 网址 for the HCD service.",
             value="HCD_API_ENDPOINT",
             required=True,
         ),
@@ -51,45 +51,45 @@ class HCDVectorStoreComponent(LCVectorStoreComponent):
         StrInput(
             name="namespace",
             display_name="Namespace",
-            info="Optional namespace within HCD to use for the collection.",
+            info="可选 namespace within HCD to use for the collection.",
             value="default_namespace",
             advanced=True,
         ),
         MultilineInput(
             name="ca_certificate",
             display_name="CA Certificate",
-            info="Optional CA certificate for TLS connections to HCD.",
+            info="可选 CA certificate for TLS connections to HCD.",
             advanced=True,
         ),
         DropdownInput(
             name="metric",
             display_name="Metric",
-            info="Optional distance metric for vector comparisons in the vector store.",
+            info="可选 distance metric for vector comparisons in the vector store.",
             options=["cosine", "dot_product", "euclidean"],
             advanced=True,
         ),
         IntInput(
             name="batch_size",
             display_name="Batch Size",
-            info="Optional number of data to process in a single batch.",
+            info="可选 number of data to process in a single batch.",
             advanced=True,
         ),
         IntInput(
             name="bulk_insert_batch_concurrency",
             display_name="Bulk Insert Batch Concurrency",
-            info="Optional concurrency level for bulk insert operations.",
+            info="可选 concurrency level for bulk insert operations.",
             advanced=True,
         ),
         IntInput(
             name="bulk_insert_overwrite_concurrency",
             display_name="Bulk Insert Overwrite Concurrency",
-            info="Optional concurrency level for bulk insert operations that overwrite existing data.",
+            info="可选 concurrency level for bulk insert operations that overwrite existing data.",
             advanced=True,
         ),
         IntInput(
             name="bulk_delete_concurrency",
             display_name="Bulk Delete Concurrency",
-            info="Optional concurrency level for bulk delete operations.",
+            info="可选 concurrency level for bulk delete operations.",
             advanced=True,
         ),
         DropdownInput(
@@ -109,7 +109,7 @@ class HCDVectorStoreComponent(LCVectorStoreComponent):
         StrInput(
             name="metadata_indexing_include",
             display_name="Metadata Indexing Include",
-            info="Optional list of metadata fields to include in the indexing.",
+            info="可选 list of metadata fields to include in the indexing.",
             advanced=True,
         ),
         HandleInput(
@@ -122,13 +122,13 @@ class HCDVectorStoreComponent(LCVectorStoreComponent):
         StrInput(
             name="metadata_indexing_exclude",
             display_name="Metadata Indexing Exclude",
-            info="Optional list of metadata fields to exclude from the indexing.",
+            info="可选 list of metadata fields to exclude from the indexing.",
             advanced=True,
         ),
         StrInput(
             name="collection_indexing_policy",
             display_name="Collection Indexing Policy",
-            info="Optional dictionary defining the indexing policy for the collection.",
+            info="可选 dictionary defining the indexing policy for the collection.",
             advanced=True,
         ),
         IntInput(
@@ -141,7 +141,7 @@ class HCDVectorStoreComponent(LCVectorStoreComponent):
         DropdownInput(
             name="search_type",
             display_name="Search Type",
-            info="Search type to use",
+            info="搜索 type to use",
             options=["Similarity", "Similarity with score threshold", "MMR (Max Marginal Relevance)"],
             value="Similarity",
             advanced=True,
@@ -157,7 +157,7 @@ class HCDVectorStoreComponent(LCVectorStoreComponent):
         DictInput(
             name="search_filter",
             display_name="Search Metadata Filter",
-            info="Optional dictionary of filters to apply to the search query.",
+            info="可选 dictionary of filters to apply to the search query.",
             advanced=True,
             is_list=True,
         ),

@@ -11,7 +11,7 @@ import {
 import useFlowsManagerStore from "@/stores/flowsManagerStore";
 import { useFolderStore } from "@/stores/foldersStore";
 import { FlowType } from "@/types/flow";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import HeaderComponent from "../../components/header";
 import ListComponent from "../../components/list";
@@ -42,16 +42,23 @@ const HomePage = ({ type }: { type: "flows" | "components" | "mcp" }) => {
     "";
   const flows = useFlowsManagerStore((state) => state.flows);
 
+  // 确保我们有有效的文件夹ID
+  const validFolderId = useMemo(() => 
+    folderId || (myCollectionId && myCollectionId.trim() !== "" ? myCollectionId : null)
+  , [folderId, myCollectionId]);
+  
   const { data: folderData, isLoading } = useGetFolderQuery({
-    id: folderId ?? myCollectionId!,
+    id: validFolderId!,
     page: pageIndex,
     size: pageSize,
     is_component: flowType === "components",
     is_flow: flowType === "flows",
     search,
+  }, {
+    enabled: !!validFolderId, // 只有当我们有有效的文件夹ID时才执行查询
   });
 
-  const data = {
+  const data = useMemo(() => ({
     flows: folderData?.flows?.items ?? [],
     name: folderData?.folder?.name ?? "",
     description: folderData?.folder?.description ?? "",
@@ -63,7 +70,7 @@ const HomePage = ({ type }: { type: "flows" | "components" | "mcp" }) => {
       total: folderData?.flows?.total ?? 0,
       pages: folderData?.flows?.pages ?? 0,
     },
-  };
+  }), [folderData]);
 
   useEffect(() => {
     localStorage.setItem("view", view);
@@ -82,7 +89,7 @@ const HomePage = ({ type }: { type: "flows" | "components" | "mcp" }) => {
   const isEmptyFolder =
     flows?.find(
       (flow) =>
-        flow.folder_id === (folderId ?? myCollectionId) &&
+        flow.folder_id === validFolderId &&
         (ENABLE_MCP ? flow.is_component === false : true),
     ) === undefined;
 
@@ -93,13 +100,13 @@ const HomePage = ({ type }: { type: "flows" | "components" | "mcp" }) => {
       !isEmptyFolder &&
       flows?.find(
         (flow) =>
-          flow.folder_id === (folderId ?? myCollectionId) &&
+          flow.folder_id === validFolderId &&
           flow.is_component === (flowType === "components"),
       ) === undefined
     ) {
       setFlowType(flowType === "flows" ? "components" : "flows");
     }
-  }, [isEmptyFolder]);
+  }, [isEmptyFolder, flows, validFolderId, flowType]);
 
   const [selectedFlows, setSelectedFlows] = useState<string[]>([]);
   const [lastSelectedIndex, setLastSelectedIndex] = useState<number | null>(
@@ -216,7 +223,7 @@ const HomePage = ({ type }: { type: "flows" | "components" | "mcp" }) => {
       setIsShiftPressed(false);
       setIsCtrlPressed(false);
     };
-  }, [folderId]);
+  }, [validFolderId]);
 
   return (
     <CardsWrapComponent

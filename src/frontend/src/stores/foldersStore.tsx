@@ -6,7 +6,7 @@ export const useFolderStore = create<FoldersStoreType>((set, get) => ({
   setMyCollectionId: (myCollectionId) => {
     set({ myCollectionId });
   },
-  myCollectionId: "",
+  myCollectionId: null,
   folderToEdit: null,
   setFolderToEdit: (folder) => set(() => ({ folderToEdit: folder })),
   folderDragging: false,
@@ -20,7 +20,7 @@ export const useFolderStore = create<FoldersStoreType>((set, get) => ({
   resetStore: () => {
     set({
       folders: [],
-      myCollectionId: "",
+      myCollectionId: null,
       folderToEdit: null,
       folderDragging: false,
       folderIdDragging: "",

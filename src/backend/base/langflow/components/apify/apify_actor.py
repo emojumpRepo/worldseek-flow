@@ -18,10 +18,12 @@ MAX_DESCRIPTION_LEN = 250
 
 class ApifyActorsComponent(Component):
     display_name = "Apify Actors"
+    display_name_zh = "Apify Actors"
     description = (
         "Use Apify Actors to extract data from hundreds of places fast. "
         "This component can be used in a flow to retrieve data or as a tool with an agent."
     )
+    description_zh = "使用Apify Actors从数百个地方快速提取数据。这个组件可以用于在流程中检索数据，也可以作为工具与代理一起使用。"
     documentation: str = "http://docs.langflow.org/integrations-apify"
     icon = "Apify"
     name = "ApifyActors"
@@ -80,7 +82,7 @@ class ApifyActorsComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Output", name="output", type_=list[Data], method="run_model"),
+        Output(display_name="输出", name="output", type_=list[Data], method="run_model"),
         Output(display_name="Tool", name="tool", type_=Tool, method="build_tool"),
     ]
 

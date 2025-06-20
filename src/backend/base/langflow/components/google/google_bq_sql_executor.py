@@ -29,7 +29,7 @@ class BigQueryExecutorComponent(Component):
         MessageTextInput(
             name="query",
             display_name="SQL Query",
-            info="The SQL query to execute on BigQuery.",
+            info="The SQL query to execute on Big查询.",
             required=True,
             tool_mode=True,
         ),

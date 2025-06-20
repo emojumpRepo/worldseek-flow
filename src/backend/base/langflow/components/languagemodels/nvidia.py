@@ -14,6 +14,7 @@ from langflow.schema.dotdict import dotdict
 class NVIDIAModelComponent(LCModelComponent):
     display_name = "NVIDIA"
     description = "Generates text using NVIDIA LLMs."
+    description_zh = "使用NVIDIA LLMs生成文本。"
     icon = "NVIDIA"
 
     try:
@@ -38,13 +39,13 @@ class NVIDIAModelComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             info="The name of the NVIDIA model to use.",
             advanced=False,
             value=None,
@@ -71,18 +72,18 @@ class NVIDIAModelComponent(LCModelComponent):
             name="base_url",
             display_name="NVIDIA Base URL",
             value="https://integrate.api.nvidia.com/v1",
-            info="The base URL of the NVIDIA API. Defaults to https://integrate.api.nvidia.com/v1.",
+            info="The base 网址 of the NVIDIA API. Defaults to https://integrate.api.nvidia.com/v1.",
         ),
         SecretStrInput(
             name="api_key",
             display_name="NVIDIA API Key",
-            info="The NVIDIA API Key.",
+            info="The NVIDIA API密钥.",
             advanced=False,
             value="NVIDIA_API_KEY",
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             info="Run inference with this temperature.",
             range_spec=RangeSpec(min=0, max=1, step=0.01),

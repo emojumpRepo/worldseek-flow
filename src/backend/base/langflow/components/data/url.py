@@ -41,6 +41,7 @@ class URLComponent(Component):
 
     display_name = "URL"
     description = "Fetch content from one or more web pages, following links recursively."
+    description_zh = "从多个网页中获取内容，并递归地跟随链接。"
     icon = "layout-template"
     name = "URLComponent"
 
@@ -48,22 +49,22 @@ class URLComponent(Component):
         MessageTextInput(
             name="urls",
             display_name="URLs",
-            info="Enter one or more URLs to crawl recursively, by clicking the '+' button.",
+            info="输入一个或多个URL以递归地爬取，点击'+'按钮。",
             is_list=True,
             tool_mode=True,
-            placeholder="Enter a URL...",
-            list_add_label="Add URL",
+            placeholder="输入一个URL...",
+            list_add_label="添加URL",
             input_types=[],
         ),
         SliderInput(
             name="max_depth",
-            display_name="Depth",
+            display_name="深度",
             info=(
-                "Controls how many 'clicks' away from the initial page the crawler will go:\n"
-                "- depth 1: only the initial page\n"
-                "- depth 2: initial page + all pages linked directly from it\n"
-                "- depth 3: initial page + direct links + links found on those direct link pages\n"
-                "Note: This is about link traversal, not URL path depth."
+                "控制爬虫从初始页面跳转多少次:\n"
+                "- depth 1: 只爬取初始页面\n"
+                "- depth 2: 初始页面 + 直接链接的页面\n"
+                "- depth 3: 初始页面 + 直接链接 + 直接链接页面的链接\n"
+                "注意: 这是关于链接遍历，而不是URL路径深度。"
             ),
             value=DEFAULT_MAX_DEPTH,
             range_spec=RangeSpec(min=1, max=5, step=1),
@@ -76,10 +77,10 @@ class URLComponent(Component):
         ),
         BoolInput(
             name="prevent_outside",
-            display_name="Prevent Outside",
+            display_name="不访问外部",
             info=(
-                "If enabled, only crawls URLs within the same domain as the root URL. "
-                "This helps prevent the crawler from going to external websites."
+                "如果启用，则只爬取与根URL相同的域名的URL。 "
+                "这有助于防止爬虫访问外部网站。"
             ),
             value=True,
             required=False,
@@ -87,10 +88,10 @@ class URLComponent(Component):
         ),
         BoolInput(
             name="use_async",
-            display_name="Use Async",
+            display_name="使用异步",
             info=(
-                "If enabled, uses asynchronous loading which can be significantly faster "
-                "but might use more system resources."
+                "如果启用，则使用异步加载，这可以显著提高速度 "
+                "但可能会使用更多系统资源。"
             ),
             value=True,
             required=False,
@@ -98,36 +99,36 @@ class URLComponent(Component):
         ),
         DropdownInput(
             name="format",
-            display_name="Output Format",
-            info="Output Format. Use 'Text' to extract the text from the HTML or 'HTML' for the raw HTML content.",
+            display_name="输出格式",
+            info="输出格式。使用'Text'提取HTML中的文本，或使用'HTML'提取原始HTML内容。",
             options=["Text", "HTML"],
             value=DEFAULT_FORMAT,
             advanced=True,
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
-            info="Timeout for the request in seconds.",
+            display_name="超时",
+            info="请求的超时时间（秒）。",
             value=DEFAULT_TIMEOUT,
             required=False,
             advanced=True,
         ),
         TableInput(
             name="headers",
-            display_name="Headers",
-            info="The headers to send with the request",
+            display_name="请求头",
+            info="要发送的请求头",
             table_schema=[
                 {
                     "name": "key",
-                    "display_name": "Header",
+                    "display_name": "请求头",
                     "type": "str",
-                    "description": "Header name",
+                    "description": "请求头名称",
                 },
                 {
                     "name": "value",
-                    "display_name": "Value",
+                    "display_name": "值",
                     "type": "str",
-                    "description": "Header value",
+                    "description": "请求头值",
                 },
             ],
             value=[{"key": "User-Agent", "value": get_settings_service().settings.user_agent}],
@@ -136,32 +137,32 @@ class URLComponent(Component):
         ),
         BoolInput(
             name="filter_text_html",
-            display_name="Filter Text/HTML",
-            info="If enabled, filters out text/css content type from the results.",
+            display_name="过滤text/HTML",
+            info="如果启用，则过滤掉text/css内容类型。",
             value=True,
             required=False,
             advanced=True,
         ),
         BoolInput(
             name="continue_on_failure",
-            display_name="Continue on Failure",
-            info="If enabled, continues crawling even if some requests fail.",
+            display_name="忽略失败",
+            info="如果启用，则继续爬取，即使某些请求失败。",
             value=True,
             required=False,
             advanced=True,
         ),
         BoolInput(
             name="check_response_status",
-            display_name="Check Response Status",
-            info="If enabled, checks the response status of the request.",
+            display_name="检查响应状态",
+            info="如果启用，则检查请求的响应状态。",
             value=False,
             required=False,
             advanced=True,
         ),
         BoolInput(
             name="autoset_encoding",
-            display_name="Autoset Encoding",
-            info="If enabled, automatically sets the encoding of the request.",
+            display_name="自动设置编码",
+            info="如果启用，则自动设置请求的编码。",
             value=True,
             required=False,
             advanced=True,
@@ -169,8 +170,8 @@ class URLComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Extracted Pages", name="page_results", method="fetch_content"),
-        Output(display_name="Raw Content", name="raw_results", method="fetch_content_as_message"),
+        Output(display_name="提取的页面", name="page_results", method="fetch_content"),
+        Output(display_name="原始内容", name="raw_results", method="fetch_content_as_message"),
     ]
 
     @staticmethod

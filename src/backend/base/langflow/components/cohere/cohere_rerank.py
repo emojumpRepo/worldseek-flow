@@ -7,7 +7,9 @@ from langflow.template.field.base import Output
 
 class CohereRerankComponent(LCCompressorComponent):
     display_name = "Cohere Rerank"
+    display_name_zh = "Cohere 重排"
     description = "Rerank documents using the Cohere API."
+    description_zh = "使用Cohere API重排文档。"
     name = "CohereRerank"
     icon = "Cohere"
 
@@ -19,7 +21,7 @@ class CohereRerankComponent(LCCompressorComponent):
         ),
         DropdownInput(
             name="model",
-            display_name="Model",
+            display_name="模型",
             options=[
                 "rerank-english-v3.0",
                 "rerank-multilingual-v3.0",

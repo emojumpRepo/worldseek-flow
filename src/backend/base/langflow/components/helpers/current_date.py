@@ -10,22 +10,24 @@ from langflow.schema.message import Message
 
 class CurrentDateComponent(Component):
     display_name = "Current Date"
+    display_name_zh = "当前日期"
     description = "Returns the current date and time in the selected timezone."
+    description_zh = "返回所选时区的当前日期和时间。"
     icon = "clock"
     name = "CurrentDate"
 
     inputs = [
         DropdownInput(
             name="timezone",
-            display_name="Timezone",
+            display_name="时区",
             options=list(available_timezones()),
             value="UTC",
-            info="Select the timezone for the current date and time.",
+            info="选择当前日期和时间的时区。",
             tool_mode=True,
         ),
     ]
     outputs = [
-        Output(display_name="Current Date", name="current_date", method="get_current_date"),
+        Output(display_name="当前日期", name="current_date", method="get_current_date"),
     ]
 
     def get_current_date(self) -> Message:

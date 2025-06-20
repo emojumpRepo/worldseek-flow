@@ -16,7 +16,9 @@ from langflow.logging import logger
 
 class OpenAIModelComponent(LCModelComponent):
     display_name = "OpenAI"
+    display_name_zh = "OpenAI"
     description = "Generates text using OpenAI LLMs."
+    description_zh = "使用OpenAI大语言模型生成文本。"
     icon = "OpenAI"
     name = "OpenAIModel"
 
@@ -24,26 +26,26 @@ class OpenAIModelComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
-            info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
+            info="要生成的最大令牌数。设置为0表示无限制。",
             range_spec=RangeSpec(min=0, max=128000),
         ),
         DictInput(
             name="model_kwargs",
-            display_name="Model Kwargs",
+            display_name="模型参数",
             advanced=True,
-            info="Additional keyword arguments to pass to the model.",
+            info="要传递给模型的附加关键字参数。",
         ),
         BoolInput(
             name="json_mode",
-            display_name="JSON Mode",
+            display_name="JSON模式",
             advanced=True,
-            info="If True, it will output JSON regardless of passing a schema.",
+            info="如果为真，将输出JSON，无论是否传递模式。",
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             options=OPENAI_MODEL_NAMES + OPENAI_REASONING_MODEL_NAMES,
             value=OPENAI_MODEL_NAMES[1],
@@ -52,45 +54,44 @@ class OpenAIModelComponent(LCModelComponent):
         ),
         StrInput(
             name="openai_api_base",
-            display_name="OpenAI API Base",
+            display_name="OpenAI API基础URL",
             advanced=True,
-            info="The base URL of the OpenAI API. "
-            "Defaults to https://api.openai.com/v1. "
-            "You can change this to use other APIs like JinaChat, LocalAI and Prem.",
+            info="OpenAI API的基础URL。默认为https://api.openai.com/v1. "
+            "您可以更改此URL以使用其他API，如JinaChat、LocalAI和Prem。",
         ),
         SecretStrInput(
             name="api_key",
-            display_name="OpenAI API Key",
-            info="The OpenAI API Key to use for the OpenAI model.",
+            display_name="OpenAI API密钥",
+            info="用于OpenAI模型的OpenAI API密钥。",
             advanced=False,
             value="OPENAI_API_KEY",
             required=True,
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             range_spec=RangeSpec(min=0, max=1, step=0.01),
             show=True,
         ),
         IntInput(
             name="seed",
-            display_name="Seed",
-            info="The seed controls the reproducibility of the job.",
+            display_name="随机种子",
+            info="随机种子控制任务的可重复性。",
             advanced=True,
             value=1,
         ),
         IntInput(
             name="max_retries",
-            display_name="Max Retries",
-            info="The maximum number of retries to make when generating.",
+            display_name="最大重试次数",
+            info="生成时最大重试次数。",
             advanced=True,
             value=5,
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
-            info="The timeout for requests to OpenAI completion API.",
+            display_name="超时",
+            info="OpenAI完成API请求的超时时间。",
             advanced=True,
             value=700,
         ),

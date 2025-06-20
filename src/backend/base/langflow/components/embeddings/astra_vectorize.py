@@ -62,7 +62,7 @@ class AstraVectorizeComponent(Component):
         ),
         MessageTextInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             info="The embedding model to use for the selected provider. Each provider has a different set of models "
             f"available (full list at https://docs.datastax.com/en/astra-db-serverless/databases/embedding-generation.html):\n\n{VECTORIZE_MODELS_STR}",
             required=True,

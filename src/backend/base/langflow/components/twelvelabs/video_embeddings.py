@@ -85,10 +85,10 @@ class TwelveLabsVideoEmbeddingsComponent(LCEmbeddingsModel):
     icon = "TwelveLabs"
     documentation = "https://github.com/twelvelabs-io/twelvelabs-developer-experience/blob/main/integrations/Langflow/TWELVE_LABS_COMPONENTS_README.md"
     inputs = [
-        SecretStrInput(name="api_key", display_name="API Key", required=True),
+        SecretStrInput(name="api_key", display_name="API密钥", required=True),
         DropdownInput(
             name="model_name",
-            display_name="Model",
+            display_name="模型",
             advanced=False,
             options=["Marengo-retrieval-2.7"],
             value="Marengo-retrieval-2.7",

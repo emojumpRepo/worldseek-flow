@@ -7,7 +7,9 @@ from langflow.schema.message import Message
 
 class ConditionalRouterComponent(Component):
     display_name = "If-Else"
+    display_name_zh = "条件分支"
     description = "Routes an input message to a corresponding output based on text comparison."
+    description_zh = "根据文本比较将输入消息路由到相应的输出。"
     icon = "split"
     name = "ConditionalRouter"
 
@@ -18,57 +20,57 @@ class ConditionalRouterComponent(Component):
     inputs = [
         MessageTextInput(
             name="input_text",
-            display_name="Text Input",
-            info="The primary text input for the operation.",
+            display_name="文本输入",
+            info="操作的主要文本输入。",
             required=True,
         ),
         MessageTextInput(
             name="match_text",
-            display_name="Match Text",
-            info="The text input to compare against.",
+            display_name="匹配文本",
+            info="要比较的文本输入。",
             required=True,
         ),
         DropdownInput(
             name="operator",
-            display_name="Operator",
+            display_name="操作符",
             options=["equals", "not equals", "contains", "starts with", "ends with", "regex"],
-            info="The operator to apply for comparing the texts.",
+            info="要应用于比较文本的操作符。",
             value="equals",
             real_time_refresh=True,
         ),
         BoolInput(
             name="case_sensitive",
-            display_name="Case Sensitive",
-            info="If true, the comparison will be case sensitive.",
+            display_name="大小写敏感",
+            info="如果为true，比较将区分大小写。",
             value=True,
             advanced=True,
         ),
         MessageInput(
             name="message",
-            display_name="Alternative Output",
-            info="The message to pass through either route.",
+            display_name="替代输出",
+            info="要通过任一路由传递的消息。",
             advanced=True,
         ),
         IntInput(
             name="max_iterations",
-            display_name="Max Iterations",
-            info="The maximum number of iterations for the conditional router.",
+            display_name="最大迭代次数",
+            info="条件路由的最大迭代次数。",
             value=10,
             advanced=True,
         ),
         DropdownInput(
             name="default_route",
-            display_name="Default Route",
+            display_name="默认路由",
             options=["true_result", "false_result"],
-            info="The default route to take when max iterations are reached.",
+            info="当达到最大迭代次数时，要采取的默认路由。",
             value="false_result",
             advanced=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="True", name="true_result", method="true_response", group_outputs=True),
-        Output(display_name="False", name="false_result", method="false_response", group_outputs=True),
+        Output(display_name="True输出", name="true_result", method="true_response", group_outputs=True),
+        Output(display_name="False输出", name="false_result", method="false_response", group_outputs=True),
     ]
 
     def _pre_run_setup(self):

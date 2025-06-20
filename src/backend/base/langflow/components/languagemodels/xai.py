@@ -22,6 +22,7 @@ XAI_DEFAULT_MODELS = ["grok-2-latest"]
 class XAIModelComponent(LCModelComponent):
     display_name = "xAI"
     description = "Generates text using xAI models like Grok."
+    description_zh = "使用xAI模型生成文本，如Grok。"
     icon = "xAI"
     name = "xAIModel"
 
@@ -29,7 +30,7 @@ class XAIModelComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
             range_spec=RangeSpec(min=0, max=128000),
@@ -44,11 +45,11 @@ class XAIModelComponent(LCModelComponent):
             name="json_mode",
             display_name="JSON Mode",
             advanced=True,
-            info="If True, it will output JSON regardless of passing a schema.",
+            info="If 真, it will output JSON regardless of passing a schema.",
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             options=XAI_DEFAULT_MODELS,
             value=XAI_DEFAULT_MODELS[0],
@@ -60,20 +61,20 @@ class XAIModelComponent(LCModelComponent):
             name="base_url",
             display_name="xAI API Base",
             advanced=True,
-            info="The base URL of the xAI API. Defaults to https://api.x.ai/v1",
+            info="The base 网址 of the xAI API. Defaults to https://api.x.ai/v1",
             value="https://api.x.ai/v1",
         ),
         SecretStrInput(
             name="api_key",
             display_name="xAI API Key",
-            info="The xAI API Key to use for the model.",
+            info="The xAI API密钥 to use for the model.",
             advanced=False,
             value="XAI_API_KEY",
             required=True,
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             range_spec=RangeSpec(min=0, max=2, step=0.01),
             advanced=True,

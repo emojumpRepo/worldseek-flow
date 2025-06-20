@@ -8,7 +8,9 @@ from langflow.io import BoolInput, FileInput, FloatInput, IntInput, StrInput
 
 class ChatVertexAIComponent(LCModelComponent):
     display_name = "Vertex AI"
+    display_name_zh = "Vertex AI"
     description = "Generate text using Vertex AI LLMs."
+    description_zh = "使用Vertex AI大语言模型生成文本。"
     icon = "VertexAI"
     name = "VertexAiModel"
 
@@ -16,16 +18,16 @@ class ChatVertexAIComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         FileInput(
             name="credentials",
-            display_name="Credentials",
+            display_name="凭据",
             info="JSON credentials file. Leave empty to fallback to environment variables",
             file_types=["json"],
         ),
-        MessageTextInput(name="model_name", display_name="Model Name", value="gemini-1.5-pro"),
-        StrInput(name="project", display_name="Project", info="The project ID.", advanced=True),
+        MessageTextInput(name="model_name", display_name="模型名称", value="gemini-1.5-pro"),
+        StrInput(name="project", display_name="项目", info="The project ID.", advanced=True),
         StrInput(name="location", display_name="Location", value="us-central1", advanced=True),
         IntInput(name="max_output_tokens", display_name="Max Output Tokens", advanced=True),
         IntInput(name="max_retries", display_name="Max Retries", value=1, advanced=True),
-        FloatInput(name="temperature", value=0.0, display_name="Temperature"),
+        FloatInput(name="temperature", value=0.0, display_name="温度"),
         IntInput(name="top_k", display_name="Top K", advanced=True),
         FloatInput(name="top_p", display_name="Top P", value=0.95, advanced=True),
         BoolInput(name="verbose", display_name="Verbose", value=False, advanced=True),

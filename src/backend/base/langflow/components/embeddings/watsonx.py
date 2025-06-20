@@ -31,7 +31,7 @@ class WatsonxEmbeddingsComponent(LCEmbeddingsModel):
         DropdownInput(
             name="url",
             display_name="watsonx API Endpoint",
-            info="The base URL of the API.",
+            info="The base 网址 of the API.",
             value=None,
             options=[
                 "https://us-south.ml.cloud.ibm.com",
@@ -51,13 +51,13 @@ class WatsonxEmbeddingsComponent(LCEmbeddingsModel):
         ),
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
-            info="The API Key to use for the model.",
+            display_name="API密钥",
+            info="The API密钥 to use for the model.",
             required=True,
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             options=[],
             value=None,
             dynamic=True,

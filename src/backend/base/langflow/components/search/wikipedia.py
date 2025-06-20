@@ -15,10 +15,10 @@ class WikipediaComponent(Component):
     inputs = [
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
             tool_mode=True,
         ),
-        MessageTextInput(name="lang", display_name="Language", value="en"),
+        MessageTextInput(name="lang", display_name="语言", value="en"),
         IntInput(name="k", display_name="Number of results", value=4, required=True),
         BoolInput(name="load_all_available_meta", display_name="Load all available meta", value=False, advanced=True),
         IntInput(

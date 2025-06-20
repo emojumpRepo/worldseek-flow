@@ -28,7 +28,9 @@ def set_advanced_true(component_input):
 
 class AgentComponent(ToolCallingAgentComponent):
     display_name: str = "Agent"
+    display_name_zh: str = "代理"
     description: str = "Define the agent's instructions, then enter a task to complete using tools."
+    description_zh: str = "定义代理的指令，然后输入一个任务来使用工具完成。"
     icon = "bot"
     beta = False
     name = "Agent"
@@ -38,8 +40,8 @@ class AgentComponent(ToolCallingAgentComponent):
     inputs = [
         DropdownInput(
             name="agent_llm",
-            display_name="Model Provider",
-            info="The provider of the language model that the agent will use to generate responses.",
+            display_name="模型提供商",
+            info="代理将用于生成响应的语言模型提供商。",
             options=[*sorted(MODEL_PROVIDERS_DICT.keys()), "Custom"],
             value="OpenAI",
             real_time_refresh=True,
@@ -49,8 +51,8 @@ class AgentComponent(ToolCallingAgentComponent):
         *MODEL_PROVIDERS_DICT["OpenAI"]["inputs"],
         MultilineInput(
             name="system_prompt",
-            display_name="Agent Instructions",
-            info="System Prompt: Initial instructions and context provided to guide the agent's behavior.",
+            display_name="代理指令",
+            info="System Prompt: 初始指令和上下文，用于指导代理的行为。",
             value="You are a helpful assistant that can use tools to answer questions and perform tasks.",
             advanced=False,
         ),
@@ -58,13 +60,13 @@ class AgentComponent(ToolCallingAgentComponent):
         *memory_inputs,
         BoolInput(
             name="add_current_date_tool",
-            display_name="Current Date",
+            display_name="当前日期",
             advanced=True,
-            info="If true, will add a tool to the agent that returns the current date.",
+            info="如果为true，将添加一个工具，返回当前日期。",
             value=True,
         ),
     ]
-    outputs = [Output(name="response", display_name="Response", method="message_response")]
+    outputs = [Output(name="response", display_name="响应", method="message_response")]
 
     async def message_response(self) -> Message:
         try:

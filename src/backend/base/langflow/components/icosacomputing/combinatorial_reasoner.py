@@ -16,32 +16,32 @@ class CombinatorialReasonerComponent(Component):
     name = "Combinatorial Reasoner"
 
     inputs = [
-        MessageTextInput(name="prompt", display_name="Prompt", required=True),
+        MessageTextInput(name="prompt", display_name="提示词", required=True),
         SecretStrInput(
             name="openai_api_key",
             display_name="OpenAI API Key",
-            info="The OpenAI API Key to use for the OpenAI model.",
+            info="The OpenAI API密钥 to use for the OpenAI model.",
             advanced=False,
             value="OPENAI_API_KEY",
             required=True,
         ),
         StrInput(
             name="username",
-            display_name="Username",
-            info="Username to authenticate access to Icosa CR API",
+            display_name="用户名",
+            info="用户名 to authenticate access to Icosa CR API",
             advanced=False,
             required=True,
         ),
         SecretStrInput(
             name="password",
-            display_name="Password",
-            info="Password to authenticate access to Icosa CR API.",
+            display_name="密码",
+            info="密码 to authenticate access to Icosa CR API.",
             advanced=False,
             required=True,
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             options=OPENAI_MODEL_NAMES,
             value=OPENAI_MODEL_NAMES[0],

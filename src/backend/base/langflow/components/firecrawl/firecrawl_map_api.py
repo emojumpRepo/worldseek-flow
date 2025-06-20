@@ -18,7 +18,7 @@ class FirecrawlMapApi(Component):
     inputs = [
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             required=True,
             password=True,
             info="The API key to use Firecrawl API.",
@@ -27,7 +27,7 @@ class FirecrawlMapApi(Component):
             name="urls",
             display_name="URLs",
             required=True,
-            info="List of URLs to create maps from (separated by commas or new lines).",
+            info="List of 网址s to create maps from (separated by commas or new lines).",
             tool_mode=True,
         ),
         BoolInput(
@@ -43,12 +43,12 @@ class FirecrawlMapApi(Component):
         BoolInput(
             name="include_subdomains",
             display_name="Include Subdomains",
-            info="When true, subdomains of the provided URL will also be scanned.",
+            info="When true, subdomains of the provided 网址 will also be scanned.",
         ),
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="map"),
+        Output(display_name="数据", name="data", method="map"),
     ]
 
     def map(self) -> Data:

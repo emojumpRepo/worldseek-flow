@@ -7,7 +7,9 @@ from langflow.schema.message import Message
 
 class ParseDataComponent(Component):
     display_name = "Data to Message"
+    display_name_zh = "数据 → 消息"
     description = "Convert Data objects into Messages using any {field_name} from input data."
+    description_zh = "使用输入数据中的任何{field_name}将数据对象转换为消息。"
     icon = "message-square"
     name = "ParseData"
     legacy = True
@@ -18,33 +20,33 @@ class ParseDataComponent(Component):
     inputs = [
         DataInput(
             name="data",
-            display_name="Data",
-            info="The data to convert to text.",
+            display_name="数据",
+            info="要转换为文本的数据。",
             is_list=True,
             required=True,
         ),
         MultilineInput(
             name="template",
-            display_name="Template",
-            info="The template to use for formatting the data. "
-            "It can contain the keys {text}, {data} or any other key in the Data.",
+            display_name="模板",
+            info="用于格式化数据的模板。"
+            "它可以包含键{text}、{data}或其他Data中的任何键。",
             value="{text}",
             required=True,
         ),
-        StrInput(name="sep", display_name="Separator", advanced=True, value="\n"),
+        StrInput(name="sep", display_name="分隔符", advanced=True, value="\n"),
     ]
 
     outputs = [
         Output(
-            display_name="Message",
+            display_name="消息",
             name="text",
-            info="Data as a single Message, with each input Data separated by Separator",
+            info="数据作为单个消息，每个输入数据由分隔符分隔",
             method="parse_data",
         ),
         Output(
-            display_name="Data List",
+            display_name="数据列表",
             name="data_list",
-            info="Data as a list of new Data, each having `text` formatted by Template",
+            info="数据作为新数据列表，每个数据都由模板格式化",
             method="parse_data_as_list",
         ),
     ]

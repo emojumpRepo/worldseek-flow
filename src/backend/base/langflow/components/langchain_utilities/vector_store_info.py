@@ -15,14 +15,14 @@ class VectorStoreInfoComponent(Component):
     inputs = [
         MessageTextInput(
             name="vectorstore_name",
-            display_name="Name",
-            info="Name of the VectorStore",
+            display_name="名称",
+            info="名称 of the VectorStore",
             required=True,
         ),
         MultilineInput(
             name="vectorstore_description",
-            display_name="Description",
-            info="Description of the VectorStore",
+            display_name="描述",
+            info="描述 of the VectorStore",
             required=True,
         ),
         HandleInput(

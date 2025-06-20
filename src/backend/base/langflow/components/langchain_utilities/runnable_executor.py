@@ -14,7 +14,7 @@ class RunnableExecComponent(Component):
     icon = "LangChain"
 
     inputs = [
-        MessageTextInput(name="input_value", display_name="Input", required=True),
+        MessageTextInput(name="input_value", display_name="输入", required=True),
         HandleInput(
             name="runnable",
             display_name="Agent Executor",
@@ -35,14 +35,14 @@ class RunnableExecComponent(Component):
         ),
         BoolInput(
             name="use_stream",
-            display_name="Stream",
+            display_name="流式输出",
             value=False,
         ),
     ]
 
     outputs = [
         Output(
-            display_name="Message",
+            display_name="消息",
             name="text",
             method="build_executor",
         ),

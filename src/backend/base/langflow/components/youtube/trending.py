@@ -66,7 +66,7 @@ class YouTubeTrendingComponent(Component):
         SecretStrInput(
             name="api_key",
             display_name="YouTube API Key",
-            info="Your YouTube Data API key.",
+            info="Your YouTube 数据 API key.",
             required=True,
         ),
         DropdownInput(
@@ -78,7 +78,7 @@ class YouTubeTrendingComponent(Component):
         ),
         DropdownInput(
             name="category",
-            display_name="Category",
+            display_name="类别",
             options=list(VIDEO_CATEGORIES.keys()),
             value="All",
             info="The category of videos to retrieve.",
@@ -106,7 +106,7 @@ class YouTubeTrendingComponent(Component):
             name="include_thumbnails",
             display_name="Include Thumbnails",
             value=True,
-            info="Include video thumbnail URLs.",
+            info="Include video thumbnail 网址s.",
             advanced=True,
         ),
     ]

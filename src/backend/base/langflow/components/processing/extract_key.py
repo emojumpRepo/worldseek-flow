@@ -5,9 +5,13 @@ from langflow.schema.data import Data
 
 class ExtractDataKeyComponent(Component):
     display_name = "Extract Key"
+    display_name_zh = "提取键"
     description = (
         "Extract a specific key from a Data object or a list of "
         "Data objects and return the extracted value(s) as Data object(s)."
+    )
+    description_zh = (
+        "从数据对象或数据对象列表中提取特定键，并返回提取的值作为数据对象。"
     )
     icon = "key"
     name = "ExtractaKey"
@@ -16,18 +20,18 @@ class ExtractDataKeyComponent(Component):
     inputs = [
         DataInput(
             name="data_input",
-            display_name="Data Input",
-            info="The Data object or list of Data objects to extract the key from.",
+            display_name="数据输入",
+            info="要提取键的数据对象或数据对象列表。",
         ),
         StrInput(
             name="key",
-            display_name="Key to Extract",
-            info="The key in the Data object(s) to extract.",
+            display_name="提取键",
+            info="要提取的键。",
         ),
     ]
 
     outputs = [
-        Output(display_name="Extracted Data", name="extracted_data", method="extract_key"),
+        Output(display_name="提取的数据", name="extracted_data", method="extract_key"),
     ]
 
     def extract_key(self) -> Data | list[Data]:

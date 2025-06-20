@@ -7,16 +7,18 @@ from langflow.template.field.base import Output
 
 class LoopComponent(Component):
     display_name = "Loop"
+    display_name_zh = "循环"
     description = (
         "Iterates over a list of Data objects, outputting one item at a time and aggregating results from loop inputs."
     )
+    description_zh = "迭代一个数据对象列表，每次输出一个项目，并聚合循环输入的结果。"
     icon = "infinity"
 
     inputs = [
         HandleInput(
             name="data",
-            display_name="Inputs",
-            info="The initial list of Data objects or DataFrame to iterate over.",
+            display_name="输入",
+            info="要迭代的初始数据对象列表或数据帧。",
             input_types=["DataFrame"],
         ),
     ]

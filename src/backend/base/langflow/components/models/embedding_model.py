@@ -19,7 +19,9 @@ from langflow.schema.dotdict import dotdict
 
 class EmbeddingModelComponent(LCEmbeddingsModel):
     display_name = "Embedding Model"
+    display_name_zh = "Embedding模型"
     description = "Generate embeddings using a specified provider."
+    description_zh = "使用指定的模型提供商生成嵌入。"
     icon = "binary"
     name = "EmbeddingModel"
     category = "models"
@@ -27,24 +29,24 @@ class EmbeddingModelComponent(LCEmbeddingsModel):
     inputs = [
         DropdownInput(
             name="provider",
-            display_name="Model Provider",
+            display_name="模型提供商",
             options=["OpenAI"],
             value="OpenAI",
-            info="Select the embedding model provider",
+            info="选择嵌入模型提供商",
             real_time_refresh=True,
             options_metadata=[{"icon": "OpenAI"}],
         ),
         DropdownInput(
             name="model",
-            display_name="Model Name",
+            display_name="模型名称",
             options=OPENAI_EMBEDDING_MODEL_NAMES,
             value=OPENAI_EMBEDDING_MODEL_NAMES[0],
-            info="Select the embedding model to use",
+            info="选择要使用的嵌入模型",
         ),
         SecretStrInput(
             name="api_key",
-            display_name="OpenAI API Key",
-            info="Model Provider API key",
+            display_name="API Key",
+            info="模型提供商的API Key",
             required=True,
             show=True,
             real_time_refresh=True,
@@ -52,25 +54,24 @@ class EmbeddingModelComponent(LCEmbeddingsModel):
         MessageTextInput(
             name="api_base",
             display_name="API Base URL",
-            info="Base URL for the API. Leave empty for default.",
+            info="API的Base网址。留空使用默认值。",
             advanced=True,
         ),
         IntInput(
             name="dimensions",
-            display_name="Dimensions",
-            info="The number of dimensions the resulting output embeddings should have. "
-            "Only supported by certain models.",
+            display_name="维度",
+            info="输出嵌入的维度。仅支持某些模型。",
             advanced=True,
         ),
-        IntInput(name="chunk_size", display_name="Chunk Size", advanced=True, value=1000),
-        FloatInput(name="request_timeout", display_name="Request Timeout", advanced=True),
-        IntInput(name="max_retries", display_name="Max Retries", advanced=True, value=3),
-        BoolInput(name="show_progress_bar", display_name="Show Progress Bar", advanced=True),
+        IntInput(name="chunk_size", display_name="块大小", advanced=True, value=1000),
+        FloatInput(name="request_timeout", display_name="请求超时", advanced=True),
+        IntInput(name="max_retries", display_name="最大重试次数", advanced=True, value=3),
+        BoolInput(name="show_progress_bar", display_name="显示进度条", advanced=True),
         DictInput(
             name="model_kwargs",
-            display_name="Model Kwargs",
+            display_name="模型参数",
             advanced=True,
-            info="Additional keyword arguments to pass to the model.",
+            info="要传递给模型的附加关键字参数。",
         ),
     ]
 
@@ -88,7 +89,7 @@ class EmbeddingModelComponent(LCEmbeddingsModel):
 
         if provider == "OpenAI":
             if not api_key:
-                msg = "OpenAI API key is required when using OpenAI provider"
+                msg = "OpenAI API Key 是使用OpenAI提供商时必需的"
                 raise ValueError(msg)
             return OpenAIEmbeddings(
                 model=model,

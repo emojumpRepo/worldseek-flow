@@ -37,7 +37,7 @@ const EditNodeModal = ({
       </BaseModal.Trigger>
       <BaseModal.Header description={data.node?.description!}>
         <span data-testid="node-modal-title" className="pr-2">
-          {data.node?.display_name ?? data.type}
+          {data.node?.display_name_zh || data.node?.display_name || data.type}
         </span>
         <div>
           <Badge size="sm" variant={isDark ? "gray" : "secondary"}>

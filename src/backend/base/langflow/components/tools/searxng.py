@@ -24,7 +24,7 @@ class SearXNGToolComponent(LCToolComponent):
     inputs = [
         MessageTextInput(
             name="url",
-            display_name="URL",
+            display_name="网址",
             value="http://localhost",
             required=True,
             refresh_button=True,
@@ -43,7 +43,7 @@ class SearXNGToolComponent(LCToolComponent):
         ),
         DropdownInput(
             name="language",
-            display_name="Language",
+            display_name="语言",
             options=[],
         ),
     ]

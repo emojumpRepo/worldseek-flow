@@ -17,18 +17,18 @@ class CassandraChatMemory(LCChatMemoryComponent):
             required=True,
         ),
         MessageTextInput(
-            name="username", display_name="Username", info="Username for the database (leave empty for AstraDB)."
+            name="username", display_name="用户名", info="用户名 for the database (leave empty for AstraDB)."
         ),
         SecretStrInput(
             name="token",
             display_name="Password / AstraDB Token",
-            info="User password for the database (or AstraDB token).",
+            info="用户 password for the database (or AstraDB token).",
             required=True,
         ),
         MessageTextInput(
             name="keyspace",
             display_name="Keyspace",
-            info="Table Keyspace (or AstraDB namespace).",
+            info="表 键space (or AstraDB namespace).",
             required=True,
         ),
         MessageTextInput(
@@ -38,12 +38,12 @@ class CassandraChatMemory(LCChatMemoryComponent):
             required=True,
         ),
         MessageTextInput(
-            name="session_id", display_name="Session ID", info="Session ID for the message.", advanced=True
+            name="session_id", display_name="会话ID", info="会话ID for the message.", advanced=True
         ),
         DictInput(
             name="cluster_kwargs",
             display_name="Cluster arguments",
-            info="Optional dictionary of additional keyword arguments for the Cassandra cluster.",
+            info="可选 dictionary of additional keyword arguments for the Cassandra cluster.",
             advanced=True,
             is_list=True,
         ),

@@ -28,7 +28,7 @@ class YouTubeSearchComponent(Component):
         SecretStrInput(
             name="api_key",
             display_name="YouTube API Key",
-            info="Your YouTube Data API key.",
+            info="Your YouTube 数据 API key.",
             required=True,
         ),
         IntInput(
@@ -42,7 +42,7 @@ class YouTubeSearchComponent(Component):
             display_name="Sort Order",
             options=["relevance", "date", "rating", "title", "viewCount"],
             value="relevance",
-            info="Sort order for the search results.",
+            info="排序 order for the search results.",
         ),
         BoolInput(
             name="include_metadata",

@@ -19,12 +19,12 @@ class TavilyExtractComponent(Component):
             name="api_key",
             display_name="Tavily API Key",
             required=True,
-            info="Your Tavily API Key.",
+            info="Your Tavily API密钥.",
         ),
         MessageTextInput(
             name="urls",
             display_name="URLs",
-            info="Comma-separated list of URLs to extract content from.",
+            info="Comma-separated list of 网址s to extract content from.",
             required=True,
         ),
         DropdownInput(
@@ -38,7 +38,7 @@ class TavilyExtractComponent(Component):
         BoolInput(
             name="include_images",
             display_name="Include Images",
-            info="Include a list of images extracted from the URLs.",
+            info="Include a list of images extracted from the 网址s.",
             value=False,
             advanced=True,
         ),

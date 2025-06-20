@@ -141,7 +141,7 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         *ComposioBaseComponent._base_inputs,
         IntInput(
             name="SLACK_LIST_ALL_SLACK_TEAM_USERS_WITH_PAGINATION_limit",
-            display_name="Limit",
+            display_name="限制",
             info="The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no `limit` value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience `limit_required` or HTTP 500 errors. ",  # noqa: E501
             show=False,
             value=1,
@@ -169,14 +169,14 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="SLACK_SENDS_A_MESSAGE_TO_A_SLACK_CHANNEL_attachments",
             display_name="Attachments",
-            info="A JSON-based array of structured attachments, presented as a URL-encoded string. ",
+            info="A JSON-based array of structured attachments, presented as a 网址-encoded string. ",
             show=False,
             advanced=True,
         ),
         MessageTextInput(
             name="SLACK_SENDS_A_MESSAGE_TO_A_SLACK_CHANNEL_blocks",
             display_name="Blocks",
-            info="A JSON-based array of structured blocks, presented as a URL-encoded string. ",
+            info="A JSON-based array of structured blocks, presented as a 网址-encoded string. ",
             show=False,
             advanced=True,
         ),
@@ -197,7 +197,7 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="SLACK_SENDS_A_MESSAGE_TO_A_SLACK_CHANNEL_icon_url",
             display_name="Icon Url",
-            info="URL to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored",  # noqa: E501
+            info="网址 to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored",  # noqa: E501
             show=False,
             advanced=True,
         ),
@@ -211,7 +211,7 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         BoolInput(
             name="SLACK_SENDS_A_MESSAGE_TO_A_SLACK_CHANNEL_mrkdwn",
             display_name="Mrkdwn",
-            info="Disable Slack markup parsing by setting to `false`. Enabled by default.",
+            info="禁用 Slack markup parsing by setting to `false`. 启用d by default.",
             show=False,
             advanced=True,
         ),
@@ -231,7 +231,7 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="SLACK_SENDS_A_MESSAGE_TO_A_SLACK_CHANNEL_text",
-            display_name="Text",
+            display_name="文本",
             info="How this field works and whether it is required depends on other fields you use in your API call",
             show=False,
         ),
@@ -257,7 +257,7 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="SLACK_SENDS_A_MESSAGE_TO_A_SLACK_CHANNEL_username",
-            display_name="Username",
+            display_name="用户名",
             info="Set your bot's user name. Must be used in conjunction with `as_user` set to false, otherwise ignored",
             show=False,
             advanced=True,
@@ -300,20 +300,20 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="SLACK_UPDATES_A_SLACK_MESSAGE_parse",
             display_name="Parse",
-            info="Change how messages are treated. Defaults to `client`, unlike `chat.postMessage`. Accepts either `none` or `full`. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, `client`. ",  # noqa: E501
+            info="Change how messages are treated. Defaults to `client`, unlike `chat.post消息`. Accepts either `none` or `full`. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, `client`. ",  # noqa: E501
             show=False,
             advanced=True,
         ),
         MessageTextInput(
             name="SLACK_UPDATES_A_SLACK_MESSAGE_text",
-            display_name="Text",
+            display_name="文本",
             info="New text for the message, using the default formatting rules. It's not required when presenting `blocks` or `attachments`. ",  # noqa: E501
             show=False,
         ),
         MessageTextInput(
             name="SLACK_UPDATES_A_SLACK_MESSAGE_ts",
             display_name="Ts",
-            info="Timestamp of the message to be updated.",
+            info="时间stamp of the message to be updated.",
             show=False,
             required=True,
         ),
@@ -346,7 +346,7 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         ),
         IntInput(
             name="SLACK_FETCH_CONVERSATION_HISTORY_limit",
-            display_name="Limit",
+            display_name="限制",
             info="The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. ",  # noqa: E501
             show=False,
             advanced=True,
@@ -368,14 +368,14 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="SLACK_SCHEDULES_A_MESSAGE_TO_A_CHANNEL_AT_A_SPECIFIED_TIME_attachments",
             display_name="Attachments",
-            info="A JSON-based array of structured attachments, presented as a URL-encoded string. ",
+            info="A JSON-based array of structured attachments, presented as a 网址-encoded string. ",
             show=False,
             advanced=True,
         ),
         MessageTextInput(
             name="SLACK_SCHEDULES_A_MESSAGE_TO_A_CHANNEL_AT_A_SPECIFIED_TIME_blocks",
             display_name="Blocks",
-            info="A JSON-based array of structured blocks, presented as a URL-encoded string. ",
+            info="A JSON-based array of structured blocks, presented as a 网址-encoded string. ",
             show=False,
             advanced=True,
         ),
@@ -415,7 +415,7 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="SLACK_SCHEDULES_A_MESSAGE_TO_A_CHANNEL_AT_A_SPECIFIED_TIME_text",
-            display_name="Text",
+            display_name="文本",
             info="How this field works and whether it is required depends on other fields you use in your API call",
             show=False,
         ),
@@ -454,7 +454,7 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         ),
         IntInput(
             name="SLACK_LIST_ALL_SLACK_TEAM_CHANNELS_WITH_VARIOUS_FILTERS_limit",
-            display_name="Limit",
+            display_name="限制",
             info="The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000. ",  # noqa: E501
             show=False,
             value=1,
@@ -468,7 +468,7 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         ),
         IntInput(
             name="SLACK_SEARCH_FOR_MESSAGES_WITH_QUERY_count",
-            display_name="Count",
+            display_name="数量",
             info="Pass the number of results you want per 'page'. Maximum of `100`.",
             show=False,
             value=1,
@@ -483,21 +483,21 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         ),
         IntInput(
             name="SLACK_SEARCH_FOR_MESSAGES_WITH_QUERY_page",
-            display_name="Page",
-            info="Page",
+            display_name="页面",
+            info="页面",
             show=False,
             advanced=True,
         ),
         MessageTextInput(
             name="SLACK_SEARCH_FOR_MESSAGES_WITH_QUERY_query",
-            display_name="Query",
-            info="Search query.",
+            display_name="查询",
+            info="搜索 query.",
             show=False,
             required=True,
         ),
         MessageTextInput(
             name="SLACK_SEARCH_FOR_MESSAGES_WITH_QUERY_sort",
-            display_name="Sort",
+            display_name="排序",
             info="Return matches sorted by either `score` or `timestamp`.",
             show=False,
             advanced=True,
@@ -511,21 +511,21 @@ class ComposioSlackAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="SLACK_CREATE_A_REMINDER_text",
-            display_name="Text",
+            display_name="文本",
             info="The content of the reminder",
             show=False,
             required=True,
         ),
         MessageTextInput(
             name="SLACK_CREATE_A_REMINDER_time",
-            display_name="Time",
+            display_name="时间",
             info="When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. 'in 15 minutes,' or 'every Thursday') ",  # noqa: E501
             show=False,
             required=True,
         ),
         MessageTextInput(
             name="SLACK_CREATE_A_REMINDER_user",
-            display_name="User",
+            display_name="用户",
             info="The user who will receive the reminder. If no user is specified, the reminder will go to user who created it. ",  # noqa: E501
             show=False,
         ),

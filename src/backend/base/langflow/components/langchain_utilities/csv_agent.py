@@ -27,15 +27,15 @@ class CSVAgentComponent(LCAgentComponent):
             display_name="Language Model",
             input_types=["LanguageModel"],
             required=True,
-            info="An LLM Model Object (It can be found in any LLM Component).",
+            info="An LLM 模型 Object (It can be found in any LLM Component).",
         ),
         FileInput(
             name="path",
-            display_name="File Path",
+            display_name="文件路径",
             file_types=["csv"],
             input_types=["str", "Message"],
             required=True,
-            info="A CSV File or File Path.",
+            info="A CSV 文件 or 文件 路径.",
         ),
         DropdownInput(
             name="agent_type",
@@ -46,8 +46,8 @@ class CSVAgentComponent(LCAgentComponent):
         ),
         MessageTextInput(
             name="input_value",
-            display_name="Text",
-            info="Text to be passed as input and extract info from the CSV File.",
+            display_name="文本",
+            info="文本 to be passed as input and extract info from the CSV 文件.",
             required=True,
         ),
         DictInput(
@@ -60,8 +60,8 @@ class CSVAgentComponent(LCAgentComponent):
     ]
 
     outputs = [
-        Output(display_name="Response", name="response", method="build_agent_response"),
-        Output(display_name="Agent", name="agent", method="build_agent", hidden=True, tool_mode=False),
+        Output(display_name="响应", name="response", method="build_agent_response"),
+        Output(display_name="代理", name="agent", method="build_agent", hidden=True, tool_mode=False),
     ]
 
     def _path(self) -> str:

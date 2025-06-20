@@ -13,28 +13,30 @@ from langflow.services.deps import get_settings_service
 
 class WebSearchComponent(Component):
     display_name = "Web Search"
+    display_name_zh = "网页搜索"
     description = "Performs a basic DuckDuckGo search (HTML scraping). May be subject to rate limits."
+    description_zh = "执行基本的DuckDuckGo搜索（HTML抓取）。可能受到速率限制。"
     icon = "search"
     name = "WebSearchNoAPI"
 
     inputs = [
         MessageTextInput(
             name="query",
-            display_name="Search Query",
-            info="Keywords to search for.",
+            display_name="搜索查询",
+            info="要搜索的关键词。",
             tool_mode=True,
             required=True,
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
-            info="Timeout for the web search request.",
+            display_name="超时",
+            info="请求的超时时间（秒）。",
             value=5,
             advanced=True,
         ),
     ]
 
-    outputs = [Output(name="results", display_name="Search Results", method="perform_search")]
+    outputs = [Output(name="results", display_name="搜索结果", method="perform_search")]
 
     def validate_url(self, string: str) -> bool:
         url_regex = re.compile(

@@ -43,8 +43,8 @@ class AssistantsRun(ComponentWithCache):
         ),
         MultilineInput(
             name="user_message",
-            display_name="User Message",
-            info="User message to pass to the run.",
+            display_name="用户消息",
+            info="用户 message to pass to the run.",
         ),
         MultilineInput(
             name="thread_id",

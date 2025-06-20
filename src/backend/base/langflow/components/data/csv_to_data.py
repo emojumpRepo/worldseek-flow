@@ -9,7 +9,9 @@ from langflow.schema.data import Data
 
 class CSVToDataComponent(Component):
     display_name = "Load CSV"
+    display_name_zh = "加载CSV"
     description = "Load a CSV file, CSV from a file path, or a valid CSV string and convert it to a list of Data"
+    description_zh = "加载CSV文件、CSV文件路径或有效的CSV字符串并转换为Data对象列表"
     icon = "file-spreadsheet"
     name = "CSVtoData"
     legacy = True
@@ -17,30 +19,30 @@ class CSVToDataComponent(Component):
     inputs = [
         FileInput(
             name="csv_file",
-            display_name="CSV File",
+            display_name="CSV文件",
             file_types=["csv"],
-            info="Upload a CSV file to convert to a list of Data objects",
+            info="上传CSV文件以转换为Data对象列表",
         ),
         MessageTextInput(
             name="csv_path",
-            display_name="CSV File Path",
-            info="Provide the path to the CSV file as pure text",
+            display_name="CSV文件路径",
+            info="提供CSV文件的纯文本路径",
         ),
         MultilineInput(
             name="csv_string",
-            display_name="CSV String",
-            info="Paste a CSV string directly to convert to a list of Data objects",
+            display_name="CSV字符串",
+            info="粘贴一个CSV字符串直接转换为Data对象列表",
         ),
         MessageTextInput(
             name="text_key",
-            display_name="Text Key",
-            info="The key to use for the text column. Defaults to 'text'.",
+            display_name="文本键",
+            info="要用于文本列的键。默认为'text'。",
             value="text",
         ),
     ]
 
     outputs = [
-        Output(name="data_list", display_name="Data List", method="load_csv_to_data"),
+        Output(name="data_list", display_name="Data列表", method="load_csv_to_data"),
     ]
 
     def load_csv_to_data(self) -> list[Data]:

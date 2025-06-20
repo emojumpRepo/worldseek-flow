@@ -7,7 +7,9 @@ from langflow.io import DropdownInput, FloatInput, MessageTextInput, SecretStrIn
 
 class QianfanChatEndpointComponent(LCModelComponent):
     display_name: str = "Qianfan"
+    display_name_zh: str = "百度千帆"
     description: str = "Generate text using Baidu Qianfan LLMs."
+    description_zh: str = "使用百度千帆LLMs生成文本。"
     documentation: str = "https://python.langchain.com/docs/integrations/chat/baidu_qianfan_endpoint"
     icon = "BaiduQianfan"
     name = "BaiduQianfanChatModel"
@@ -16,7 +18,7 @@ class QianfanChatEndpointComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         DropdownInput(
             name="model",
-            display_name="Model Name",
+            display_name="模型名称",
             options=[
                 "EB-turbo-AppBuilder",
                 "Llama-2-70b-chat",
@@ -60,20 +62,20 @@ class QianfanChatEndpointComponent(LCModelComponent):
         FloatInput(
             name="top_p",
             display_name="Top p",
-            info="Model params, only supported in ERNIE-Bot and ERNIE-Bot-turbo",
+            info="模型 params, only supported in ERNIE-Bot and ERNIE-Bot-turbo",
             value=0.8,
             advanced=True,
         ),
         FloatInput(
             name="temperature",
-            display_name="Temperature",
-            info="Model params, only supported in ERNIE-Bot and ERNIE-Bot-turbo",
+            display_name="温度",
+            info="模型 params, only supported in ERNIE-Bot and ERNIE-Bot-turbo",
             value=0.95,
         ),
         FloatInput(
             name="penalty_score",
             display_name="Penalty Score",
-            info="Model params, only supported in ERNIE-Bot and ERNIE-Bot-turbo",
+            info="模型 params, only supported in ERNIE-Bot and ERNIE-Bot-turbo",
             value=1.0,
             advanced=True,
         ),

@@ -14,7 +14,9 @@ from langflow.schema.data import Data
 
 class PythonREPLToolComponent(LCToolComponent):
     display_name = "Python REPL [DEPRECATED]"
+    display_name_zh = "Python交互环境 [已弃用]"
     description = "A tool for running Python code in a REPL environment."
+    description_zh = "在REPL环境中运行Python代码的工具。"
     name = "PythonREPLTool"
     icon = "Python"
     legacy = True

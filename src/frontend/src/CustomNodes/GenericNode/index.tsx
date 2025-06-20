@@ -490,7 +490,7 @@ function GenericNode({
               />
               <div className="ml-3 flex flex-1 overflow-hidden">
                 <MemoizedNodeName
-                  display_name={data.node?.display_name}
+                  display_name={data.node?.display_name_zh || data.node?.display_name}
                   nodeId={data.id}
                   selected={selected}
                   showNode={showNode}
@@ -546,7 +546,7 @@ function GenericNode({
           {showNode && (hasDescription || editNameDescription) && (
             <div className="px-4 pb-3">
               <MemoizedNodeDescription
-                description={data.node?.description}
+                description={data.node?.description_zh || data.node?.description}
                 mdClassName={"dark:prose-invert"}
                 nodeId={data.id}
                 selected={selected}

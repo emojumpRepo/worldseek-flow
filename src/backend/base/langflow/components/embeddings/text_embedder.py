@@ -24,7 +24,7 @@ class TextEmbedderComponent(Component):
         ),
         MessageInput(
             name="message",
-            display_name="Message",
+            display_name="消息",
             info="The message to generate embeddings for.",
             required=True,
         ),

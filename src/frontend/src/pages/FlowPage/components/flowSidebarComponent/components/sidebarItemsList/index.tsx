@@ -53,7 +53,7 @@ const SidebarItemsList = ({
           }
           return (
             <ShadTooltip
-              content={currentItem.display_name}
+              content={currentItem.display_name_zh || currentItem.display_name}
               side="right"
               key={idx}
             >
@@ -71,6 +71,7 @@ const SidebarItemsList = ({
                 itemName={SBItemName}
                 error={!!currentItem.error}
                 display_name={currentItem.display_name}
+                display_name_zh={currentItem.display_name_zh}
                 official={currentItem.official === false ? false : true}
                 beta={currentItem.beta ?? false}
                 legacy={currentItem.legacy ?? false}
@@ -105,7 +106,11 @@ const UniqueInputsDraggableComponent = ({
   }, [chatInputAdded, webhookInputAdded]);
 
   return (
-    <ShadTooltip content={currentItem.display_name} side="right" key={idx}>
+    <ShadTooltip
+      content={currentItem.display_name_zh || currentItem.display_name}
+      side="right"
+      key={idx}
+    >
       <SidebarDraggableComponent
         sectionName={item.name}
         apiClass={currentItem}
@@ -120,6 +125,7 @@ const UniqueInputsDraggableComponent = ({
         itemName={SBItemName}
         error={!!currentItem.error}
         display_name={currentItem.display_name}
+        display_name_zh={currentItem.display_name_zh}
         official={currentItem.official === false ? false : true}
         beta={currentItem.beta ?? false}
         legacy={currentItem.legacy ?? false}

@@ -18,7 +18,9 @@ class ChromaVectorStoreComponent(LCVectorStoreComponent):
     """Chroma Vector Store with search capabilities."""
 
     display_name: str = "Chroma DB"
+    display_name_zh: str = "Chroma数据库"
     description: str = "Chroma Vector Store with search capabilities"
+    description_zh: str = "具有搜索功能的Chroma向量存储"
     name = "Chroma"
     icon = "Chroma"
 
@@ -81,9 +83,9 @@ class ChromaVectorStoreComponent(LCVectorStoreComponent):
         ),
         IntInput(
             name="limit",
-            display_name="Limit",
+            display_name="限制",
             advanced=True,
-            info="Limit the number of records to compare when Allow Duplicates is False.",
+            info="限制 the number of records to compare when Allow Duplicates is 假.",
         ),
     ]
 

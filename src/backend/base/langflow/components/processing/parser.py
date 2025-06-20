@@ -9,32 +9,33 @@ from langflow.template.field.base import Output
 
 class ParserComponent(Component):
     display_name = "Parser"
+    display_name_zh = "解析器"
     description = "Extracts text using a template."
+    description_zh = "使用模板提取文本。"
     icon = "braces"
 
     inputs = [
         HandleInput(
             name="input_data",
-            display_name="Data or DataFrame",
+            display_name="数据或DataFrame",
             input_types=["DataFrame", "Data"],
-            info="Accepts either a DataFrame or a Data object.",
+            info="接受一个DataFrame或一个数据对象。",
             required=True,
         ),
         TabInput(
             name="mode",
-            display_name="Mode",
+            display_name="模式",
             options=["Parser", "Stringify"],
             value="Parser",
-            info="Convert into raw string instead of using a template.",
+            info="将数据转换为原始字符串，而不是使用模板。",
             real_time_refresh=True,
         ),
         MultilineInput(
             name="pattern",
-            display_name="Template",
+            display_name="模板",
             info=(
-                "Use variables within curly brackets to extract column values for DataFrames "
-                "or key values for Data."
-                "For example: `Name: {Name}, Age: {Age}, Country: {Country}`"
+                "使用大括号内的变量提取DataFrame的列值或Data的键值。"
+                "例如：`Name: {Name}, Age: {Age}, Country: {Country}`"
             ),
             value="Text: {text}",  # Example default
             dynamic=True,
@@ -43,18 +44,18 @@ class ParserComponent(Component):
         ),
         MessageTextInput(
             name="sep",
-            display_name="Separator",
+            display_name="分隔符",
             advanced=True,
             value="\n",
-            info="String used to separate rows/items.",
+            info="用于分隔行和项目的字符串。",
         ),
     ]
 
     outputs = [
         Output(
-            display_name="Parsed Text",
+            display_name="解析后的文本",
             name="parsed_text",
-            info="Formatted text output.",
+            info="格式化后的文本输出。",
             method="parse_combined_text",
         ),
     ]

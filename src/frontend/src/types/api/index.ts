@@ -53,6 +53,8 @@ export type APIClassType = {
   field_order?: string[];
   tool_mode?: boolean;
   type?: string;
+  display_name_zh?: string;
+  description_zh?: string;
   [key: string]:
     | Array<string>
     | string

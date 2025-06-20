@@ -8,7 +8,9 @@ from langflow.schema.message import Message
 
 class MessageToDataComponent(Component):
     display_name = "Message to Data"
+    display_name_zh = "消息 → 数据"
     description = "Convert a Message object to a Data object"
+    description_zh = "将消息对象转换为数据对象"
     icon = "message-square-share"
     beta = True
     name = "MessagetoData"
@@ -17,13 +19,13 @@ class MessageToDataComponent(Component):
     inputs = [
         MessageInput(
             name="message",
-            display_name="Message",
-            info="The Message object to convert to a Data object",
+            display_name="消息",
+            info="要转换为数据对象的消息对象",
         ),
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="convert_message_to_data"),
+        Output(display_name="数据", name="data", method="convert_message_to_data"),
     ]
 
     def convert_message_to_data(self) -> Data:

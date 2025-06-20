@@ -8,7 +8,9 @@ from langflow.schema.data import Data
 
 class AssemblyAIGetSubtitles(Component):
     display_name = "AssemblyAI Get Subtitles"
+    display_name_zh = "AssemblyAI 获取字幕"
     description = "Export your transcript in SRT or VTT format for subtitles and closed captions"
+    description_zh = "将转录结果导出为SRT或VTT格式，用于字幕和闭路字幕。"
     documentation = "https://www.assemblyai.com/docs"
     icon = "AssemblyAI"
 

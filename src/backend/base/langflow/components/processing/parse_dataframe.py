@@ -5,39 +5,44 @@ from langflow.schema.message import Message
 
 class ParseDataFrameComponent(Component):
     display_name = "Parse DataFrame"
+    display_name_zh = "DataFrame → 文本"
     description = (
         "Convert a DataFrame into plain text following a specified template. "
         "Each column in the DataFrame is treated as a possible template key, e.g. {col_name}."
+    )
+    description_zh = (
+        "将DataFrame转换为纯文本，遵循指定的模板。"
+        "DataFrame中的每一列都被视为可能的模板键，例如{col_name}。"
     )
     icon = "braces"
     name = "ParseDataFrame"
     legacy = True
 
     inputs = [
-        DataFrameInput(name="df", display_name="DataFrame", info="The DataFrame to convert to text rows."),
+        DataFrameInput(name="df", display_name="DataFrame", info="要转换为文本行的DataFrame。"),
         MultilineInput(
             name="template",
-            display_name="Template",
+            display_name="模板",
             info=(
-                "The template for formatting each row. "
-                "Use placeholders matching column names in the DataFrame, for example '{col1}', '{col2}'."
+                "用于格式化每一行的模板。"
+                "使用与DataFrame中的列名匹配的占位符，例如'{col1}'、'{col2}'。"
             ),
             value="{text}",
         ),
         StrInput(
             name="sep",
-            display_name="Separator",
+            display_name="分隔符",
             advanced=True,
             value="\n",
-            info="String that joins all row texts when building the single Text output.",
+            info="用于将所有行文本连接在一起的String，构建单个文本输出。",
         ),
     ]
 
     outputs = [
         Output(
-            display_name="Text",
+            display_name="文本",
             name="text",
-            info="All rows combined into a single text, each row formatted by the template and separated by `sep`.",
+            info="所有行合并为一个文本，每个行由模板格式化并由`sep`分隔。",
             method="parse_data",
         ),
     ]

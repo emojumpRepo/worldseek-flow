@@ -54,10 +54,10 @@ class NotDiamondComponent(Component):
         self._selected_model_name = None
 
     inputs = [
-        MessageInput(name="input_value", display_name="Input", required=True),
+        MessageInput(name="input_value", display_name="输入", required=True),
         MessageTextInput(
             name="system_message",
-            display_name="System Message",
+            display_name="系统消息",
             info="System message to pass to the model.",
             advanced=False,
         ),
@@ -72,7 +72,7 @@ class NotDiamondComponent(Component):
         SecretStrInput(
             name="api_key",
             display_name="Not Diamond API Key",
-            info="The Not Diamond API Key to use for routing.",
+            info="The 否t Diamond API密钥 to use for routing.",
             advanced=False,
             value="NOTDIAMOND_API_KEY",
             required=True,
@@ -94,14 +94,14 @@ class NotDiamondComponent(Component):
         BoolInput(
             name="hash_content",
             display_name="Hash Content",
-            info="Whether to hash the content before being sent to the NotDiamond API.",
+            info="Whether to hash the content before being sent to the 否tDiamond API.",
             advanced=False,
             value=False,
         ),
     ]
 
     outputs = [
-        Output(display_name="Output", name="output", method="model_select"),
+        Output(display_name="输出", name="output", method="model_select"),
         Output(
             display_name="Selected Model",
             name="selected_model",

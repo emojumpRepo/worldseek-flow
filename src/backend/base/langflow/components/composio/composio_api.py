@@ -24,7 +24,9 @@ enabled_tools = ["confluence", "discord", "dropbox", "github", "gmail", "linkedi
 
 class ComposioAPIComponent(LCToolComponent):
     display_name: str = "Composio Tools"
+    display_name_zh: str = "Composio 工具"
     description: str = "Use Composio toolset to run actions with your agent"
+    description_zh: str = "使用Composio工具集与您的代理运行操作。"
     name = "ComposioAPI"
     icon = "Composio"
     documentation: str = "https://docs.composio.dev"
@@ -66,7 +68,7 @@ class ComposioAPIComponent(LCToolComponent):
     ]
 
     outputs = [
-        Output(name="tools", display_name="Tools", method="build_tool"),
+        Output(name="tools", display_name="工具", method="build_tool"),
     ]
 
     def sanitize_action_name(self, action_name: str) -> str:

@@ -8,7 +8,9 @@ from langflow.io import BoolInput, DropdownInput, FloatInput, IntInput, SecretSt
 
 class MistralAIModelComponent(LCModelComponent):
     display_name = "MistralAI"
+    display_name_zh = "MistralAI"
     description = "Generates text using MistralAI LLMs."
+    description_zh = "使用MistralAI大语言模型生成文本。"
     icon = "MistralAI"
     name = "MistralModel"
 
@@ -16,13 +18,13 @@ class MistralAIModelComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             options=[
                 "open-mixtral-8x7b",
@@ -38,20 +40,20 @@ class MistralAIModelComponent(LCModelComponent):
             name="mistral_api_base",
             display_name="Mistral API Base",
             advanced=True,
-            info="The base URL of the Mistral API. Defaults to https://api.mistral.ai/v1. "
+            info="The base 网址 of the Mistral API. Defaults to https://api.mistral.ai/v1. "
             "You can change this to use other APIs like JinaChat, LocalAI and Prem.",
         ),
         SecretStrInput(
             name="api_key",
             display_name="Mistral API Key",
-            info="The Mistral API Key to use for the Mistral model.",
+            info="The Mistral API密钥 to use for the Mistral model.",
             advanced=False,
             required=True,
             value="MISTRAL_API_KEY",
         ),
         FloatInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             advanced=True,
         ),
@@ -63,7 +65,7 @@ class MistralAIModelComponent(LCModelComponent):
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
+            display_name="超时",
             advanced=True,
             value=60,
         ),

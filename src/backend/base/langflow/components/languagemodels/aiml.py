@@ -19,6 +19,7 @@ from langflow.inputs.inputs import (
 class AIMLModelComponent(LCModelComponent):
     display_name = "AIML"
     description = "Generates text using AIML LLMs."
+    description_zh = "使用AIML LLMs生成文本。"
     icon = "AIML"
     name = "AIMLModel"
     documentation = "https://docs.aimlapi.com/api-reference"
@@ -27,7 +28,7 @@ class AIMLModelComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
             range_spec=RangeSpec(min=0, max=128000),
@@ -35,7 +36,7 @@ class AIMLModelComponent(LCModelComponent):
         DictInput(name="model_kwargs", display_name="Model Kwargs", advanced=True),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             options=[],
             refresh_button=True,
@@ -44,19 +45,19 @@ class AIMLModelComponent(LCModelComponent):
             name="aiml_api_base",
             display_name="AIML API Base",
             advanced=True,
-            info="The base URL of the OpenAI API. Defaults to https://api.aimlapi.com . "
+            info="The base 网址 of the OpenAI API. Defaults to https://api.aimlapi.com . "
             "You can change this to use other APIs like JinaChat, LocalAI and Prem.",
         ),
         SecretStrInput(
             name="api_key",
             display_name="AIML API Key",
-            info="The AIML API Key to use for the OpenAI model.",
+            info="The AIML API密钥 to use for the OpenAI model.",
             advanced=False,
             value="AIML_API_KEY",
             required=True,
         ),
         SliderInput(
-            name="temperature", display_name="Temperature", value=0.1, range_spec=RangeSpec(min=0, max=2, step=0.01)
+            name="temperature", display_name="温度", value=0.1, range_spec=RangeSpec(min=0, max=2, step=0.01)
         ),
     ]
 

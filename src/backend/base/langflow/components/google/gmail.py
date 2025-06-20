@@ -22,7 +22,9 @@ from langflow.template.field.base import Output
 
 class GmailLoaderComponent(Component):
     display_name = "Gmail Loader"
+    display_name_zh = "Gmail加载器"
     description = "Loads emails from Gmail using provided credentials."
+    description_zh = "使用提供的凭据从Gmail加载邮件。"
     icon = "Google"
     legacy: bool = True
 
@@ -63,7 +65,7 @@ class GmailLoaderComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="load_emails"),
+        Output(display_name="数据", name="data", method="load_emails"),
     ]
 
     def load_emails(self) -> Data:

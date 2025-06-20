@@ -12,14 +12,16 @@ DEEPSEEK_MODELS = ["deepseek-chat"]
 
 class DeepSeekModelComponent(LCModelComponent):
     display_name = "DeepSeek"
+    display_name_zh = "DeepSeek"
     description = "Generate text using DeepSeek LLMs."
+    description_zh = "使用DeepSeek大语言模型生成文本。"
     icon = "DeepSeek"
 
     inputs = [
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             info="Maximum number of tokens to generate. Set to 0 for unlimited.",
             range_spec=RangeSpec(min=0, max=128000),
@@ -34,11 +36,11 @@ class DeepSeekModelComponent(LCModelComponent):
             name="json_mode",
             display_name="JSON Mode",
             advanced=True,
-            info="If True, it will output JSON regardless of passing a schema.",
+            info="If 真, it will output JSON regardless of passing a schema.",
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             info="DeepSeek model to use",
             options=DEEPSEEK_MODELS,
             value="deepseek-chat",
@@ -48,19 +50,19 @@ class DeepSeekModelComponent(LCModelComponent):
             name="api_base",
             display_name="DeepSeek API Base",
             advanced=True,
-            info="Base URL for API requests. Defaults to https://api.deepseek.com",
+            info="Base 网址 for API requests. Defaults to https://api.deepseek.com",
             value="https://api.deepseek.com",
         ),
         SecretStrInput(
             name="api_key",
             display_name="DeepSeek API Key",
-            info="The DeepSeek API Key",
+            info="The DeepSeek API密钥",
             advanced=False,
             required=True,
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             info="Controls randomness in responses",
             value=1.0,
             range_spec=RangeSpec(min=0, max=2, step=0.01),

@@ -19,7 +19,7 @@ class TavilySearchComponent(Component):
             name="api_key",
             display_name="Tavily API Key",
             required=True,
-            info="Your Tavily API Key.",
+            info="Your Tavily API密钥.",
         ),
         MessageTextInput(
             name="query",

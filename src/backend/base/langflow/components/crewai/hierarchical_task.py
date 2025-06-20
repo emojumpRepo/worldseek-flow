@@ -5,12 +5,14 @@ from langflow.io import HandleInput, MultilineInput, Output
 
 class HierarchicalTaskComponent(Component):
     display_name: str = "Hierarchical Task"
+    display_name_zh: str = "分层任务"
     description: str = "Each task must have a description, an expected output and an agent responsible for execution."
+    description_zh: str = "每个任务必须有一个描述、一个期望输出和一个负责执行的代理。"
     icon = "CrewAI"
     inputs = [
         MultilineInput(
             name="task_description",
-            display_name="Description",
+            display_name="描述",
             info="Descriptive text detailing task's purpose and execution.",
         ),
         MultilineInput(
@@ -20,17 +22,17 @@ class HierarchicalTaskComponent(Component):
         ),
         HandleInput(
             name="tools",
-            display_name="Tools",
+            display_name="工具",
             input_types=["Tool"],
             is_list=True,
-            info="List of tools/resources limited for task execution. Uses the Agent tools by default.",
+            info="List of tools/resources limited for task execution. Uses the 代理 tools by default.",
             required=False,
             advanced=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Task", name="task_output", method="build_task"),
+        Output(display_name="任务", name="task_output", method="build_task"),
     ]
 
     def build_task(self) -> HierarchicalTask:

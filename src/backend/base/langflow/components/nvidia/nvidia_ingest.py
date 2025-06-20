@@ -31,7 +31,7 @@ class NvidiaIngestComponent(BaseFileComponent):
         MessageTextInput(
             name="base_url",
             display_name="Base URL",
-            info="The URL of the NVIDIA NeMo Retriever Extraction API.",
+            info="The 网址 of the NVIDIA NeMo Retriever Extraction API.",
             required=True,
         ),
         SecretStrInput(
@@ -104,7 +104,7 @@ class NvidiaIngestComponent(BaseFileComponent):
         BoolInput(
             name="filter_images",
             display_name="Filter Images",
-            info="Filter images (see advanced options for filtering criteria).",
+            info="过滤器 images (see advanced options for filtering criteria).",
             advanced=True,
             value=False,
         ),
@@ -132,7 +132,7 @@ class NvidiaIngestComponent(BaseFileComponent):
         BoolInput(
             name="dedup_images",
             display_name="Deduplicate Images",
-            info="Filter duplicated images.",
+            info="过滤器 duplicated images.",
             advanced=True,
             value=True,
         ),

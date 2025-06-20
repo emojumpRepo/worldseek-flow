@@ -29,6 +29,7 @@ export const SidebarDraggableComponent = forwardRef(
     {
       sectionName,
       display_name,
+      display_name_zh,
       icon,
       itemName,
       error,
@@ -45,6 +46,7 @@ export const SidebarDraggableComponent = forwardRef(
       apiClass: APIClassType;
       icon: string;
       display_name: string;
+      display_name_zh: string;
       itemName: string;
       error: boolean;
       color: string;
@@ -156,9 +158,12 @@ export const SidebarDraggableComponent = forwardRef(
                 className="h-5 w-5 shrink-0"
               />
               <div className="flex flex-1 items-center overflow-hidden">
-                <ShadTooltip content={display_name} styleClasses="z-50">
+                <ShadTooltip
+                  content={display_name_zh || display_name}
+                  styleClasses="z-50"
+                >
                   <span className="truncate text-sm font-normal">
-                    {display_name}
+                    {display_name_zh || display_name}
                   </span>
                 </ShadTooltip>
                 {beta && (

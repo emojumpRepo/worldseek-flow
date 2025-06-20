@@ -26,7 +26,7 @@ class RedisVectorStoreComponent(LCVectorStoreComponent):
         StrInput(name="code", display_name="Code", advanced=True),
         StrInput(
             name="schema",
-            display_name="Schema",
+            display_name="模式",
         ),
         *LCVectorStoreComponent.inputs,
         IntInput(

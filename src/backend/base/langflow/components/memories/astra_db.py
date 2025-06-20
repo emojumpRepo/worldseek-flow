@@ -25,7 +25,7 @@ class AstraDBChatMemory(LCChatMemoryComponent):
         SecretStrInput(
             name="api_endpoint",
             display_name="API Endpoint",
-            info="API endpoint URL for the Astra DB service.",
+            info="API endpoint 网址 for the Astra DB service.",
             value="ASTRA_DB_API_ENDPOINT",
             required=True,
         ),
@@ -38,12 +38,12 @@ class AstraDBChatMemory(LCChatMemoryComponent):
         StrInput(
             name="namespace",
             display_name="Namespace",
-            info="Optional namespace within Astra DB to use for the collection.",
+            info="可选 namespace within Astra DB to use for the collection.",
             advanced=True,
         ),
         MessageTextInput(
             name="session_id",
-            display_name="Session ID",
+            display_name="会话ID",
             info="The session ID of the chat. If empty, the current session ID parameter will be used.",
             advanced=True,
         ),

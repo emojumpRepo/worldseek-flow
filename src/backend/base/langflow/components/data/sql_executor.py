@@ -17,7 +17,9 @@ class SQLComponent(ComponentWithCache):
     """A sql component."""
 
     display_name = "SQL Database"
+    display_name_zh = "SQL数据库"
     description = "Executes SQL queries on SQLAlchemy-compatible databases."
+    description_zh = "在SQLAlchemy兼容的数据库上执行SQL查询。"
     icon = "database"
     name = "SQLComponent"
     metadata = {"keywords": ["sql", "database", "query", "db", "fetch"]}
@@ -41,21 +43,21 @@ class SQLComponent(ComponentWithCache):
             self._shared_component_cache.set(self.database_url, self.db)
 
     inputs = [
-        MessageTextInput(name="database_url", display_name="Database URL", required=True),
-        MultilineInput(name="query", display_name="SQL Query", tool_mode=True, required=True),
-        BoolInput(name="include_columns", display_name="Include Columns", value=True, tool_mode=True, advanced=True),
+        MessageTextInput(name="database_url", display_name="数据库URL", required=True),
+        MultilineInput(name="query", display_name="SQL查询", tool_mode=True, required=True),
+        BoolInput(name="include_columns", display_name="包含列", value=True, tool_mode=True, advanced=True),
         BoolInput(
             name="add_error",
-            display_name="Add Error",
+            display_name="添加错误",
             value=False,
             tool_mode=True,
-            info="If True, the error will be added to the result",
+            info="如果为真，则错误将添加到结果中",
             advanced=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Result Table", name="run_sql_query", method="run_sql_query"),
+        Output(display_name="结果表", name="run_sql_query", method="run_sql_query"),
     ]
 
     def build_component(

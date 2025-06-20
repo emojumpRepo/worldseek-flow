@@ -27,7 +27,7 @@ class SemanticTextSplitterComponent(LCTextSplitterComponent):
         HandleInput(
             name="data_inputs",
             display_name="Data Inputs",
-            info="List of Data objects containing text and metadata to split.",
+            info="List of 数据 objects containing text and metadata to split.",
             input_types=["Data"],
             is_list=True,
             required=True,
@@ -35,7 +35,7 @@ class SemanticTextSplitterComponent(LCTextSplitterComponent):
         HandleInput(
             name="embeddings",
             display_name="Embeddings",
-            info="Embeddings model to use for semantic similarity. Required.",
+            info="Embeddings model to use for semantic similarity. 必需.",
             input_types=["Embeddings"],
             is_list=False,
             required=True,
@@ -65,14 +65,14 @@ class SemanticTextSplitterComponent(LCTextSplitterComponent):
         MessageTextInput(
             name="sentence_split_regex",
             display_name="Sentence Split Regex",
-            info="Regular expression to split sentences. Optional.",
+            info="Regular expression to split sentences. 可选.",
             value="",
             advanced=True,
         ),
         IntInput(
             name="buffer_size",
             display_name="Buffer Size",
-            info="Size of the buffer.",
+            info="大小 of the buffer.",
             value=0,
             advanced=True,
         ),

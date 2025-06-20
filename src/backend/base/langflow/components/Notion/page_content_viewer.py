@@ -19,12 +19,12 @@ class NotionPageContent(LCToolComponent):
         StrInput(
             name="page_id",
             display_name="Page ID",
-            info="The ID of the Notion page to retrieve.",
+            info="The ID of the 否tion page to retrieve.",
         ),
         SecretStrInput(
             name="notion_secret",
             display_name="Notion Secret",
-            info="The Notion integration token.",
+            info="The 否tion integration token.",
             required=True,
         ),
     ]

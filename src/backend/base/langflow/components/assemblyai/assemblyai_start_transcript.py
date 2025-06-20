@@ -10,7 +10,9 @@ from langflow.schema.data import Data
 
 class AssemblyAITranscriptionJobCreator(Component):
     display_name = "AssemblyAI Start Transcript"
+    display_name_zh = "AssemblyAI 开始转录"
     description = "Create a transcription job for an audio file using AssemblyAI with advanced options"
+    description_zh = "使用AssemblyAI创建转录作业，并提供高级选项。"
     documentation = "https://www.assemblyai.com/docs"
     icon = "AssemblyAI"
 
@@ -71,7 +73,7 @@ class AssemblyAITranscriptionJobCreator(Component):
         MessageTextInput(
             name="audio_file_url",
             display_name="Audio File URL",
-            info="The URL of the audio file to transcribe (Can be used instead of a File)",
+            info="The 网址 of the audio file to transcribe (Can be used instead of a 文件)",
             advanced=True,
         ),
         DropdownInput(
@@ -88,12 +90,12 @@ class AssemblyAITranscriptionJobCreator(Component):
         BoolInput(
             name="language_detection",
             display_name="Automatic Language Detection",
-            info="Enable automatic language detection",
+            info="启用 automatic language detection",
             advanced=True,
         ),
         MessageTextInput(
             name="language_code",
-            display_name="Language",
+            display_name="语言",
             info=(
                 """
             The language of the audio file. Can be set manually if automatic language detection is disabled.
@@ -105,7 +107,7 @@ class AssemblyAITranscriptionJobCreator(Component):
         BoolInput(
             name="speaker_labels",
             display_name="Enable Speaker Labels",
-            info="Enable speaker diarization",
+            info="启用 speaker diarization",
         ),
         MessageTextInput(
             name="speakers_expected",
@@ -116,14 +118,14 @@ class AssemblyAITranscriptionJobCreator(Component):
         BoolInput(
             name="punctuate",
             display_name="Punctuate",
-            info="Enable automatic punctuation",
+            info="启用 automatic punctuation",
             advanced=True,
             value=True,
         ),
         BoolInput(
             name="format_text",
             display_name="Format Text",
-            info="Enable text formatting",
+            info="启用 text formatting",
             advanced=True,
             value=True,
         ),

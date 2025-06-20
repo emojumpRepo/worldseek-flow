@@ -30,7 +30,7 @@ class NaturalLanguageTextSplitterComponent(LCTextSplitterComponent):
         ),
         DataInput(
             name="data_input",
-            display_name="Input",
+            display_name="输入",
             info="The text data to be split.",
             input_types=["Document", "Data"],
             required=True,
@@ -42,7 +42,7 @@ class NaturalLanguageTextSplitterComponent(LCTextSplitterComponent):
         ),
         MessageTextInput(
             name="language",
-            display_name="Language",
+            display_name="语言",
             info='The language of the text. Default is "English". '
             "Supports multiple languages for better text boundary recognition.",
         ),

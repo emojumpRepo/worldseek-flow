@@ -15,7 +15,7 @@ class NVIDIAEmbeddingsComponent(LCEmbeddingsModel):
     inputs = [
         DropdownInput(
             name="model",
-            display_name="Model",
+            display_name="模型",
             options=[
                 "nvidia/nv-embed-v1",
                 "snowflake/arctic-embed-I",
@@ -33,7 +33,7 @@ class NVIDIAEmbeddingsComponent(LCEmbeddingsModel):
         SecretStrInput(
             name="nvidia_api_key",
             display_name="NVIDIA API Key",
-            info="The NVIDIA API Key.",
+            info="The NVIDIA API密钥.",
             advanced=False,
             value="NVIDIA_API_KEY",
             required=True,

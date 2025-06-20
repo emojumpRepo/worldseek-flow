@@ -8,7 +8,9 @@ from langflow.schema.dotdict import dotdict
 
 class DataConditionalRouterComponent(Component):
     display_name = "Condition"
+    display_name_zh = "条件判断"
     description = "Route Data object(s) based on a condition applied to a specified key, including boolean validation."
+    description_zh = "根据条件将数据对象路由到相应的输出，包括布尔验证。"
     icon = "split"
     name = "DataConditionalRouter"
     legacy = True
@@ -16,32 +18,32 @@ class DataConditionalRouterComponent(Component):
     inputs = [
         DataInput(
             name="data_input",
-            display_name="Data Input",
-            info="The Data object or list of Data objects to process",
+            display_name="数据输入",
+            info="要处理的数据对象或数据对象列表",
             is_list=True,
         ),
         MessageTextInput(
             name="key_name",
-            display_name="Key Name",
-            info="The name of the key in the Data object(s) to check",
+            display_name="键名",
+            info="要检查的数据对象中的键名",
         ),
         DropdownInput(
             name="operator",
-            display_name="Operator",
+            display_name="操作符",
             options=["equals", "not equals", "contains", "starts with", "ends with", "boolean validator"],
-            info="The operator to apply for comparing the values. 'boolean validator' treats the value as a boolean.",
+            info="要应用于比较值的操作符。'boolean validator' 将值视为布尔值。",
             value="equals",
         ),
         MessageTextInput(
             name="compare_value",
-            display_name="Match Text",
-            info="The value to compare against (not used for boolean validator)",
+            display_name="匹配文本",
+            info="要比较的值（不用于布尔验证器）",
         ),
     ]
 
     outputs = [
-        Output(display_name="True Output", name="true_output", method="process_data"),
-        Output(display_name="False Output", name="false_output", method="process_data"),
+        Output(display_name="True 输出", name="true_output", method="process_data"),
+        Output(display_name="False 输出", name="false_output", method="process_data"),
     ]
 
     def compare_values(self, item_value: str, compare_value: str, operator: str) -> bool:

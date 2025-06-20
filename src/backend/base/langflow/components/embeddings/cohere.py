@@ -20,7 +20,7 @@ class CohereEmbeddingsComponent(LCModelComponent):
         SecretStrInput(name="api_key", display_name="Cohere API Key", required=True, real_time_refresh=True),
         DropdownInput(
             name="model_name",
-            display_name="Model",
+            display_name="模型",
             advanced=False,
             options=[
                 "embed-english-v2.0",

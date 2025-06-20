@@ -15,7 +15,9 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
     """Google Calendar API component for interacting with Google Calendar services."""
 
     display_name: str = "Google Calendar"
+    display_name_zh: str = "Google 日历"
     description: str = "Google Calendar API"
+    description_zh: str = "Google 日历 API"
     icon = "Googlecalendar"
     documentation: str = "https://docs.composio.dev"
     app_name = "googlecalendar"
@@ -195,7 +197,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="GOOGLECALENDAR_LIST_CALENDARS_page_token",
             display_name="Page Token",
-            info="Token specifying which result page to return.",
+            info="令牌 specifying which result page to return.",
             show=False,
             advanced=True,
         ),
@@ -218,7 +220,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="GOOGLECALENDAR_LIST_CALENDARS_sync_token",
             display_name="Sync Token",
-            info="Token obtained from the nextSyncToken field returned on the last page of results from the previous list request.",  # noqa: E501
+            info="令牌 obtained from the nextSync令牌 field returned on the last page of results from the previous list request.",  # noqa: E501
             show=False,
             advanced=True,
         ),
@@ -231,7 +233,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GOOGLECALENDAR_FIND_EVENT_query",
-            display_name="Query",
+            display_name="查询",
             info="Search term to find events that match these terms in the event's summary, description, location, attendee's displayName, attendee's email, organizer's displayName, organizer's email, etc if needed.",  # noqa: E501
             show=False,
         ),
@@ -288,14 +290,14 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="GOOGLECALENDAR_FIND_EVENT_event_types",
             display_name="Event Types",
-            info="List of event types to return. Possible values are: default, outOfOffice, focusTime, workingLocation.",  # noqa: E501
+            info="List of event types to return. Possible values are: default, outOfOffice, focus时间, workingLocation.",  # noqa: E501
             show=False,
             advanced=True,
         ),
         MessageTextInput(
             name="GOOGLECALENDAR_FIND_EVENT_page_token",
             display_name="Page Token",
-            info="Token specifying which result page to return. Optional.",
+            info="令牌 specifying which result page to return. 可选.",
             show=False,
             advanced=True,
         ),
@@ -323,7 +325,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="GOOGLECALENDAR_REMOVE_ATTENDEE_attendee_email",
             display_name="Attendee Email",
-            info="Email address of the attendee to be removed",
+            info="邮箱 address of the attendee to be removed",
             show=False,
             required=True,
         ),
@@ -336,8 +338,8 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GOOGLECALENDAR_CREATE_EVENT_description",
-            display_name="Description",
-            info="Description of the event. Can contain HTML. Optional.",
+            display_name="描述",
+            info="描述 of the event. Can contain HTML. 可选.",
             show=False,
             advanced=True,
         ),
@@ -415,7 +417,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         BoolInput(
             name="GOOGLECALENDAR_CREATE_EVENT_guests_can_modify",
             display_name="Guests Can Modify",
-            info="If True, guests can modify the event.",
+            info="If 真, guests can modify the event.",
             show=False,
             value=False,
             advanced=True,
@@ -429,7 +431,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         BoolInput(
             name="GOOGLECALENDAR_CREATE_EVENT_send_updates",
             display_name="Send Updates",
-            info="Defaults to True. Whether to send updates to the attendees.",
+            info="Defaults to 真. Whether to send updates to the attendees.",
             show=False,
             advanced=True,
         ),
@@ -495,7 +497,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="GOOGLECALENDAR_FIND_FREE_SLOTS_timezone",
             display_name="Timezone",
-            info="Time zone used in the response. Optional. The default is UTC.",
+            info="时间 zone used in the response. 可选. The default is UTC.",
             show=False,
             value="UTC",
             advanced=True,
@@ -503,7 +505,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         IntInput(
             name="GOOGLECALENDAR_FIND_FREE_SLOTS_group_expansion_max",
             display_name="Group Expansion Max",
-            info="Maximal number of calendar identifiers to be provided for a single group. Optional. An error is returned for a group with more members than this value. Maximum value is 100.",  # noqa: E501
+            info="Maximal number of calendar identifiers to be provided for a single group. 可选. An error is returned for a group with more members than this value. Maximum value is 100.",  # noqa: E501
             show=False,
             value=100,
             advanced=True,
@@ -511,7 +513,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         IntInput(
             name="GOOGLECALENDAR_FIND_FREE_SLOTS_calendar_expansion_max",
             display_name="Calendar Expansion Max",
-            info="Maximal number of calendars for which FreeBusy information is to be provided. Optional. Maximum value is 50.",  # noqa: E501
+            info="Maximal number of calendars for which FreeBusy information is to be provided. 可选. Maximum value is 50.",  # noqa: E501
             show=False,
             value=50,
             advanced=True,
@@ -531,7 +533,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GOOGLECALENDAR_QUICK_ADD_text",
-            display_name="Text",
+            display_name="文本",
             info="The text describing the event to be created.",
             show=False,
             value="",
@@ -553,8 +555,8 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GOOGLECALENDAR_PATCH_CALENDAR_description",
-            display_name="Description",
-            info="Description of the calendar. Optional.",
+            display_name="描述",
+            info="描述 of the calendar. 可选.",
             show=False,
             advanced=True,
         ),
@@ -589,8 +591,8 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="GOOGLECALENDAR_UPDATE_EVENT_description",
-            display_name="Description",
-            info="Description of the event. Can contain HTML. Optional.",
+            display_name="描述",
+            info="描述 of the event. Can contain HTML. 可选.",
             show=False,
             advanced=True,
         ),
@@ -669,7 +671,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         BoolInput(
             name="GOOGLECALENDAR_UPDATE_EVENT_guests_can_modify",
             display_name="Guests Can Modify",
-            info="If True, guests can modify the event.",
+            info="If 真, guests can modify the event.",
             show=False,
             value=False,
             advanced=True,
@@ -683,7 +685,7 @@ class ComposioGoogleCalendarAPIComponent(ComposioBaseComponent):
         BoolInput(
             name="GOOGLECALENDAR_UPDATE_EVENT_send_updates",
             display_name="Send Updates",
-            info="Defaults to True. Whether to send updates to the attendees.",
+            info="Defaults to 真. Whether to send updates to the attendees.",
             show=False,
             advanced=True,
         ),

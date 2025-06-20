@@ -22,7 +22,7 @@ class VectaraSelfQueryRetriverComponent(CustomComponent):
         HandleInput(
             name="vectorstore",
             display_name="Vector Store",
-            info="Input Vectara Vector Store",
+            info="输入 Vectara Vector Store",
         ),
         HandleInput(
             name="llm",

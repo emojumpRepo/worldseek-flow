@@ -22,20 +22,20 @@ class GoogleOAuthToken(Component):
         MultilineInput(
             name="scopes",
             display_name="Scopes",
-            info="Input scopes for your application.",
+            info="输入 scopes for your application.",
             required=True,
         ),
         FileInput(
             name="oauth_credentials",
             display_name="Credentials File",
-            info="Input OAuth Credentials file (e.g. credentials.json).",
+            info="输入 OAuth 凭据 file (e.g. credentials.json).",
             file_types=["json"],
             required=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Output", name="output", method="build_output"),
+        Output(display_name="输出", name="output", method="build_output"),
     ]
 
     def validate_scopes(self, scopes):

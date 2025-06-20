@@ -28,7 +28,7 @@ class LocalDBComponent(LCVectorStoreComponent):
     inputs = [
         TabInput(
             name="mode",
-            display_name="Mode",
+            display_name="模式",
             options=["Ingest", "Retrieve"],
             info="Select the operation mode",
             value="Ingest",
@@ -77,7 +77,7 @@ class LocalDBComponent(LCVectorStoreComponent):
             display_name="Ingest Data",
             input_types=["Data", "DataFrame"],
             is_list=True,
-            info="Data to store. It will be embedded and indexed for semantic search.",
+            info="数据 to store. It will be embedded and indexed for semantic search.",
             show=True,
         ),
         MultilineInput(
@@ -96,9 +96,9 @@ class LocalDBComponent(LCVectorStoreComponent):
         ),
         IntInput(
             name="limit",
-            display_name="Limit",
+            display_name="限制",
             advanced=True,
-            info="Limit the number of records to compare when Allow Duplicates is False.",
+            info="限制 the number of records to compare when Allow Duplicates is 假.",
         ),
     ]
     outputs = [

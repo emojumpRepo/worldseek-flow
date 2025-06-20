@@ -25,13 +25,13 @@ class FaissVectorStoreComponent(LCVectorStoreComponent):
         StrInput(
             name="persist_directory",
             display_name="Persist Directory",
-            info="Path to save the FAISS index. It will be relative to where Langflow is running.",
+            info="路径 to save the FAISS index. It will be relative to where Langflow is running.",
         ),
         *LCVectorStoreComponent.inputs,
         BoolInput(
             name="allow_dangerous_deserialization",
             display_name="Allow Dangerous Deserialization",
-            info="Set to True to allow loading pickle files from untrusted sources. "
+            info="Set to 真 to allow loading pickle files from untrusted sources. "
             "Only enable this if you trust the source of the data.",
             advanced=True,
             value=True,

@@ -20,7 +20,7 @@ class NotionSearch(LCToolComponent):
         SecretStrInput(
             name="notion_secret",
             display_name="Notion Secret",
-            info="The Notion integration token.",
+            info="The 否tion integration token.",
             required=True,
         ),
         StrInput(
@@ -31,7 +31,7 @@ class NotionSearch(LCToolComponent):
         DropdownInput(
             name="filter_value",
             display_name="Filter Type",
-            info="Limits the results to either only pages or only databases.",
+            info="限制s the results to either only pages or only databases.",
             options=["page", "database"],
             value="page",
         ),

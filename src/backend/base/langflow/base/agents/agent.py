@@ -36,32 +36,32 @@ class LCAgentComponent(Component):
     _base_inputs: list[InputTypes] = [
         MessageTextInput(
             name="input_value",
-            display_name="Input",
-            info="The input provided by the user for the agent to process.",
+            display_name="输入",
+            info="用户为代理提供要处理的信息。",
             tool_mode=True,
         ),
         BoolInput(
             name="handle_parsing_errors",
-            display_name="Handle Parse Errors",
+            display_name="处理解析错误",
             value=True,
             advanced=True,
-            info="Should the Agent fix errors when reading user input for better processing?",
+            info="代理在读取用户输入时是否应该修复错误以更好地处理？",
         ),
         BoolInput(name="verbose", display_name="Verbose", value=True, advanced=True),
         IntInput(
             name="max_iterations",
-            display_name="Max Iterations",
+            display_name="最大迭代次数",
             value=15,
             advanced=True,
-            info="The maximum number of attempts the agent can make to complete its task before it stops.",
+            info="代理可以尝试完成任务的最大次数。",
         ),
         MultilineInput(
             name="agent_description",
-            display_name="Agent Description [Deprecated]",
+            display_name="代理描述 [已弃用]",
             info=(
-                "The description of the agent. This is only used when in Tool Mode. "
-                f"Defaults to '{DEFAULT_TOOLS_DESCRIPTION}' and tools are added dynamically. "
-                "This feature is deprecated and will be removed in future versions."
+                "代理的描述。仅在工具模式下使用。"
+                f"默认为'{DEFAULT_TOOLS_DESCRIPTION}'，工具是动态添加的。"
+                "此功能已弃用，将在未来版本中删除。"
             ),
             advanced=True,
             value=DEFAULT_TOOLS_DESCRIPTION,
@@ -69,8 +69,8 @@ class LCAgentComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Agent", name="agent", method="build_agent", hidden=True, tool_mode=False),
-        Output(display_name="Response", name="response", method="message_response"),
+        Output(display_name="代理", name="agent", method="build_agent", hidden=True, tool_mode=False),
+        Output(display_name="响应", name="response", method="message_response"),
     ]
 
     @abstractmethod
@@ -203,11 +203,11 @@ class LCToolsAgentComponent(LCAgentComponent):
     _base_inputs = [
         HandleInput(
             name="tools",
-            display_name="Tools",
+            display_name="工具",
             input_types=["Tool"],
             is_list=True,
             required=False,
-            info="These are the tools that the agent can use to help with tasks.",
+            info="这些是代理可以用来帮助完成任务的工具。",
         ),
         *LCAgentComponent._base_inputs,
     ]

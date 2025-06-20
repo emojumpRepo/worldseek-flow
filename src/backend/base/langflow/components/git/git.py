@@ -27,7 +27,7 @@ class GitLoaderComponent(Component):
             display_name="Repository Source",
             options=["Local", "Remote"],
             required=True,
-            info="Select whether to use a local repo path or clone from a remote URL.",
+            info="Select whether to use a local repo path or clone from a remote 网址.",
             real_time_refresh=True,
         ),
         MessageTextInput(
@@ -75,7 +75,7 @@ class GitLoaderComponent(Component):
     ]
 
     outputs = [
-        Output(name="data", display_name="Data", method="load_documents"),
+        Output(name="data", display_name="数据", method="load_documents"),
     ]
 
     @staticmethod

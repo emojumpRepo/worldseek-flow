@@ -17,7 +17,9 @@ from langflow.schema.data import Data
 
 class AgentQL(Component):
     display_name = "Extract Web Data"
+    display_name_zh = "提取网页数据"
     description = "Extracts structured data from a web page using an AgentQL query or a Natural Language description."
+    description_zh = "使用AgentQL查询或自然语言描述从网页中提取结构化数据。"
     documentation: str = "https://docs.agentql.com/rest-api/api-reference"
     icon = "AgentQL"
     name = "AgentQL"
@@ -25,42 +27,42 @@ class AgentQL(Component):
     inputs = [
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             required=True,
             password=True,
-            info="Your AgentQL API key from dev.agentql.com",
+            info="Your 代理QL API key from dev.agentql.com",
         ),
         MessageTextInput(
             name="url",
-            display_name="URL",
+            display_name="网址",
             required=True,
-            info="The URL of the public web page you want to extract data from.",
+            info="The 网址 of the public web page you want to extract data from.",
             tool_mode=True,
         ),
         MultilineInput(
             name="query",
             display_name="AgentQL Query",
             required=False,
-            info="The AgentQL query to execute. Learn more at https://docs.agentql.com/agentql-query or use a prompt.",
+            info="The 代理QL query to execute. Learn more at https://docs.agentql.com/agentql-query or use a prompt.",
             tool_mode=True,
         ),
         MultilineInput(
             name="prompt",
-            display_name="Prompt",
+            display_name="提示词",
             required=False,
-            info="A Natural Language description of the data to extract from the page. Alternative to AgentQL query.",
+            info="A Natural 语言 description of the data to extract from the page. Alternative to 代理QL query.",
             tool_mode=True,
         ),
         BoolInput(
             name="is_stealth_mode_enabled",
             display_name="Enable Stealth Mode (Beta)",
-            info="Enable experimental anti-bot evasion strategies. May not work for all websites at all times.",
+            info="启用 experimental anti-bot evasion strategies. May not work for all websites at all times.",
             value=False,
             advanced=True,
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
+            display_name="超时",
             info="Seconds to wait for a request.",
             value=900,
             advanced=True,
@@ -98,7 +100,7 @@ class AgentQL(Component):
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="build_output"),
+        Output(display_name="数据", name="data", method="build_output"),
     ]
 
     def build_output(self) -> Data:

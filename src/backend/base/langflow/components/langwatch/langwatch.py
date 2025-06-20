@@ -40,19 +40,19 @@ class LangWatchComponent(Component):
         ),
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             required=True,
             info="Enter your LangWatch API key.",
         ),
         MessageTextInput(
             name="input",
-            display_name="Input",
+            display_name="输入",
             required=False,
             info="The input text for evaluation.",
         ),
         MessageTextInput(
             name="output",
-            display_name="Output",
+            display_name="输出",
             required=False,
             info="The output text for evaluation.",
         ),
@@ -70,7 +70,7 @@ class LangWatchComponent(Component):
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
+            display_name="超时",
             info="The maximum time (in seconds) allowed for the server to respond before timing out.",
             value=30,
             advanced=True,

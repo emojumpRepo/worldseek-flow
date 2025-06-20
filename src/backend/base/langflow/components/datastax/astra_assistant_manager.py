@@ -34,7 +34,7 @@ class AstraAssistantManager(ComponentWithCache):
     inputs = [
         DropdownInput(
             name="model_name",
-            display_name="Model",
+            display_name="模型",
             advanced=False,
             options=litellm_model_names,
             value="gpt-4o-mini",
@@ -46,25 +46,25 @@ class AstraAssistantManager(ComponentWithCache):
         ),
         HandleInput(
             name="input_tools",
-            display_name="Tools",
+            display_name="工具",
             input_types=["Tool"],
             is_list=True,
             required=False,
             info="These are the tools that the agent can use to help with tasks.",
         ),
         # DropdownInput(
-        #    display_name="Tools",
+        #    display_name="工具",
         #    name="tool",
         #    options=tool_names,
         # ),
         MultilineInput(
-            name="user_message", display_name="User Message", info="User message to pass to the run.", tool_mode=True
+            name="user_message", display_name="用户消息", info="用户 message to pass to the run.", tool_mode=True
         ),
         FileInput(
             name="file",
             display_name="File(s) for retrieval",
             list=True,
-            info="Files to be sent with the message.",
+            info="文件s to be sent with the message.",
             required=False,
             show=True,
             file_types=[

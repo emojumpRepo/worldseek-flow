@@ -30,7 +30,7 @@ class NvidiaSystemAssistComponent(ComponentWithCache):
     ]
 
     outputs = [
-        Output(display_name="Response", name="response", method="sys_assist_prompt"),
+        Output(display_name="响应", name="response", method="sys_assist_prompt"),
     ]
 
     def maybe_register_rise_client(self):

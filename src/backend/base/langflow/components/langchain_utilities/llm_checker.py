@@ -15,7 +15,7 @@ class LLMCheckerChainComponent(LCChainComponent):
     inputs = [
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
             info="The input value to pass to the chain.",
             required=True,
         ),

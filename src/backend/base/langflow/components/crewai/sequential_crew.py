@@ -7,7 +7,9 @@ from langflow.schema.message import Message
 
 class SequentialCrewComponent(BaseCrewComponent):
     display_name: str = "Sequential Crew"
+    display_name_zh: str = "顺序 Crew"
     description: str = "Represents a group of agents with tasks that are executed sequentially."
+    description_zh: str = "表示一组代理，定义它们如何协作以及它们应该执行的任务。"
     documentation: str = "https://docs.crewai.com/how-to/Sequential/"
     icon = "CrewAI"
 

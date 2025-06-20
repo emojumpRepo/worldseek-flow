@@ -10,7 +10,9 @@ from langflow.schema.dotdict import dotdict
 
 class CreateDataComponent(Component):
     display_name: str = "Create Data"
+    display_name_zh: str = "创建数据"
     description: str = "Dynamically create a Data with a specified number of fields."
+    description_zh: str = "动态创建一个具有指定数量的字段的数据。"
     name: str = "CreateData"
     MAX_FIELDS = 15  # Define a constant for maximum number of fields
     legacy = True
@@ -19,23 +21,23 @@ class CreateDataComponent(Component):
     inputs = [
         IntInput(
             name="number_of_fields",
-            display_name="Number of Fields",
-            info="Number of fields to be added to the record.",
+            display_name="字段数量",
+            info="要添加到记录的字段数量。",
             real_time_refresh=True,
             value=1,
             range_spec=RangeSpec(min=1, max=MAX_FIELDS, step=1, step_type="int"),
         ),
         MessageTextInput(
             name="text_key",
-            display_name="Text Key",
-            info="Key that identifies the field to be used as the text content.",
+            display_name="文本键",
+            info="用于标识要作为文本内容的字段的键。",
             advanced=True,
         ),
         BoolInput(
             name="text_key_validator",
-            display_name="Text Key Validator",
+            display_name="文本键验证器",
             advanced=True,
-            info="If enabled, checks if the given 'Text Key' is present in the given 'Data'.",
+            info="如果启用，则检查给定的'文本键'是否存在于给定的'数据'中。",
         ),
     ]
 

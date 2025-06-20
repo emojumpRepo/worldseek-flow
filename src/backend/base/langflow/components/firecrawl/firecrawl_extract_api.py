@@ -21,7 +21,7 @@ class FirecrawlExtractApi(Component):
     inputs = [
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             required=True,
             password=True,
             info="The API key to use Firecrawl API.",
@@ -30,21 +30,21 @@ class FirecrawlExtractApi(Component):
             name="urls",
             display_name="URLs",
             required=True,
-            info="List of URLs to extract data from (separated by commas or new lines).",
+            info="List of 网址s to extract data from (separated by commas or new lines).",
             tool_mode=True,
         ),
         MultilineInput(
             name="prompt",
-            display_name="Prompt",
+            display_name="提示词",
             required=True,
-            info="Prompt to guide the extraction process.",
+            info="提示词 to guide the extraction process.",
             tool_mode=True,
         ),
         DataInput(
             name="schema",
-            display_name="Schema",
+            display_name="模式",
             required=False,
-            info="Schema to define the structure of the extracted data.",
+            info="模式 to define the structure of the extracted data.",
         ),
         BoolInput(
             name="enable_web_search",
@@ -61,7 +61,7 @@ class FirecrawlExtractApi(Component):
         # BoolInput(
         #     name="include_subdomains",
         #     display_name="Include Subdomains",
-        #     info="When true, subdomains of the provided URLs will also be scanned.",
+        #     info="When true, subdomains of the provided 网址s will also be scanned.",
         # ),
         # # Optional: Not essential for basic extraction
         # BoolInput(
@@ -72,7 +72,7 @@ class FirecrawlExtractApi(Component):
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="extract"),
+        Output(display_name="数据", name="data", method="extract"),
     ]
 
     def extract(self) -> Data:

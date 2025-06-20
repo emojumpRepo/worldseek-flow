@@ -14,7 +14,7 @@ class RetrievalQAComponent(LCChainComponent):
     inputs = [
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
             info="The input value to pass to the chain.",
             required=True,
         ),
@@ -40,7 +40,7 @@ class RetrievalQAComponent(LCChainComponent):
         ),
         HandleInput(
             name="memory",
-            display_name="Memory",
+            display_name="记忆",
             input_types=["BaseChatMemory"],
         ),
         BoolInput(

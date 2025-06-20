@@ -28,7 +28,7 @@ class MultiQueryRetrieverComponent(CustomComponent):
         ),
         StrInput(
             name="prompt",
-            display_name="Prompt",
+            display_name="提示词",
             value="You are an AI language model assistant. Your task is \n"
             "to generate 3 different versions of the given user \n"
             "question to retrieve relevant documents from a vector database. \n"

@@ -26,7 +26,7 @@ class ListHomeAssistantStates(LCToolComponent):
         SecretStrInput(
             name="ha_token",
             display_name="Home Assistant Token",
-            info="Home Assistant Long-Lived Access Token",
+            info="Home Assistant Long-Lived Access 令牌",
             required=True,
         ),
         StrInput(

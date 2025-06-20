@@ -42,9 +42,9 @@ class TwelveLabsPegasus(Component):
     documentation = "https://github.com/twelvelabs-io/twelvelabs-developer-experience/blob/main/integrations/Langflow/TWELVE_LABS_COMPONENTS_README.md"
 
     inputs = [
-        DataInput(name="videodata", display_name="Video Data", info="Video Data", is_list=True),
+        DataInput(name="videodata", display_name="Video Data", info="Video 数据", is_list=True),
         SecretStrInput(
-            name="api_key", display_name="Twelve Labs API Key", info="Enter your Twelve Labs API Key.", required=True
+            name="api_key", display_name="Twelve Labs API Key", info="Enter your Twelve Labs API密钥.", required=True
         ),
         MessageInput(
             name="video_id",
@@ -65,7 +65,7 @@ class TwelveLabsPegasus(Component):
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model",
+            display_name="模型",
             info="Pegasus model to use for indexing",
             options=["pegasus1.2"],
             value="pegasus1.2",
@@ -73,13 +73,13 @@ class TwelveLabsPegasus(Component):
         ),
         MultilineInput(
             name="message",
-            display_name="Prompt",
-            info="Message to chat with the video.",
+            display_name="提示词",
+            info="消息 to chat with the video.",
             required=True,
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.7,
             range_spec=RangeSpec(min=0, max=1, step=0.01),
             info=(
@@ -91,7 +91,7 @@ class TwelveLabsPegasus(Component):
 
     outputs = [
         Output(
-            display_name="Message",
+            display_name="消息",
             name="response",
             method="process_video",
             type_=Message,

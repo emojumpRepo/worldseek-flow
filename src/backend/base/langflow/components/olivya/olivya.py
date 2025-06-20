@@ -18,7 +18,7 @@ class OlivyaComponent(Component):
     inputs = [
         MessageTextInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             info="Your API key for authentication",
             value="",
             required=True,
@@ -63,7 +63,7 @@ class OlivyaComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Output", name="output", method="build_output"),
+        Output(display_name="输出", name="output", method="build_output"),
     ]
 
     async def build_output(self) -> Data:

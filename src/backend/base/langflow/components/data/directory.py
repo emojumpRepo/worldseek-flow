@@ -8,61 +8,63 @@ from langflow.template.field.base import Output
 
 class DirectoryComponent(Component):
     display_name = "Directory"
+    display_name_zh = "目录"
     description = "Recursively load files from a directory."
+    description_zh = "递归加载目录中的文件。"
     icon = "folder"
     name = "Directory"
 
     inputs = [
         MessageTextInput(
             name="path",
-            display_name="Path",
-            info="Path to the directory to load files from. Defaults to current directory ('.')",
+            display_name="路径",
+            info="要加载文件的目录路径。默认为当前目录（'.'）",
             value=".",
             tool_mode=True,
         ),
         MultiselectInput(
             name="types",
-            display_name="File Types",
-            info="File types to load. Select one or more types or leave empty to load all supported types.",
+            display_name="文件类型",
+            info="要加载的文件类型。选择一个或多个类型或留空以加载所有支持的类型。",
             options=TEXT_FILE_TYPES,
             value=[],
         ),
         IntInput(
             name="depth",
-            display_name="Depth",
-            info="Depth to search for files.",
+            display_name="深度",
+            info="要搜索的文件深度。",
             value=0,
         ),
         IntInput(
             name="max_concurrency",
-            display_name="Max Concurrency",
+            display_name="最大并发",
             advanced=True,
-            info="Maximum concurrency for loading files.",
+            info="要加载文件的最大并发数。",
             value=2,
         ),
         BoolInput(
             name="load_hidden",
-            display_name="Load Hidden",
+            display_name="加载隐藏文件",
             advanced=True,
-            info="If true, hidden files will be loaded.",
+            info="如果为true，则加载隐藏文件。",
         ),
         BoolInput(
             name="recursive",
-            display_name="Recursive",
+            display_name="递归",
             advanced=True,
-            info="If true, the search will be recursive.",
+            info="如果为true，则搜索将是递归的。",
         ),
         BoolInput(
             name="silent_errors",
-            display_name="Silent Errors",
+            display_name="静默错误",
             advanced=True,
-            info="If true, errors will not raise an exception.",
+            info="如果为true，则错误不会引发异常。",
         ),
         BoolInput(
             name="use_multithreading",
-            display_name="Use Multithreading",
+            display_name="使用多线程",
             advanced=True,
-            info="If true, multithreading will be used.",
+            info="如果为true，则使用多线程。",
         ),
     ]
 

@@ -41,16 +41,16 @@ class PegasusIndexVideo(Component):
         DataInput(
             name="videodata",
             display_name="Video Data",
-            info="Video Data objects (from VideoFile or SplitVideo)",
+            info="Video 数据 objects (from Video文件 or SplitVideo)",
             is_list=True,
             required=True,
         ),
         SecretStrInput(
-            name="api_key", display_name="Twelve Labs API Key", info="Enter your Twelve Labs API Key.", required=True
+            name="api_key", display_name="Twelve Labs API Key", info="Enter your Twelve Labs API密钥.", required=True
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model",
+            display_name="模型",
             info="Pegasus model to use for indexing",
             options=["pegasus1.2"],
             value="pegasus1.2",

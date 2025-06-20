@@ -9,7 +9,9 @@ from langflow.io import DropdownInput, FloatInput, IntInput, SecretStrInput, Sli
 
 class PerplexityComponent(LCModelComponent):
     display_name = "Perplexity"
+    display_name_zh = "Perplexity"
     description = "Generate text using Perplexity LLMs."
+    description_zh = "使用Perplexity大语言模型生成文本。"
     documentation = "https://python.langchain.com/v0.2/docs/integrations/chat/perplexity/"
     icon = "Perplexity"
     name = "PerplexityModel"
@@ -18,7 +20,7 @@ class PerplexityComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             options=[
                 "llama-3.1-sonar-small-128k-online",
@@ -32,17 +34,17 @@ class PerplexityComponent(LCModelComponent):
             value="llama-3.1-sonar-small-128k-online",
         ),
         IntInput(
-            name="max_output_tokens", display_name="Max Output Tokens", info="The maximum number of tokens to generate."
+            name="max_output_tokens", display_name="Max Output Tokens", info="要生成的最大令牌数。"
         ),
         SecretStrInput(
             name="api_key",
             display_name="Perplexity API Key",
-            info="The Perplexity API Key to use for the Perplexity model.",
+            info="The Perplexity API密钥 to use for the Perplexity model.",
             advanced=False,
             required=True,
         ),
         SliderInput(
-            name="temperature", display_name="Temperature", value=0.75, range_spec=RangeSpec(min=0, max=2, step=0.05)
+            name="temperature", display_name="温度", value=0.75, range_spec=RangeSpec(min=0, max=2, step=0.05)
         ),
         FloatInput(
             name="top_p",

@@ -7,9 +7,14 @@ from langflow.schema.data import Data
 
 class DataFilterComponent(Component):
     display_name = "Filter Values"
+    display_name_zh = "过滤数据值"
     description = (
         "Filter a list of data items based on a specified key, filter value,"
         " and comparison operator. Check advanced options to select match comparision."
+    )
+    description_zh = (
+        "根据指定的键、过滤值和比较运算符过滤数据列表。"
+        "检查高级选项以选择匹配比较。"
     )
     icon = "filter"
     beta = True
@@ -17,33 +22,33 @@ class DataFilterComponent(Component):
     legacy = True
 
     inputs = [
-        DataInput(name="input_data", display_name="Input Data", info="The list of data items to filter.", is_list=True),
+        DataInput(name="input_data", display_name="输入数据", info="要过滤的数据列表。", is_list=True),
         MessageTextInput(
             name="filter_key",
-            display_name="Filter Key",
-            info="The key to filter on (e.g., 'route').",
+            display_name="过滤键",
+            info="要过滤的键（例如，'route'）。",
             value="route",
             input_types=["Data"],
         ),
         MessageTextInput(
             name="filter_value",
-            display_name="Filter Value",
-            info="The value to filter by (e.g., 'CMIP').",
+            display_name="过滤值",
+            info="要过滤的值（例如，'CMIP'）。",
             value="CMIP",
             input_types=["Data"],
         ),
         DropdownInput(
             name="operator",
-            display_name="Comparison Operator",
+            display_name="比较运算符",
             options=["equals", "not equals", "contains", "starts with", "ends with"],
-            info="The operator to apply for comparing the values.",
+            info="要应用的比较运算符。",
             value="equals",
             advanced=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Filtered Data", name="filtered_data", method="filter_data"),
+        Output(display_name="过滤后的数据", name="filtered_data", method="filter_data"),
     ]
 
     def compare_values(self, item_value: Any, filter_value: str, operator: str) -> bool:

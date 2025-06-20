@@ -15,51 +15,53 @@ if TYPE_CHECKING:
 
 class BatchRunComponent(Component):
     display_name = "Batch Run"
+    display_name_zh = "批量运行"
     description = "Runs an LLM on each row of a DataFrame column. If no column is specified, all columns are used."
+    description_zh = "在DataFrame的每一行上运行LLM。如果未指定列，则使用所有列。"
     icon = "List"
 
     inputs = [
         HandleInput(
             name="model",
-            display_name="Language Model",
-            info="Connect the 'Language Model' output from your LLM component here.",
+            display_name="语言模型",
+            info="从你的LLM组件中连接'语言模型'输出。",
             input_types=["LanguageModel"],
             required=True,
         ),
         MultilineInput(
             name="system_message",
-            display_name="Instructions",
-            info="Multi-line system instruction for all rows in the DataFrame.",
+            display_name="指令",
+            info="多行系统指令，用于DataFrame的所有行。",
             required=False,
         ),
         DataFrameInput(
             name="df",
             display_name="DataFrame",
-            info="The DataFrame whose column (specified by 'column_name') we'll treat as text messages.",
+            info="要处理的DataFrame，其列（指定为'column_name'）将被视为文本消息。",
             required=True,
         ),
         MessageTextInput(
             name="column_name",
-            display_name="Column Name",
+            display_name="列名",
             info=(
-                "The name of the DataFrame column to treat as text messages. "
-                "If empty, all columns will be formatted in TOML."
+                "要处理的DataFrame的列名，指定为'column_name'。"
+                "如果为空，则所有列都将格式化为TOML。"
             ),
             required=False,
             advanced=False,
         ),
         MessageTextInput(
             name="output_column_name",
-            display_name="Output Column Name",
-            info="Name of the column where the model's response will be stored.",
+            display_name="输出列名",
+            info="模型响应将存储的列名。",
             value="model_response",
             required=False,
             advanced=True,
         ),
         BoolInput(
             name="enable_metadata",
-            display_name="Enable Metadata",
-            info="If True, add metadata to the output DataFrame.",
+            display_name="启用元数据",
+            info="如果为真，则将元数据添加到输出DataFrame。",
             value=False,
             required=False,
             advanced=True,
@@ -68,10 +70,10 @@ class BatchRunComponent(Component):
 
     outputs = [
         Output(
-            display_name="LLM Results",
+            display_name="LLM结果",
             name="batch_results",
             method="run_batch",
-            info="A DataFrame with all original columns plus the model's response column.",
+            info="一个包含所有原始列和模型响应列的DataFrame。",
         ),
     ]
 

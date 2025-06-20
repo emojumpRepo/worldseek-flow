@@ -48,7 +48,9 @@ class S3BucketUploaderComponent(Component):
     """
 
     display_name = "S3 Bucket Uploader"
+    display_name_zh = "S3 Bucket上传器"
     description = "Uploads files to S3 bucket."
+    description_zh = "上传文件到S3 Bucket。"
     icon = "Amazon"
     name = "s3bucketuploader"
 
@@ -65,7 +67,7 @@ class S3BucketUploaderComponent(Component):
             display_name="AWS Secret Key",
             required=True,
             password=True,
-            info="AWS Secret Key.",
+            info="AWS 密钥 键.",
         ),
         StrInput(
             name="bucket_name",

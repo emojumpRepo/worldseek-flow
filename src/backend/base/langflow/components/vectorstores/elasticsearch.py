@@ -28,7 +28,7 @@ class ElasticsearchVectorStoreComponent(LCVectorStoreComponent):
             name="elasticsearch_url",
             display_name="Elasticsearch URL",
             value="http://localhost:9200",
-            info="URL for self-managed Elasticsearch deployments (e.g., http://localhost:9200). "
+            info="网址 for self-managed Elasticsearch deployments (e.g., http://localhost:9200). "
             "Do not use with Elastic Cloud deployments, use Elastic Cloud ID instead.",
         ),
         SecretStrInput(
@@ -46,7 +46,7 @@ class ElasticsearchVectorStoreComponent(LCVectorStoreComponent):
         *LCVectorStoreComponent.inputs,
         StrInput(
             name="username",
-            display_name="Username",
+            display_name="用户名",
             value="",
             advanced=False,
             info=(
@@ -56,7 +56,7 @@ class ElasticsearchVectorStoreComponent(LCVectorStoreComponent):
         ),
         SecretStrInput(
             name="password",
-            display_name="Password",
+            display_name="密码",
             value="",
             advanced=False,
             info=(

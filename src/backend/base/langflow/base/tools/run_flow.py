@@ -32,16 +32,16 @@ class RunFlowBaseComponent(Component):
     _base_inputs: list[InputTypes] = [
         DropdownInput(
             name="flow_name_selected",
-            display_name="Flow Name",
-            info="The name of the flow to run.",
+            display_name="工作流名称",
+            info="要运行的工作流的名称。",
             options=[],
             real_time_refresh=True,
             value=None,
         ),
         MessageInput(
             name="session_id",
-            display_name="Session ID",
-            info="The session ID to run the flow in.",
+            display_name="会话ID",
+            info="要运行的工作流的会话ID。",
             value="",
             advanced=True,
         ),
@@ -49,19 +49,19 @@ class RunFlowBaseComponent(Component):
     _base_outputs: list[Output] = [
         Output(
             name="flow_outputs_data",
-            display_name="Flow Data Output",
+            display_name="工作流Data输出",
             method="data_output",
             hidden=True,
             tool_mode=False,  # This output is not intended to be used as a tool, so tool_mode is disabled.
         ),
         Output(
             name="flow_outputs_dataframe",
-            display_name="Flow Dataframe Output",
+            display_name="工作流DataFrame输出",
             method="dataframe_output",
             hidden=True,
             tool_mode=False,  # This output is not intended to be used as a tool, so tool_mode is disabled.
         ),
-        Output(name="flow_outputs_message", display_name="Flow Message Output", method="message_output"),
+        Output(name="flow_outputs_message", display_name="工作流Message输出", method="message_output"),
     ]
     default_keys = ["code", "_type", "flow_name_selected", "session_id"]
     FLOW_INPUTS: list[dotdict] = []

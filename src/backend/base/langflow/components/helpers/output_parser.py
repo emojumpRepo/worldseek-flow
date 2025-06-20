@@ -8,7 +8,9 @@ from langflow.schema.message import Message
 
 class OutputParserComponent(Component):
     display_name = "Output Parser"
+    display_name_zh = "输出解析器"
     description = "Transforms the output of an LLM into a specified format."
+    description_zh = "将LLM的输出转换为指定的格式。"
     icon = "type"
     name = "OutputParser"
     legacy = True
@@ -16,7 +18,7 @@ class OutputParserComponent(Component):
     inputs = [
         DropdownInput(
             name="parser_type",
-            display_name="Parser",
+            display_name="解析器",
             options=["CSV"],
             value="CSV",
         ),
@@ -24,12 +26,12 @@ class OutputParserComponent(Component):
 
     outputs = [
         Output(
-            display_name="Format Instructions",
+            display_name="格式化指令",
             name="format_instructions",
-            info="Pass to a prompt template to include formatting instructions for LLM responses.",
+            info="传递给提示模板以包含LLM响应的格式化指令。",
             method="format_instructions",
         ),
-        Output(display_name="Output Parser", name="output_parser", method="build_parser"),
+        Output(display_name="输出解析器", name="output_parser", method="build_parser"),
     ]
 
     def build_parser(self) -> OutputParser:

@@ -5,7 +5,9 @@ from langflow.schema.data import Data
 
 class FilterDataComponent(Component):
     display_name = "Filter Data"
+    display_name_zh = "过滤数据"
     description = "Filters a Data object based on a list of keys."
+    description_zh = "根据列表中的键过滤数据对象。"
     icon = "filter"
     beta = True
     name = "FilterData"
@@ -14,19 +16,19 @@ class FilterDataComponent(Component):
     inputs = [
         DataInput(
             name="data",
-            display_name="Data",
-            info="Data object to filter.",
+            display_name="数据",
+            info="要被过滤的数据对象。",
         ),
         MessageTextInput(
             name="filter_criteria",
-            display_name="Filter Criteria",
-            info="List of keys to filter by.",
+            display_name="过滤条件",
+            info="要过滤的键列表。",
             is_list=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Filtered Data", name="filtered_data", method="filter_data"),
+        Output(display_name="过滤后的数据", name="filtered_data", method="filter_data"),
     ]
 
     def filter_data(self) -> Data:

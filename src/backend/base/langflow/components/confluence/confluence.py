@@ -9,6 +9,7 @@ from langflow.schema.data import Data
 class ConfluenceComponent(Component):
     display_name = "Confluence"
     description = "Confluence wiki collaboration platform"
+    description_zh = "Confluence 维基协作平台"
     documentation = "https://python.langchain.com/v0.2/docs/integrations/document_loaders/confluence/"
     trace_type = "tool"
     icon = "Confluence"
@@ -19,19 +20,19 @@ class ConfluenceComponent(Component):
             name="url",
             display_name="Site URL",
             required=True,
-            info="The base URL of the Confluence Space. Example: https://<company>.atlassian.net/wiki.",
+            info="The base 网址 of the Confluence Space. Example: https://<company>.atlassian.net/wiki.",
         ),
         StrInput(
             name="username",
-            display_name="Username",
+            display_name="用户名",
             required=True,
-            info="Atlassian User E-mail. Example: email@example.com",
+            info="Atlassian 用户 E-mail. Example: email@example.com",
         ),
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             required=True,
-            info="Atlassian Key. Create at: https://id.atlassian.com/manage-profile/security/api-tokens",
+            info="Atlassian 键. Create at: https://id.atlassian.com/manage-profile/security/api-tokens",
         ),
         StrInput(name="space_key", display_name="Space Key", required=True),
         BoolInput(name="cloud", display_name="Use Cloud?", required=True, value=True, advanced=True),
@@ -48,7 +49,7 @@ class ConfluenceComponent(Component):
             value=ContentFormat.STORAGE.value,
             required=True,
             advanced=True,
-            info="Specify content format, defaults to ContentFormat.STORAGE",
+            info="Specify content format, defaults to 内容格式.STORAGE",
         ),
         IntInput(
             name="max_pages",
@@ -61,7 +62,7 @@ class ConfluenceComponent(Component):
     ]
 
     outputs = [
-        Output(name="data", display_name="Data", method="load_documents"),
+        Output(name="data", display_name="数据", method="load_documents"),
     ]
 
     def build_confluence(self) -> ConfluenceLoader:

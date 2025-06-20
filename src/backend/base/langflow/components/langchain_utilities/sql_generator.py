@@ -22,7 +22,7 @@ class SQLGeneratorComponent(LCChainComponent):
     inputs = [
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
             info="The input value to pass to the chain.",
             required=True,
         ),
@@ -46,12 +46,12 @@ class SQLGeneratorComponent(LCChainComponent):
         ),
         MultilineInput(
             name="prompt",
-            display_name="Prompt",
+            display_name="提示词",
             info="The prompt must contain `{question}`.",
         ),
     ]
 
-    outputs = [Output(display_name="Message", name="text", method="invoke_chain")]
+    outputs = [Output(display_name="消息", name="text", method="invoke_chain")]
 
     def invoke_chain(self) -> Message:
         prompt_template = PromptTemplate.from_template(template=self.prompt) if self.prompt else None

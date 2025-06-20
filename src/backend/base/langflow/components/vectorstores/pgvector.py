@@ -15,7 +15,7 @@ class PGVectorStoreComponent(LCVectorStoreComponent):
 
     inputs = [
         SecretStrInput(name="pg_server_url", display_name="PostgreSQL Server Connection String", required=True),
-        StrInput(name="collection_name", display_name="Table", required=True),
+        StrInput(name="collection_name", display_name="表", required=True),
         *LCVectorStoreComponent.inputs,
         HandleInput(name="embedding", display_name="Embedding", input_types=["Embeddings"], required=True),
         IntInput(

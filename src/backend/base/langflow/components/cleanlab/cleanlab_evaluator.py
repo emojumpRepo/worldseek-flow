@@ -39,26 +39,28 @@ class CleanlabEvaluator(Component):
     """
 
     display_name = "Cleanlab Evaluator"
+    display_name_zh = "Cleanlab 评估器"
     description = "Evaluates any LLM response using Cleanlab and outputs trust score and explanation."
+    description_zh = "使用Cleanlab评估任何LLM响应，并输出信任分数和解释。"
     icon = "Cleanlab"
     name = "CleanlabEvaluator"
 
     inputs = [
         MessageTextInput(
             name="system_prompt",
-            display_name="System Message",
+            display_name="系统消息",
             info="System-level instructions prepended to the user query.",
             value="",
         ),
         MessageTextInput(
             name="prompt",
-            display_name="Prompt",
+            display_name="提示词",
             info="The user's query to the model.",
             required=True,
         ),
         MessageTextInput(
             name="response",
-            display_name="Response",
+            display_name="响应",
             info="The response to the user's query.",
             required=True,
         ),
@@ -113,7 +115,7 @@ class CleanlabEvaluator(Component):
     ]
 
     outputs = [
-        Output(display_name="Response", name="response_passthrough", method="pass_response", types=["Message"]),
+        Output(display_name="响应", name="response_passthrough", method="pass_response", types=["Message"]),
         Output(display_name="Trust Score", name="score", method="get_score", types=["number"]),
         Output(display_name="Explanation", name="explanation", method="get_explanation", types=["Message"]),
     ]

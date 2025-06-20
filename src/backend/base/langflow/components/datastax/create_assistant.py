@@ -16,7 +16,7 @@ class AssistantsCreateAssistant(ComponentWithCache):
         StrInput(
             name="assistant_name",
             display_name="Assistant Name",
-            info="Name for the assistant being created",
+            info="名称 for the assistant being created",
         ),
         StrInput(
             name="instructions",

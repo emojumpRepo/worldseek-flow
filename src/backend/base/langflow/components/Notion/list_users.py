@@ -18,7 +18,7 @@ class NotionUserList(LCToolComponent):
         SecretStrInput(
             name="notion_secret",
             display_name="Notion Secret",
-            info="The Notion integration token.",
+            info="The 否tion integration token.",
             required=True,
         ),
     ]

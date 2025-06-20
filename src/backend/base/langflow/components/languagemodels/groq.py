@@ -15,7 +15,9 @@ from langflow.io import BoolInput, DropdownInput, IntInput, MessageTextInput, Se
 
 class GroqModel(LCModelComponent):
     display_name: str = "Groq"
+    display_name_zh: str = "Groq"
     description: str = "Generate text using Groq."
+    description_zh: str = "使用Groq生成文本。"
     icon = "Groq"
     name = "GroqModel"
 
@@ -27,7 +29,7 @@ class GroqModel(LCModelComponent):
         MessageTextInput(
             name="base_url",
             display_name="Groq API Base",
-            info="Base URL path for API requests, leave blank if not using a proxy or service emulator.",
+            info="Base 网址 path for API requests, leave blank if not using a proxy or service emulator.",
             advanced=True,
             value="https://api.groq.com",
             real_time_refresh=True,
@@ -35,12 +37,12 @@ class GroqModel(LCModelComponent):
         IntInput(
             name="max_tokens",
             display_name="Max Output Tokens",
-            info="The maximum number of tokens to generate.",
+            info="要生成的最大令牌数。",
             advanced=True,
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             info="Run inference with this temperature. Must by in the closed interval [0.0, 1.0].",
             range_spec=RangeSpec(min=0, max=1, step=0.01),
@@ -55,7 +57,7 @@ class GroqModel(LCModelComponent):
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model",
+            display_name="模型",
             info="The name of the model to use.",
             options=GROQ_MODELS,
             value=GROQ_MODELS[0],

@@ -18,8 +18,8 @@ class SelfQueryRetrieverComponent(Component):
     inputs = [
         HandleInput(
             name="query",
-            display_name="Query",
-            info="Query to be passed as input.",
+            display_name="查询",
+            info="查询 to be passed as input.",
             input_types=["Message"],
         ),
         HandleInput(
@@ -31,14 +31,14 @@ class SelfQueryRetrieverComponent(Component):
         HandleInput(
             name="attribute_infos",
             display_name="Metadata Field Info",
-            info="Metadata Field Info to be passed as input.",
+            info="元数据 Field Info to be passed as input.",
             input_types=["Data"],
             is_list=True,
         ),
         MessageTextInput(
             name="document_content_description",
             display_name="Document Content Description",
-            info="Document Content Description to be passed as input.",
+            info="Document 内容 描述 to be passed as input.",
         ),
         HandleInput(
             name="llm",

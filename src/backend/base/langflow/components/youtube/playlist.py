@@ -16,7 +16,7 @@ class YouTubePlaylistComponent(Component):
         MessageTextInput(
             name="playlist_url",
             display_name="Playlist URL",
-            info="URL of the YouTube playlist.",
+            info="网址 of the YouTube playlist.",
             required=True,
         ),
     ]

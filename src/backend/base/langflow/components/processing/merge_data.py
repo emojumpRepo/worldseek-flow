@@ -17,16 +17,18 @@ class DataOperation(str, Enum):
 
 class MergeDataComponent(Component):
     display_name = "Combine Data"
+    display_name_zh = "合并数据"
     description = "Combines data using different operations"
+    description_zh = "使用不同的操作合并数据。"
     icon = "merge"
     MIN_INPUTS_REQUIRED = 2
     legacy = True
 
     inputs = [
-        DataInput(name="data_inputs", display_name="Data Inputs", info="Data to combine", is_list=True, required=True),
+        DataInput(name="data_inputs", display_name="数据输入", info="要合并的数据", is_list=True, required=True),
         DropdownInput(
             name="operation",
-            display_name="Operation Type",
+            display_name="操作类型",
             options=[op.value for op in DataOperation],
             value=DataOperation.CONCATENATE.value,
         ),

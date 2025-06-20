@@ -28,13 +28,13 @@ class NotionListPages(LCToolComponent):
         SecretStrInput(
             name="notion_secret",
             display_name="Notion Secret",
-            info="The Notion integration token.",
+            info="The 否tion integration token.",
             required=True,
         ),
         StrInput(
             name="database_id",
             display_name="Database ID",
-            info="The ID of the Notion database to query.",
+            info="The ID of the 否tion database to query.",
         ),
         MultilineInput(
             name="query_json",

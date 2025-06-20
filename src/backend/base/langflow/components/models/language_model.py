@@ -17,7 +17,9 @@ from langflow.schema.dotdict import dotdict
 
 class LanguageModelComponent(LCModelComponent):
     display_name = "Language Model"
+    display_name_zh = "语言模型"
     description = "Runs a language model given a specified provider. "
+    description_zh = "使用指定的模型提供者运行语言模型。"
     icon = "brain-circuit"
     category = "models"
     priority = 0  # Set priority to 0 to make it appear first
@@ -25,51 +27,51 @@ class LanguageModelComponent(LCModelComponent):
     inputs = [
         DropdownInput(
             name="provider",
-            display_name="Model Provider",
+            display_name="模型提供商",
             options=["OpenAI", "Anthropic", "Google"],
             value="OpenAI",
-            info="Select the model provider",
+            info="选择模型提供商",
             real_time_refresh=True,
             options_metadata=[{"icon": "OpenAI"}, {"icon": "Anthropic"}, {"icon": "Google"}],
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             options=OPENAI_MODEL_NAMES,
             value=OPENAI_MODEL_NAMES[0],
-            info="Select the model to use",
+            info="选择要使用的模型",
         ),
         SecretStrInput(
             name="api_key",
-            display_name="OpenAI API Key",
-            info="Model Provider API key",
+            display_name="API Key",
+            info="模型提供商的API Key",
             required=False,
             show=True,
             real_time_refresh=True,
         ),
         MessageTextInput(
             name="input_value",
-            display_name="Input",
-            info="The input text to send to the model",
+            display_name="输入",
+            info="要发送给模型的输入文本",
         ),
         MessageTextInput(
             name="system_message",
-            display_name="System Message",
-            info="A system message that helps set the behavior of the assistant",
+            display_name="系统消息",
+            info="帮助设置助手行为的系统消息",
             advanced=True,
         ),
         BoolInput(
             name="stream",
-            display_name="Stream",
-            info="Whether to stream the response",
+            display_name="流式输出",
+            info="是否流式输出响应",
             value=False,
             advanced=True,
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
-            info="Controls randomness in responses",
+            info="控制响应的随机性",
             range_spec=RangeSpec(min=0, max=1, step=0.01),
             advanced=True,
         ),
@@ -83,7 +85,7 @@ class LanguageModelComponent(LCModelComponent):
 
         if provider == "OpenAI":
             if not self.api_key:
-                msg = "OpenAI API key is required when using OpenAI provider"
+                msg = "OpenAI API Key 是使用OpenAI提供商时必需的"
                 raise ValueError(msg)
             return ChatOpenAI(
                 model_name=model_name,
@@ -93,7 +95,7 @@ class LanguageModelComponent(LCModelComponent):
             )
         if provider == "Anthropic":
             if not self.api_key:
-                msg = "Anthropic API key is required when using Anthropic provider"
+                msg = "Anthropic API Key 是使用Anthropic提供商时必需的"
                 raise ValueError(msg)
             return ChatAnthropic(
                 model=model_name,
@@ -103,7 +105,7 @@ class LanguageModelComponent(LCModelComponent):
             )
         if provider == "Google":
             if not self.api_key:
-                msg = "Google API key is required when using Google provider"
+                msg = "Google API Key 是使用Google提供商时必需的"
                 raise ValueError(msg)
             return ChatGoogleGenerativeAI(
                 model=model_name,

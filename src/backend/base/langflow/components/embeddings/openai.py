@@ -8,7 +8,9 @@ from langflow.io import BoolInput, DictInput, DropdownInput, FloatInput, IntInpu
 
 class OpenAIEmbeddingsComponent(LCEmbeddingsModel):
     display_name = "OpenAI Embeddings"
+    display_name_zh = "OpenAI向量嵌入"
     description = "Generate embeddings using OpenAI models."
+    description_zh = "使用OpenAI模型生成向量嵌入。"
     icon = "OpenAI"
     name = "OpenAIEmbeddings"
 
@@ -32,7 +34,7 @@ class OpenAIEmbeddingsComponent(LCEmbeddingsModel):
         IntInput(name="max_retries", display_name="Max Retries", value=3, advanced=True),
         DropdownInput(
             name="model",
-            display_name="Model",
+            display_name="模型",
             advanced=False,
             options=OPENAI_EMBEDDING_MODEL_NAMES,
             value="text-embedding-3-small",
@@ -61,7 +63,7 @@ class OpenAIEmbeddingsComponent(LCEmbeddingsModel):
             display_name="TikToken Enable",
             advanced=True,
             value=True,
-            info="If False, you must have transformers installed.",
+            info="If 假, you must have transformers installed.",
         ),
         IntInput(
             name="dimensions",

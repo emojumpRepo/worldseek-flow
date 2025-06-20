@@ -44,7 +44,7 @@ class TwelveLabsTextEmbeddingsComponent(LCEmbeddingsModel):
         SecretStrInput(name="api_key", display_name="Twelve Labs API Key", value="TWELVELABS_API_KEY", required=True),
         DropdownInput(
             name="model",
-            display_name="Model",
+            display_name="模型",
             advanced=False,
             options=["Marengo-retrieval-2.7"],
             value="Marengo-retrieval-2.7",

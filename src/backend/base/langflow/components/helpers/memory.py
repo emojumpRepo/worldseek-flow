@@ -15,7 +15,9 @@ from langflow.utils.constants import MESSAGE_SENDER_AI, MESSAGE_SENDER_NAME_AI, 
 
 class MemoryComponent(Component):
     display_name = "Message History"
+    display_name_zh = "消息历史"
     description = "Stores or retrieves stored chat messages from Langflow tables or an external memory."
+    description_zh = "从Langflow表或外部存储中存储或检索聊天消息。"
     icon = "message-square-more"
     name = "Memory"
     default_keys = ["mode", "memory"]
@@ -27,79 +29,78 @@ class MemoryComponent(Component):
     inputs = [
         TabInput(
             name="mode",
-            display_name="Mode",
+            display_name="模式",
             options=["Retrieve", "Store"],
             value="Retrieve",
-            info="Operation mode: Store messages or Retrieve messages.",
+            info="操作模式：存储消息或检索消息。",
             real_time_refresh=True,
         ),
         MessageTextInput(
             name="message",
-            display_name="Message",
-            info="The chat message to be stored.",
+            display_name="消息",
+            info="要存储的聊天消息。",
             tool_mode=True,
             dynamic=True,
             show=False,
         ),
         HandleInput(
             name="memory",
-            display_name="External Memory",
+            display_name="外部记忆",
             input_types=["Memory"],
-            info="Retrieve messages from an external memory. If empty, it will use the Langflow tables.",
+            info="从外部记忆中检索消息。如果为空，它将使用Langflow表。",
             advanced=True,
         ),
         DropdownInput(
             name="sender_type",
-            display_name="Sender Type",
+            display_name="发送者类型",
             options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER, "Machine and User"],
             value="Machine and User",
-            info="Filter by sender type.",
+            info="按发送者类型过滤。",
             advanced=True,
         ),
         MessageTextInput(
             name="sender",
-            display_name="Sender",
-            info="The sender of the message. Might be Machine or User. "
-            "If empty, the current sender parameter will be used.",
+            display_name="发送者",
+            info="消息的发送者。可能是机器或用户。如果为空，将使用当前发送者参数。",
             advanced=True,
         ),
         MessageTextInput(
             name="sender_name",
-            display_name="Sender Name",
-            info="Filter by sender name.",
+            display_name="发送者名称",
+            info="按发送者名称过滤。",
             advanced=True,
             show=False,
         ),
         IntInput(
             name="n_messages",
-            display_name="Number of Messages",
+            display_name="消息数量",
             value=100,
-            info="Number of messages to retrieve.",
+            info="要检索的消息数量。",
             advanced=True,
             show=False,
         ),
         MessageTextInput(
             name="session_id",
-            display_name="Session ID",
-            info="The session ID of the chat. If empty, the current session ID parameter will be used.",
+            display_name="会话ID",
+            info="聊天会话ID。如果为空，将使用当前会话ID参数。",
             value="",
             advanced=True,
         ),
         DropdownInput(
             name="order",
-            display_name="Order",
+            display_name="顺序",
             options=["Ascending", "Descending"],
             value="Ascending",
-            info="Order of the messages.",
+            info="消息的顺序。",
             advanced=True,
             tool_mode=True,
             required=True,
         ),
         MultilineInput(
             name="template",
-            display_name="Template",
-            info="The template to use for formatting the data. "
-            "It can contain the keys {text}, {sender} or any other key in the message data.",
+            display_name="模板",
+            info="用于格式化数据的模板。"
+            "它可以包含{text}、{sender}或其他消息数据中的任何其他键。",
             value="{sender_name}: {text}",
             advanced=True,
             show=False,
@@ -107,7 +108,7 @@ class MemoryComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Message", name="messages_text", method="retrieve_messages_as_text", dynamic=True),
+        Output(display_name="消息", name="messages_text", method="retrieve_messages_as_text", dynamic=True),
         Output(display_name="Dataframe", name="dataframe", method="retrieve_messages_dataframe", dynamic=True),
     ]
 

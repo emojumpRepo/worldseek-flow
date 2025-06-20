@@ -19,31 +19,33 @@ class CrewAIAgentComponent(Component):
     """
 
     display_name = "CrewAI Agent"
+    display_name_zh = "CrewAI 代理"
     description = "Represents an agent of CrewAI."
+    description_zh = "表示一个CrewAI代理。"
     documentation: str = "https://docs.crewai.com/how-to/LLM-Connections/"
     icon = "CrewAI"
 
     inputs = [
-        MultilineInput(name="role", display_name="Role", info="The role of the agent."),
+        MultilineInput(name="role", display_name="角色", info="The role of the agent."),
         MultilineInput(name="goal", display_name="Goal", info="The objective of the agent."),
         MultilineInput(name="backstory", display_name="Backstory", info="The backstory of the agent."),
         HandleInput(
             name="tools",
-            display_name="Tools",
+            display_name="工具",
             input_types=["Tool"],
             is_list=True,
-            info="Tools at agents disposal",
+            info="工具 at agents disposal",
             value=[],
         ),
         HandleInput(
             name="llm",
             display_name="Language Model",
-            info="Language model that will run the agent.",
+            info="语言 model that will run the agent.",
             input_types=["LanguageModel"],
         ),
         BoolInput(
             name="memory",
-            display_name="Memory",
+            display_name="记忆",
             info="Whether the agent should have memory or not",
             advanced=True,
             value=True,
@@ -77,7 +79,7 @@ class CrewAIAgentComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Agent", name="output", method="build_output"),
+        Output(display_name="代理", name="output", method="build_output"),
     ]
 
     def build_output(self) -> Agent:

@@ -55,13 +55,13 @@ class UnstructuredComponent(BaseFileComponent):
             name="api_key",
             display_name="Unstructured.io Serverless API Key",
             required=True,
-            info="Unstructured API Key. Create at: https://app.unstructured.io/",
+            info="Unstructured API密钥. Create at: https://app.unstructured.io/",
         ),
         MessageTextInput(
             name="api_url",
             display_name="Unstructured.io API URL",
             required=False,
-            info="Unstructured API URL.",
+            info="Unstructured API 网址.",
         ),
         DropdownInput(
             name="chunking_strategy",

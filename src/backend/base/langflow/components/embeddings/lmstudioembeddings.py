@@ -46,7 +46,7 @@ class LMStudioEmbeddingsComponent(LCEmbeddingsModel):
     inputs = [
         DropdownInput(
             name="model",
-            display_name="Model",
+            display_name="模型",
             advanced=False,
             refresh_button=True,
             required=True,

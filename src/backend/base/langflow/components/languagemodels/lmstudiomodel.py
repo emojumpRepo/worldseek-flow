@@ -14,6 +14,7 @@ from langflow.inputs.inputs import DictInput, DropdownInput, FloatInput, IntInpu
 class LMStudioModelComponent(LCModelComponent):
     display_name = "LM Studio"
     description = "Generate text using LM Studio Local LLMs."
+    description_zh = "使用LM Studio本地LLMs生成文本。"
     icon = "LMStudio"
     name = "LMStudioModel"
 
@@ -49,7 +50,7 @@ class LMStudioModelComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
             range_spec=RangeSpec(min=0, max=128000),
@@ -57,7 +58,7 @@ class LMStudioModelComponent(LCModelComponent):
         DictInput(name="model_kwargs", display_name="Model Kwargs", advanced=True),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             refresh_button=True,
         ),
@@ -71,13 +72,13 @@ class LMStudioModelComponent(LCModelComponent):
         SecretStrInput(
             name="api_key",
             display_name="LM Studio API Key",
-            info="The LM Studio API Key to use for LM Studio.",
+            info="The LM Studio API密钥 to use for LM Studio.",
             advanced=True,
             value="LMSTUDIO_API_KEY",
         ),
         FloatInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             advanced=True,
         ),

@@ -17,29 +17,31 @@ from langflow.schema.table import EditMode
 
 class StructuredOutputComponent(Component):
     display_name = "Structured Output"
+    display_name_zh = "结构化输出"
     description = "Uses an LLM to generate structured data. Ideal for extraction and consistency."
+    description_zh = "使用LLM生成结构化数据。适用于提取和一致性。"
     name = "StructuredOutput"
     icon = "braces"
 
     inputs = [
         HandleInput(
             name="llm",
-            display_name="Language Model",
-            info="The language model to use to generate the structured output.",
+            display_name="语言模型",
+            info="要使用生成结构化输出的语言模型。",
             input_types=["LanguageModel"],
             required=True,
         ),
         MessageTextInput(
             name="input_value",
-            display_name="Input Message",
-            info="The input message to the language model.",
+            display_name="输入消息",
+            info="要输入到语言模型的消息。",
             tool_mode=True,
             required=True,
         ),
         MultilineInput(
             name="system_prompt",
-            display_name="Format Instructions",
-            info="The instructions to the language model for formatting the output.",
+            display_name="格式指令",
+            info="要格式化输出的语言模型的指令。",
             value=(
                 "You are an AI system designed to extract structured information from unstructured text."
                 "Given the input_text, return a JSON object with predefined keys based on the expected structure."
@@ -55,47 +57,47 @@ class StructuredOutputComponent(Component):
         ),
         MessageTextInput(
             name="schema_name",
-            display_name="Schema Name",
-            info="Provide a name for the output data schema.",
+            display_name="模式名称",
+            info="提供输出数据模式的名称。",
             advanced=True,
         ),
         TableInput(
             name="output_schema",
-            display_name="Output Schema",
-            info="Define the structure and data types for the model's output.",
+            display_name="输出模式",
+            info="定义模型输出的结构和数据类型。",
             required=True,
             # TODO: remove deault value
             table_schema=[
                 {
                     "name": "name",
-                    "display_name": "Name",
+                    "display_name": "名称",
                     "type": "str",
-                    "description": "Specify the name of the output field.",
+                    "description": "指定输出字段的名称。",
                     "default": "field",
                     "edit_mode": EditMode.INLINE,
                 },
                 {
                     "name": "description",
-                    "display_name": "Description",
+                    "display_name": "描述",
                     "type": "str",
-                    "description": "Describe the purpose of the output field.",
+                    "description": "描述输出字段的用途。",
                     "default": "description of field",
                     "edit_mode": EditMode.POPOVER,
                 },
                 {
                     "name": "type",
-                    "display_name": "Type",
+                    "display_name": "类型",
                     "type": "str",
                     "edit_mode": EditMode.INLINE,
-                    "description": ("Indicate the data type of the output field (e.g., str, int, float, bool, dict)."),
+                    "description": ("指示输出字段的类型（例如，str、int、float、bool、dict）。"),
                     "options": ["str", "int", "float", "bool", "dict"],
                     "default": "str",
                 },
                 {
                     "name": "multiple",
-                    "display_name": "As List",
+                    "display_name": "作为列表",
                     "type": "boolean",
-                    "description": "Set to True if this output field should be a list of the specified type.",
+                    "description": "如果此输出字段应为指定类型的列表，则设置为True。",
                     "default": "False",
                     "edit_mode": EditMode.INLINE,
                 },
@@ -103,7 +105,7 @@ class StructuredOutputComponent(Component):
             value=[
                 {
                     "name": "field",
-                    "description": "description of field",
+                    "description": "字段描述",
                     "type": "str",
                     "multiple": "False",
                 }
@@ -114,7 +116,7 @@ class StructuredOutputComponent(Component):
     outputs = [
         Output(
             name="structured_output",
-            display_name="Structured Output",
+            display_name="结构化输出",
             method="build_structured_output",
         ),
     ]

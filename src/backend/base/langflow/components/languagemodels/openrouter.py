@@ -24,6 +24,9 @@ class OpenRouterComponent(LCModelComponent):
     description = (
         "OpenRouter provides unified access to multiple AI models from different providers through a single API."
     )
+    description_zh = (
+        "OpenRouter通过单个API提供统一的访问多个AI模型。"
+    )
     icon = "OpenRouter"
 
     inputs = [
@@ -34,7 +37,7 @@ class OpenRouterComponent(LCModelComponent):
         StrInput(
             name="site_url",
             display_name="Site URL",
-            info="Your site URL for OpenRouter rankings",
+            info="Your site 网址 for OpenRouter rankings",
             advanced=True,
         ),
         StrInput(
@@ -54,7 +57,7 @@ class OpenRouterComponent(LCModelComponent):
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model",
+            display_name="模型",
             info="The model to use for chat completion",
             options=["Select a provider first"],
             value="Select a provider first",
@@ -63,7 +66,7 @@ class OpenRouterComponent(LCModelComponent):
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.7,
             range_spec=RangeSpec(min=0, max=2, step=0.01),
             info="Controls randomness. Lower values are more deterministic, higher values are more creative.",
@@ -71,7 +74,7 @@ class OpenRouterComponent(LCModelComponent):
         ),
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             info="Maximum number of tokens to generate",
             advanced=True,
         ),

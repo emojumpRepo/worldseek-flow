@@ -14,7 +14,9 @@ from langflow.schema.dotdict import dotdict
 
 class SubFlowComponent(Component):
     display_name = "Sub Flow [Deprecated]"
+    display_name_zh = "子工作流 [已弃用]"
     description = "Generates a Component from a Flow, with all of its inputs, and "
+    description_zh = "从工作流中生成一个组件，包括所有输入。"
     name = "SubFlow"
     legacy: bool = True
     icon = "Workflow"
@@ -79,15 +81,15 @@ class SubFlowComponent(Component):
     inputs = [
         DropdownInput(
             name="flow_name",
-            display_name="Flow Name",
-            info="The name of the flow to run.",
+            display_name="工作流名称",
+            info="要运行的工作流的名称。",
             options=[],
             refresh_button=True,
             real_time_refresh=True,
         ),
     ]
 
-    outputs = [Output(name="flow_outputs", display_name="Flow Outputs", method="generate_results")]
+    outputs = [Output(name="flow_outputs", display_name="工作流输出", method="generate_results")]
 
     async def generate_results(self) -> list[Data]:
         tweaks: dict = {}

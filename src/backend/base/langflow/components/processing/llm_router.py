@@ -16,7 +16,9 @@ from langflow.template.field.base import Output
 
 class LLMRouterComponent(Component):
     display_name = "LLM Router"
+    display_name_zh = "LLM路由"
     description = "Routes the input to the most appropriate LLM based on OpenRouter model specifications"
+    description_zh = "根据OpenRouter模型规范将输入路由到最合适的LLM"
     icon = "git-branch"
 
     # Constants for magic values
@@ -26,68 +28,68 @@ class LLMRouterComponent(Component):
     inputs = [
         HandleInput(
             name="models",
-            display_name="Language Models",
+            display_name="语言模型",
             input_types=["LanguageModel"],
             required=True,
             is_list=True,
-            info="List of LLMs to route between",
+            info="要路由的LLM列表",
         ),
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
             required=True,
-            info="The input message to be routed",
+            info="要路由的输入消息",
         ),
         HandleInput(
             name="judge_llm",
-            display_name="Judge LLM",
+            display_name="判断LLM",
             input_types=["LanguageModel"],
             required=True,
-            info="LLM that will evaluate and select the most appropriate model",
+            info="将评估和选择最合适模型的LLM",
         ),
         DropdownInput(
             name="optimization",
-            display_name="Optimization",
+            display_name="优化",
             options=["quality", "speed", "cost", "balanced"],
             value="balanced",
-            info="Optimization preference for model selection",
+            info="模型选择的优化偏好",
         ),
         BoolInput(
             name="use_openrouter_specs",
-            display_name="Use OpenRouter Specs",
+            display_name="使用OpenRouter规范",
             value=True,
             info=(
-                "Fetch model specifications from OpenRouter API for enhanced routing decisions. "
-                "If false, only model names will be used."
+                "从OpenRouter API获取模型规范，以增强路由决策。"
+                "如果为false，则只使用模型名称。"
             ),
             advanced=True,
         ),
         IntInput(
             name="timeout",
-            display_name="API Timeout",
+            display_name="API超时",
             value=10,
-            info="Timeout for API requests in seconds",
+            info="API请求的超时时间（秒）",
             advanced=True,
         ),
         BoolInput(
             name="fallback_to_first",
-            display_name="Fallback to First Model",
+            display_name="回退到第一个模型",
             value=True,
-            info="Use first model as fallback when routing fails",
+            info="当路由失败时，使用第一个模型作为回退",
             advanced=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Output", name="output", method="route_to_model"),
+        Output(display_name="输出", name="output", method="route_to_model"),
         Output(
-            display_name="Selected Model Info",
+            display_name="选中的模型信息",
             name="selected_model_info",
             method="get_selected_model_info",
             types=["Data"],
         ),
         Output(
-            display_name="Routing Decision",
+            display_name="路由决策",
             name="routing_decision",
             method="get_routing_decision",
         ),

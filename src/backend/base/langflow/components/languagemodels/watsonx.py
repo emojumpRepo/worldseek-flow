@@ -16,6 +16,7 @@ from langflow.schema.dotdict import dotdict
 class WatsonxAIComponent(LCModelComponent):
     display_name = "IBM watsonx.ai"
     description = "Generate text using IBM watsonx.ai foundation models."
+    description_zh = "使用IBM watsonx.ai foundation models生成文本。"
     icon = "WatsonxAI"
     name = "IBMwatsonxModel"
     beta = False
@@ -27,7 +28,7 @@ class WatsonxAIComponent(LCModelComponent):
         DropdownInput(
             name="url",
             display_name="watsonx API Endpoint",
-            info="The base URL of the API.",
+            info="The base 网址 of the API.",
             value=None,
             options=[
                 "https://us-south.ml.cloud.ibm.com",
@@ -47,13 +48,13 @@ class WatsonxAIComponent(LCModelComponent):
         ),
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
-            info="The API Key to use for the model.",
+            display_name="API密钥",
+            info="The API密钥 to use for the model.",
             required=True,
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             options=[],
             value=None,
             dynamic=True,
@@ -61,9 +62,9 @@ class WatsonxAIComponent(LCModelComponent):
         ),
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
-            info="The maximum number of tokens to generate.",
+            info="要生成的最大令牌数。",
             range_spec=RangeSpec(min=1, max=4096),
             value=1000,
         ),
@@ -76,7 +77,7 @@ class WatsonxAIComponent(LCModelComponent):
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             info="Controls randomness, higher values increase diversity.",
             value=0.1,
             range_spec=RangeSpec(min=0, max=2, step=0.01),

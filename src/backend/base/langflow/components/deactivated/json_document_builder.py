@@ -29,7 +29,7 @@ class JSONDocumentBuilder(CustomComponent):
     inputs = [
         StrInput(
             name="key",
-            display_name="Key",
+            display_name="键",
             required=True,
         ),
         HandleInput(

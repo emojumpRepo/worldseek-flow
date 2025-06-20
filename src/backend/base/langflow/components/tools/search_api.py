@@ -23,7 +23,7 @@ class SearchAPIComponent(LCToolComponent):
         SecretStrInput(name="api_key", display_name="SearchAPI API Key", required=True),
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
         ),
         DictInput(name="search_params", display_name="Search parameters", advanced=True, is_list=True),
         IntInput(name="max_results", display_name="Max Results", value=5, advanced=True),

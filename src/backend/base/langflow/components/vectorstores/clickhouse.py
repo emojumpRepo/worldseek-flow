@@ -31,7 +31,7 @@ class ClickhouseVectorStoreComponent(LCVectorStoreComponent):
             name="index_type",
             display_name="index_type",
             options=["annoy", "vector_similarity"],
-            info="Type of the index.",
+            info="类型 of the index.",
             value="annoy",
             advanced=True,
         ),

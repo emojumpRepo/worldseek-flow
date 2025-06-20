@@ -32,7 +32,9 @@ OPERATORS = {
 
 class DataOperationsComponent(Component):
     display_name = "Data Operations"
+    display_name_zh = "数据操作"
     description = "Perform various operations on a Data object."
+    description_zh = "对数据对象执行各种操作。"
     icon = "file-json"
     name = "DataOperations"
     default_keys = ["operations", "data"]
@@ -71,12 +73,12 @@ class DataOperationsComponent(Component):
     }
 
     inputs = [
-        DataInput(name="data", display_name="Data", info="Data object to filter.", required=True, is_list=True),
+        DataInput(name="data", display_name="数据", info="数据 object to filter.", required=True, is_list=True),
         SortableListInput(
             name="operations",
-            display_name="Operations",
-            placeholder="Select Operation",
-            info="List of operations to perform on the data.",
+            display_name="操作",
+            placeholder="选择操作",
+            info="要执行的操作列表。",
             options=[
                 {"name": "Select Keys", "icon": "lasso-select"},
                 {"name": "Literal Eval", "icon": "braces"},
@@ -92,8 +94,8 @@ class DataOperationsComponent(Component):
         # select keys inputs
         MessageTextInput(
             name="select_keys_input",
-            display_name="Select Keys",
-            info="List of keys to select from the data.",
+            display_name="选择键",
+            info="要从中选择的数据的键列表。",
             show=False,
             is_list=True,
         ),
@@ -101,31 +103,31 @@ class DataOperationsComponent(Component):
         MessageTextInput(
             name="filter_key",
             display_name="Filter Key",
-            info="Key to filter by.",
+            info="键 to filter by.",
             is_list=True,
             show=False,
         ),
         DropdownInput(
             name="operator",
-            display_name="Comparison Operator",
+            display_name="比较运算符",
             options=["equals", "not equals", "contains", "starts with", "ends with"],
-            info="The operator to apply for comparing the values.",
+            info="用于比较值的运算符。",
             value="equals",
             advanced=False,
             show=False,
         ),
         DictInput(
             name="filter_values",
-            display_name="Filter Values",
-            info="List of values to filter by.",
+            display_name="过滤值",
+            info="要过滤的值列表。",
             show=False,
             is_list=True,
         ),
         # update/ Append data inputs
         DictInput(
             name="append_update_data",
-            display_name="Append or Update",
-            info="Data to Append or Updatethe existing data with.",
+            display_name="追加或更新",
+            info="要追加或更新的数据。",
             show=False,
             value={"key": "value"},
             is_list=True,
@@ -133,23 +135,23 @@ class DataOperationsComponent(Component):
         # remove keys inputs
         MessageTextInput(
             name="remove_keys_input",
-            display_name="Remove Keys",
-            info="List of keys to remove from the data.",
+            display_name="删除键",
+            info="要删除的键列表。",
             show=False,
             is_list=True,
         ),
         # rename keys inputs
         DictInput(
             name="rename_keys_input",
-            display_name="Rename Keys",
-            info="List of keys to rename in the data.",
+            display_name="重命名键",
+            info="要重命名的键列表。",
             show=False,
             is_list=True,
             value={"old_key": "new_key"},
         ),
     ]
     outputs = [
-        Output(display_name="Data", name="data_output", method="as_data"),
+        Output(display_name="数据", name="data_output", method="as_data"),
     ]
 
     # Helper methods for data operations

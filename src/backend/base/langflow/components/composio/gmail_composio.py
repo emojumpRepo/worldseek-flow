@@ -17,6 +17,7 @@ class ComposioGmailAPIComponent(ComposioBaseComponent):
     """Gmail API component for interacting with Gmail services."""
 
     display_name: str = "Gmail"
+    display_name_zh: str = "Gmail"
     name = "GmailAPI"
     icon = "Google"
     documentation: str = "https://docs.composio.dev"
@@ -123,38 +124,38 @@ class ComposioGmailAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="recipient_email",
             display_name="Recipient Email",
-            info="Email address of the recipient",
+            info="邮箱 address of the recipient",
             show=False,
             required=True,
             advanced=False,
         ),
         MessageTextInput(
             name="subject",
-            display_name="Subject",
-            info="Subject of the email",
+            display_name="主题",
+            info="主题 of the email",
             show=False,
             required=True,
             advanced=False,
         ),
         MessageTextInput(
             name="body",
-            display_name="Body",
+            display_name="请求体",
             required=True,
-            info="Content of the email",
+            info="内容 of the email",
             show=False,
             advanced=False,
         ),
         MessageTextInput(
             name="cc",
             display_name="CC",
-            info="Email addresses to CC (Carbon Copy) in the email, separated by commas",
+            info="邮箱 addresses to CC (Carbon Copy) in the email, separated by commas",
             show=False,
             advanced=True,
         ),
         MessageTextInput(
             name="bcc",
             display_name="BCC",
-            info="Email addresses to BCC (Blind Carbon Copy) in the email, separated by commas",
+            info="邮箱 addresses to BCC (Blind Carbon Copy) in the email, separated by commas",
             show=False,
             advanced=True,
         ),
@@ -200,7 +201,7 @@ class ComposioGmailAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="query",
-            display_name="Query",
+            display_name="查询",
             info="Search query to filter emails (e.g., 'from:someone@email.com' or 'subject:hello')",
             show=False,
             advanced=False,
@@ -216,7 +217,7 @@ class ComposioGmailAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="label_name",
             display_name="Label Name",
-            info="Name of the Gmail label to create, modify, or filter by",
+            info="名称 of the Gmail label to create, modify, or filter by",
             show=False,
             required=True,
             advanced=False,
@@ -253,7 +254,7 @@ class ComposioGmailAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="page_token",
             display_name="Page Token",
-            info="Token for retrieving the next page of results",
+            info="令牌 for retrieving the next page of results",
             show=False,
             advanced=True,
         ),
@@ -267,7 +268,7 @@ class ComposioGmailAPIComponent(ComposioBaseComponent):
         ),
         MessageTextInput(
             name="format",
-            display_name="Format",
+            display_name="格式",
             info="The format to return the message in. Possible values: minimal, full, raw, metadata",
             show=False,
             advanced=True,
@@ -299,7 +300,7 @@ class ComposioGmailAPIComponent(ComposioBaseComponent):
         MessageTextInput(
             name="file_name",
             display_name="File name",
-            info="File name of the attachment file",
+            info="文件 name of the attachment file",
             show=False,
             required=True,
             advanced=False,

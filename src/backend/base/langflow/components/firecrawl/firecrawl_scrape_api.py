@@ -19,22 +19,22 @@ class FirecrawlScrapeApi(Component):
     inputs = [
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             required=True,
             password=True,
             info="The API key to use Firecrawl API.",
         ),
         MultilineInput(
             name="url",
-            display_name="URL",
+            display_name="网址",
             required=True,
-            info="The URL to scrape.",
+            info="The 网址 to scrape.",
             tool_mode=True,
         ),
         IntInput(
             name="timeout",
-            display_name="Timeout",
-            info="Timeout in milliseconds for the request.",
+            display_name="超时",
+            info="超时 in milliseconds for the request.",
         ),
         DataInput(
             name="scrapeOptions",
@@ -49,7 +49,7 @@ class FirecrawlScrapeApi(Component):
     ]
 
     outputs = [
-        Output(display_name="Data", name="data", method="scrape"),
+        Output(display_name="数据", name="data", method="scrape"),
     ]
 
     def scrape(self) -> Data:

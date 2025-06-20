@@ -17,7 +17,9 @@ HTTP_STATUS_OK = 200
 
 class ChatOllamaComponent(LCModelComponent):
     display_name = "Ollama"
+    display_name_zh = "Ollama"
     description = "Generate text using Ollama Local LLMs."
+    description_zh = "使用Ollama本地大语言模型生成文本。"
     icon = "Ollama"
     name = "OllamaModel"
 
@@ -37,7 +39,7 @@ class ChatOllamaComponent(LCModelComponent):
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             options=[],
             info="Refer to https://ollama.com/library for more models.",
             refresh_button=True,
@@ -45,20 +47,20 @@ class ChatOllamaComponent(LCModelComponent):
         ),
         SliderInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             value=0.1,
             range_spec=RangeSpec(min=0, max=1, step=0.01),
             advanced=True,
         ),
         MessageTextInput(
-            name="format", display_name="Format", info="Specify the format of the output (e.g., json).", advanced=True
+            name="format", display_name="格式", info="Specify the format of the output (e.g., json).", advanced=True
         ),
-        DictInput(name="metadata", display_name="Metadata", info="Metadata to add to the run trace.", advanced=True),
+        DictInput(name="metadata", display_name="元数据", info="元数据 to add to the run trace.", advanced=True),
         DropdownInput(
             name="mirostat",
             display_name="Mirostat",
             options=["Disabled", "Mirostat", "Mirostat 2.0"],
-            info="Enable/disable Mirostat sampling for controlling perplexity.",
+            info="启用/disable Mirostat sampling for controlling perplexity.",
             value="Disabled",
             advanced=True,
             real_time_refresh=True,
@@ -78,7 +80,7 @@ class ChatOllamaComponent(LCModelComponent):
         IntInput(
             name="num_ctx",
             display_name="Context Window Size",
-            info="Size of the context window for generating tokens. (Default: 2048)",
+            info="大小 of the context window for generating tokens. (Default: 2048)",
             advanced=True,
         ),
         IntInput(
@@ -106,9 +108,9 @@ class ChatOllamaComponent(LCModelComponent):
             advanced=True,
         ),
         FloatInput(name="tfs_z", display_name="TFS Z", info="Tail free sampling value. (Default: 1)", advanced=True),
-        IntInput(name="timeout", display_name="Timeout", info="Timeout for the request stream.", advanced=True),
+        IntInput(name="timeout", display_name="超时", info="超时 for the request stream.", advanced=True),
         IntInput(
-            name="top_k", display_name="Top K", info="Limits token selection to top K. (Default: 40)", advanced=True
+            name="top_k", display_name="Top K", info="限制s token selection to top K. (Default: 40)", advanced=True
         ),
         FloatInput(name="top_p", display_name="Top P", info="Works together with top-k. (Default: 0.9)", advanced=True),
         BoolInput(name="verbose", display_name="Verbose", info="Whether to print out response text.", advanced=True),
@@ -135,7 +137,7 @@ class ChatOllamaComponent(LCModelComponent):
             real_time_refresh=True,
         ),
         MessageTextInput(
-            name="template", display_name="Template", info="Template to use for generating text.", advanced=True
+            name="template", display_name="模板", info="模板 to use for generating text.", advanced=True
         ),
         *LCModelComponent._base_inputs,
     ]

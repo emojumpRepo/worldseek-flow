@@ -5,12 +5,14 @@ from langflow.io import BoolInput, HandleInput, MultilineInput, Output
 
 class SequentialTaskComponent(Component):
     display_name: str = "Sequential Task"
+    display_name_zh: str = "顺序任务"
     description: str = "Each task must have a description, an expected output and an agent responsible for execution."
+    description_zh: str = "每个任务必须有一个描述、一个期望输出和一个负责执行的代理。"
     icon = "CrewAI"
     inputs = [
         MultilineInput(
             name="task_description",
-            display_name="Description",
+            display_name="描述",
             info="Descriptive text detailing task's purpose and execution.",
         ),
         MultilineInput(
@@ -20,25 +22,25 @@ class SequentialTaskComponent(Component):
         ),
         HandleInput(
             name="tools",
-            display_name="Tools",
+            display_name="工具",
             input_types=["Tool"],
             is_list=True,
-            info="List of tools/resources limited for task execution. Uses the Agent tools by default.",
+            info="List of tools/resources limited for task execution. Uses the 代理 tools by default.",
             required=False,
             advanced=True,
         ),
         HandleInput(
             name="agent",
-            display_name="Agent",
+            display_name="代理",
             input_types=["Agent"],
-            info="CrewAI Agent that will perform the task",
+            info="CrewAI 代理 that will perform the task",
             required=True,
         ),
         HandleInput(
             name="task",
-            display_name="Task",
+            display_name="任务",
             input_types=["SequentialTask"],
-            info="CrewAI Task that will perform the task",
+            info="CrewAI 任务 that will perform the task",
         ),
         BoolInput(
             name="async_execution",
@@ -50,7 +52,7 @@ class SequentialTaskComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Task", name="task_output", method="build_task"),
+        Output(display_name="任务", name="task_output", method="build_task"),
     ]
 
     def build_task(self) -> list[SequentialTask]:

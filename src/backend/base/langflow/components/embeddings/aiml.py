@@ -14,7 +14,7 @@ class AIMLEmbeddingsComponent(LCEmbeddingsModel):
     inputs = [
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             options=[
                 "text-embedding-3-small",
                 "text-embedding-3-large",

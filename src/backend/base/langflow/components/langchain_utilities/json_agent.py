@@ -26,7 +26,7 @@ class JsonAgentComponent(LCAgentComponent):
         ),
         FileInput(
             name="path",
-            display_name="File Path",
+            display_name="文件路径",
             file_types=["json", "yaml", "yml"],
             required=True,
         ),

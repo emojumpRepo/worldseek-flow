@@ -9,6 +9,7 @@ from langflow.schema.data import Data
 class AssemblyAILeMUR(Component):
     display_name = "AssemblyAI LeMUR"
     description = "Apply Large Language Models to spoken data using the AssemblyAI LeMUR framework"
+    description_zh = "使用AssemblyAI LeMUR框架对口语数据应用大型语言模型。"
     documentation = "https://www.assemblyai.com/docs/lemur"
     icon = "AssemblyAI"
 
@@ -37,7 +38,7 @@ class AssemblyAILeMUR(Component):
         ),
         FloatInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             advanced=True,
             value=0.0,
             info="The temperature to use for the model",

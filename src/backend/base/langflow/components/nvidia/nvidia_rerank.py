@@ -24,11 +24,11 @@ class NvidiaRerankComponent(LCCompressorComponent):
             display_name="Base URL",
             value="https://integrate.api.nvidia.com/v1",
             refresh_button=True,
-            info="The base URL of the NVIDIA API. Defaults to https://integrate.api.nvidia.com/v1.",
+            info="The base 网址 of the NVIDIA API. Defaults to https://integrate.api.nvidia.com/v1.",
         ),
         DropdownInput(
             name="model",
-            display_name="Model",
+            display_name="模型",
             options=["nv-rerank-qa-mistral-4b:1"],
             value="nv-rerank-qa-mistral-4b:1",
         ),

@@ -20,7 +20,7 @@ class ConvertAstraToTwelveLabs(Component):
             name="astra_results",
             display_name="AstraDB Results",
             input_types=["Data"],
-            info="Search results from AstraDB component",
+            info="搜索 results from AstraDB component",
             required=True,
             is_list=True,
         )

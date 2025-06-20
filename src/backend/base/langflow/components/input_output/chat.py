@@ -18,7 +18,9 @@ from langflow.utils.constants import (
 
 class ChatInput(ChatComponent):
     display_name = "Chat Input"
+    display_name_zh = "聊天输入"
     description = "Get chat inputs from the Playground."
+    description_zh = "获取用户的聊天输入。"
     icon = "MessagesSquare"
     name = "ChatInput"
     minimized = True
@@ -26,69 +28,69 @@ class ChatInput(ChatComponent):
     inputs = [
         MultilineInput(
             name="input_value",
-            display_name="Input Text",
+            display_name="输入文本",
             value="",
-            info="Message to be passed as input.",
+            info="要作为输入传递的消息。",
             input_types=[],
         ),
         BoolInput(
             name="should_store_message",
-            display_name="Store Messages",
-            info="Store the message in the history.",
+            display_name="存储消息",
+            info="将消息存储在历史记录中。",
             value=True,
             advanced=True,
         ),
         DropdownInput(
             name="sender",
-            display_name="Sender Type",
+            display_name="发送者类型",
             options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],
             value=MESSAGE_SENDER_USER,
-            info="Type of sender.",
+            info="发送者类型。",
             advanced=True,
         ),
         MessageTextInput(
             name="sender_name",
-            display_name="Sender Name",
-            info="Name of the sender.",
+            display_name="发送者名称",
+            info="发送者名称。",
             value=MESSAGE_SENDER_NAME_USER,
             advanced=True,
         ),
         MessageTextInput(
             name="session_id",
-            display_name="Session ID",
-            info="The session ID of the chat. If empty, the current session ID parameter will be used.",
+            display_name="会话ID",
+            info="聊天会话ID。如果为空，则使用当前会话ID参数。",
             advanced=True,
         ),
         FileInput(
             name="files",
-            display_name="Files",
+            display_name="文件",
             file_types=TEXT_FILE_TYPES + IMG_FILE_TYPES,
-            info="Files to be sent with the message.",
+            info="要与消息一起发送的文件。",
             advanced=True,
             is_list=True,
             temp_file=True,
         ),
         MessageTextInput(
             name="background_color",
-            display_name="Background Color",
-            info="The background color of the icon.",
+            display_name="背景颜色",
+            info="图标的背景颜色。",
             advanced=True,
         ),
         MessageTextInput(
             name="chat_icon",
-            display_name="Icon",
-            info="The icon of the message.",
+            display_name="图标",
+            info="消息的图标。",
             advanced=True,
         ),
         MessageTextInput(
             name="text_color",
-            display_name="Text Color",
-            info="The text color of the name",
+            display_name="文本颜色",
+            info="名称的文本颜色。",
             advanced=True,
         ),
     ]
     outputs = [
-        Output(display_name="Chat Message", name="message", method="message_response"),
+        Output(display_name="聊天消息", name="message", method="message_response"),
     ]
 
     async def message_response(self) -> Message:

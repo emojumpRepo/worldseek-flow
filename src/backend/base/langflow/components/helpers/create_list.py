@@ -7,7 +7,9 @@ from langflow.template.field.base import Output
 
 class CreateListComponent(Component):
     display_name = "Create List"
+    display_name_zh = "创建列表"
     description = "Creates a list of texts."
+    description_zh = "创建一个文本列表。"
     icon = "list"
     name = "CreateList"
     legacy = True
@@ -15,14 +17,14 @@ class CreateListComponent(Component):
     inputs = [
         StrInput(
             name="texts",
-            display_name="Texts",
-            info="Enter one or more texts.",
+            display_name="文本",
+            info="输入一个或多个文本。",
             is_list=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Data List", name="list", method="create_list"),
+        Output(display_name="数据列表", name="list", method="create_list"),
         Output(display_name="DataFrame", name="dataframe", method="as_dataframe"),
     ]
 

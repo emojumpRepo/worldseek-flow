@@ -229,9 +229,9 @@
               "api_key": {
                 "_input_type": "SecretStrInput",
                 "advanced": false,
-                "display_name": "API Key",
+                "display_name": "API密钥",
                 "dynamic": false,
-                "info": "Your AgentQL API key from dev.agentql.com",
+                "info": "Your 代理QL API key from dev.agentql.com",
                 "input_types": [],
                 "load_from_db": true,
                 "name": "api_key",
@@ -259,7 +259,7 @@
                 "show": true,
                 "title_case": false,
                 "type": "code",
-                "value": "import httpx\nfrom loguru import logger\n\nfrom langflow.custom.custom_component.component import Component\nfrom langflow.field_typing.range_spec import RangeSpec\nfrom langflow.io import (\n    BoolInput,\n    DropdownInput,\n    IntInput,\n    MessageTextInput,\n    MultilineInput,\n    Output,\n    SecretStrInput,\n)\nfrom langflow.schema.data import Data\n\n\nclass AgentQL(Component):\n    display_name = \"Extract Web Data\"\n    description = \"Extracts structured data from a web page using an AgentQL query or a Natural Language description.\"\n    documentation: str = \"https://docs.agentql.com/rest-api/api-reference\"\n    icon = \"AgentQL\"\n    name = \"AgentQL\"\n\n    inputs = [\n        SecretStrInput(\n            name=\"api_key\",\n            display_name=\"API Key\",\n            required=True,\n            password=True,\n            info=\"Your AgentQL API key from dev.agentql.com\",\n        ),\n        MessageTextInput(\n            name=\"url\",\n            display_name=\"URL\",\n            required=True,\n            info=\"The URL of the public web page you want to extract data from.\",\n            tool_mode=True,\n        ),\n        MultilineInput(\n            name=\"query\",\n            display_name=\"AgentQL Query\",\n            required=False,\n            info=\"The AgentQL query to execute. Learn more at https://docs.agentql.com/agentql-query or use a prompt.\",\n            tool_mode=True,\n        ),\n        MultilineInput(\n            name=\"prompt\",\n            display_name=\"Prompt\",\n            required=False,\n            info=\"A Natural Language description of the data to extract from the page. Alternative to AgentQL query.\",\n            tool_mode=True,\n        ),\n        BoolInput(\n            name=\"is_stealth_mode_enabled\",\n            display_name=\"Enable Stealth Mode (Beta)\",\n            info=\"Enable experimental anti-bot evasion strategies. May not work for all websites at all times.\",\n            value=False,\n            advanced=True,\n        ),\n        IntInput(\n            name=\"timeout\",\n            display_name=\"Timeout\",\n            info=\"Seconds to wait for a request.\",\n            value=900,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"mode\",\n            display_name=\"Request Mode\",\n            info=\"'standard' uses deep data analysis, while 'fast' trades some depth of analysis for speed.\",\n            options=[\"fast\", \"standard\"],\n            value=\"fast\",\n            advanced=True,\n        ),\n        IntInput(\n            name=\"wait_for\",\n            display_name=\"Wait For\",\n            info=\"Seconds to wait for the page to load before extracting data.\",\n            value=0,\n            range_spec=RangeSpec(min=0, max=10, step_type=\"int\"),\n            advanced=True,\n        ),\n        BoolInput(\n            name=\"is_scroll_to_bottom_enabled\",\n            display_name=\"Enable scroll to bottom\",\n            info=\"Scroll to bottom of the page before extracting data.\",\n            value=False,\n            advanced=True,\n        ),\n        BoolInput(\n            name=\"is_screenshot_enabled\",\n            display_name=\"Enable screenshot\",\n            info=\"Take a screenshot before extracting data. Returned in 'metadata' as a Base64 string.\",\n            value=False,\n            advanced=True,\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Data\", name=\"data\", method=\"build_output\"),\n    ]\n\n    def build_output(self) -> Data:\n        endpoint = \"https://api.agentql.com/v1/query-data\"\n        headers = {\n            \"X-API-Key\": self.api_key,\n            \"Content-Type\": \"application/json\",\n            \"X-TF-Request-Origin\": \"langflow\",\n        }\n\n        payload = {\n            \"url\": self.url,\n            \"query\": self.query,\n            \"prompt\": self.prompt,\n            \"params\": {\n                \"mode\": self.mode,\n                \"wait_for\": self.wait_for,\n                \"is_scroll_to_bottom_enabled\": self.is_scroll_to_bottom_enabled,\n                \"is_screenshot_enabled\": self.is_screenshot_enabled,\n            },\n            \"metadata\": {\n                \"experimental_stealth_mode_enabled\": self.is_stealth_mode_enabled,\n            },\n        }\n\n        if not self.prompt and not self.query:\n            self.status = \"Either Query or Prompt must be provided.\"\n            raise ValueError(self.status)\n        if self.prompt and self.query:\n            self.status = \"Both Query and Prompt can't be provided at the same time.\"\n            raise ValueError(self.status)\n\n        try:\n            response = httpx.post(endpoint, headers=headers, json=payload, timeout=self.timeout)\n            response.raise_for_status()\n\n            json = response.json()\n            data = Data(result=json[\"data\"], metadata=json[\"metadata\"])\n\n        except httpx.HTTPStatusError as e:\n            response = e.response\n            if response.status_code == httpx.codes.UNAUTHORIZED:\n                self.status = \"Please, provide a valid API Key. You can create one at https://dev.agentql.com.\"\n            else:\n                try:\n                    error_json = response.json()\n                    logger.error(\n                        f\"Failure response: '{response.status_code} {response.reason_phrase}' with body: {error_json}\"\n                    )\n                    msg = error_json[\"error_info\"] if \"error_info\" in error_json else error_json[\"detail\"]\n                except (ValueError, TypeError):\n                    msg = f\"HTTP {e}.\"\n                self.status = msg\n            raise ValueError(self.status) from e\n\n        else:\n            self.status = data\n            return data\n"
+                "value": "import httpx\nfrom loguru import logger\n\nfrom langflow.custom.custom_component.component import Component\nfrom langflow.field_typing.range_spec import RangeSpec\nfrom langflow.io import (\n    BoolInput,\n    DropdownInput,\n    IntInput,\n    MessageTextInput,\n    MultilineInput,\n    Output,\n    SecretStrInput,\n)\nfrom langflow.schema.data import Data\n\n\nclass AgentQL(Component):\n    display_name = \"Extract Web Data\"\n    display_name_zh = \"提取网页数据\"\n    description = \"Extracts structured data from a web page using an AgentQL query or a Natural Language description.\"\n    description_zh = \"使用AgentQL查询或自然语言描述从网页中提取结构化数据。\"\n    documentation: str = \"https://docs.agentql.com/rest-api/api-reference\"\n    icon = \"AgentQL\"\n    name = \"AgentQL\"\n\n    inputs = [\n        SecretStrInput(\n            name=\"api_key\",\n            display_name=\"API密钥\",\n            required=True,\n            password=True,\n            info=\"Your 代理QL API key from dev.agentql.com\",\n        ),\n        MessageTextInput(\n            name=\"url\",\n            display_name=\"网址\",\n            required=True,\n            info=\"The 网址 of the public web page you want to extract data from.\",\n            tool_mode=True,\n        ),\n        MultilineInput(\n            name=\"query\",\n            display_name=\"AgentQL Query\",\n            required=False,\n            info=\"The 代理QL query to execute. Learn more at https://docs.agentql.com/agentql-query or use a prompt.\",\n            tool_mode=True,\n        ),\n        MultilineInput(\n            name=\"prompt\",\n            display_name=\"提示词\",\n            required=False,\n            info=\"A Natural 语言 description of the data to extract from the page. Alternative to 代理QL query.\",\n            tool_mode=True,\n        ),\n        BoolInput(\n            name=\"is_stealth_mode_enabled\",\n            display_name=\"Enable Stealth Mode (Beta)\",\n            info=\"启用 experimental anti-bot evasion strategies. May not work for all websites at all times.\",\n            value=False,\n            advanced=True,\n        ),\n        IntInput(\n            name=\"timeout\",\n            display_name=\"超时\",\n            info=\"Seconds to wait for a request.\",\n            value=900,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"mode\",\n            display_name=\"Request Mode\",\n            info=\"'standard' uses deep data analysis, while 'fast' trades some depth of analysis for speed.\",\n            options=[\"fast\", \"standard\"],\n            value=\"fast\",\n            advanced=True,\n        ),\n        IntInput(\n            name=\"wait_for\",\n            display_name=\"Wait For\",\n            info=\"Seconds to wait for the page to load before extracting data.\",\n            value=0,\n            range_spec=RangeSpec(min=0, max=10, step_type=\"int\"),\n            advanced=True,\n        ),\n        BoolInput(\n            name=\"is_scroll_to_bottom_enabled\",\n            display_name=\"Enable scroll to bottom\",\n            info=\"Scroll to bottom of the page before extracting data.\",\n            value=False,\n            advanced=True,\n        ),\n        BoolInput(\n            name=\"is_screenshot_enabled\",\n            display_name=\"Enable screenshot\",\n            info=\"Take a screenshot before extracting data. Returned in 'metadata' as a Base64 string.\",\n            value=False,\n            advanced=True,\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"数据\", name=\"data\", method=\"build_output\"),\n    ]\n\n    def build_output(self) -> Data:\n        endpoint = \"https://api.agentql.com/v1/query-data\"\n        headers = {\n            \"X-API-Key\": self.api_key,\n            \"Content-Type\": \"application/json\",\n            \"X-TF-Request-Origin\": \"langflow\",\n        }\n\n        payload = {\n            \"url\": self.url,\n            \"query\": self.query,\n            \"prompt\": self.prompt,\n            \"params\": {\n                \"mode\": self.mode,\n                \"wait_for\": self.wait_for,\n                \"is_scroll_to_bottom_enabled\": self.is_scroll_to_bottom_enabled,\n                \"is_screenshot_enabled\": self.is_screenshot_enabled,\n            },\n            \"metadata\": {\n                \"experimental_stealth_mode_enabled\": self.is_stealth_mode_enabled,\n            },\n        }\n\n        if not self.prompt and not self.query:\n            self.status = \"Either Query or Prompt must be provided.\"\n            raise ValueError(self.status)\n        if self.prompt and self.query:\n            self.status = \"Both Query and Prompt can't be provided at the same time.\"\n            raise ValueError(self.status)\n\n        try:\n            response = httpx.post(endpoint, headers=headers, json=payload, timeout=self.timeout)\n            response.raise_for_status()\n\n            json = response.json()\n            data = Data(result=json[\"data\"], metadata=json[\"metadata\"])\n\n        except httpx.HTTPStatusError as e:\n            response = e.response\n            if response.status_code == httpx.codes.UNAUTHORIZED:\n                self.status = \"Please, provide a valid API Key. You can create one at https://dev.agentql.com.\"\n            else:\n                try:\n                    error_json = response.json()\n                    logger.error(\n                        f\"Failure response: '{response.status_code} {response.reason_phrase}' with body: {error_json}\"\n                    )\n                    msg = error_json[\"error_info\"] if \"error_info\" in error_json else error_json[\"detail\"]\n                except (ValueError, TypeError):\n                    msg = f\"HTTP {e}.\"\n                self.status = msg\n            raise ValueError(self.status) from e\n\n        else:\n            self.status = data\n            return data\n"
               },
               "is_screenshot_enabled": {
                 "_input_type": "BoolInput",
@@ -302,7 +302,7 @@
                 "advanced": true,
                 "display_name": "Enable Stealth Mode (Beta)",
                 "dynamic": false,
-                "info": "Enable experimental anti-bot evasion strategies. May not work for all websites at all times.",
+                "info": "启用 experimental anti-bot evasion strategies. May not work for all websites at all times.",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "is_stealth_mode_enabled",
@@ -342,9 +342,9 @@
                 "_input_type": "MultilineInput",
                 "advanced": false,
                 "copy_field": false,
-                "display_name": "Prompt",
+                "display_name": "提示词",
                 "dynamic": false,
-                "info": "A Natural Language description of the data to extract from the page. Alternative to AgentQL query.",
+                "info": "A Natural 语言 description of the data to extract from the page. Alternative to 代理QL query.",
                 "input_types": [
                   "Message"
                 ],
@@ -369,7 +369,7 @@
                 "copy_field": false,
                 "display_name": "AgentQL Query",
                 "dynamic": false,
-                "info": "The AgentQL query to execute. Learn more at https://docs.agentql.com/agentql-query or use a prompt.",
+                "info": "The 代理QL query to execute. Learn more at https://docs.agentql.com/agentql-query or use a prompt.",
                 "input_types": [
                   "Message"
                 ],
@@ -391,7 +391,7 @@
               "timeout": {
                 "_input_type": "IntInput",
                 "advanced": true,
-                "display_name": "Timeout",
+                "display_name": "超时",
                 "dynamic": false,
                 "info": "Seconds to wait for a request.",
                 "list": false,
@@ -514,9 +514,9 @@
               "url": {
                 "_input_type": "MessageTextInput",
                 "advanced": false,
-                "display_name": "URL",
+                "display_name": "网址",
                 "dynamic": false,
-                "info": "The URL of the public web page you want to extract data from.",
+                "info": "The 网址 of the public web page you want to extract data from.",
                 "input_types": [
                   "Message"
                 ],
@@ -615,7 +615,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "Chat Message",
+                "display_name": "聊天消息",
                 "group_outputs": false,
                 "method": "message_response",
                 "name": "message",
@@ -634,9 +634,9 @@
               "background_color": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Background Color",
+                "display_name": "背景颜色",
                 "dynamic": false,
-                "info": "The background color of the icon.",
+                "info": "图标的背景颜色。",
                 "input_types": [
                   "Message"
                 ],
@@ -657,9 +657,9 @@
               "chat_icon": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Icon",
+                "display_name": "图标",
                 "dynamic": false,
-                "info": "The icon of the message.",
+                "info": "消息的图标。",
                 "input_types": [
                   "Message"
                 ],
@@ -693,12 +693,12 @@
                 "show": true,
                 "title_case": false,
                 "type": "code",
-                "value": "from langflow.base.data.utils import IMG_FILE_TYPES, TEXT_FILE_TYPES\nfrom langflow.base.io.chat import ChatComponent\nfrom langflow.inputs.inputs import BoolInput\nfrom langflow.io import (\n    DropdownInput,\n    FileInput,\n    MessageTextInput,\n    MultilineInput,\n    Output,\n)\nfrom langflow.schema.message import Message\nfrom langflow.utils.constants import (\n    MESSAGE_SENDER_AI,\n    MESSAGE_SENDER_NAME_USER,\n    MESSAGE_SENDER_USER,\n)\n\n\nclass ChatInput(ChatComponent):\n    display_name = \"Chat Input\"\n    description = \"Get chat inputs from the Playground.\"\n    icon = \"MessagesSquare\"\n    name = \"ChatInput\"\n    minimized = True\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"Input Text\",\n            value=\"\",\n            info=\"Message to be passed as input.\",\n            input_types=[],\n        ),\n        BoolInput(\n            name=\"should_store_message\",\n            display_name=\"Store Messages\",\n            info=\"Store the message in the history.\",\n            value=True,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"sender\",\n            display_name=\"Sender Type\",\n            options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],\n            value=MESSAGE_SENDER_USER,\n            info=\"Type of sender.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"sender_name\",\n            display_name=\"Sender Name\",\n            info=\"Name of the sender.\",\n            value=MESSAGE_SENDER_NAME_USER,\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"session_id\",\n            display_name=\"Session ID\",\n            info=\"The session ID of the chat. If empty, the current session ID parameter will be used.\",\n            advanced=True,\n        ),\n        FileInput(\n            name=\"files\",\n            display_name=\"Files\",\n            file_types=TEXT_FILE_TYPES + IMG_FILE_TYPES,\n            info=\"Files to be sent with the message.\",\n            advanced=True,\n            is_list=True,\n            temp_file=True,\n        ),\n        MessageTextInput(\n            name=\"background_color\",\n            display_name=\"Background Color\",\n            info=\"The background color of the icon.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"chat_icon\",\n            display_name=\"Icon\",\n            info=\"The icon of the message.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"text_color\",\n            display_name=\"Text Color\",\n            info=\"The text color of the name\",\n            advanced=True,\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"Chat Message\", name=\"message\", method=\"message_response\"),\n    ]\n\n    async def message_response(self) -> Message:\n        background_color = self.background_color\n        text_color = self.text_color\n        icon = self.chat_icon\n\n        message = await Message.create(\n            text=self.input_value,\n            sender=self.sender,\n            sender_name=self.sender_name,\n            session_id=self.session_id,\n            files=self.files,\n            properties={\n                \"background_color\": background_color,\n                \"text_color\": text_color,\n                \"icon\": icon,\n            },\n        )\n        if self.session_id and isinstance(message, Message) and self.should_store_message:\n            stored_message = await self.send_message(\n                message,\n            )\n            self.message.value = stored_message\n            message = stored_message\n\n        self.status = message\n        return message\n"
+                "value": "from langflow.base.data.utils import IMG_FILE_TYPES, TEXT_FILE_TYPES\nfrom langflow.base.io.chat import ChatComponent\nfrom langflow.inputs.inputs import BoolInput\nfrom langflow.io import (\n    DropdownInput,\n    FileInput,\n    MessageTextInput,\n    MultilineInput,\n    Output,\n)\nfrom langflow.schema.message import Message\nfrom langflow.utils.constants import (\n    MESSAGE_SENDER_AI,\n    MESSAGE_SENDER_NAME_USER,\n    MESSAGE_SENDER_USER,\n)\n\n\nclass ChatInput(ChatComponent):\n    display_name = \"Chat Input\"\n    display_name_zh = \"聊天输入\"\n    description = \"Get chat inputs from the Playground.\"\n    description_zh = \"获取用户的聊天输入。\"\n    icon = \"MessagesSquare\"\n    name = \"ChatInput\"\n    minimized = True\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"输入文本\",\n            value=\"\",\n            info=\"要作为输入传递的消息。\",\n            input_types=[],\n        ),\n        BoolInput(\n            name=\"should_store_message\",\n            display_name=\"存储消息\",\n            info=\"将消息存储在历史记录中。\",\n            value=True,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"sender\",\n            display_name=\"发送者类型\",\n            options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],\n            value=MESSAGE_SENDER_USER,\n            info=\"发送者类型。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"sender_name\",\n            display_name=\"发送者名称\",\n            info=\"发送者名称。\",\n            value=MESSAGE_SENDER_NAME_USER,\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"session_id\",\n            display_name=\"会话ID\",\n            info=\"聊天会话ID。如果为空，则使用当前会话ID参数。\",\n            advanced=True,\n        ),\n        FileInput(\n            name=\"files\",\n            display_name=\"文件\",\n            file_types=TEXT_FILE_TYPES + IMG_FILE_TYPES,\n            info=\"要与消息一起发送的文件。\",\n            advanced=True,\n            is_list=True,\n            temp_file=True,\n        ),\n        MessageTextInput(\n            name=\"background_color\",\n            display_name=\"背景颜色\",\n            info=\"图标的背景颜色。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"chat_icon\",\n            display_name=\"图标\",\n            info=\"消息的图标。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"text_color\",\n            display_name=\"文本颜色\",\n            info=\"名称的文本颜色。\",\n            advanced=True,\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"聊天消息\", name=\"message\", method=\"message_response\"),\n    ]\n\n    async def message_response(self) -> Message:\n        background_color = self.background_color\n        text_color = self.text_color\n        icon = self.chat_icon\n\n        message = await Message.create(\n            text=self.input_value,\n            sender=self.sender,\n            sender_name=self.sender_name,\n            session_id=self.session_id,\n            files=self.files,\n            properties={\n                \"background_color\": background_color,\n                \"text_color\": text_color,\n                \"icon\": icon,\n            },\n        )\n        if self.session_id and isinstance(message, Message) and self.should_store_message:\n            stored_message = await self.send_message(\n                message,\n            )\n            self.message.value = stored_message\n            message = stored_message\n\n        self.status = message\n        return message\n"
               },
               "files": {
                 "_input_type": "FileInput",
                 "advanced": true,
-                "display_name": "Files",
+                "display_name": "文件",
                 "dynamic": false,
                 "fileTypes": [
                   "txt",
@@ -726,7 +726,7 @@
                   "image"
                 ],
                 "file_path": "",
-                "info": "Files to be sent with the message.",
+                "info": "要与消息一起发送的文件。",
                 "list": true,
                 "list_add_label": "Add More",
                 "name": "files",
@@ -742,9 +742,9 @@
               "input_value": {
                 "_input_type": "MultilineInput",
                 "advanced": false,
-                "display_name": "Input Text",
+                "display_name": "输入文本",
                 "dynamic": false,
-                "info": "Message to be passed as input.",
+                "info": "要作为输入传递的消息。",
                 "input_types": [],
                 "list": false,
                 "list_add_label": "Add More",
@@ -766,9 +766,9 @@
                 "advanced": true,
                 "combobox": false,
                 "dialog_inputs": {},
-                "display_name": "Sender Type",
+                "display_name": "发送者类型",
                 "dynamic": false,
-                "info": "Type of sender.",
+                "info": "发送者类型。",
                 "name": "sender",
                 "options": [
                   "Machine",
@@ -787,9 +787,9 @@
               "sender_name": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Sender Name",
+                "display_name": "发送者名称",
                 "dynamic": false,
-                "info": "Name of the sender.",
+                "info": "发送者名称。",
                 "input_types": [
                   "Message"
                 ],
@@ -810,9 +810,9 @@
               "session_id": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Session ID",
+                "display_name": "会话ID",
                 "dynamic": false,
-                "info": "The session ID of the chat. If empty, the current session ID parameter will be used.",
+                "info": "聊天会话ID。如果为空，则使用当前会话ID参数。",
                 "input_types": [
                   "Message"
                 ],
@@ -833,9 +833,9 @@
               "should_store_message": {
                 "_input_type": "BoolInput",
                 "advanced": true,
-                "display_name": "Store Messages",
+                "display_name": "存储消息",
                 "dynamic": false,
-                "info": "Store the message in the history.",
+                "info": "将消息存储在历史记录中。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "should_store_message",
@@ -851,9 +851,9 @@
               "text_color": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Text Color",
+                "display_name": "文本颜色",
                 "dynamic": false,
-                "info": "The text color of the name",
+                "info": "名称的文本颜色。",
                 "input_types": [
                   "Message"
                 ],
@@ -943,7 +943,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "Response",
+                "display_name": "响应",
                 "group_outputs": false,
                 "method": "message_response",
                 "name": "response",
@@ -961,9 +961,9 @@
               "add_current_date_tool": {
                 "_input_type": "BoolInput",
                 "advanced": true,
-                "display_name": "Current Date",
+                "display_name": "当前日期",
                 "dynamic": false,
-                "info": "If true, will add a tool to the agent that returns the current date.",
+                "info": "如果为true，将添加一个工具，返回当前日期。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "add_current_date_tool",
@@ -979,9 +979,9 @@
               "agent_description": {
                 "_input_type": "MultilineInput",
                 "advanced": true,
-                "display_name": "Agent Description [Deprecated]",
+                "display_name": "代理描述 [已弃用]",
                 "dynamic": false,
-                "info": "The description of the agent. This is only used when in Tool Mode. Defaults to 'A helpful assistant with access to the following tools:' and tools are added dynamically. This feature is deprecated and will be removed in future versions.",
+                "info": "代理的描述。仅在工具模式下使用。默认为'A helpful assistant with access to the following tools:'，工具是动态添加的。此功能已弃用，将在未来版本中删除。",
                 "input_types": [
                   "Message"
                 ],
@@ -1005,9 +1005,9 @@
                 "advanced": false,
                 "combobox": false,
                 "dialog_inputs": {},
-                "display_name": "Model Provider",
+                "display_name": "模型提供商",
                 "dynamic": false,
-                "info": "The provider of the language model that the agent will use to generate responses.",
+                "info": "代理将用于生成响应的语言模型提供商。",
                 "input_types": [],
                 "name": "agent_llm",
                 "options": [
@@ -1063,9 +1063,9 @@
               "api_key": {
                 "_input_type": "SecretStrInput",
                 "advanced": false,
-                "display_name": "OpenAI API Key",
+                "display_name": "OpenAI API密钥",
                 "dynamic": false,
-                "info": "The OpenAI API Key to use for the OpenAI model.",
+                "info": "用于OpenAI模型的OpenAI API密钥。",
                 "input_types": [],
                 "load_from_db": true,
                 "name": "api_key",
@@ -1093,14 +1093,14 @@
                 "show": true,
                 "title_case": false,
                 "type": "code",
-                "value": "from langchain_core.tools import StructuredTool\n\nfrom langflow.base.agents.agent import LCToolsAgentComponent\nfrom langflow.base.agents.events import ExceptionWithMessageError\nfrom langflow.base.models.model_input_constants import (\n    ALL_PROVIDER_FIELDS,\n    MODEL_DYNAMIC_UPDATE_FIELDS,\n    MODEL_PROVIDERS_DICT,\n    MODELS_METADATA,\n)\nfrom langflow.base.models.model_utils import get_model_name\nfrom langflow.components.helpers.current_date import CurrentDateComponent\nfrom langflow.components.helpers.memory import MemoryComponent\nfrom langflow.components.langchain_utilities.tool_calling import ToolCallingAgentComponent\nfrom langflow.custom.custom_component.component import _get_component_toolkit\nfrom langflow.custom.utils import update_component_build_config\nfrom langflow.field_typing import Tool\nfrom langflow.io import BoolInput, DropdownInput, MultilineInput, Output\nfrom langflow.logging import logger\nfrom langflow.schema.dotdict import dotdict\nfrom langflow.schema.message import Message\n\n\ndef set_advanced_true(component_input):\n    component_input.advanced = True\n    return component_input\n\n\nclass AgentComponent(ToolCallingAgentComponent):\n    display_name: str = \"Agent\"\n    description: str = \"Define the agent's instructions, then enter a task to complete using tools.\"\n    icon = \"bot\"\n    beta = False\n    name = \"Agent\"\n\n    memory_inputs = [set_advanced_true(component_input) for component_input in MemoryComponent().inputs]\n\n    inputs = [\n        DropdownInput(\n            name=\"agent_llm\",\n            display_name=\"Model Provider\",\n            info=\"The provider of the language model that the agent will use to generate responses.\",\n            options=[*sorted(MODEL_PROVIDERS_DICT.keys()), \"Custom\"],\n            value=\"OpenAI\",\n            real_time_refresh=True,\n            input_types=[],\n            options_metadata=[MODELS_METADATA[key] for key in sorted(MODELS_METADATA.keys())] + [{\"icon\": \"brain\"}],\n        ),\n        *MODEL_PROVIDERS_DICT[\"OpenAI\"][\"inputs\"],\n        MultilineInput(\n            name=\"system_prompt\",\n            display_name=\"Agent Instructions\",\n            info=\"System Prompt: Initial instructions and context provided to guide the agent's behavior.\",\n            value=\"You are a helpful assistant that can use tools to answer questions and perform tasks.\",\n            advanced=False,\n        ),\n        *LCToolsAgentComponent._base_inputs,\n        *memory_inputs,\n        BoolInput(\n            name=\"add_current_date_tool\",\n            display_name=\"Current Date\",\n            advanced=True,\n            info=\"If true, will add a tool to the agent that returns the current date.\",\n            value=True,\n        ),\n    ]\n    outputs = [Output(name=\"response\", display_name=\"Response\", method=\"message_response\")]\n\n    async def message_response(self) -> Message:\n        try:\n            # Get LLM model and validate\n            llm_model, display_name = self.get_llm()\n            if llm_model is None:\n                msg = \"No language model selected. Please choose a model to proceed.\"\n                raise ValueError(msg)\n            self.model_name = get_model_name(llm_model, display_name=display_name)\n\n            # Get memory data\n            self.chat_history = await self.get_memory_data()\n\n            # Add current date tool if enabled\n            if self.add_current_date_tool:\n                if not isinstance(self.tools, list):  # type: ignore[has-type]\n                    self.tools = []\n                current_date_tool = (await CurrentDateComponent(**self.get_base_args()).to_toolkit()).pop(0)\n                if not isinstance(current_date_tool, StructuredTool):\n                    msg = \"CurrentDateComponent must be converted to a StructuredTool\"\n                    raise TypeError(msg)\n                self.tools.append(current_date_tool)\n\n            # Validate tools\n            if not self.tools:\n                msg = \"Tools are required to run the agent. Please add at least one tool.\"\n                raise ValueError(msg)\n\n            # Set up and run agent\n            self.set(\n                llm=llm_model,\n                tools=self.tools,\n                chat_history=self.chat_history,\n                input_value=self.input_value,\n                system_prompt=self.system_prompt,\n            )\n            agent = self.create_agent_runnable()\n            return await self.run_agent(agent)\n\n        except (ValueError, TypeError, KeyError) as e:\n            logger.error(f\"{type(e).__name__}: {e!s}\")\n            raise\n        except ExceptionWithMessageError as e:\n            logger.error(f\"ExceptionWithMessageError occurred: {e}\")\n            raise\n        except Exception as e:\n            logger.error(f\"Unexpected error: {e!s}\")\n            raise\n\n    async def get_memory_data(self):\n        memory_kwargs = {\n            component_input.name: getattr(self, f\"{component_input.name}\") for component_input in self.memory_inputs\n        }\n        # filter out empty values\n        memory_kwargs = {k: v for k, v in memory_kwargs.items() if v is not None}\n\n        return await MemoryComponent(**self.get_base_args()).set(**memory_kwargs).retrieve_messages()\n\n    def get_llm(self):\n        if not isinstance(self.agent_llm, str):\n            return self.agent_llm, None\n\n        try:\n            provider_info = MODEL_PROVIDERS_DICT.get(self.agent_llm)\n            if not provider_info:\n                msg = f\"Invalid model provider: {self.agent_llm}\"\n                raise ValueError(msg)\n\n            component_class = provider_info.get(\"component_class\")\n            display_name = component_class.display_name\n            inputs = provider_info.get(\"inputs\")\n            prefix = provider_info.get(\"prefix\", \"\")\n\n            return self._build_llm_model(component_class, inputs, prefix), display_name\n\n        except Exception as e:\n            logger.error(f\"Error building {self.agent_llm} language model: {e!s}\")\n            msg = f\"Failed to initialize language model: {e!s}\"\n            raise ValueError(msg) from e\n\n    def _build_llm_model(self, component, inputs, prefix=\"\"):\n        model_kwargs = {}\n        for input_ in inputs:\n            if hasattr(self, f\"{prefix}{input_.name}\"):\n                model_kwargs[input_.name] = getattr(self, f\"{prefix}{input_.name}\")\n        return component.set(**model_kwargs).build_model()\n\n    def set_component_params(self, component):\n        provider_info = MODEL_PROVIDERS_DICT.get(self.agent_llm)\n        if provider_info:\n            inputs = provider_info.get(\"inputs\")\n            prefix = provider_info.get(\"prefix\")\n            model_kwargs = {input_.name: getattr(self, f\"{prefix}{input_.name}\") for input_ in inputs}\n\n            return component.set(**model_kwargs)\n        return component\n\n    def delete_fields(self, build_config: dotdict, fields: dict | list[str]) -> None:\n        \"\"\"Delete specified fields from build_config.\"\"\"\n        for field in fields:\n            build_config.pop(field, None)\n\n    def update_input_types(self, build_config: dotdict) -> dotdict:\n        \"\"\"Update input types for all fields in build_config.\"\"\"\n        for key, value in build_config.items():\n            if isinstance(value, dict):\n                if value.get(\"input_types\") is None:\n                    build_config[key][\"input_types\"] = []\n            elif hasattr(value, \"input_types\") and value.input_types is None:\n                value.input_types = []\n        return build_config\n\n    async def update_build_config(\n        self, build_config: dotdict, field_value: str, field_name: str | None = None\n    ) -> dotdict:\n        # Iterate over all providers in the MODEL_PROVIDERS_DICT\n        # Existing logic for updating build_config\n        if field_name in (\"agent_llm\",):\n            build_config[\"agent_llm\"][\"value\"] = field_value\n            provider_info = MODEL_PROVIDERS_DICT.get(field_value)\n            if provider_info:\n                component_class = provider_info.get(\"component_class\")\n                if component_class and hasattr(component_class, \"update_build_config\"):\n                    # Call the component class's update_build_config method\n                    build_config = await update_component_build_config(\n                        component_class, build_config, field_value, \"model_name\"\n                    )\n\n            provider_configs: dict[str, tuple[dict, list[dict]]] = {\n                provider: (\n                    MODEL_PROVIDERS_DICT[provider][\"fields\"],\n                    [\n                        MODEL_PROVIDERS_DICT[other_provider][\"fields\"]\n                        for other_provider in MODEL_PROVIDERS_DICT\n                        if other_provider != provider\n                    ],\n                )\n                for provider in MODEL_PROVIDERS_DICT\n            }\n            if field_value in provider_configs:\n                fields_to_add, fields_to_delete = provider_configs[field_value]\n\n                # Delete fields from other providers\n                for fields in fields_to_delete:\n                    self.delete_fields(build_config, fields)\n\n                # Add provider-specific fields\n                if field_value == \"OpenAI\" and not any(field in build_config for field in fields_to_add):\n                    build_config.update(fields_to_add)\n                else:\n                    build_config.update(fields_to_add)\n                # Reset input types for agent_llm\n                build_config[\"agent_llm\"][\"input_types\"] = []\n            elif field_value == \"Custom\":\n                # Delete all provider fields\n                self.delete_fields(build_config, ALL_PROVIDER_FIELDS)\n                # Update with custom component\n                custom_component = DropdownInput(\n                    name=\"agent_llm\",\n                    display_name=\"Language Model\",\n                    options=[*sorted(MODEL_PROVIDERS_DICT.keys()), \"Custom\"],\n                    value=\"Custom\",\n                    real_time_refresh=True,\n                    input_types=[\"LanguageModel\"],\n                    options_metadata=[MODELS_METADATA[key] for key in sorted(MODELS_METADATA.keys())]\n                    + [{\"icon\": \"brain\"}],\n                )\n                build_config.update({\"agent_llm\": custom_component.to_dict()})\n            # Update input types for all fields\n            build_config = self.update_input_types(build_config)\n\n            # Validate required keys\n            default_keys = [\n                \"code\",\n                \"_type\",\n                \"agent_llm\",\n                \"tools\",\n                \"input_value\",\n                \"add_current_date_tool\",\n                \"system_prompt\",\n                \"agent_description\",\n                \"max_iterations\",\n                \"handle_parsing_errors\",\n                \"verbose\",\n            ]\n            missing_keys = [key for key in default_keys if key not in build_config]\n            if missing_keys:\n                msg = f\"Missing required keys in build_config: {missing_keys}\"\n                raise ValueError(msg)\n        if (\n            isinstance(self.agent_llm, str)\n            and self.agent_llm in MODEL_PROVIDERS_DICT\n            and field_name in MODEL_DYNAMIC_UPDATE_FIELDS\n        ):\n            provider_info = MODEL_PROVIDERS_DICT.get(self.agent_llm)\n            if provider_info:\n                component_class = provider_info.get(\"component_class\")\n                component_class = self.set_component_params(component_class)\n                prefix = provider_info.get(\"prefix\")\n                if component_class and hasattr(component_class, \"update_build_config\"):\n                    # Call each component class's update_build_config method\n                    # remove the prefix from the field_name\n                    if isinstance(field_name, str) and isinstance(prefix, str):\n                        field_name = field_name.replace(prefix, \"\")\n                    build_config = await update_component_build_config(\n                        component_class, build_config, field_value, \"model_name\"\n                    )\n        return dotdict({k: v.to_dict() if hasattr(v, \"to_dict\") else v for k, v in build_config.items()})\n\n    async def _get_tools(self) -> list[Tool]:\n        component_toolkit = _get_component_toolkit()\n        tools_names = self._build_tools_names()\n        agent_description = self.get_tool_description()\n        # TODO: Agent Description Depreciated Feature to be removed\n        description = f\"{agent_description}{tools_names}\"\n        tools = component_toolkit(component=self).get_tools(\n            tool_name=\"Call_Agent\", tool_description=description, callbacks=self.get_langchain_callbacks()\n        )\n        if hasattr(self, \"tools_metadata\"):\n            tools = component_toolkit(component=self, metadata=self.tools_metadata).update_tools_metadata(tools=tools)\n        return tools\n"
+                "value": "from langchain_core.tools import StructuredTool\n\nfrom langflow.base.agents.agent import LCToolsAgentComponent\nfrom langflow.base.agents.events import ExceptionWithMessageError\nfrom langflow.base.models.model_input_constants import (\n    ALL_PROVIDER_FIELDS,\n    MODEL_DYNAMIC_UPDATE_FIELDS,\n    MODEL_PROVIDERS_DICT,\n    MODELS_METADATA,\n)\nfrom langflow.base.models.model_utils import get_model_name\nfrom langflow.components.helpers.current_date import CurrentDateComponent\nfrom langflow.components.helpers.memory import MemoryComponent\nfrom langflow.components.langchain_utilities.tool_calling import ToolCallingAgentComponent\nfrom langflow.custom.custom_component.component import _get_component_toolkit\nfrom langflow.custom.utils import update_component_build_config\nfrom langflow.field_typing import Tool\nfrom langflow.io import BoolInput, DropdownInput, MultilineInput, Output\nfrom langflow.logging import logger\nfrom langflow.schema.dotdict import dotdict\nfrom langflow.schema.message import Message\n\n\ndef set_advanced_true(component_input):\n    component_input.advanced = True\n    return component_input\n\n\nclass AgentComponent(ToolCallingAgentComponent):\n    display_name: str = \"Agent\"\n    display_name_zh: str = \"代理\"\n    description: str = \"Define the agent's instructions, then enter a task to complete using tools.\"\n    description_zh: str = \"定义代理的指令，然后输入一个任务来使用工具完成。\"\n    icon = \"bot\"\n    beta = False\n    name = \"Agent\"\n\n    memory_inputs = [set_advanced_true(component_input) for component_input in MemoryComponent().inputs]\n\n    inputs = [\n        DropdownInput(\n            name=\"agent_llm\",\n            display_name=\"模型提供商\",\n            info=\"代理将用于生成响应的语言模型提供商。\",\n            options=[*sorted(MODEL_PROVIDERS_DICT.keys()), \"Custom\"],\n            value=\"OpenAI\",\n            real_time_refresh=True,\n            input_types=[],\n            options_metadata=[MODELS_METADATA[key] for key in sorted(MODELS_METADATA.keys())] + [{\"icon\": \"brain\"}],\n        ),\n        *MODEL_PROVIDERS_DICT[\"OpenAI\"][\"inputs\"],\n        MultilineInput(\n            name=\"system_prompt\",\n            display_name=\"代理指令\",\n            info=\"System Prompt: 初始指令和上下文，用于指导代理的行为。\",\n            value=\"You are a helpful assistant that can use tools to answer questions and perform tasks.\",\n            advanced=False,\n        ),\n        *LCToolsAgentComponent._base_inputs,\n        *memory_inputs,\n        BoolInput(\n            name=\"add_current_date_tool\",\n            display_name=\"当前日期\",\n            advanced=True,\n            info=\"如果为true，将添加一个工具，返回当前日期。\",\n            value=True,\n        ),\n    ]\n    outputs = [Output(name=\"response\", display_name=\"响应\", method=\"message_response\")]\n\n    async def message_response(self) -> Message:\n        try:\n            # Get LLM model and validate\n            llm_model, display_name = self.get_llm()\n            if llm_model is None:\n                msg = \"No language model selected. Please choose a model to proceed.\"\n                raise ValueError(msg)\n            self.model_name = get_model_name(llm_model, display_name=display_name)\n\n            # Get memory data\n            self.chat_history = await self.get_memory_data()\n\n            # Add current date tool if enabled\n            if self.add_current_date_tool:\n                if not isinstance(self.tools, list):  # type: ignore[has-type]\n                    self.tools = []\n                current_date_tool = (await CurrentDateComponent(**self.get_base_args()).to_toolkit()).pop(0)\n                if not isinstance(current_date_tool, StructuredTool):\n                    msg = \"CurrentDateComponent must be converted to a StructuredTool\"\n                    raise TypeError(msg)\n                self.tools.append(current_date_tool)\n\n            # Validate tools\n            if not self.tools:\n                msg = \"Tools are required to run the agent. Please add at least one tool.\"\n                raise ValueError(msg)\n\n            # Set up and run agent\n            self.set(\n                llm=llm_model,\n                tools=self.tools,\n                chat_history=self.chat_history,\n                input_value=self.input_value,\n                system_prompt=self.system_prompt,\n            )\n            agent = self.create_agent_runnable()\n            return await self.run_agent(agent)\n\n        except (ValueError, TypeError, KeyError) as e:\n            logger.error(f\"{type(e).__name__}: {e!s}\")\n            raise\n        except ExceptionWithMessageError as e:\n            logger.error(f\"ExceptionWithMessageError occurred: {e}\")\n            raise\n        except Exception as e:\n            logger.error(f\"Unexpected error: {e!s}\")\n            raise\n\n    async def get_memory_data(self):\n        memory_kwargs = {\n            component_input.name: getattr(self, f\"{component_input.name}\") for component_input in self.memory_inputs\n        }\n        # filter out empty values\n        memory_kwargs = {k: v for k, v in memory_kwargs.items() if v is not None}\n\n        return await MemoryComponent(**self.get_base_args()).set(**memory_kwargs).retrieve_messages()\n\n    def get_llm(self):\n        if not isinstance(self.agent_llm, str):\n            return self.agent_llm, None\n\n        try:\n            provider_info = MODEL_PROVIDERS_DICT.get(self.agent_llm)\n            if not provider_info:\n                msg = f\"Invalid model provider: {self.agent_llm}\"\n                raise ValueError(msg)\n\n            component_class = provider_info.get(\"component_class\")\n            display_name = component_class.display_name\n            inputs = provider_info.get(\"inputs\")\n            prefix = provider_info.get(\"prefix\", \"\")\n\n            return self._build_llm_model(component_class, inputs, prefix), display_name\n\n        except Exception as e:\n            logger.error(f\"Error building {self.agent_llm} language model: {e!s}\")\n            msg = f\"Failed to initialize language model: {e!s}\"\n            raise ValueError(msg) from e\n\n    def _build_llm_model(self, component, inputs, prefix=\"\"):\n        model_kwargs = {}\n        for input_ in inputs:\n            if hasattr(self, f\"{prefix}{input_.name}\"):\n                model_kwargs[input_.name] = getattr(self, f\"{prefix}{input_.name}\")\n        return component.set(**model_kwargs).build_model()\n\n    def set_component_params(self, component):\n        provider_info = MODEL_PROVIDERS_DICT.get(self.agent_llm)\n        if provider_info:\n            inputs = provider_info.get(\"inputs\")\n            prefix = provider_info.get(\"prefix\")\n            model_kwargs = {input_.name: getattr(self, f\"{prefix}{input_.name}\") for input_ in inputs}\n\n            return component.set(**model_kwargs)\n        return component\n\n    def delete_fields(self, build_config: dotdict, fields: dict | list[str]) -> None:\n        \"\"\"Delete specified fields from build_config.\"\"\"\n        for field in fields:\n            build_config.pop(field, None)\n\n    def update_input_types(self, build_config: dotdict) -> dotdict:\n        \"\"\"Update input types for all fields in build_config.\"\"\"\n        for key, value in build_config.items():\n            if isinstance(value, dict):\n                if value.get(\"input_types\") is None:\n                    build_config[key][\"input_types\"] = []\n            elif hasattr(value, \"input_types\") and value.input_types is None:\n                value.input_types = []\n        return build_config\n\n    async def update_build_config(\n        self, build_config: dotdict, field_value: str, field_name: str | None = None\n    ) -> dotdict:\n        # Iterate over all providers in the MODEL_PROVIDERS_DICT\n        # Existing logic for updating build_config\n        if field_name in (\"agent_llm\",):\n            build_config[\"agent_llm\"][\"value\"] = field_value\n            provider_info = MODEL_PROVIDERS_DICT.get(field_value)\n            if provider_info:\n                component_class = provider_info.get(\"component_class\")\n                if component_class and hasattr(component_class, \"update_build_config\"):\n                    # Call the component class's update_build_config method\n                    build_config = await update_component_build_config(\n                        component_class, build_config, field_value, \"model_name\"\n                    )\n\n            provider_configs: dict[str, tuple[dict, list[dict]]] = {\n                provider: (\n                    MODEL_PROVIDERS_DICT[provider][\"fields\"],\n                    [\n                        MODEL_PROVIDERS_DICT[other_provider][\"fields\"]\n                        for other_provider in MODEL_PROVIDERS_DICT\n                        if other_provider != provider\n                    ],\n                )\n                for provider in MODEL_PROVIDERS_DICT\n            }\n            if field_value in provider_configs:\n                fields_to_add, fields_to_delete = provider_configs[field_value]\n\n                # Delete fields from other providers\n                for fields in fields_to_delete:\n                    self.delete_fields(build_config, fields)\n\n                # Add provider-specific fields\n                if field_value == \"OpenAI\" and not any(field in build_config for field in fields_to_add):\n                    build_config.update(fields_to_add)\n                else:\n                    build_config.update(fields_to_add)\n                # Reset input types for agent_llm\n                build_config[\"agent_llm\"][\"input_types\"] = []\n            elif field_value == \"Custom\":\n                # Delete all provider fields\n                self.delete_fields(build_config, ALL_PROVIDER_FIELDS)\n                # Update with custom component\n                custom_component = DropdownInput(\n                    name=\"agent_llm\",\n                    display_name=\"Language Model\",\n                    options=[*sorted(MODEL_PROVIDERS_DICT.keys()), \"Custom\"],\n                    value=\"Custom\",\n                    real_time_refresh=True,\n                    input_types=[\"LanguageModel\"],\n                    options_metadata=[MODELS_METADATA[key] for key in sorted(MODELS_METADATA.keys())]\n                    + [{\"icon\": \"brain\"}],\n                )\n                build_config.update({\"agent_llm\": custom_component.to_dict()})\n            # Update input types for all fields\n            build_config = self.update_input_types(build_config)\n\n            # Validate required keys\n            default_keys = [\n                \"code\",\n                \"_type\",\n                \"agent_llm\",\n                \"tools\",\n                \"input_value\",\n                \"add_current_date_tool\",\n                \"system_prompt\",\n                \"agent_description\",\n                \"max_iterations\",\n                \"handle_parsing_errors\",\n                \"verbose\",\n            ]\n            missing_keys = [key for key in default_keys if key not in build_config]\n            if missing_keys:\n                msg = f\"Missing required keys in build_config: {missing_keys}\"\n                raise ValueError(msg)\n        if (\n            isinstance(self.agent_llm, str)\n            and self.agent_llm in MODEL_PROVIDERS_DICT\n            and field_name in MODEL_DYNAMIC_UPDATE_FIELDS\n        ):\n            provider_info = MODEL_PROVIDERS_DICT.get(self.agent_llm)\n            if provider_info:\n                component_class = provider_info.get(\"component_class\")\n                component_class = self.set_component_params(component_class)\n                prefix = provider_info.get(\"prefix\")\n                if component_class and hasattr(component_class, \"update_build_config\"):\n                    # Call each component class's update_build_config method\n                    # remove the prefix from the field_name\n                    if isinstance(field_name, str) and isinstance(prefix, str):\n                        field_name = field_name.replace(prefix, \"\")\n                    build_config = await update_component_build_config(\n                        component_class, build_config, field_value, \"model_name\"\n                    )\n        return dotdict({k: v.to_dict() if hasattr(v, \"to_dict\") else v for k, v in build_config.items()})\n\n    async def _get_tools(self) -> list[Tool]:\n        component_toolkit = _get_component_toolkit()\n        tools_names = self._build_tools_names()\n        agent_description = self.get_tool_description()\n        # TODO: Agent Description Depreciated Feature to be removed\n        description = f\"{agent_description}{tools_names}\"\n        tools = component_toolkit(component=self).get_tools(\n            tool_name=\"Call_Agent\", tool_description=description, callbacks=self.get_langchain_callbacks()\n        )\n        if hasattr(self, \"tools_metadata\"):\n            tools = component_toolkit(component=self, metadata=self.tools_metadata).update_tools_metadata(tools=tools)\n        return tools\n"
               },
               "handle_parsing_errors": {
                 "_input_type": "BoolInput",
                 "advanced": true,
-                "display_name": "Handle Parse Errors",
+                "display_name": "处理解析错误",
                 "dynamic": false,
-                "info": "Should the Agent fix errors when reading user input for better processing?",
+                "info": "代理在读取用户输入时是否应该修复错误以更好地处理？",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "handle_parsing_errors",
@@ -1116,9 +1116,9 @@
               "input_value": {
                 "_input_type": "MessageTextInput",
                 "advanced": false,
-                "display_name": "Input",
+                "display_name": "输入",
                 "dynamic": false,
-                "info": "The input provided by the user for the agent to process.",
+                "info": "用户为代理提供要处理的信息。",
                 "input_types": [
                   "Message"
                 ],
@@ -1139,9 +1139,9 @@
               "json_mode": {
                 "_input_type": "BoolInput",
                 "advanced": true,
-                "display_name": "JSON Mode",
+                "display_name": "JSON模式",
                 "dynamic": false,
-                "info": "If True, it will output JSON regardless of passing a schema.",
+                "info": "如果为真，将输出JSON，无论是否传递模式。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "json_mode",
@@ -1157,9 +1157,9 @@
               "max_iterations": {
                 "_input_type": "IntInput",
                 "advanced": true,
-                "display_name": "Max Iterations",
+                "display_name": "最大迭代次数",
                 "dynamic": false,
-                "info": "The maximum number of attempts the agent can make to complete its task before it stops.",
+                "info": "代理可以尝试完成任务的最大次数。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "max_iterations",
@@ -1175,9 +1175,9 @@
               "max_retries": {
                 "_input_type": "IntInput",
                 "advanced": true,
-                "display_name": "Max Retries",
+                "display_name": "最大重试次数",
                 "dynamic": false,
-                "info": "The maximum number of retries to make when generating.",
+                "info": "生成时最大重试次数。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "max_retries",
@@ -1193,9 +1193,9 @@
               "max_tokens": {
                 "_input_type": "IntInput",
                 "advanced": true,
-                "display_name": "Max Tokens",
+                "display_name": "最大令牌数",
                 "dynamic": false,
-                "info": "The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
+                "info": "要生成的最大令牌数。设置为0表示无限制。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "max_tokens",
@@ -1217,9 +1217,9 @@
               "memory": {
                 "_input_type": "HandleInput",
                 "advanced": true,
-                "display_name": "External Memory",
+                "display_name": "外部记忆",
                 "dynamic": false,
-                "info": "Retrieve messages from an external memory. If empty, it will use the Langflow tables.",
+                "info": "从外部记忆中检索消息。如果为空，它将使用Langflow表。",
                 "input_types": [
                   "Memory"
                 ],
@@ -1237,9 +1237,9 @@
               "message": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Message",
+                "display_name": "消息",
                 "dynamic": false,
-                "info": "The chat message to be stored.",
+                "info": "要存储的聊天消息。",
                 "input_types": [
                   "Message"
                 ],
@@ -1260,9 +1260,9 @@
               "mode": {
                 "_input_type": "TabInput",
                 "advanced": true,
-                "display_name": "Mode",
+                "display_name": "模式",
                 "dynamic": false,
-                "info": "Operation mode: Store messages or Retrieve messages.",
+                "info": "操作模式：存储消息或检索消息。",
                 "name": "mode",
                 "options": [
                   "Retrieve",
@@ -1281,9 +1281,9 @@
               "model_kwargs": {
                 "_input_type": "DictInput",
                 "advanced": true,
-                "display_name": "Model Kwargs",
+                "display_name": "模型参数",
                 "dynamic": false,
-                "info": "Additional keyword arguments to pass to the model.",
+                "info": "要传递给模型的附加关键字参数。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "model_kwargs",
@@ -1301,9 +1301,9 @@
                 "advanced": false,
                 "combobox": true,
                 "dialog_inputs": {},
-                "display_name": "Model Name",
+                "display_name": "模型名称",
                 "dynamic": false,
-                "info": "To see the model names, first choose a provider. Then, enter your API key and click the refresh button next to the model name.",
+                "info": "要查看模型名称，首先选择一个提供者。然后，输入您的API密钥并单击模型名称旁边的刷新按钮。",
                 "name": "model_name",
                 "options": [
                   "gpt-4o-mini",
@@ -1332,9 +1332,9 @@
               "n_messages": {
                 "_input_type": "IntInput",
                 "advanced": true,
-                "display_name": "Number of Messages",
+                "display_name": "消息数量",
                 "dynamic": false,
-                "info": "Number of messages to retrieve.",
+                "info": "要检索的消息数量。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "n_messages",
@@ -1350,9 +1350,9 @@
               "openai_api_base": {
                 "_input_type": "StrInput",
                 "advanced": true,
-                "display_name": "OpenAI API Base",
+                "display_name": "OpenAI API基础URL",
                 "dynamic": false,
-                "info": "The base URL of the OpenAI API. Defaults to https://api.openai.com/v1. You can change this to use other APIs like JinaChat, LocalAI and Prem.",
+                "info": "OpenAI API的基础URL。默认为https://api.openai.com/v1. 您可以更改此URL以使用其他API，如JinaChat、LocalAI和Prem。",
                 "list": false,
                 "list_add_label": "Add More",
                 "load_from_db": false,
@@ -1371,9 +1371,9 @@
                 "advanced": true,
                 "combobox": false,
                 "dialog_inputs": {},
-                "display_name": "Order",
+                "display_name": "顺序",
                 "dynamic": false,
-                "info": "Order of the messages.",
+                "info": "消息的顺序。",
                 "name": "order",
                 "options": [
                   "Ascending",
@@ -1392,9 +1392,9 @@
               "seed": {
                 "_input_type": "IntInput",
                 "advanced": true,
-                "display_name": "Seed",
+                "display_name": "随机种子",
                 "dynamic": false,
-                "info": "The seed controls the reproducibility of the job.",
+                "info": "随机种子控制任务的可重复性。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "seed",
@@ -1412,9 +1412,9 @@
                 "advanced": true,
                 "combobox": false,
                 "dialog_inputs": {},
-                "display_name": "Sender",
+                "display_name": "发送者",
                 "dynamic": false,
-                "info": "The sender of the message. Might be Machine or User. If empty, the current sender parameter will be used.",
+                "info": "消息的发送者。可能是机器或用户。如果为空，将使用当前发送者参数。",
                 "name": "sender",
                 "options": [
                   "Machine",
@@ -1434,9 +1434,9 @@
               "sender_name": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Sender Name",
+                "display_name": "发送者名称",
                 "dynamic": false,
-                "info": "Filter by sender name.",
+                "info": "按发送者名称过滤。",
                 "input_types": [
                   "Message"
                 ],
@@ -1459,9 +1459,9 @@
                 "advanced": true,
                 "combobox": false,
                 "dialog_inputs": {},
-                "display_name": "Sender Type",
+                "display_name": "发送者类型",
                 "dynamic": false,
-                "info": "Filter by sender type.",
+                "info": "按发送者类型过滤。",
                 "name": "sender_type",
                 "options": [
                   "Machine",
@@ -1482,9 +1482,9 @@
               "session_id": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Session ID",
+                "display_name": "会话ID",
                 "dynamic": false,
-                "info": "The session ID of the chat. If empty, the current session ID parameter will be used.",
+                "info": "聊天会话ID。如果为空，将使用当前会话ID参数。",
                 "input_types": [
                   "Message"
                 ],
@@ -1505,9 +1505,9 @@
               "system_prompt": {
                 "_input_type": "MultilineInput",
                 "advanced": false,
-                "display_name": "Agent Instructions",
+                "display_name": "代理指令",
                 "dynamic": false,
-                "info": "System Prompt: Initial instructions and context provided to guide the agent's behavior.",
+                "info": "System Prompt: 初始指令和上下文，用于指导代理的行为。",
                 "input_types": [
                   "Message"
                 ],
@@ -1529,7 +1529,7 @@
               "temperature": {
                 "_input_type": "SliderInput",
                 "advanced": true,
-                "display_name": "Temperature",
+                "display_name": "温度",
                 "dynamic": false,
                 "info": "",
                 "max_label": "",
@@ -1557,9 +1557,9 @@
               "template": {
                 "_input_type": "MultilineInput",
                 "advanced": true,
-                "display_name": "Template",
+                "display_name": "模板",
                 "dynamic": false,
-                "info": "The template to use for formatting the data. It can contain the keys {text}, {sender} or any other key in the message data.",
+                "info": "用于格式化数据的模板。它可以包含{text}、{sender}或其他消息数据中的任何其他键。",
                 "input_types": [
                   "Message"
                 ],
@@ -1581,9 +1581,9 @@
               "timeout": {
                 "_input_type": "IntInput",
                 "advanced": true,
-                "display_name": "Timeout",
+                "display_name": "超时",
                 "dynamic": false,
-                "info": "The timeout for requests to OpenAI completion API.",
+                "info": "OpenAI完成API请求的超时时间。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "timeout",
@@ -1599,9 +1599,9 @@
               "tools": {
                 "_input_type": "HandleInput",
                 "advanced": false,
-                "display_name": "Tools",
+                "display_name": "工具",
                 "dynamic": false,
-                "info": "These are the tools that the agent can use to help with tasks.",
+                "info": "这些是代理可以用来帮助完成任务的工具。",
                 "input_types": [
                   "Tool"
                 ],
@@ -1712,7 +1712,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "File Path",
+                "display_name": "文件路径",
                 "group_outputs": false,
                 "method": "save_to_file",
                 "name": "result",
@@ -1743,16 +1743,16 @@
                 "show": true,
                 "title_case": false,
                 "type": "code",
-                "value": "import json\nfrom collections.abc import AsyncIterator, Iterator\nfrom pathlib import Path\n\nimport orjson\nimport pandas as pd\nfrom fastapi import UploadFile\nfrom fastapi.encoders import jsonable_encoder\n\nfrom langflow.api.v2.files import upload_user_file\nfrom langflow.custom import Component\nfrom langflow.io import DropdownInput, HandleInput, StrInput\nfrom langflow.schema import Data, DataFrame, Message\nfrom langflow.services.auth.utils import create_user_longterm_token\nfrom langflow.services.database.models.user.crud import get_user_by_id\nfrom langflow.services.deps import get_session, get_settings_service, get_storage_service\nfrom langflow.template.field.base import Output\n\n\nclass SaveToFileComponent(Component):\n    display_name = \"Save File\"\n    description = \"Save data to a local file in the selected format.\"\n    icon = \"save\"\n    name = \"SaveToFile\"\n\n    # File format options for different types\n    DATA_FORMAT_CHOICES = [\"csv\", \"excel\", \"json\", \"markdown\"]\n    MESSAGE_FORMAT_CHOICES = [\"txt\", \"json\", \"markdown\"]\n\n    inputs = [\n        HandleInput(\n            name=\"input\",\n            display_name=\"Input\",\n            info=\"The input to save.\",\n            dynamic=True,\n            input_types=[\"Data\", \"DataFrame\", \"Message\"],\n            required=True,\n        ),\n        StrInput(\n            name=\"file_name\",\n            display_name=\"File Name\",\n            info=\"Name file will be saved as (without extension).\",\n            required=True,\n        ),\n        DropdownInput(\n            name=\"file_format\",\n            display_name=\"File Format\",\n            options=DATA_FORMAT_CHOICES + MESSAGE_FORMAT_CHOICES,\n            info=\"Select the file format to save the input. If not provided, the default format will be used.\",\n            value=\"\",\n            advanced=True,\n        ),\n    ]\n\n    outputs = [Output(display_name=\"File Path\", name=\"result\", method=\"save_to_file\")]\n\n    async def save_to_file(self) -> Message:\n        \"\"\"Save the input to a file and upload it, returning a confirmation message.\"\"\"\n        # Validate inputs\n        if not self.file_name:\n            msg = \"File name must be provided.\"\n            raise ValueError(msg)\n        if not self._get_input_type():\n            msg = \"Input type is not set.\"\n            raise ValueError(msg)\n\n        # Validate file format based on input type\n        file_format = self.file_format or self._get_default_format()\n        allowed_formats = (\n            self.MESSAGE_FORMAT_CHOICES if self._get_input_type() == \"Message\" else self.DATA_FORMAT_CHOICES\n        )\n        if file_format not in allowed_formats:\n            msg = f\"Invalid file format '{file_format}' for {self._get_input_type()}. Allowed: {allowed_formats}\"\n            raise ValueError(msg)\n\n        # Prepare file path\n        file_path = Path(self.file_name).expanduser()\n        if not file_path.parent.exists():\n            file_path.parent.mkdir(parents=True, exist_ok=True)\n        file_path = self._adjust_file_path_with_format(file_path, file_format)\n\n        # Save the input to file based on type\n        if self._get_input_type() == \"DataFrame\":\n            confirmation = self._save_dataframe(self.input, file_path, file_format)\n        elif self._get_input_type() == \"Data\":\n            confirmation = self._save_data(self.input, file_path, file_format)\n        elif self._get_input_type() == \"Message\":\n            confirmation = await self._save_message(self.input, file_path, file_format)\n        else:\n            msg = f\"Unsupported input type: {self._get_input_type()}\"\n            raise ValueError(msg)\n\n        # Upload the saved file\n        await self._upload_file(file_path)\n\n        # Return the final file path and confirmation message\n        final_path = Path.cwd() / file_path if not file_path.is_absolute() else file_path\n\n        return Message(text=f\"{confirmation} at {final_path}\")\n\n    def _get_input_type(self) -> str:\n        \"\"\"Determine the input type based on the provided input.\"\"\"\n        if isinstance(self.input, DataFrame):\n            return \"DataFrame\"\n        if isinstance(self.input, Data):\n            return \"Data\"\n        if isinstance(self.input, Message):\n            return \"Message\"\n\n        msg = f\"Unsupported input type: {type(self.input)}\"\n        raise ValueError(msg)\n\n    def _get_default_format(self) -> str:\n        \"\"\"Return the default file format based on input type.\"\"\"\n        if self._get_input_type() == \"DataFrame\":\n            return \"csv\"\n        if self._get_input_type() == \"Data\":\n            return \"json\"\n        if self._get_input_type() == \"Message\":\n            return \"markdown\"\n        return \"json\"  # Fallback\n\n    def _adjust_file_path_with_format(self, path: Path, fmt: str) -> Path:\n        \"\"\"Adjust the file path to include the correct extension.\"\"\"\n        file_extension = path.suffix.lower().lstrip(\".\")\n        if fmt == \"excel\":\n            return Path(f\"{path}.xlsx\").expanduser() if file_extension not in [\"xlsx\", \"xls\"] else path\n        return Path(f\"{path}.{fmt}\").expanduser() if file_extension != fmt else path\n\n    async def _upload_file(self, file_path: Path) -> None:\n        \"\"\"Upload the saved file using the upload_user_file service.\"\"\"\n        if not file_path.exists():\n            msg = f\"File not found: {file_path}\"\n            raise FileNotFoundError(msg)\n\n        with file_path.open(\"rb\") as f:\n            async for db in get_session():\n                user_id, _ = await create_user_longterm_token(db)\n                current_user = await get_user_by_id(db, user_id)\n\n                await upload_user_file(\n                    file=UploadFile(filename=file_path.name, file=f, size=file_path.stat().st_size),\n                    session=db,\n                    current_user=current_user,\n                    storage_service=get_storage_service(),\n                    settings_service=get_settings_service(),\n                )\n\n    def _save_dataframe(self, dataframe: DataFrame, path: Path, fmt: str) -> str:\n        \"\"\"Save a DataFrame to the specified file format.\"\"\"\n        if fmt == \"csv\":\n            dataframe.to_csv(path, index=False)\n        elif fmt == \"excel\":\n            dataframe.to_excel(path, index=False, engine=\"openpyxl\")\n        elif fmt == \"json\":\n            dataframe.to_json(path, orient=\"records\", indent=2)\n        elif fmt == \"markdown\":\n            path.write_text(dataframe.to_markdown(index=False), encoding=\"utf-8\")\n        else:\n            msg = f\"Unsupported DataFrame format: {fmt}\"\n            raise ValueError(msg)\n        return f\"DataFrame saved successfully as '{path}'\"\n\n    def _save_data(self, data: Data, path: Path, fmt: str) -> str:\n        \"\"\"Save a Data object to the specified file format.\"\"\"\n        if fmt == \"csv\":\n            pd.DataFrame(data.data).to_csv(path, index=False)\n        elif fmt == \"excel\":\n            pd.DataFrame(data.data).to_excel(path, index=False, engine=\"openpyxl\")\n        elif fmt == \"json\":\n            path.write_text(\n                orjson.dumps(jsonable_encoder(data.data), option=orjson.OPT_INDENT_2).decode(\"utf-8\"), encoding=\"utf-8\"\n            )\n        elif fmt == \"markdown\":\n            path.write_text(pd.DataFrame(data.data).to_markdown(index=False), encoding=\"utf-8\")\n        else:\n            msg = f\"Unsupported Data format: {fmt}\"\n            raise ValueError(msg)\n        return f\"Data saved successfully as '{path}'\"\n\n    async def _save_message(self, message: Message, path: Path, fmt: str) -> str:\n        \"\"\"Save a Message to the specified file format, handling async iterators.\"\"\"\n        content = \"\"\n        if message.text is None:\n            content = \"\"\n        elif isinstance(message.text, AsyncIterator):\n            async for item in message.text:\n                content += str(item) + \" \"\n            content = content.strip()\n        elif isinstance(message.text, Iterator):\n            content = \" \".join(str(item) for item in message.text)\n        else:\n            content = str(message.text)\n\n        if fmt == \"txt\":\n            path.write_text(content, encoding=\"utf-8\")\n        elif fmt == \"json\":\n            path.write_text(json.dumps({\"message\": content}, indent=2), encoding=\"utf-8\")\n        elif fmt == \"markdown\":\n            path.write_text(f\"**Message:**\\n\\n{content}\", encoding=\"utf-8\")\n        else:\n            msg = f\"Unsupported Message format: {fmt}\"\n            raise ValueError(msg)\n        return f\"Message saved successfully as '{path}'\"\n"
+                "value": "import json\nfrom collections.abc import AsyncIterator, Iterator\nfrom pathlib import Path\n\nimport orjson\nimport pandas as pd\nfrom fastapi import UploadFile\nfrom fastapi.encoders import jsonable_encoder\n\nfrom langflow.api.v2.files import upload_user_file\nfrom langflow.custom import Component\nfrom langflow.io import DropdownInput, HandleInput, StrInput\nfrom langflow.schema import Data, DataFrame, Message\nfrom langflow.services.auth.utils import create_user_longterm_token\nfrom langflow.services.database.models.user.crud import get_user_by_id\nfrom langflow.services.deps import get_session, get_settings_service, get_storage_service\nfrom langflow.template.field.base import Output\n\n\nclass SaveToFileComponent(Component):\n    display_name = \"Save File\"\n    display_name_zh = \"保存文件\"\n    description = \"Save data to a local file in the selected format.\"\n    description_zh = \"将数据保存到本地文件，选择格式。\"\n    icon = \"save\"\n    name = \"SaveToFile\"\n\n    # File format options for different types\n    DATA_FORMAT_CHOICES = [\"csv\", \"excel\", \"json\", \"markdown\"]\n    MESSAGE_FORMAT_CHOICES = [\"txt\", \"json\", \"markdown\"]\n\n    inputs = [\n        HandleInput(\n            name=\"input\",\n            display_name=\"输入\",\n            info=\"要保存的输入。\",\n            dynamic=True,\n            input_types=[\"Data\", \"DataFrame\", \"Message\"],\n            required=True,\n        ),\n        StrInput(\n            name=\"file_name\",\n            display_name=\"文件名\",\n            info=\"文件将被保存的名称（不包括扩展名）。\",\n            required=True,\n        ),\n        DropdownInput(\n            name=\"file_format\",\n            display_name=\"文件格式\",\n            options=DATA_FORMAT_CHOICES + MESSAGE_FORMAT_CHOICES,\n            info=\"选择要保存的文件格式。如果未提供，将使用默认格式。\",\n            value=\"\",\n            advanced=True,\n        ),\n    ]\n\n    outputs = [Output(display_name=\"文件路径\", name=\"result\", method=\"save_to_file\")]\n\n    async def save_to_file(self) -> Message:\n        \"\"\"Save the input to a file and upload it, returning a confirmation message.\"\"\"\n        # Validate inputs\n        if not self.file_name:\n            msg = \"File name must be provided.\"\n            raise ValueError(msg)\n        if not self._get_input_type():\n            msg = \"Input type is not set.\"\n            raise ValueError(msg)\n\n        # Validate file format based on input type\n        file_format = self.file_format or self._get_default_format()\n        allowed_formats = (\n            self.MESSAGE_FORMAT_CHOICES if self._get_input_type() == \"Message\" else self.DATA_FORMAT_CHOICES\n        )\n        if file_format not in allowed_formats:\n            msg = f\"Invalid file format '{file_format}' for {self._get_input_type()}. Allowed: {allowed_formats}\"\n            raise ValueError(msg)\n\n        # Prepare file path\n        file_path = Path(self.file_name).expanduser()\n        if not file_path.parent.exists():\n            file_path.parent.mkdir(parents=True, exist_ok=True)\n        file_path = self._adjust_file_path_with_format(file_path, file_format)\n\n        # Save the input to file based on type\n        if self._get_input_type() == \"DataFrame\":\n            confirmation = self._save_dataframe(self.input, file_path, file_format)\n        elif self._get_input_type() == \"Data\":\n            confirmation = self._save_data(self.input, file_path, file_format)\n        elif self._get_input_type() == \"Message\":\n            confirmation = await self._save_message(self.input, file_path, file_format)\n        else:\n            msg = f\"Unsupported input type: {self._get_input_type()}\"\n            raise ValueError(msg)\n\n        # Upload the saved file\n        await self._upload_file(file_path)\n\n        # Return the final file path and confirmation message\n        final_path = Path.cwd() / file_path if not file_path.is_absolute() else file_path\n\n        return Message(text=f\"{confirmation} at {final_path}\")\n\n    def _get_input_type(self) -> str:\n        \"\"\"Determine the input type based on the provided input.\"\"\"\n        if isinstance(self.input, DataFrame):\n            return \"DataFrame\"\n        if isinstance(self.input, Data):\n            return \"Data\"\n        if isinstance(self.input, Message):\n            return \"Message\"\n\n        msg = f\"Unsupported input type: {type(self.input)}\"\n        raise ValueError(msg)\n\n    def _get_default_format(self) -> str:\n        \"\"\"Return the default file format based on input type.\"\"\"\n        if self._get_input_type() == \"DataFrame\":\n            return \"csv\"\n        if self._get_input_type() == \"Data\":\n            return \"json\"\n        if self._get_input_type() == \"Message\":\n            return \"markdown\"\n        return \"json\"  # Fallback\n\n    def _adjust_file_path_with_format(self, path: Path, fmt: str) -> Path:\n        \"\"\"Adjust the file path to include the correct extension.\"\"\"\n        file_extension = path.suffix.lower().lstrip(\".\")\n        if fmt == \"excel\":\n            return Path(f\"{path}.xlsx\").expanduser() if file_extension not in [\"xlsx\", \"xls\"] else path\n        return Path(f\"{path}.{fmt}\").expanduser() if file_extension != fmt else path\n\n    async def _upload_file(self, file_path: Path) -> None:\n        \"\"\"Upload the saved file using the upload_user_file service.\"\"\"\n        if not file_path.exists():\n            msg = f\"File not found: {file_path}\"\n            raise FileNotFoundError(msg)\n\n        with file_path.open(\"rb\") as f:\n            async for db in get_session():\n                user_id, _ = await create_user_longterm_token(db)\n                current_user = await get_user_by_id(db, user_id)\n\n                await upload_user_file(\n                    file=UploadFile(filename=file_path.name, file=f, size=file_path.stat().st_size),\n                    session=db,\n                    current_user=current_user,\n                    storage_service=get_storage_service(),\n                    settings_service=get_settings_service(),\n                )\n\n    def _save_dataframe(self, dataframe: DataFrame, path: Path, fmt: str) -> str:\n        \"\"\"Save a DataFrame to the specified file format.\"\"\"\n        if fmt == \"csv\":\n            dataframe.to_csv(path, index=False)\n        elif fmt == \"excel\":\n            dataframe.to_excel(path, index=False, engine=\"openpyxl\")\n        elif fmt == \"json\":\n            dataframe.to_json(path, orient=\"records\", indent=2)\n        elif fmt == \"markdown\":\n            path.write_text(dataframe.to_markdown(index=False), encoding=\"utf-8\")\n        else:\n            msg = f\"Unsupported DataFrame format: {fmt}\"\n            raise ValueError(msg)\n        return f\"DataFrame saved successfully as '{path}'\"\n\n    def _save_data(self, data: Data, path: Path, fmt: str) -> str:\n        \"\"\"Save a Data object to the specified file format.\"\"\"\n        if fmt == \"csv\":\n            pd.DataFrame(data.data).to_csv(path, index=False)\n        elif fmt == \"excel\":\n            pd.DataFrame(data.data).to_excel(path, index=False, engine=\"openpyxl\")\n        elif fmt == \"json\":\n            path.write_text(\n                orjson.dumps(jsonable_encoder(data.data), option=orjson.OPT_INDENT_2).decode(\"utf-8\"), encoding=\"utf-8\"\n            )\n        elif fmt == \"markdown\":\n            path.write_text(pd.DataFrame(data.data).to_markdown(index=False), encoding=\"utf-8\")\n        else:\n            msg = f\"Unsupported Data format: {fmt}\"\n            raise ValueError(msg)\n        return f\"Data saved successfully as '{path}'\"\n\n    async def _save_message(self, message: Message, path: Path, fmt: str) -> str:\n        \"\"\"Save a Message to the specified file format, handling async iterators.\"\"\"\n        content = \"\"\n        if message.text is None:\n            content = \"\"\n        elif isinstance(message.text, AsyncIterator):\n            async for item in message.text:\n                content += str(item) + \" \"\n            content = content.strip()\n        elif isinstance(message.text, Iterator):\n            content = \" \".join(str(item) for item in message.text)\n        else:\n            content = str(message.text)\n\n        if fmt == \"txt\":\n            path.write_text(content, encoding=\"utf-8\")\n        elif fmt == \"json\":\n            path.write_text(json.dumps({\"message\": content}, indent=2), encoding=\"utf-8\")\n        elif fmt == \"markdown\":\n            path.write_text(f\"**Message:**\\n\\n{content}\", encoding=\"utf-8\")\n        else:\n            msg = f\"Unsupported Message format: {fmt}\"\n            raise ValueError(msg)\n        return f\"Message saved successfully as '{path}'\"\n"
               },
               "file_format": {
                 "_input_type": "DropdownInput",
                 "advanced": true,
                 "combobox": false,
                 "dialog_inputs": {},
-                "display_name": "File Format",
+                "display_name": "文件格式",
                 "dynamic": false,
-                "info": "Select the file format to save the input. If not provided, the default format will be used.",
+                "info": "选择要保存的文件格式。如果未提供，将使用默认格式。",
                 "name": "file_format",
                 "options": [
                   "csv",
@@ -1777,9 +1777,9 @@
               "file_name": {
                 "_input_type": "StrInput",
                 "advanced": false,
-                "display_name": "File Name",
+                "display_name": "文件名",
                 "dynamic": false,
-                "info": "Name file will be saved as (without extension).",
+                "info": "文件将被保存的名称（不包括扩展名）。",
                 "list": false,
                 "list_add_label": "Add More",
                 "load_from_db": false,
@@ -1798,9 +1798,9 @@
                 "advanced": false,
                 "combobox": false,
                 "dialog_inputs": {},
-                "display_name": "Input",
+                "display_name": "输入",
                 "dynamic": false,
-                "info": "The input to save.",
+                "info": "要保存的输入。",
                 "name": "input_type",
                 "options": [
                   "DataFrame",
@@ -1875,7 +1875,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "Output Message",
+                "display_name": "输出消息",
                 "group_outputs": false,
                 "method": "message_response",
                 "name": "message",
@@ -1893,9 +1893,9 @@
               "background_color": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Background Color",
+                "display_name": "背景颜色",
                 "dynamic": false,
-                "info": "The background color of the icon.",
+                "info": "图标的背景颜色。",
                 "input_types": [
                   "Message"
                 ],
@@ -1916,9 +1916,9 @@
               "chat_icon": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Icon",
+                "display_name": "图标",
                 "dynamic": false,
-                "info": "The icon of the message.",
+                "info": "消息的图标。",
                 "input_types": [
                   "Message"
                 ],
@@ -1939,9 +1939,9 @@
               "clean_data": {
                 "_input_type": "BoolInput",
                 "advanced": true,
-                "display_name": "Basic Clean Data",
+                "display_name": "基础数据清理",
                 "dynamic": false,
-                "info": "Whether to clean the data",
+                "info": "是否清理数据。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "clean_data",
@@ -1970,14 +1970,14 @@
                 "show": true,
                 "title_case": false,
                 "type": "code",
-                "value": "from collections.abc import Generator\nfrom typing import Any\n\nimport orjson\nfrom fastapi.encoders import jsonable_encoder\n\nfrom langflow.base.io.chat import ChatComponent\nfrom langflow.helpers.data import safe_convert\nfrom langflow.inputs.inputs import BoolInput, DropdownInput, HandleInput, MessageTextInput\nfrom langflow.schema.data import Data\nfrom langflow.schema.dataframe import DataFrame\nfrom langflow.schema.message import Message\nfrom langflow.schema.properties import Source\nfrom langflow.template.field.base import Output\nfrom langflow.utils.constants import (\n    MESSAGE_SENDER_AI,\n    MESSAGE_SENDER_NAME_AI,\n    MESSAGE_SENDER_USER,\n)\n\n\nclass ChatOutput(ChatComponent):\n    display_name = \"Chat Output\"\n    description = \"Display a chat message in the Playground.\"\n    icon = \"MessagesSquare\"\n    name = \"ChatOutput\"\n    minimized = True\n\n    inputs = [\n        HandleInput(\n            name=\"input_value\",\n            display_name=\"Inputs\",\n            info=\"Message to be passed as output.\",\n            input_types=[\"Data\", \"DataFrame\", \"Message\"],\n            required=True,\n        ),\n        BoolInput(\n            name=\"should_store_message\",\n            display_name=\"Store Messages\",\n            info=\"Store the message in the history.\",\n            value=True,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"sender\",\n            display_name=\"Sender Type\",\n            options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],\n            value=MESSAGE_SENDER_AI,\n            advanced=True,\n            info=\"Type of sender.\",\n        ),\n        MessageTextInput(\n            name=\"sender_name\",\n            display_name=\"Sender Name\",\n            info=\"Name of the sender.\",\n            value=MESSAGE_SENDER_NAME_AI,\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"session_id\",\n            display_name=\"Session ID\",\n            info=\"The session ID of the chat. If empty, the current session ID parameter will be used.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"data_template\",\n            display_name=\"Data Template\",\n            value=\"{text}\",\n            advanced=True,\n            info=\"Template to convert Data to Text. If left empty, it will be dynamically set to the Data's text key.\",\n        ),\n        MessageTextInput(\n            name=\"background_color\",\n            display_name=\"Background Color\",\n            info=\"The background color of the icon.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"chat_icon\",\n            display_name=\"Icon\",\n            info=\"The icon of the message.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"text_color\",\n            display_name=\"Text Color\",\n            info=\"The text color of the name\",\n            advanced=True,\n        ),\n        BoolInput(\n            name=\"clean_data\",\n            display_name=\"Basic Clean Data\",\n            value=True,\n            info=\"Whether to clean the data\",\n            advanced=True,\n        ),\n    ]\n    outputs = [\n        Output(\n            display_name=\"Output Message\",\n            name=\"message\",\n            method=\"message_response\",\n        ),\n    ]\n\n    def _build_source(self, id_: str | None, display_name: str | None, source: str | None) -> Source:\n        source_dict = {}\n        if id_:\n            source_dict[\"id\"] = id_\n        if display_name:\n            source_dict[\"display_name\"] = display_name\n        if source:\n            # Handle case where source is a ChatOpenAI object\n            if hasattr(source, \"model_name\"):\n                source_dict[\"source\"] = source.model_name\n            elif hasattr(source, \"model\"):\n                source_dict[\"source\"] = str(source.model)\n            else:\n                source_dict[\"source\"] = str(source)\n        return Source(**source_dict)\n\n    async def message_response(self) -> Message:\n        # First convert the input to string if needed\n        text = self.convert_to_string()\n\n        # Get source properties\n        source, icon, display_name, source_id = self.get_properties_from_source_component()\n        background_color = self.background_color\n        text_color = self.text_color\n        if self.chat_icon:\n            icon = self.chat_icon\n\n        # Create or use existing Message object\n        if isinstance(self.input_value, Message):\n            message = self.input_value\n            # Update message properties\n            message.text = text\n        else:\n            message = Message(text=text)\n\n        # Set message properties\n        message.sender = self.sender\n        message.sender_name = self.sender_name\n        message.session_id = self.session_id\n        message.flow_id = self.graph.flow_id if hasattr(self, \"graph\") else None\n        message.properties.source = self._build_source(source_id, display_name, source)\n        message.properties.icon = icon\n        message.properties.background_color = background_color\n        message.properties.text_color = text_color\n\n        # Store message if needed\n        if self.session_id and self.should_store_message:\n            stored_message = await self.send_message(message)\n            self.message.value = stored_message\n            message = stored_message\n\n        self.status = message\n        return message\n\n    def _serialize_data(self, data: Data) -> str:\n        \"\"\"Serialize Data object to JSON string.\"\"\"\n        # Convert data.data to JSON-serializable format\n        serializable_data = jsonable_encoder(data.data)\n        # Serialize with orjson, enabling pretty printing with indentation\n        json_bytes = orjson.dumps(serializable_data, option=orjson.OPT_INDENT_2)\n        # Convert bytes to string and wrap in Markdown code blocks\n        return \"```json\\n\" + json_bytes.decode(\"utf-8\") + \"\\n```\"\n\n    def _validate_input(self) -> None:\n        \"\"\"Validate the input data and raise ValueError if invalid.\"\"\"\n        if self.input_value is None:\n            msg = \"Input data cannot be None\"\n            raise ValueError(msg)\n        if isinstance(self.input_value, list) and not all(\n            isinstance(item, Message | Data | DataFrame | str) for item in self.input_value\n        ):\n            invalid_types = [\n                type(item).__name__\n                for item in self.input_value\n                if not isinstance(item, Message | Data | DataFrame | str)\n            ]\n            msg = f\"Expected Data or DataFrame or Message or str, got {invalid_types}\"\n            raise TypeError(msg)\n        if not isinstance(\n            self.input_value,\n            Message | Data | DataFrame | str | list | Generator | type(None),\n        ):\n            type_name = type(self.input_value).__name__\n            msg = f\"Expected Data or DataFrame or Message or str, Generator or None, got {type_name}\"\n            raise TypeError(msg)\n\n    def convert_to_string(self) -> str | Generator[Any, None, None]:\n        \"\"\"Convert input data to string with proper error handling.\"\"\"\n        self._validate_input()\n        if isinstance(self.input_value, list):\n            return \"\\n\".join([safe_convert(item, clean_data=self.clean_data) for item in self.input_value])\n        if isinstance(self.input_value, Generator):\n            return self.input_value\n        return safe_convert(self.input_value)\n"
+                "value": "from collections.abc import Generator\nfrom typing import Any\n\nimport orjson\nfrom fastapi.encoders import jsonable_encoder\n\nfrom langflow.base.io.chat import ChatComponent\nfrom langflow.helpers.data import safe_convert\nfrom langflow.inputs.inputs import BoolInput, DropdownInput, HandleInput, MessageTextInput\nfrom langflow.schema.data import Data\nfrom langflow.schema.dataframe import DataFrame\nfrom langflow.schema.message import Message\nfrom langflow.schema.properties import Source\nfrom langflow.template.field.base import Output\nfrom langflow.utils.constants import (\n    MESSAGE_SENDER_AI,\n    MESSAGE_SENDER_NAME_AI,\n    MESSAGE_SENDER_USER,\n)\n\n\nclass ChatOutput(ChatComponent):\n    display_name = \"Chat Output\"\n    display_name_zh = \"聊天输出\"\n    description = \"Display a chat message in the Playground.\"\n    description_zh = \"在游乐场中显示聊天消息。\"\n    icon = \"MessagesSquare\"\n    name = \"ChatOutput\"\n    minimized = True\n\n    inputs = [\n        HandleInput(\n            name=\"input_value\",\n            display_name=\"输入\",\n            info=\"要作为输出传递的消息。\",\n            input_types=[\"Data\", \"DataFrame\", \"Message\"],\n            required=True,\n        ),\n        BoolInput(\n            name=\"should_store_message\",\n            display_name=\"存储消息\",\n            info=\"将消息存储在历史记录中。\",\n            value=True,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"sender\",\n            display_name=\"发送者类型\",\n            options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],\n            value=MESSAGE_SENDER_AI,\n            advanced=True,\n            info=\"发送者类型。\",\n        ),\n        MessageTextInput(\n            name=\"sender_name\",\n            display_name=\"发送者名称\",\n            info=\"发送者名称。\",\n            value=MESSAGE_SENDER_NAME_AI,\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"session_id\",\n            display_name=\"会话ID\",\n            info=\"聊天的会话ID。如果为空，将使用当前会话ID参数。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"data_template\",\n            display_name=\"数据模板\",\n            value=\"{text}\",\n            advanced=True,\n            info=\"将数据转换为文本的模板。如果留空，将动态设置为数据的文本键。\",\n        ),\n        MessageTextInput(\n            name=\"background_color\",\n            display_name=\"背景颜色\",\n            info=\"图标的背景颜色。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"chat_icon\",\n            display_name=\"图标\",\n            info=\"消息的图标。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"text_color\",\n            display_name=\"文本颜色\",\n            info=\"名称的文本颜色。\",\n            advanced=True,\n        ),\n        BoolInput(\n            name=\"clean_data\",\n            display_name=\"基础数据清理\",\n            value=True,\n            info=\"是否清理数据。\",\n            advanced=True,\n        ),\n    ]\n    outputs = [\n        Output(\n            display_name=\"输出消息\",\n            name=\"message\",\n            method=\"message_response\",\n        ),\n    ]\n\n    def _build_source(self, id_: str | None, display_name: str | None, source: str | None) -> Source:\n        source_dict = {}\n        if id_:\n            source_dict[\"id\"] = id_\n        if display_name:\n            source_dict[\"display_name\"] = display_name\n        if source:\n            # Handle case where source is a ChatOpenAI object\n            if hasattr(source, \"model_name\"):\n                source_dict[\"source\"] = source.model_name\n            elif hasattr(source, \"model\"):\n                source_dict[\"source\"] = str(source.model)\n            else:\n                source_dict[\"source\"] = str(source)\n        return Source(**source_dict)\n\n    async def message_response(self) -> Message:\n        # First convert the input to string if needed\n        text = self.convert_to_string()\n\n        # Get source properties\n        source, icon, display_name, source_id = self.get_properties_from_source_component()\n        background_color = self.background_color\n        text_color = self.text_color\n        if self.chat_icon:\n            icon = self.chat_icon\n\n        # Create or use existing Message object\n        if isinstance(self.input_value, Message):\n            message = self.input_value\n            # Update message properties\n            message.text = text\n        else:\n            message = Message(text=text)\n\n        # Set message properties\n        message.sender = self.sender\n        message.sender_name = self.sender_name\n        message.session_id = self.session_id\n        message.flow_id = self.graph.flow_id if hasattr(self, \"graph\") else None\n        message.properties.source = self._build_source(source_id, display_name, source)\n        message.properties.icon = icon\n        message.properties.background_color = background_color\n        message.properties.text_color = text_color\n\n        # Store message if needed\n        if self.session_id and self.should_store_message:\n            stored_message = await self.send_message(message)\n            self.message.value = stored_message\n            message = stored_message\n\n        self.status = message\n        return message\n\n    def _serialize_data(self, data: Data) -> str:\n        \"\"\"Serialize Data object to JSON string.\"\"\"\n        # Convert data.data to JSON-serializable format\n        serializable_data = jsonable_encoder(data.data)\n        # Serialize with orjson, enabling pretty printing with indentation\n        json_bytes = orjson.dumps(serializable_data, option=orjson.OPT_INDENT_2)\n        # Convert bytes to string and wrap in Markdown code blocks\n        return \"```json\\n\" + json_bytes.decode(\"utf-8\") + \"\\n```\"\n\n    def _validate_input(self) -> None:\n        \"\"\"Validate the input data and raise ValueError if invalid.\"\"\"\n        if self.input_value is None:\n            msg = \"Input data cannot be None\"\n            raise ValueError(msg)\n        if isinstance(self.input_value, list) and not all(\n            isinstance(item, Message | Data | DataFrame | str) for item in self.input_value\n        ):\n            invalid_types = [\n                type(item).__name__\n                for item in self.input_value\n                if not isinstance(item, Message | Data | DataFrame | str)\n            ]\n            msg = f\"Expected Data or DataFrame or Message or str, got {invalid_types}\"\n            raise TypeError(msg)\n        if not isinstance(\n            self.input_value,\n            Message | Data | DataFrame | str | list | Generator | type(None),\n        ):\n            type_name = type(self.input_value).__name__\n            msg = f\"Expected Data or DataFrame or Message or str, Generator or None, got {type_name}\"\n            raise TypeError(msg)\n\n    def convert_to_string(self) -> str | Generator[Any, None, None]:\n        \"\"\"Convert input data to string with proper error handling.\"\"\"\n        self._validate_input()\n        if isinstance(self.input_value, list):\n            return \"\\n\".join([safe_convert(item, clean_data=self.clean_data) for item in self.input_value])\n        if isinstance(self.input_value, Generator):\n            return self.input_value\n        return safe_convert(self.input_value)\n"
               },
               "data_template": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Data Template",
+                "display_name": "数据模板",
                 "dynamic": false,
-                "info": "Template to convert Data to Text. If left empty, it will be dynamically set to the Data's text key.",
+                "info": "将数据转换为文本的模板。如果留空，将动态设置为数据的文本键。",
                 "input_types": [
                   "Message"
                 ],
@@ -1998,9 +1998,9 @@
               "input_value": {
                 "_input_type": "HandleInput",
                 "advanced": false,
-                "display_name": "Inputs",
+                "display_name": "输入",
                 "dynamic": false,
-                "info": "Message to be passed as output.",
+                "info": "要作为输出传递的消息。",
                 "input_types": [
                   "Data",
                   "DataFrame",
@@ -2022,9 +2022,9 @@
                 "advanced": true,
                 "combobox": false,
                 "dialog_inputs": {},
-                "display_name": "Sender Type",
+                "display_name": "发送者类型",
                 "dynamic": false,
-                "info": "Type of sender.",
+                "info": "发送者类型。",
                 "name": "sender",
                 "options": [
                   "Machine",
@@ -2043,9 +2043,9 @@
               "sender_name": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Sender Name",
+                "display_name": "发送者名称",
                 "dynamic": false,
-                "info": "Name of the sender.",
+                "info": "发送者名称。",
                 "input_types": [
                   "Message"
                 ],
@@ -2066,9 +2066,9 @@
               "session_id": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Session ID",
+                "display_name": "会话ID",
                 "dynamic": false,
-                "info": "The session ID of the chat. If empty, the current session ID parameter will be used.",
+                "info": "聊天的会话ID。如果为空，将使用当前会话ID参数。",
                 "input_types": [
                   "Message"
                 ],
@@ -2089,9 +2089,9 @@
               "should_store_message": {
                 "_input_type": "BoolInput",
                 "advanced": true,
-                "display_name": "Store Messages",
+                "display_name": "存储消息",
                 "dynamic": false,
-                "info": "Store the message in the history.",
+                "info": "将消息存储在历史记录中。",
                 "list": false,
                 "list_add_label": "Add More",
                 "name": "should_store_message",
@@ -2107,9 +2107,9 @@
               "text_color": {
                 "_input_type": "MessageTextInput",
                 "advanced": true,
-                "display_name": "Text Color",
+                "display_name": "文本颜色",
                 "dynamic": false,
-                "info": "The text color of the name",
+                "info": "名称的文本颜色。",
                 "input_types": [
                   "Message"
                 ],

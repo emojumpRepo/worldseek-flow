@@ -65,7 +65,9 @@ def getattr_return_dict(value):
 
 ATTR_FUNC_MAPPING: dict[str, Callable] = {
     "display_name": getattr_return_str,
+    "display_name_zh": getattr_return_str,
     "description": getattr_return_str,
+    "description_zh": getattr_return_str,
     "beta": getattr_return_bool,
     "legacy": getattr_return_bool,
     "documentation": getattr_return_str,

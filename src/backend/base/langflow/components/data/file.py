@@ -12,7 +12,9 @@ class FileComponent(BaseFileComponent):
     """
 
     display_name = "File"
+    display_name_zh = "文件"
     description = "Loads content from one or more files as a DataFrame."
+    description_zh = "加载一个或多个文件的内容作为DataFrame。"
     icon = "file-text"
     name = "File"
 
@@ -22,16 +24,16 @@ class FileComponent(BaseFileComponent):
         *BaseFileComponent._base_inputs,
         BoolInput(
             name="use_multithreading",
-            display_name="[Deprecated] Use Multithreading",
+            display_name="[已弃用] 使用多线程",
             advanced=True,
             value=True,
-            info="Set 'Processing Concurrency' greater than 1 to enable multithreading.",
+            info="设置'处理并发'大于1以启用多线程。",
         ),
         IntInput(
             name="concurrency_multithreading",
-            display_name="Processing Concurrency",
+            display_name="处理并发",
             advanced=True,
-            info="When multiple files are being processed, the number of files to process concurrently.",
+            info="当多个文件正在处理时，要同时处理的文件数量。",
             value=1,
         ),
     ]

@@ -10,7 +10,9 @@ from langflow.schema.data import Data
 
 class CalculatorComponent(Component):
     display_name = "Calculator"
+    display_name_zh = "计算器"
     description = "Perform basic arithmetic operations on a given expression."
+    description_zh = "对给定的表达式执行基本的算术运算。"
     icon = "calculator"
 
     # Cache operators dictionary as a class variable
@@ -25,14 +27,14 @@ class CalculatorComponent(Component):
     inputs = [
         MessageTextInput(
             name="expression",
-            display_name="Expression",
-            info="The arithmetic expression to evaluate (e.g., '4*4*(33/22)+12-20').",
+            display_name="表达式",
+            info="要计算的算术表达式（例如，'4*4*(33/22)+12-20'）。",
             tool_mode=True,
         ),
     ]
 
     outputs = [
-        Output(display_name="Data", name="result", type_=Data, method="evaluate_expression"),
+        Output(display_name="数据", name="result", type_=Data, method="evaluate_expression"),
     ]
 
     def _eval_expr(self, node: ast.AST) -> float:

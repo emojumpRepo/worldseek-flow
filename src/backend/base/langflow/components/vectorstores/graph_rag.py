@@ -52,14 +52,14 @@ class GraphRAGComponent(LCVectorStoreComponent):
             name="embedding_model",
             display_name="Embedding Model",
             input_types=["Embeddings"],
-            info="Specify the Embedding Model. Not required for Astra Vectorize collections.",
+            info="Specify the Embedding 模型. 否t required for Astra Vectorize collections.",
             required=False,
         ),
         HandleInput(
             name="vector_store",
             display_name="Vector Store Connection",
             input_types=["VectorStore"],
-            info="Connection to Vector Store.",
+            info="连接 to Vector Store.",
         ),
         StrInput(
             name="edge_definition",

@@ -72,10 +72,16 @@ class TavilySearchSchema(BaseModel):
 
 class TavilySearchToolComponent(LCToolComponent):
     display_name = "Tavily Search API"
+    display_name_zh = "Tavily搜索API"
     description = """**Tavily Search API** is a search engine optimized for LLMs and RAG, \
         aimed at efficient, quick, and persistent search results. It can be used independently or as an agent tool.
 
 Note: Check 'Advanced' for all options.
+"""
+    description_zh = """**Tavily搜索API**是一个为大语言模型和RAG优化的搜索引擎，\
+        旨在提供高效、快速和持久的搜索结果。可以独立使用或作为智能体工具。
+
+注意：请查看"高级"选项获取所有配置。
 """
     icon = "TavilyIcon"
     name = "TavilyAISearch"
@@ -87,7 +93,7 @@ Note: Check 'Advanced' for all options.
             name="api_key",
             display_name="Tavily API Key",
             required=True,
-            info="Your Tavily API Key.",
+            info="Your Tavily API密钥.",
         ),
         MessageTextInput(
             name="query",

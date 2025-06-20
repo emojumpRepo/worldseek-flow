@@ -9,21 +9,23 @@ from langflow.schema.data import Data
 
 class PythonREPLComponent(Component):
     display_name = "Python Interpreter"
+    display_name_zh = "Python解释器"
     description = "Run Python code with optional imports. Use print() to see the output."
+    description_zh = "运行Python代码，可选导入。使用print()查看输出。"
     icon = "square-terminal"
 
     inputs = [
         StrInput(
             name="global_imports",
-            display_name="Global Imports",
-            info="A comma-separated list of modules to import globally, e.g. 'math,numpy,pandas'.",
+            display_name="全局导入",
+            info="逗号分隔的模块列表，用于全局导入，例如'math,numpy,pandas'。",
             value="math,pandas",
             required=True,
         ),
         CodeInput(
             name="python_code",
-            display_name="Python Code",
-            info="The Python code to execute. Only modules specified in Global Imports can be used.",
+            display_name="Python代码",
+            info="要执行的Python代码。只有全局导入中指定的模块才能使用。",
             value="print('Hello, World!')",
             input_types=["Message"],
             tool_mode=True,
@@ -33,7 +35,7 @@ class PythonREPLComponent(Component):
 
     outputs = [
         Output(
-            display_name="Results",
+            display_name="结果",
             name="results",
             type_=Data,
             method="run_python_repl",

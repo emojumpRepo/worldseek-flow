@@ -16,46 +16,48 @@ if TYPE_CHECKING:
 
 class LambdaFilterComponent(Component):
     display_name = "Smart Function"
+    display_name_zh = "智能函数"
     description = "Uses an LLM to generate a function for filtering or transforming structured data."
+    description_zh = "使用LLM生成一个函数，用于过滤或转换结构化数据。"
     icon = "test-tube-diagonal"
     name = "Smart Function"
 
     inputs = [
         DataInput(
             name="data",
-            display_name="Data",
-            info="The structured data to filter or transform using a lambda function.",
+            display_name="数据",
+            info="要过滤或转换的结构化数据。",
             is_list=True,
             required=True,
         ),
         HandleInput(
             name="llm",
-            display_name="Language Model",
-            info="Connect the 'Language Model' output from your LLM component here.",
+            display_name="语言模型",
+            info="从你的LLM组件中连接'语言模型'输出。",
             input_types=["LanguageModel"],
             required=True,
         ),
         MultilineInput(
             name="filter_instruction",
-            display_name="Instructions",
+            display_name="指令",
             info=(
-                "Natural language instructions for how to filter or transform the data using a lambda function. "
-                "Example: Filter the data to only include items where the 'status' is 'active'."
+                "使用lambda函数过滤或转换数据的自然语言指令。"
+                "示例：过滤数据，只包含'status'为'active'的项。"
             ),
-            value="Filter the data to...",
+            value="过滤数据...",
             required=True,
         ),
         IntInput(
             name="sample_size",
-            display_name="Sample Size",
-            info="For large datasets, number of items to sample from head/tail.",
+            display_name="样本大小",
+            info="对于大型数据集，从头部/尾部采样的项目数量。",
             value=1000,
             advanced=True,
         ),
         IntInput(
             name="max_size",
-            display_name="Max Size",
-            info="Number of characters for the data to be considered large.",
+            display_name="最大大小",
+            info="要考虑为大型数据集的字符数。",
             value=30000,
             advanced=True,
         ),
@@ -63,7 +65,7 @@ class LambdaFilterComponent(Component):
 
     outputs = [
         Output(
-            display_name="Filtered Data",
+            display_name="过滤后的数据",
             name="filtered_data",
             method="filter_data",
         ),

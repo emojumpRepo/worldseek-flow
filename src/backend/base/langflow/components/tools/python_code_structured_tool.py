@@ -63,7 +63,7 @@ class PythonCodeStructuredTool(LCToolComponent):
         ),
         MessageTextInput(
             name="tool_description",
-            display_name="Description",
+            display_name="描述",
             info="Enter the description of the tool.",
             required=True,
         ),
@@ -84,7 +84,7 @@ class PythonCodeStructuredTool(LCToolComponent):
         HandleInput(
             name="global_variables",
             display_name="Global Variables",
-            info="Enter the global variables or Create Data Component.",
+            info="Enter the global variables or Create 数据 Component.",
             input_types=["Data"],
             field_type=FieldTypes.DICT,
             is_list=True,

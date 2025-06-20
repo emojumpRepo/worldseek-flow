@@ -13,8 +13,8 @@ class WebhookComponent(Component):
     inputs = [
         MultilineInput(
             name="data",
-            display_name="Payload",
-            info="Receives a payload from external systems via HTTP POST.",
+            display_name="负载",
+            info="通过HTTP POST接收来自外部系统的负载。",
             advanced=True,
         ),
         MultilineInput(
@@ -26,7 +26,7 @@ class WebhookComponent(Component):
         ),
         MultilineInput(
             name="endpoint",
-            display_name="Endpoint",
+            display_name="端点",
             value="BACKEND_URL",
             advanced=False,
             copy_field=True,
@@ -34,7 +34,7 @@ class WebhookComponent(Component):
         ),
     ]
     outputs = [
-        Output(display_name="Data", name="output_data", method="build_data"),
+        Output(display_name="数据", name="output_data", method="build_data"),
     ]
 
     def build_data(self) -> Data:

@@ -28,14 +28,14 @@ class YouTubeChannelComponent(Component):
         MessageTextInput(
             name="channel_url",
             display_name="Channel URL or ID",
-            info="The URL or ID of the YouTube channel.",
+            info="The 网址 or ID of the YouTube channel.",
             tool_mode=True,
             required=True,
         ),
         SecretStrInput(
             name="api_key",
             display_name="YouTube API Key",
-            info="Your YouTube Data API key.",
+            info="Your YouTube 数据 API key.",
             required=True,
         ),
         BoolInput(

@@ -22,7 +22,7 @@ class ChatLiteLLMModelComponent(LCModelComponent):
     icon = "🚄"
 
     inputs = [
-        MessageInput(name="input_value", display_name="Input"),
+        MessageInput(name="input_value", display_name="输入"),
         StrInput(
             name="model",
             display_name="Model name",
@@ -32,7 +32,7 @@ class ChatLiteLLMModelComponent(LCModelComponent):
         ),
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
+            display_name="API密钥",
             advanced=False,
             required=False,
         ),
@@ -51,7 +51,7 @@ class ChatLiteLLMModelComponent(LCModelComponent):
         ),
         FloatInput(
             name="temperature",
-            display_name="Temperature",
+            display_name="温度",
             advanced=False,
             required=False,
             value=0.7,
@@ -106,13 +106,13 @@ class ChatLiteLLMModelComponent(LCModelComponent):
         ),
         BoolInput(
             name="stream",
-            display_name="Stream",
+            display_name="流式输出",
             info=STREAM_INFO_TEXT,
             advanced=True,
         ),
         StrInput(
             name="system_message",
-            display_name="System Message",
+            display_name="系统消息",
             info="System message to pass to the model.",
             advanced=True,
         ),

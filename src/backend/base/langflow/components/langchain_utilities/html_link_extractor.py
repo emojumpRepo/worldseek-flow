@@ -19,7 +19,7 @@ class HtmlLinkExtractorComponent(LCDocumentTransformerComponent):
         BoolInput(name="drop_fragments", display_name="Drop URL fragments", value=True, required=False),
         DataInput(
             name="data_input",
-            display_name="Input",
+            display_name="输入",
             info="The texts from which to extract links.",
             input_types=["Document", "Data"],
             required=True,

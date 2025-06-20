@@ -9,54 +9,56 @@ from langflow.utils.util import unescape_string
 
 class SplitTextComponent(Component):
     display_name: str = "Split Text"
+    display_name_zh: str = "拆分文本"
     description: str = "Split text into chunks based on specified criteria."
+    description_zh: str = "根据指定条件拆分文本。"
     icon = "scissors-line-dashed"
     name = "SplitText"
 
     inputs = [
         HandleInput(
             name="data_inputs",
-            display_name="Data or DataFrame",
-            info="The data with texts to split in chunks.",
+            display_name="数据或DataFrame",
+            info="要拆分的文本数据。",
             input_types=["Data", "DataFrame"],
             required=True,
         ),
         IntInput(
             name="chunk_overlap",
-            display_name="Chunk Overlap",
-            info="Number of characters to overlap between chunks.",
+            display_name="块重叠",
+            info="块之间的重叠字符数。",
             value=200,
         ),
         IntInput(
             name="chunk_size",
-            display_name="Chunk Size",
+            display_name="块大小",
             info=(
-                "The maximum length of each chunk. Text is first split by separator, "
-                "then chunks are merged up to this size. "
-                "Individual splits larger than this won't be further divided."
+                "每个块的最大长度。文本首先按分隔符拆分，"
+                "然后合并到此大小。"
+                "大于此大小的单独拆分不会进一步拆分。"
             ),
             value=1000,
         ),
         MessageTextInput(
             name="separator",
-            display_name="Separator",
+            display_name="分隔符",
             info=(
-                "The character to split on. Use \\n for newline. "
-                "Examples: \\n\\n for paragraphs, \\n for lines, . for sentences"
+                "要拆分的字符。使用\\n换行。"
+                "示例：\\n\\n用于段落，\\n用于行，.用于句子"
             ),
             value="\n",
         ),
         MessageTextInput(
             name="text_key",
-            display_name="Text Key",
-            info="The key to use for the text column.",
+            display_name="文本键",
+            info="要用于文本列的键。",
             value="text",
             advanced=True,
         ),
         DropdownInput(
             name="keep_separator",
-            display_name="Keep Separator",
-            info="Whether to keep the separator in the output chunks and where to place it.",
+            display_name="保留分隔符",
+            info="是否保留输出块中的分隔符，以及放置位置。",
             options=["False", "True", "Start", "End"],
             value="False",
             advanced=True,
@@ -64,7 +66,7 @@ class SplitTextComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Chunks", name="dataframe", method="split_text"),
+        Output(display_name="块", name="dataframe", method="split_text"),
     ]
 
     def _docs_to_data(self, docs) -> list[Data]:

@@ -20,14 +20,14 @@ class QdrantVectorStoreComponent(LCVectorStoreComponent):
 
     inputs = [
         StrInput(name="collection_name", display_name="Collection Name", required=True),
-        StrInput(name="host", display_name="Host", value="localhost", advanced=True),
-        IntInput(name="port", display_name="Port", value=6333, advanced=True),
+        StrInput(name="host", display_name="主机", value="localhost", advanced=True),
+        IntInput(name="port", display_name="端口", value=6333, advanced=True),
         IntInput(name="grpc_port", display_name="gRPC Port", value=6334, advanced=True),
-        SecretStrInput(name="api_key", display_name="API Key", advanced=True),
+        SecretStrInput(name="api_key", display_name="API密钥", advanced=True),
         StrInput(name="prefix", display_name="Prefix", advanced=True),
-        IntInput(name="timeout", display_name="Timeout", advanced=True),
-        StrInput(name="path", display_name="Path", advanced=True),
-        StrInput(name="url", display_name="URL", advanced=True),
+        IntInput(name="timeout", display_name="超时", advanced=True),
+        StrInput(name="path", display_name="路径", advanced=True),
+        StrInput(name="url", display_name="网址", advanced=True),
         DropdownInput(
             name="distance_func",
             display_name="Distance Function",

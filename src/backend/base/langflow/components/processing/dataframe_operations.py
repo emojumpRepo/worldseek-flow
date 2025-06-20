@@ -5,7 +5,9 @@ from langflow.schema.dataframe import DataFrame
 
 class DataFrameOperationsComponent(Component):
     display_name = "DataFrame Operations"
+    display_name_zh = "DataFrame操作"
     description = "Perform various operations on a DataFrame."
+    description_zh = "对DataFrame执行各种操作。"
     icon = "table"
 
     # Available operations
@@ -25,77 +27,77 @@ class DataFrameOperationsComponent(Component):
         DataFrameInput(
             name="df",
             display_name="DataFrame",
-            info="The input DataFrame to operate on.",
+            info="要操作的输入DataFrame。",
         ),
         DropdownInput(
             name="operation",
-            display_name="Operation",
+            display_name="操作",
             options=OPERATION_CHOICES,
-            info="Select the DataFrame operation to perform.",
+            info="选择要执行的DataFrame操作。",
             real_time_refresh=True,
         ),
         StrInput(
             name="column_name",
-            display_name="Column Name",
-            info="The column name to use for the operation.",
+            display_name="列名",
+            info="要使用的列名。",
             dynamic=True,
             show=False,
         ),
         MessageTextInput(
             name="filter_value",
-            display_name="Filter Value",
-            info="The value to filter rows by.",
+            display_name="过滤值",
+            info="要过滤的值。",
             dynamic=True,
             show=False,
         ),
         BoolInput(
             name="ascending",
-            display_name="Sort Ascending",
-            info="Whether to sort in ascending order.",
+            display_name="升序",
+            info="是否按升序排序。",
             dynamic=True,
             show=False,
             value=True,
         ),
         StrInput(
             name="new_column_name",
-            display_name="New Column Name",
-            info="The new column name when renaming or adding a column.",
+            display_name="新列名",
+            info="重命名或添加列时的新列名。",
             dynamic=True,
             show=False,
         ),
         MessageTextInput(
             name="new_column_value",
-            display_name="New Column Value",
-            info="The value to populate the new column with.",
+            display_name="新列值",
+            info="要填充新列的值。",
             dynamic=True,
             show=False,
         ),
         StrInput(
             name="columns_to_select",
-            display_name="Columns to Select",
+            display_name="选择列",
             dynamic=True,
             is_list=True,
             show=False,
         ),
         IntInput(
             name="num_rows",
-            display_name="Number of Rows",
-            info="Number of rows to return (for head/tail).",
+            display_name="行数",
+            info="要返回的行数（用于head/tail）。",
             dynamic=True,
             show=False,
             value=5,
         ),
         MessageTextInput(
             name="replace_value",
-            display_name="Value to Replace",
-            info="The value to replace in the column.",
+            display_name="要替换的值",
+            info="列中要替换的值。",
             dynamic=True,
             show=False,
         ),
         MessageTextInput(
             name="replacement_value",
-            display_name="Replacement Value",
-            info="The value to replace with.",
+            display_name="替换成的值",
+            info="要替换成的值。",
             dynamic=True,
             show=False,
         ),
@@ -106,7 +108,7 @@ class DataFrameOperationsComponent(Component):
             display_name="DataFrame",
             name="output",
             method="perform_operation",
-            info="The resulting DataFrame after the operation.",
+            info="执行操作后的结果DataFrame。",
         )
     ]
 

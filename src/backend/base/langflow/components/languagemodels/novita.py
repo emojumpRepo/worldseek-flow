@@ -21,6 +21,7 @@ from langflow.inputs.inputs import (
 class NovitaModelComponent(LCModelComponent):
     display_name = "Novita AI"
     description = "Generates text using Novita AI LLMs (OpenAI compatible)."
+    description_zh = "使用Novita AI LLMs生成文本。"
     icon = "Novita"
     name = "NovitaModel"
 
@@ -28,7 +29,7 @@ class NovitaModelComponent(LCModelComponent):
         *LCModelComponent._base_inputs,
         IntInput(
             name="max_tokens",
-            display_name="Max Tokens",
+            display_name="最大令牌数",
             advanced=True,
             info="The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
             range_spec=RangeSpec(min=0, max=128000),
@@ -43,11 +44,11 @@ class NovitaModelComponent(LCModelComponent):
             name="json_mode",
             display_name="JSON Mode",
             advanced=True,
-            info="If True, it will output JSON regardless of passing a schema.",
+            info="If 真, it will output JSON regardless of passing a schema.",
         ),
         DropdownInput(
             name="model_name",
-            display_name="Model Name",
+            display_name="模型名称",
             advanced=False,
             options=MODEL_NAMES,
             value=MODEL_NAMES[0],
@@ -56,12 +57,12 @@ class NovitaModelComponent(LCModelComponent):
         SecretStrInput(
             name="api_key",
             display_name="Novita API Key",
-            info="The Novita API Key to use for Novita AI models.",
+            info="The 否vita API密钥 to use for 否vita AI models.",
             advanced=False,
             value="NOVITA_API_KEY",
             real_time_refresh=True,
         ),
-        SliderInput(name="temperature", display_name="Temperature", value=0.1, range_spec=RangeSpec(min=0, max=1)),
+        SliderInput(name="temperature", display_name="温度", value=0.1, range_spec=RangeSpec(min=0, max=1)),
         IntInput(
             name="seed",
             display_name="Seed",

@@ -12,6 +12,8 @@ class FrontendNode(BaseModel):
     """Template for the frontend node."""
     description: str | None = None
     """Description of the frontend node."""
+    description_zh: str | None = None
+    """Chinese description of the frontend node."""
     icon: str | None = None
     """Icon of the frontend node."""
     is_input: bool | None = None
@@ -28,6 +30,8 @@ class FrontendNode(BaseModel):
     """Name of the frontend node."""
     display_name: str | None = ""
     """Display name of the frontend node."""
+    display_name_zh: str | None = None
+    """Chinese display name of the frontend node."""
     priority: int | None = None
     """Priority of the frontend node."""
     documentation: str = ""

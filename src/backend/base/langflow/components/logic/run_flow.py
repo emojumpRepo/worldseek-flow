@@ -9,9 +9,14 @@ from langflow.schema.dotdict import dotdict
 
 class RunFlowComponent(RunFlowBaseComponent):
     display_name = "Run Flow"
+    display_name_zh = "运行工作流"
     description = (
         "Creates a tool component from a Flow that takes all its inputs and runs it. "
         " \n **Select a Flow to use the tool mode**"
+    )
+    description_zh = (
+        "创建一个工具组件，从工作流中获取所有输入并运行它。"
+        " \n **选择一个工作流来使用工具模式**"
     )
     beta = True
     name = "RunFlow"

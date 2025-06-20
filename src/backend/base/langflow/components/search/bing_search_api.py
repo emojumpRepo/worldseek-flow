@@ -21,7 +21,7 @@ class BingSearchAPIComponent(LCToolComponent):
         SecretStrInput(name="bing_subscription_key", display_name="Bing Subscription Key"),
         MultilineInput(
             name="input_value",
-            display_name="Input",
+            display_name="输入",
         ),
         MessageTextInput(name="bing_search_url", display_name="Bing Search URL", advanced=True),
         IntInput(name="k", display_name="Number of results", value=4, required=True),

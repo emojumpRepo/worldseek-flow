@@ -10,37 +10,41 @@ from langflow.template.field.base import Output
 class JSONCleaner(Component):
     icon = "braces"
     display_name = "JSON Cleaner"
+    display_name_zh = "JSON清理器"
     description = (
         "Cleans the messy and sometimes incorrect JSON strings produced by LLMs "
         "so that they are fully compliant with the JSON spec."
     )
+    description_zh = (
+        "清理由LLM生成的混乱和有时不正确的JSON字符串，使其完全符合JSON规范。"
+    )
     legacy = True
     inputs = [
         MessageTextInput(
-            name="json_str", display_name="JSON String", info="The JSON string to be cleaned.", required=True
+            name="json_str", display_name="JSON字符串", info="要清理的JSON字符串。", required=True
         ),
         BoolInput(
             name="remove_control_chars",
-            display_name="Remove Control Characters",
-            info="Remove control characters from the JSON string.",
+            display_name="删除控制字符",
+            info="从JSON字符串中删除控制字符。",
             required=False,
         ),
         BoolInput(
             name="normalize_unicode",
-            display_name="Normalize Unicode",
-            info="Normalize Unicode characters in the JSON string.",
+            display_name="标准化Unicode",
+            info="标准化JSON字符串中的Unicode字符。",
             required=False,
         ),
         BoolInput(
             name="validate_json",
-            display_name="Validate JSON",
-            info="Validate the JSON string to ensure it is well-formed.",
+            display_name="验证JSON",
+            info="验证JSON字符串是否格式良好。",
             required=False,
         ),
     ]
 
     outputs = [
-        Output(display_name="Cleaned JSON String", name="output", method="clean_json"),
+        Output(display_name="清理后的JSON字符串", name="output", method="clean_json"),
     ]
 
     def clean_json(self) -> Message:

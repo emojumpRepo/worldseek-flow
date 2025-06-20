@@ -26,14 +26,14 @@ class YouTubeCommentsComponent(Component):
         MessageTextInput(
             name="video_url",
             display_name="Video URL",
-            info="The URL of the YouTube video to get comments from.",
+            info="The 网址 of the YouTube video to get comments from.",
             tool_mode=True,
             required=True,
         ),
         SecretStrInput(
             name="api_key",
             display_name="YouTube API Key",
-            info="Your YouTube Data API key.",
+            info="Your YouTube 数据 API key.",
             required=True,
         ),
         IntInput(
@@ -47,7 +47,7 @@ class YouTubeCommentsComponent(Component):
             display_name="Sort By",
             options=["time", "relevance"],
             value="relevance",
-            info="Sort comments by time or relevance.",
+            info="排序 comments by time or relevance.",
         ),
         BoolInput(
             name="include_replies",
