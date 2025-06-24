@@ -552,7 +552,7 @@ export const NOUNS: string[] = [
 export const USER_PROJECTS_HEADER = "我的收藏";
 
 export const DEFAULT_FOLDER = "我的项目";
-export const DEFAULT_FOLDER_DEPRECATED = "My Projects";
+export const DEFAULT_FOLDER_DEPRECATED = "我的项目";
 
 export const MAX_MCP_SERVER_NAME_LENGTH = 30;
 

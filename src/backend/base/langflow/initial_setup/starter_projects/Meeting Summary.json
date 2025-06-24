@@ -672,7 +672,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "Model Response",
+                "display_name": "模型响应",
                 "group_outputs": false,
                 "method": "text_response",
                 "name": "text_output",
@@ -686,7 +686,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "Language Model",
+                "display_name": "语言模型",
                 "group_outputs": false,
                 "method": "build_model",
                 "name": "model_output",
@@ -1816,7 +1816,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "Model Response",
+                "display_name": "模型响应",
                 "group_outputs": false,
                 "method": "text_response",
                 "name": "text_output",
@@ -1830,7 +1830,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "Language Model",
+                "display_name": "语言模型",
                 "group_outputs": false,
                 "method": "build_model",
                 "name": "model_output",
@@ -3069,7 +3069,7 @@
                 "show": true,
                 "title_case": false,
                 "type": "code",
-                "value": "from langflow.base.data.utils import IMG_FILE_TYPES, TEXT_FILE_TYPES\nfrom langflow.base.io.chat import ChatComponent\nfrom langflow.inputs.inputs import BoolInput\nfrom langflow.io import (\n    DropdownInput,\n    FileInput,\n    MessageTextInput,\n    MultilineInput,\n    Output,\n)\nfrom langflow.schema.message import Message\nfrom langflow.utils.constants import (\n    MESSAGE_SENDER_AI,\n    MESSAGE_SENDER_NAME_USER,\n    MESSAGE_SENDER_USER,\n)\n\n\nclass ChatInput(ChatComponent):\n    display_name = \"Chat Input\"\n    display_name_zh = \"聊天输入\"\n    description = \"Get chat inputs from the Playground.\"\n    description_zh = \"获取用户的聊天输入。\"\n    icon = \"MessagesSquare\"\n    name = \"ChatInput\"\n    minimized = True\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"输入文本\",\n            value=\"\",\n            info=\"要作为输入传递的消息。\",\n            input_types=[],\n        ),\n        BoolInput(\n            name=\"should_store_message\",\n            display_name=\"存储消息\",\n            info=\"将消息存储在历史记录中。\",\n            value=True,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"sender\",\n            display_name=\"发送者类型\",\n            options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],\n            value=MESSAGE_SENDER_USER,\n            info=\"发送者类型。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"sender_name\",\n            display_name=\"发送者名称\",\n            info=\"发送者名称。\",\n            value=MESSAGE_SENDER_NAME_USER,\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"session_id\",\n            display_name=\"会话ID\",\n            info=\"聊天会话ID。如果为空，则使用当前会话ID参数。\",\n            advanced=True,\n        ),\n        FileInput(\n            name=\"files\",\n            display_name=\"文件\",\n            file_types=TEXT_FILE_TYPES + IMG_FILE_TYPES,\n            info=\"要与消息一起发送的文件。\",\n            advanced=True,\n            is_list=True,\n            temp_file=True,\n        ),\n        MessageTextInput(\n            name=\"background_color\",\n            display_name=\"背景颜色\",\n            info=\"图标的背景颜色。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"chat_icon\",\n            display_name=\"图标\",\n            info=\"消息的图标。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"text_color\",\n            display_name=\"文本颜色\",\n            info=\"名称的文本颜色。\",\n            advanced=True,\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"聊天消息\", name=\"message\", method=\"message_response\"),\n    ]\n\n    async def message_response(self) -> Message:\n        background_color = self.background_color\n        text_color = self.text_color\n        icon = self.chat_icon\n\n        message = await Message.create(\n            text=self.input_value,\n            sender=self.sender,\n            sender_name=self.sender_name,\n            session_id=self.session_id,\n            files=self.files,\n            properties={\n                \"background_color\": background_color,\n                \"text_color\": text_color,\n                \"icon\": icon,\n            },\n        )\n        if self.session_id and isinstance(message, Message) and self.should_store_message:\n            stored_message = await self.send_message(\n                message,\n            )\n            self.message.value = stored_message\n            message = stored_message\n\n        self.status = message\n        return message\n"
+                "value": "from langflow.base.data.utils import IMG_FILE_TYPES, TEXT_FILE_TYPES\nfrom langflow.base.io.chat import ChatComponent\nfrom langflow.inputs.inputs import BoolInput\nfrom langflow.io import (\n    DropdownInput,\n    FileInput,\n    MessageTextInput,\n    MultilineInput,\n    Output,\n)\nfrom langflow.schema.message import Message\nfrom langflow.utils.constants import (\n    MESSAGE_SENDER_AI,\n    MESSAGE_SENDER_NAME_USER,\n    MESSAGE_SENDER_USER,\n)\n\n\nclass ChatInput(ChatComponent):\n    display_name = \"Chat Input\"\n    display_name_zh = \"聊天输入\"\n    description = \"Get chat inputs from the Playground.\"\n    description_zh = \"获取用户的聊天输入。\"\n    icon = \"MessagesSquare\"\n    name = \"ChatInput\"\n    minimized = True\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"输入文本\",\n            value=\"Hello\",\n            info=\"要作为输入传递的消息。\",\n            input_types=[],\n        ),\n        BoolInput(\n            name=\"should_store_message\",\n            display_name=\"存储消息\",\n            info=\"将消息存储在历史记录中。\",\n            value=True,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"sender\",\n            display_name=\"发送者类型\",\n            options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],\n            value=MESSAGE_SENDER_USER,\n            info=\"发送者类型。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"sender_name\",\n            display_name=\"发送者名称\",\n            info=\"发送者名称。\",\n            value=MESSAGE_SENDER_NAME_USER,\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"session_id\",\n            display_name=\"会话ID\",\n            info=\"聊天会话ID。如果为空，则使用当前会话ID参数。\",\n            advanced=True,\n        ),\n        FileInput(\n            name=\"files\",\n            display_name=\"文件\",\n            file_types=TEXT_FILE_TYPES + IMG_FILE_TYPES,\n            info=\"要与消息一起发送的文件。\",\n            advanced=True,\n            is_list=True,\n            temp_file=True,\n        ),\n        MessageTextInput(\n            name=\"background_color\",\n            display_name=\"背景颜色\",\n            info=\"图标的背景颜色。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"chat_icon\",\n            display_name=\"图标\",\n            info=\"消息的图标。\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"text_color\",\n            display_name=\"文本颜色\",\n            info=\"名称的文本颜色。\",\n            advanced=True,\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"聊天消息\", name=\"message\", method=\"message_response\"),\n    ]\n\n    async def message_response(self) -> Message:\n        background_color = self.background_color\n        text_color = self.text_color\n        icon = self.chat_icon\n\n        message = await Message.create(\n            text=self.input_value,\n            sender=self.sender,\n            sender_name=self.sender_name,\n            session_id=self.session_id,\n            files=self.files,\n            properties={\n                \"background_color\": background_color,\n                \"text_color\": text_color,\n                \"icon\": icon,\n            },\n        )\n        if self.session_id and isinstance(message, Message) and self.should_store_message:\n            stored_message = await self.send_message(\n                message,\n            )\n            self.message.value = stored_message\n            message = stored_message\n\n        self.status = message\n        return message\n"
               },
               "files": {
                 "_input_type": "FileInput",

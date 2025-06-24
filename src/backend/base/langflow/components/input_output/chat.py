@@ -29,7 +29,7 @@ class ChatInput(ChatComponent):
         MultilineInput(
             name="input_value",
             display_name="输入文本",
-            value="",
+            value="Hello",
             info="要作为输入传递的消息。",
             input_types=[],
         ),

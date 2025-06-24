@@ -53,7 +53,7 @@ class AgentComponent(ToolCallingAgentComponent):
             name="system_prompt",
             display_name="代理指令",
             info="System Prompt: 初始指令和上下文，用于指导代理的行为。",
-            value="You are a helpful assistant that can use tools to answer questions and perform tasks.",
+            value="你是一个有用的助手，可以使用工具回答问题和执行任务。",
             advanced=False,
         ),
         *LCToolsAgentComponent._base_inputs,

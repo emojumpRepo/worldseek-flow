@@ -74,7 +74,7 @@ export const MenuBar = memo((): JSX.Element => {
 
   const handleSave = () => {
     saveFlow().then(() => {
-      setSuccessData({ title: "Saved successfully" });
+      setSuccessData({ title: "保存成功！" });
     });
   };
 

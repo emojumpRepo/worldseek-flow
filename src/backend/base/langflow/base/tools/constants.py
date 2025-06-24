@@ -1,7 +1,7 @@
 from langflow.schema.table import EditMode
 
 TOOL_OUTPUT_NAME = "component_as_tool"
-TOOL_OUTPUT_DISPLAY_NAME = "Toolset"
+TOOL_OUTPUT_DISPLAY_NAME = "工具集"
 TOOLS_METADATA_INPUT_NAME = "tools_metadata"
 TOOL_TABLE_SCHEMA = [
     {
@@ -44,6 +44,6 @@ TOOL_TABLE_SCHEMA = [
     },
 ]
 
-TOOLS_METADATA_INFO = "Modify tool names and descriptions to help agents understand when to use each tool."
+TOOLS_METADATA_INFO = "修改工具名称和描述以帮助代理理解何时使用每个工具。"
 
 TOOL_UPDATE_CONSTANTS = ["tool_mode", "tool_actions", TOOLS_METADATA_INPUT_NAME, "flow_name_selected"]

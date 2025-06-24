@@ -49,8 +49,8 @@ class LCModelComponent(Component):
     ]
 
     outputs = [
-        Output(display_name="Model Response", name="text_output", method="text_response"),
-        Output(display_name="Language Model", name="model_output", method="build_model"),
+        Output(display_name="模型响应", name="text_output", method="text_response"),
+        Output(display_name="语言模型", name="model_output", method="build_model"),
     ]
 
     def _get_exception_message(self, e: Exception):

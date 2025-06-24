@@ -1293,7 +1293,7 @@ class Component(CustomComponent):
 
         return ToolsInput(
             name=TOOLS_METADATA_INPUT_NAME,
-            display_name="Actions",
+            display_name="操作",
             info=TOOLS_METADATA_INFO,
             value=tool_data,
         )

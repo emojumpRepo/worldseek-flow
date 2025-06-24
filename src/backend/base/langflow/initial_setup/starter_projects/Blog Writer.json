@@ -801,7 +801,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "Model Response",
+                "display_name": "模型响应",
                 "group_outputs": false,
                 "method": "text_response",
                 "name": "text_output",
@@ -815,7 +815,7 @@
               {
                 "allows_loop": false,
                 "cache": true,
-                "display_name": "Language Model",
+                "display_name": "语言模型",
                 "group_outputs": false,
                 "method": "build_model",
                 "name": "model_output",

@@ -45,8 +45,8 @@ class EmbeddingModelComponent(LCEmbeddingsModel):
         ),
         SecretStrInput(
             name="api_key",
-            display_name="API Key",
-            info="模型提供商的API Key",
+            display_name="API密钥",
+            info="模型提供商的API密钥",
             required=True,
             show=True,
             real_time_refresh=True,

@@ -35,7 +35,7 @@ const EditNodeModal = ({
       <BaseModal.Trigger>
         <></>
       </BaseModal.Trigger>
-      <BaseModal.Header description={data.node?.description!}>
+      <BaseModal.Header description={data.node?.description_zh || data.node?.description!}>
         <span data-testid="node-modal-title" className="pr-2">
           {data.node?.display_name_zh || data.node?.display_name || data.type}
         </span>

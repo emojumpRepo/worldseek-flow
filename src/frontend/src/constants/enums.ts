@@ -40,7 +40,7 @@ export enum IOOutputTypes {
 }
 
 export enum EventDeliveryType {
-  STREAMING = "流式传输",
-  POLLING = "轮询",
-  DIRECT = "直接",
+  STREAMING = "streaming",
+  POLLING = "polling",
+  DIRECT = "direct",
 }

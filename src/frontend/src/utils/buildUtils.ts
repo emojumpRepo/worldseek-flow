@@ -197,8 +197,9 @@ async function pollBuildEvents(
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
+      console.log("errorData", errorData);
       throw new Error(
-        errorData.detail ||
+        errorData.detail[0].msg ||
           "WorldSeek Agent 无法连接到服务器。请检查您的连接是否正常。",
       );
     }
