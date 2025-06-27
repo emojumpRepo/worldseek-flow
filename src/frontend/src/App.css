@@ -18,6 +18,16 @@ body {
   -ms-user-select: none;
 }
 
+.btn-primary {
+  background: linear-gradient(135deg, #646464 0%, #0a0a0a 100%);
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
 .react-flow__node {
   width: fit-content !important;
   height: auto;

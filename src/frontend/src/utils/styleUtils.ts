@@ -439,6 +439,7 @@ export const getLucideIconName = (name: string): string => {
     AlertCircle: "circle-alert",
     AlertTriangle: "triangle-alert",
     TerminalSquare: "square-terminal",
+    BookText: "book-text",
     Wand2: "wand-sparkles",
   };
   const kebabCaseName = name
