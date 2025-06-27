@@ -60,8 +60,6 @@ class KnowledgeBaseComponent(Component):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # 在初始化时输出一些日志到控制台，不使用组件日志系统
-        print("=== KnowledgeBaseComponent 初始化 ===")
 
     inputs = [
         DropdownInput(
@@ -124,39 +122,15 @@ class KnowledgeBaseComponent(Component):
     async def get_kb_config_value(self, key: str, default: str = None) -> str:
         """从配置表中获取配置值"""
         try:
-            msg = f"尝试获取配置: {key}"
-            print(msg)
-            self.log(msg)
-            
             # 获取设置服务
             settings_service = get_settings_service()
-            msg = f"SettingsService 获取成功"
-            print(msg)
-            self.log(msg)
-            
             db_service = DatabaseService(settings_service)
-            msg = f"DatabaseService 创建成功"
-            print(msg)
-            self.log(msg)
             
             async with db_service.with_session() as session:
-                msg = f"数据库会话创建成功，调用 get_config_value"
-                print(msg)
-                self.log(msg)
-                
                 value = await get_config_value(session, key, default)
-                
-                msg = f"配置值获取结果: key={key}, value={value}, default={default}"
-                print(msg)
-                self.log(msg)
-                
                 return value
         except Exception as e:
             msg = f"获取配置值失败 key={key}: {e}"
-            print(msg)
-            self.log(msg)
-            import traceback
-            msg = f"完整错误堆栈: {traceback.format_exc()}"
             print(msg)
             self.log(msg)
             return default
@@ -168,10 +142,6 @@ class KnowledgeBaseComponent(Component):
             import asyncio
             
             # 在新线程中运行异步代码
-            def run_async():
-                return asyncio.run(self.get_knowledge_base_list())
-            
-            import threading
             result = {"options": []}
             exception = None
             
@@ -182,6 +152,7 @@ class KnowledgeBaseComponent(Component):
                 except Exception as e:
                     exception = e
             
+            import threading
             thread = threading.Thread(target=worker)
             thread.start()
             thread.join(timeout=30)  # 30秒超时
@@ -192,7 +163,7 @@ class KnowledgeBaseComponent(Component):
             return result
             
         except Exception as e:
-            msg = f"ERROR: Exception in get_knowledge_base_list_sync: {e}"
+            msg = f"同步获取知识库列表失败: {e}"
             print(msg)
             self.log(msg)
             return {"options": []}
@@ -204,65 +175,30 @@ class KnowledgeBaseComponent(Component):
             api_base_url = await self.get_kb_config_value("worldseek_kb_api_base_url", "http://uat.worldseek-ai.com:4000")
             api_key = await self.get_kb_config_value("worldseek_kb_api_key")
             
-            # 同时使用 print 和 self.log 确保能看到输出
-            msg = f"=== 知识库列表获取开始 ==="
-            print(msg)
-            self.log(msg)
-            
-            msg = f"API Base URL: {api_base_url}"
-            print(msg)
-            self.log(msg)
-            
-            msg = f"API Key: {'*' * (len(api_key) - 4) + api_key[-4:] if api_key else 'None'}"
-            print(msg)
-            self.log(msg)
-            
             if not api_key:
-                msg = "ERROR: No API key found in configuration"
+                msg = "ERROR: 未找到API密钥配置"
                 print(msg)
                 self.log(msg)
                 return {"options": []}
 
             # 构建请求URL
             url = f"{api_base_url.rstrip('/')}/api/core/dataset/list?parentId="
-            msg = f"Request URL: {url}"
-            print(msg)
-            self.log(msg)
-            
             headers = {
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json"
             }
-            msg = f"Request Headers: {headers}"
-            print(msg)
-            self.log(msg)
 
             async with httpx.AsyncClient() as client:
                 response = await client.get(url, headers=headers, timeout=30)
                 
-                msg = f"Response Status: {response.status_code}"
-                print(msg)
-                self.log(msg)
-                
-                msg = f"Response Headers: {dict(response.headers)}"
-                print(msg)
-                self.log(msg)
-                
-                msg = f"Response Text: {response.text}"
-                print(msg)
-                self.log(msg)
-                
                 if response.status_code == 200:
                     data = response.json()
-                    self.log(f"Parsed JSON Data: {data}")
                     
                     # 根据API响应格式解析知识库列表
                     if isinstance(data, dict) and "data" in data:
                         datasets = data["data"]
-                        self.log(f"Datasets from data field: {datasets}")
                     else:
                         datasets = data
-                        self.log(f"Datasets direct: {datasets}")
                     
                     # 转换为下拉框选项格式，存储名称，并建立映射
                     options = []
@@ -276,7 +212,6 @@ class KnowledgeBaseComponent(Component):
                             if dataset_id:  # 只有当ID不为空时才添加
                                 options.append(dataset_name)  # 使用名称作为选项
                                 name_to_id_map[dataset_name] = dataset_id  # 建立映射
-                                print(f"知识库映射: {dataset_name} -> {dataset_id}")
                             else:
                                 print(f"警告: 数据集 {dataset_name} 没有找到有效的ID字段")
                     
@@ -284,20 +219,21 @@ class KnowledgeBaseComponent(Component):
                     global GLOBAL_DATASET_NAME_TO_ID_MAP
                     GLOBAL_DATASET_NAME_TO_ID_MAP = name_to_id_map
                     
-                    self.log(f"Final options: {options}")
-                    self.log(f"Name to ID mapping: {name_to_id_map}")
-                    self.log(f"=== 知识库列表获取完成 ===")
+                    msg = f"成功获取 {len(options)} 个知识库"
+                    print(msg)
+                    self.log(msg)
                     
                     return {"options": options}
                 else:
-                    self.log(f"ERROR: Failed to get dataset list: {response.status_code}")
-                    self.log(f"Error response: {response.text}")
+                    msg = f"获取知识库列表失败: HTTP {response.status_code}"
+                    print(msg)
+                    self.log(msg)
                     return {"options": []}
                     
         except Exception as e:
-            self.log(f"ERROR: Exception in get_knowledge_base_list: {e}")
-            import traceback
-            self.log(f"Full traceback: {traceback.format_exc()}")
+            msg = f"知识库列表获取异常: {e}"
+            print(msg)
+            self.log(msg)
             return {"options": []}
 
     async def get_dataset_id_by_name_async(self, dataset_name: str) -> str:
@@ -310,10 +246,6 @@ class KnowledgeBaseComponent(Component):
             global GLOBAL_DATASET_NAME_TO_ID_MAP
             dataset_id = GLOBAL_DATASET_NAME_TO_ID_MAP.get(dataset_name, dataset_name)
             
-            msg = f"异步映射知识库名称到ID: {dataset_name} -> {dataset_id}"
-            print(msg)
-            self.log(msg)
-            
             return dataset_id
         except Exception as e:
             msg = f"异步获取数据集ID失败: {e}"
@@ -325,30 +257,16 @@ class KnowledgeBaseComponent(Component):
         """根据知识库名称获取对应的ID"""
         global GLOBAL_DATASET_NAME_TO_ID_MAP
         
-        msg = f"当前全局映射表内容: {GLOBAL_DATASET_NAME_TO_ID_MAP}"
-        print(msg)
-        self.log(msg)
-        
         # 如果全局映射为空，重新获取
         if not GLOBAL_DATASET_NAME_TO_ID_MAP:
-            msg = "全局映射表为空，重新获取知识库列表"
-            print(msg)
-            self.log(msg)
-            
             try:
                 kb_data = self.get_knowledge_base_list_sync()
-                msg = f"重新获取后，全局映射表内容: {GLOBAL_DATASET_NAME_TO_ID_MAP}"
-                print(msg)
-                self.log(msg)
             except Exception as e:
                 msg = f"重新获取知识库列表失败: {e}"
                 print(msg)
                 self.log(msg)
         
         dataset_id = GLOBAL_DATASET_NAME_TO_ID_MAP.get(dataset_name, dataset_name)
-        msg = f"映射知识库名称到ID: {dataset_name} -> {dataset_id}"
-        print(msg)
-        self.log(msg)
         
         return dataset_id
 
@@ -377,11 +295,6 @@ class KnowledgeBaseComponent(Component):
             # 根据知识库名称获取对应的ID
             dataset_id = await self.get_dataset_id_by_name_async(self.datasetIds)
             
-            # 调试信息：检查映射结果
-            msg = f"🔍 映射结果检查: 知识库名称='{self.datasetIds}' -> ID='{dataset_id}'"
-            print(msg)
-            self.log(msg)
-            
             request_data = {
                 "datasetId": dataset_id,
                 "text": self.text,
@@ -399,17 +312,6 @@ class KnowledgeBaseComponent(Component):
                 "Content-Type": "application/json"
             }
 
-            # 详细的调试输出
-            msg = f"🌐 完整请求信息:"
-            print(msg)
-            self.log(msg)
-            msg = f"   URL: {search_url}"
-            print(msg)
-            self.log(msg)
-            msg = f"   Request Data: {request_data}"
-            print(msg)
-            self.log(msg)
-
             # 配置HTTP客户端
             timeout_config = httpx.Timeout(30.0, connect=10.0)
             limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
@@ -421,15 +323,8 @@ class KnowledgeBaseComponent(Component):
                     headers=headers
                 )
                 
-                msg = f"📡 HTTP响应状态: {response.status_code}"
-                print(msg)
-                self.log(msg)
-                
                 if response.status_code == 200:
                     result_data = response.json()
-                    msg = f"📡 API原始响应数据长度: {len(str(result_data))}"
-                    print(msg)
-                    self.log(msg)
                     
                     # 根据FastGPT API响应格式解析结果
                     search_results = []
@@ -446,11 +341,11 @@ class KnowledgeBaseComponent(Component):
                     else:
                         search_results = result_data if isinstance(result_data, list) else []
 
-                    msg = f"🔍 解析后的搜索结果数量: {len(search_results)}"
+                    msg = f"知识库搜索完成: 找到 {len(search_results)} 条结果"
                     print(msg)
                     self.log(msg)
 
-                    # 格式化搜索结果 - 显示所有结果，不只是部分
+                    # 格式化搜索结果
                     formatted_results = []
                     for idx, item in enumerate(search_results):
                         if isinstance(item, dict):
@@ -474,52 +369,24 @@ class KnowledgeBaseComponent(Component):
                                 "sourceId": item.get("sourceId", ""),
                             }
                             formatted_results.append(formatted_result)
-                            
-                            # 记录每个结果的处理情况
-                            msg = f"   处理结果 {idx + 1}: ID={formatted_result['id']}, Score={formatted_result['score']:.3f}"
-                            print(msg)
-                            self.log(msg)
-                            
-                    msg = f"🔍 最终格式化后的结果数量: {len(formatted_results)}"
-                    print(msg)
-                    self.log(msg)
 
-                    # 构造返回的文本内容 - 显示所有结果，无字数限制
+                    # 构造返回的文本内容
                     if formatted_results:
                         result_text = f"🔍 从知识库「{self.datasetIds}」中找到 {len(formatted_results)} 条相关结果:\n\n"
                         
-                        msg = f"开始构造结果文本，总计 {len(formatted_results)} 条结果，无字数限制"
-                        print(msg)
-                        self.log(msg)
-                        
                         for i, result in enumerate(formatted_results, 1):
-                            msg = f"正在处理第 {i} 条结果，ID: {result['id']}"
-                            print(msg)
-                            self.log(msg)
-                            
                             result_text += f"📋 结果 {i} (相关度: {result['score']:.3f})\n"
                             
                             if result['question']:
-                                # 显示完整问题内容，不截断
                                 result_text += f"❓ 问题: {result['question']}\n"
                             
                             if result['answer'] and result['answer'].strip():
-                                # 显示完整答案内容，不截断
                                 result_text += f"✅ 答案: {result['answer']}\n"
                             
                             if result['sourceName']:
                                 result_text += f"📄 来源: {result['sourceName']}\n"
                             
                             result_text += "\n" + "─" * 50 + "\n\n"
-                            
-                            msg = f"第 {i} 条结果处理完成"
-                            print(msg)
-                            self.log(msg)
-                        
-                        final_length = len(result_text)
-                        msg = f"最终结果文本长度: {final_length} 字符，包含所有 {len(formatted_results)} 条结果"
-                        print(msg)
-                        self.log(msg)
                     else:
                         result_text = f"❌ 在知识库「{self.datasetIds}」中未找到相关结果"
 
@@ -543,63 +410,34 @@ class KnowledgeBaseComponent(Component):
             msg = f"搜索过程中发生错误: {e}"
             print(msg)
             self.log(msg)
-            import traceback
-            msg = f"完整错误堆栈: {traceback.format_exc()}"
-            print(msg)
-            self.log(msg)
             return Message(text=f"❌ 搜索过程中发生错误: {str(e)}")
 
     def update_build_config(self, build_config: dotdict, field_value: Any, field_name: str | None = None) -> dotdict:
         """Update the build config and refresh knowledge base list if needed."""
-        msg = f"=== update_build_config called ==="
-        print(msg)
-        self.log(msg)
-        
-        msg = f"field_name: {field_name}, field_value: {field_value}"
-        print(msg)
-        self.log(msg)
         
         # 当点击刷新按钮时，重新加载知识库列表
         if field_name == "datasetIds" or field_name is None:
-            msg = "Refreshing knowledge base list..."
-            print(msg)
-            self.log(msg)
-            
             try:
                 # 同步调用获取知识库列表
                 kb_data = self.get_knowledge_base_list_sync()
-                
-                msg = f"Retrieved kb_data: {kb_data}"
-                print(msg)
-                self.log(msg)
                 
                 # 更新下拉框选项
                 if "datasetIds" in build_config:
                     if kb_data["options"]:
                         build_config["datasetIds"]["options"] = kb_data["options"]
-                        msg = f"Updated options: {build_config['datasetIds']['options']}"
+                        msg = f"知识库刷新成功: 加载了 {len(kb_data['options'])} 个选项"
                         print(msg)
                         self.log(msg)
                     else:
                         build_config["datasetIds"]["options"] = ["无可用知识库，请检查配置"]
-                        msg = "No options found, set placeholder message"
-                        print(msg)
-                        self.log(msg)
                         
             except Exception as e:
-                msg = f"ERROR: Failed to refresh knowledge base list: {e}"
-                print(msg)
-                self.log(msg)
-                import traceback
-                msg = f"Full traceback: {traceback.format_exc()}"
+                msg = f"知识库刷新失败: {e}"
                 print(msg)
                 self.log(msg)
                 if "datasetIds" in build_config:
                     build_config["datasetIds"]["options"] = ["加载失败，请检查配置"]
         
-        msg = f"=== update_build_config finished ==="
-        print(msg)
-        self.log(msg)
         return build_config
     
     def build_config(self):
@@ -613,7 +451,7 @@ class KnowledgeBaseComponent(Component):
             if "datasetIds" in build_config and kb_data["options"]:
                 build_config["datasetIds"]["options"] = kb_data["options"]
         except Exception as e:
-            msg = f"Failed to load knowledge base list in build_config: {e}"
+            msg = f"构建配置时加载知识库列表失败: {e}"
             print(msg)
             self.log(msg)
             
