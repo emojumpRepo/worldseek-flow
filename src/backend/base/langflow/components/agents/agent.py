@@ -62,9 +62,9 @@ class AgentComponent(ToolCallingAgentComponent):
         ),
         IntInput(
             name="n_messages",
-            display_name="Number of Chat History Messages",
+            display_name="聊天历史消息数量",
             value=100,
-            info="Number of chat history messages to retrieve.",
+            info="获取聊天历史消息的数量",
             advanced=True,
             show=True,
         ),

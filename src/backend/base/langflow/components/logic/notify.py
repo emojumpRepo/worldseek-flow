@@ -7,7 +7,9 @@ from langflow.schema.data import Data
 
 class NotifyComponent(Component):
     display_name = "Notify"
+    display_name_zh = "通知"
     description = "A component to generate a notification to Get Notified component."
+    description_zh = "一个生成通知的组件，用于通知 Get Notified 组件。"
     icon = "Notify"
     name = "Notify"
     beta: bool = True
@@ -15,21 +17,21 @@ class NotifyComponent(Component):
     inputs = [
         StrInput(
             name="context_key",
-            display_name="Context Key",
-            info="The key of the context to store the notification.",
+            display_name="上下文键",
+            info="要存储通知的上下文键",
             required=True,
         ),
         HandleInput(
             name="input_value",
-            display_name="Input Data",
-            info="The data to store.",
+            display_name="输入数据",
+            info="要存储的数据",
             required=False,
             input_types=["Data", "Message", "DataFrame"],
         ),
         BoolInput(
             name="append",
-            display_name="Append",
-            info="If True, the record will be appended to the notification.",
+            display_name="追加",
+            info="如果为 True，记录将附加到通知中",
             value=False,
             required=False,
         ),

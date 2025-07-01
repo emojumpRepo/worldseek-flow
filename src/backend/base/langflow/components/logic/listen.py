@@ -5,15 +5,17 @@ from langflow.schema.data import Data
 
 class ListenComponent(Component):
     display_name = "Listen"
+    display_name_zh = "监听"
     description = "A component to listen for a notification."
+    description_zh = "一个监听通知的组件。"
     name = "Listen"
     beta: bool = True
     icon = "Radio"
     inputs = [
         StrInput(
             name="context_key",
-            display_name="Context Key",
-            info="The key of the context to listen for.",
+            display_name="上下文键",
+            info="要监听的上下文键",
             input_types=["Message"],
             required=True,
         )

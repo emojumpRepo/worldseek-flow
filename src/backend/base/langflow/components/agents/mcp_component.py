@@ -78,31 +78,33 @@ class MCPToolsComponent(ComponentWithCache):
     ]
 
     display_name = "MCP Tools"
+    display_name_zh = "MCP 工具"
     description = "Connect to an MCP server to use its tools."
+    description_zh = "连接到 MCP 服务器以使用其工具。"
     icon = "Mcp"
     name = "MCPTools"
 
     inputs = [
         McpInput(
             name="mcp_server",
-            display_name="MCP Server",
-            info="Select the MCP Server that will be used by this component",
+            display_name="MCP 服务",
+            info="选择将由该组件使用的 MCP 服务",
             real_time_refresh=True,
         ),
         DropdownInput(
             name="tool",
-            display_name="Tool",
+            display_name="工具",
             options=[],
             value="",
-            info="Select the tool to execute",
+            info="选择要执行的工具",
             show=False,
             required=True,
             real_time_refresh=True,
         ),
         MessageTextInput(
             name="tool_placeholder",
-            display_name="Tool Placeholder",
-            info="Placeholder for the tool",
+            display_name="工具占位符",
+            info="工具的占位符",
             value="",
             show=False,
             tool_mode=True,
@@ -110,7 +112,7 @@ class MCPToolsComponent(ComponentWithCache):
     ]
 
     outputs = [
-        Output(display_name="Response", name="response", method="build_output"),
+        Output(display_name="响应", name="response", method="build_output"),
     ]
 
     async def _validate_schema_inputs(self, tool_obj) -> list[InputTypes]:

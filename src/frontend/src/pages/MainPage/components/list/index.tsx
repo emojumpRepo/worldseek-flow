@@ -64,7 +64,7 @@ const ListComponent = ({
     deleteFlow({ id: [flowData.id] })
       .then(() => {
         setSuccessData({
-          title: "Selected items deleted successfully",
+          title: "选择的工作流已成功删除！",
         });
       })
       .catch(() => {

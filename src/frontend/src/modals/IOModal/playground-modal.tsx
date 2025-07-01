@@ -1,4 +1,4 @@
-//import LangflowLogoColor from "@/assets/LangflowLogocolor.svg?react";
+import LangflowLogoColor from "@/assets/langflow_logo_black.svg?react";
 import ThemeButtons from "@/components/core/appHeaderComponent/components/ThemeButtons";
 import {
   useDeleteMessages,
@@ -15,7 +15,6 @@ import { swatchColors } from "@/utils/styleUtils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { v5 as uuidv5 } from "uuid";
 import { useShallow } from "zustand/react/shallow";
-import LangflowLogoColor from "../../assets/LangflowLogoColor.svg?react";
 import IconComponent from "../../components/common/genericIconComponent";
 import ShadTooltip from "../../components/common/shadTooltipComponent";
 import { Button } from "../../components/ui/button";
