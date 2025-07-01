@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from langflow.api.v1 import (
     api_key_router,
     chat_router,
+    config_router,
     endpoints_router,
     files_router,
     flows_router,
@@ -11,6 +12,7 @@ from langflow.api.v1 import (
     login_router,
     mcp_projects_router,
     mcp_router,
+    models_router,
     monitor_router,
     projects_router,
     starter_projects_router,
@@ -32,6 +34,7 @@ router_v2 = APIRouter(
 )
 
 router_v1.include_router(chat_router)
+router_v1.include_router(config_router)
 router_v1.include_router(endpoints_router)
 router_v1.include_router(validate_router)
 router_v1.include_router(store_router)
@@ -43,6 +46,7 @@ router_v1.include_router(variables_router)
 router_v1.include_router(files_router)
 router_v1.include_router(monitor_router)
 router_v1.include_router(folders_router)
+router_v1.include_router(models_router)
 router_v1.include_router(projects_router)
 router_v1.include_router(starter_projects_router)
 router_v1.include_router(mcp_router)

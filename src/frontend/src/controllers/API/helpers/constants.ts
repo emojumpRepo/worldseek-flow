@@ -22,6 +22,7 @@ export const URLs = {
   VARIABLES: `variables`,
   VALIDATE: `validate`,
   CONFIG: `config`,
+  MODELS: `models`,
   STARTER_PROJECTS: `starter-projects`,
   SIDEBAR_CATEGORIES: `sidebar_categories`,
   ALL: `all`,

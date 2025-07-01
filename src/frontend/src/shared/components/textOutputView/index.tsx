@@ -11,7 +11,7 @@ const TextOutputView = ({
     value = value.text;
   }
 
-  const isTruncated = value?.length > 20000;
+  const isTruncated = value?.length > 100000;
 
   return (
     <>

@@ -301,14 +301,13 @@ const HomePage = ({ type }: { type: "flows" | "components" | "mcp" }) => {
                     )
                   ) : flowType === "flows" ? (
                     <div className="pt-24 text-center text-sm text-secondary-foreground">
-                      No flows in this project.{" "}
+                      该项目还没有流程。{" "}
                       <a
                         onClick={() => setNewProjectModal(true)}
                         className="cursor-pointer underline"
                       >
-                        Create a new flow
+                        创建一个新流程
                       </a>
-                      , or browse the store.
                     </div>
                   ) : (
                     <div className="pt-24 text-center text-sm text-secondary-foreground">

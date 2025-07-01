@@ -79,6 +79,26 @@ export default function SettingsPage(): JSX.Element {
         />
       ),
     },
+    {
+      title: "模型",
+      href: "/settings/models",
+      icon: (
+        <ForwardedIconComponent
+          name="models"
+          className="w-4 flex-shrink-0 justify-start stroke-[1.5]"
+        />
+      ),
+    },
+    {
+      title: "知识库",
+      href: "/settings/knowledge-bases",
+      icon: (
+        <ForwardedIconComponent
+          name="BookText"
+          className="w-4 flex-shrink-0 justify-start stroke-[1.5]"
+        />
+      ),
+    },
   );
 
   // TODO: Remove this on cleanup
