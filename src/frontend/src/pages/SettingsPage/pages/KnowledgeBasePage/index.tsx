@@ -127,7 +127,7 @@ export default function KnowledgeBasePage() {
 
         {/* API基础URL配置 */}
         <div className="space-y-2">
-          <Label htmlFor="api-base-url">API基础URL</Label>
+          <Label htmlFor="api-base-url">API基础URL（注意：只填写域名，不要带 "/" ）</Label>
           <Input
             id="api-base-url"
             value={apiBaseUrl}

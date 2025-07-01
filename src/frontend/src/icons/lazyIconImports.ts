@@ -296,6 +296,8 @@ export const lazyIconsMapping = {
     })),
   Wolfram: () =>
     import("@/icons/Wolfram/Wolfram").then((mod) => ({ default: mod.default })),
+  WorldSeek: () =>
+    import("@/icons/WorldSeek").then((mod) => ({ default: mod.WorldSeekIcon })),
   xAI: () => import("@/icons/xAI").then((mod) => ({ default: mod.XAIIcon })),
   YouTube: () =>
     import("@/icons/Youtube").then((mod) => ({ default: mod.YouTubeSvgIcon })),

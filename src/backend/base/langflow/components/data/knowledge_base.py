@@ -75,13 +75,13 @@ class KnowledgeBaseComponent(Component):
             display_name="引用上限",
             value=20000,
             range_spec=RangeSpec(min=1, max=1000000, step=1),
-            info="知识库检索结果最大token数量",
+            info="设置引用的最大Token数量",
         ),
         SliderInput(
             name="similarity",
             display_name="检索相关度",
             value=0.1,
-            info="检索结果与查询词的相似度",
+            info="建议根据实际检索效果设定合适的检索相关度",
             range_spec=RangeSpec(min=0, max=1, step=0.1),
             min_label="模糊",
             min_label_icon="palette",
@@ -91,22 +91,22 @@ class KnowledgeBaseComponent(Component):
         BoolInput(
             name="usingReRank",
             display_name="内容重排",
-            info="是否使用内容重排，提高检索结果的准确性",
+            info="是否将返回内容按评分从大到小排序",
             value=True,
         ),
         BoolInput(
             name="datasetSearchUsingExtensionQuery",
             display_name="优化提问",
-            info="是否使用优化提问，提高检索结果的准确性",
+            info="是否优化用户的问题提问",
             value=True,
         ),
         DropdownInput(
             name="datasetIds",
             display_name="知识库选择",
             options=[],
-            placeholder="请点击右侧刷新按钮加载知识库",
+            placeholder="点击右侧刷新按钮获取知识库",
             value="",
-            info="选择要使用的知识库。",
+            info="选择需要查询的知识库",
             refresh_button=True,
         ),
         MessageTextInput(
@@ -425,11 +425,12 @@ class KnowledgeBaseComponent(Component):
                 if "datasetIds" in build_config:
                     if kb_data["options"]:
                         build_config["datasetIds"]["options"] = kb_data["options"]
+                        build_config["datasetIds"]["placeholder"] = '请选择知识库'
                         msg = f"知识库刷新成功: 加载了 {len(kb_data['options'])} 个选项"
                         print(msg)
                         self.log(msg)
                     else:
-                        build_config["datasetIds"]["options"] = ["无可用知识库，请检查配置"]
+                        build_config["datasetIds"]["placeholder"] = "无可用知识库，请检查配置"
                         
             except Exception as e:
                 msg = f"知识库刷新失败: {e}"
