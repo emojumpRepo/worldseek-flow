@@ -4,6 +4,7 @@ from langflow.custom.custom_component.component import Component
 from langflow.io import DropdownInput, HandleInput, IntInput, MessageTextInput, Output
 from langflow.schema.data import Data
 from langflow.schema.dataframe import DataFrame
+from langflow.schema.message import Message
 from langflow.utils.util import unescape_string
 
 
@@ -18,9 +19,9 @@ class SplitTextComponent(Component):
     inputs = [
         HandleInput(
             name="data_inputs",
-            display_name="数据或DataFrame",
+            display_name="输入",
             info="要拆分的文本数据。",
-            input_types=["Data", "DataFrame"],
+            input_types=["Data", "DataFrame", "Message"],
             required=True,
         ),
         IntInput(
@@ -95,6 +96,9 @@ class SplitTextComponent(Component):
             except Exception as e:
                 msg = f"Error converting DataFrame to documents: {e}"
                 raise TypeError(msg) from e
+        elif isinstance(self.data_inputs, Message):
+            self.data_inputs = [self.data_inputs.to_data()]
+            return self.split_text_base()
         else:
             if not self.data_inputs:
                 msg = "No data inputs provided"

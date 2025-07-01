@@ -26,7 +26,7 @@ const useColumnDefs = (
         autoHeight: true,
         flex: 1,
         resizable: false,
-        cellClass: "no-border cursor-default",
+        cellClass: "no-border cursor-default text-muted-foreground !py-1",
       },
       {
         headerName: "描述",
@@ -36,10 +36,10 @@ const useColumnDefs = (
         autoHeight: true,
         flex: 2,
         resizable: false,
-        cellClass: "no-border cursor-default",
+        cellClass: "no-border cursor-default text-muted-foreground !py-1",
       },
       {
-        headerName: "值",
+        headerName: isTweaks ? "当前值" : "值",
         field: "value",
         cellRenderer: TableNodeCellRender,
         cellStyle: {
@@ -61,11 +61,11 @@ const useColumnDefs = (
         autoHeight: true,
         flex: 1,
         resizable: false,
-        cellClass: "no-border cursor-default",
+        cellClass: "no-border cursor-default !py-1",
       },
     ];
     if (!hideVisibility) {
-      colDefs.push({
+      colDefs.unshift({
         headerName: isTweaks ? "允许输入" : "可见性",
         field: "advanced",
         cellRenderer: TableAdvancedToggleCellRender,
@@ -80,7 +80,7 @@ const useColumnDefs = (
         maxWidth: !isTweaks ? 80 : 120,
         minWidth: !isTweaks ? 80 : 120,
         resizable: false,
-        cellClass: "no-border cursor-default",
+        cellClass: "no-border cursor-default !py-1",
       });
     }
     return colDefs;

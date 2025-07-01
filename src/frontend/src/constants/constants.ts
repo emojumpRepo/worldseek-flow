@@ -37,7 +37,13 @@ export const INVALID_CHARACTERS = [
  * It matches the variables in the text that are between {{}} or {}.
  */
 
-export const regexHighlight = /\{\{(.*?)\}\}|\{([^{}]+)\}/g;
+/**
+ *  p1 – fenced code block ```...```
+ *  p2 – opening brace run (one or more)
+ *  p3 – variable name  (no braces)
+ *  p4 – closing brace run (one or more)
+ */
+export const regexHighlight = /(```[\s\S]*?```)|(\{+)([^{}]+)(\}+)/g;
 export const specialCharsRegex = /[!@#$%^&*()\-_=+[\]{}|;:'",.<>/?\\`´]/;
 
 export const programmingLanguages: languageMap = {
@@ -729,6 +735,8 @@ export const INSERT_API_KEY = "新建您的WorldSeek Agent API密钥。";
 export const INVALID_API_KEY = "您的API密钥无效。";
 export const CREATE_API_KEY = `没有API密钥？注册`;
 export const STATUS_BUILD = "构建以验证状态。";
+export const STATUS_MISSING_FIELDS_ERROR =
+  "请填写所有必填字段。";
 export const STATUS_INACTIVE = "执行被阻止";
 export const STATUS_BUILDING = "构建中...";
 export const SAVED_HOVER = "最后保存：";
@@ -981,7 +989,7 @@ export const DRAG_EVENTS_CUSTOM_TYPESS = {
 export const NOTE_NODE_MIN_WIDTH = 324;
 export const NOTE_NODE_MIN_HEIGHT = 324;
 export const NOTE_NODE_MAX_HEIGHT = 800;
-export const NOTE_NODE_MAX_WIDTH = 600;
+export const NOTE_NODE_MAX_WIDTH = 1000;
 
 export const COLOR_OPTIONS = {
   amber: "hsl(var(--note-amber))",

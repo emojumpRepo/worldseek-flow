@@ -102,6 +102,11 @@ const autoInstallers = [
     title: "Claude",
     icon: "Claude",
   },
+  {
+    name: "windsurf",
+    title: "Windsurf",
+    icon: "Windsurf",
+  },
 ];
 
 const operatingSystemTabs = [
@@ -218,7 +223,7 @@ const McpServerTab = ({ folderName }: { folderName: string }) => {
     "https://docs.langflow.org/mcp-server#connect-clients-to-use-the-servers-actions";
 
   const MCP_SERVER_DEPLOY_TUTORIAL_LINK =
-    "https://docs.langflow.org/mcp-server#deploy-your-server-externally";
+    "https://docs.langflow.org/mcp-server";
 
   const copyToClipboard = useCallback(() => {
     navigator.clipboard
@@ -405,7 +410,7 @@ const McpServerTab = ({ folderName }: { folderName: string }) => {
                       {
                         onSuccess: () => {
                           setSuccessData({
-                            title: `MCP 服务已成功安装在 ${installer.title} 上`,
+                            title: `MCP 服务已成功安装在 ${installer.title} 上。您可能需要重新启动客户端以查看更改。`,
                           });
                           setLoadingMCP(
                             loadingMCP.filter(

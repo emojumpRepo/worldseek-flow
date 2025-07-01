@@ -106,6 +106,7 @@ export type OutputFieldType = {
   types: Array<string>;
   selected?: string;
   name: string;
+  group_outputs?: boolean;
   method?: string;
   display_name: string;
   hidden?: boolean;

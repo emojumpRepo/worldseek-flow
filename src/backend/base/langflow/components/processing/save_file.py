@@ -47,7 +47,7 @@ class SaveToFileComponent(Component):
         DropdownInput(
             name="file_format",
             display_name="文件格式",
-            options=DATA_FORMAT_CHOICES + MESSAGE_FORMAT_CHOICES,
+            options=list(dict.fromkeys(DATA_FORMAT_CHOICES + MESSAGE_FORMAT_CHOICES)),
             info="选择要保存的文件格式。如果未提供，将使用默认格式。",
             value="",
             advanced=True,
@@ -102,13 +102,15 @@ class SaveToFileComponent(Component):
 
     def _get_input_type(self) -> str:
         """Determine the input type based on the provided input."""
-        if isinstance(self.input, DataFrame):
+        # Use exact type checking (type() is) instead of isinstance() to avoid inheritance issues.
+        # Since Message inherits from Data, isinstance(message, Data) would return True for Message objects,
+        # causing Message inputs to be incorrectly identified as Data type.
+        if type(self.input) is DataFrame:
             return "DataFrame"
-        if isinstance(self.input, Data):
-            return "Data"
-        if isinstance(self.input, Message):
+        if type(self.input) is Message:
             return "Message"
-
+        if type(self.input) is Data:
+            return "Data"
         msg = f"Unsupported input type: {type(self.input)}"
         raise ValueError(msg)
 
@@ -119,7 +121,7 @@ class SaveToFileComponent(Component):
         if self._get_input_type() == "Data":
             return "json"
         if self._get_input_type() == "Message":
-            return "markdown"
+            return "json"
         return "json"  # Fallback
 
     def _adjust_file_path_with_format(self, path: Path, fmt: str) -> Path:

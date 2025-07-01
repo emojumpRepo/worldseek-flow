@@ -171,7 +171,7 @@ class URLComponent(Component):
 
     outputs = [
         Output(display_name="提取的页面", name="page_results", method="fetch_content"),
-        Output(display_name="原始内容", name="raw_results", method="fetch_content_as_message"),
+        Output(display_name="原始内容", name="raw_results", method="fetch_content_as_message", tool_mode=False),
     ]
 
     @staticmethod
