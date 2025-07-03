@@ -34,8 +34,8 @@ def upgrade() -> None:
             sa.Column('api_path', sqlmodel.sql.sqltypes.AutoString(length=500), nullable=False),
             sa.Column('api_key', sqlmodel.sql.sqltypes.AutoString(length=500), nullable=False),
             sa.Column('id', sa.Integer(), nullable=False),
-            sa.Column('created_at', sa.DateTime(), nullable=False),
-            sa.Column('updated_at', sa.DateTime(), nullable=False),
+            sa.Column('created_at', sa.TIMESTAMP(), nullable=False),
+            sa.Column('updated_at', sa.TIMESTAMP(), nullable=False),
             sa.PrimaryKeyConstraint('id', name='pk_model')
         )
         with op.batch_alter_table('model', schema=None) as batch_op:

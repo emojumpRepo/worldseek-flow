@@ -9,7 +9,6 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
-import sqlmodel
 from sqlalchemy.engine.reflection import Inspector
 
 
@@ -32,8 +31,8 @@ def upgrade() -> None:
             sa.Column('key', sa.VARCHAR(length=255), nullable=False),
             sa.Column('value', sa.VARCHAR(length=1000), nullable=False),
             sa.Column('id', sa.INTEGER(), nullable=False, primary_key=True),
-            sa.Column('created_at', sa.DATETIME(), nullable=False),
-            sa.Column('updated_at', sa.DATETIME(), nullable=False)
+            sa.Column('created_at', sa.TIMESTAMP(), nullable=False),
+            sa.Column('updated_at', sa.TIMESTAMP(), nullable=False)
         )
         # 创建唯一索引
         op.create_index('ix_config_key', 'config', ['key'], unique=True)
