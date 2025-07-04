@@ -5,36 +5,17 @@
 # BUILDER-BASE
 # Used to build deps + create our virtual environment
 ################################
-
-# 1. use python:3.12.3-slim as the base image until https://github.com/pydantic/pydantic-core/issues/1292 gets resolved
-# 2. do not add --platform=$BUILDPLATFORM because the pydantic binaries must be resolved for the final architecture
-# Use a Python image with uv pre-installed
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
 
-# Install the project into `/app`
 WORKDIR /app
-
-# Enable bytecode compilation
 ENV UV_COMPILE_BYTECODE=1
-
-# Copy from the cache instead of linking since it's a mounted volume
 ENV UV_LINK_MODE=copy
 
-# Add mirror configuration for builder stage
 RUN sed -i 's|http://deb.debian.org/debian|http://mirrors.ustc.edu.cn/debian|g' /etc/apt/sources.list.d/debian.sources && \
     sed -i 's|http://deb.debian.org/debian-security|http://mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources && \
-    apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install --no-install-recommends -y \
-    # deps for building python deps
-    build-essential \
-    git \
-    # npm
-    npm \
-    # gcc
-    gcc \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
+    build-essential git npm gcc && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
@@ -50,10 +31,9 @@ COPY ./src /app/src
 COPY src/frontend /tmp/src/frontend
 WORKDIR /tmp/src/frontend
 RUN --mount=type=cache,target=/root/.npm \
-    npm ci \
-    && npm run build \
-    && cp -r build /app/src/backend/langflow/frontend \
-    && rm -rf /tmp/src/frontend
+    npm ci && npm run build && \
+    cp -r build /app/src/backend/langflow/frontend && \
+    rm -rf /tmp/src/frontend
 
 WORKDIR /app
 COPY ./pyproject.toml /app/pyproject.toml
@@ -69,24 +49,16 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 ################################
 FROM python:3.12.3-slim AS runtime
 
-# Configure apt sources to use mirror
 RUN sed -i 's|http://deb.debian.org/debian|https://mirrors.aliyun.com/debian|g' /etc/apt/sources.list.d/debian.sources && \
     sed -i 's|http://deb.debian.org/debian-security|https://mirrors.aliyun.com/debian-security|g' /etc/apt/sources.list.d/debian.sources && \
-    apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install -y curl git libpq5 gnupg \
-    && curl -fsSL https://mirrors.ustc.edu.cn/nodesource/setup_18.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && useradd user -u 1000 -g 0 --no-create-home --home-dir /app/data
+    apt-get update && apt-get upgrade -y && \
+    apt-get install -y curl git libpq5 gnupg && \
+    curl -fsSL https://mirrors.ustc.edu.cn/nodesource/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    useradd user -u 1000 -g 0 --no-create-home --home-dir /app/data
 
 COPY --from=builder --chown=1000 /app/.venv /app/.venv
-
-# Create symlink for frontend files to fix static files path issue
-RUN ln -s /app/.venv/lib/python3.12/site-packages/langflow/frontend /app/.venv/lib/frontend
-
-# Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
 
 LABEL org.opencontainers.image.title=langflow
@@ -98,7 +70,31 @@ LABEL org.opencontainers.image.source=https://github.com/langflow-ai/langflow
 USER user
 WORKDIR /app
 
-ENV LANGFLOW_HOST=0.0.0.0
-ENV LANGFLOW_PORT=7860
+# --- Langflow 应用配置 ---
 
+# 基础网络配置
+ENV LANGFLOW_HOST="0.0.0.0"
+ENV LANGFLOW_PORT="7860"
+
+# 解决 SIGKILL 问题的 Worker 配置
+ENV LANGFLOW_WORKERS="1"
+ENV LANGFLOW_WORKER_TIMEOUT="600"
+
+# PostgreSQL 数据库连接配置
+# !!! 重要: 运行时请确保可以访问到这个数据库地址 !!!
+# 您可以在 `docker run` 时使用 `-e` 参数覆盖此值
+ENV LANGFLOW_DATABASE_URL="postgresql: //postgres:postgres@localhost:5432/langflow"
+ENV LANGFLOW_DATABASE_CONNECTION_RETRY="true"
+ENV LANGFLOW_DB_CONNECT_TIMEOUT="60"
+ENV LANGFLOW_DB_CONNECTION_SETTINGS='{"pool_size": 20, "max_overflow": 30, "pool_timeout": 60, "pool_pre_ping": true, "pool_recycle": 1800, "echo": false}'
+
+# 日志级别
+ENV LANGFLOW_LOG_LEVEL="INFO"
+
+# 缓存配置
+ENV LANGFLOW_CACHE_TYPE="async"
+ENV LANGFLOW_LANGCHAIN_CACHE="InMemoryCache"
+
+# 启动命令
+# Langflow 会自动从上面的环境变量中读取配置
 CMD ["langflow", "run"]

@@ -1,5 +1,6 @@
 from typing import Any
 import asyncio
+from loguru import logger
 
 from langchain_anthropic import ChatAnthropic
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -26,7 +27,6 @@ def get_worldseek_models_sync() -> list[str]:
         
         db_service = get_db_service()
         
-        # 使用线程来避免事件循环冲突
         result_queue = queue.Queue()
         
         def run_async():
@@ -36,37 +36,37 @@ def get_worldseek_models_sync() -> list[str]:
                         models = await get_models(session, skip=0, limit=1000)
                         return [model.name for model in models if model.name]
                 except Exception as e:
-                    # print(f"数据库查询错误: {e}")
+                    logger.error(f"数据库查询错误: {e}")
                     return []
             
             try:
-                # 在新线程中创建新的事件循环
                 loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(loop)
                 result = loop.run_until_complete(_get_models())
                 result_queue.put(result)
             except Exception as e:
-                # print(f"异步执行错误: {e}")
+                logger.error(f"异步执行错误: {e}")
                 result_queue.put([])
             finally:
                 loop.close()
         
-        # 在新线程中运行异步代码
         thread = threading.Thread(target=run_async)
         thread.start()
-        thread.join(timeout=5)  # 5秒超时
+        # 将超时时间从5秒增加到15秒，以适应线上环境
+        thread.join(timeout=15)
         
         if thread.is_alive():
-            # print("获取模型列表超时")
+            logger.warning("获取模型列表超时")
             return []
         
         try:
             return result_queue.get_nowait()
         except queue.Empty:
+            logger.warning("获取模型列表时队列为空")
             return []
             
     except Exception as e:
-        # print(f"获取WorldSeek模型列表失败: {e}")
+        logger.error(f"获取WorldSeek模型列表失败: {e}")
         return []
 
 
@@ -80,7 +80,6 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
 
         db_service = get_db_service()
         
-        # 使用线程来避免事件循环冲突
         result_queue = queue.Queue()
         
         def run_async():
@@ -96,39 +95,40 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
                                 "api_path": model.api_path,
                                 "api_key": model.api_key
                             }
+                        logger.warning(f"在数据库中未找到模型: {model_name}")
                         return {}
                 except Exception as e:
-                    # print(f"数据库查询错误: {e}")
+                    logger.error(f"数据库查询错误: {e}")
                     return {}
             
             try:
-                # 在新线程中创建新的事件循环
                 loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(loop)
                 result = loop.run_until_complete(_get_model_config())
                 result_queue.put(result)
             except Exception as e:
-                # print(f"异步执行错误: {e}")
+                logger.error(f"异步执行错误: {e}")
                 result_queue.put({})
             finally:
                 loop.close()
         
-        # 在新线程中运行异步代码
         thread = threading.Thread(target=run_async)
         thread.start()
-        thread.join(timeout=5)  # 5秒超时
+        # 将超时时间从5秒增加到15秒
+        thread.join(timeout=15)
         
         if thread.is_alive():
-            # print("获取模型配置超时")
+            logger.warning(f"获取模型 '{model_name}' 的配置超时")
             return {}
         
         try:
             return result_queue.get_nowait()
         except queue.Empty:
+            logger.warning(f"获取模型 '{model_name}' 配置时队列为空")
             return {}
             
     except Exception as e:
-        # print(f"获取WorldSeek模型配置失败: {e}")
+        logger.error(f"获取WorldSeek模型 '{model_name}' 配置失败: {e}")
         return {}
 
 
@@ -255,7 +255,7 @@ class LanguageModelComponent(LCModelComponent):
             actual_model = model_config.get('model_id', model_name) if model_config else model_name
             
             # 保留关键调试信息
-            print(f"WorldSeek API - 模型: {actual_model}, API端点: {api_base}")
+            logger.info(f"WorldSeek API - 模型: {actual_model}, API端点: {api_base}")
             
             # 构建额外参数，处理特定模型的要求
             extra_kwargs = {}
