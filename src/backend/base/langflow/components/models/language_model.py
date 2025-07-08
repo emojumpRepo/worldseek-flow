@@ -393,9 +393,7 @@ class LanguageModelComponent(LCModelComponent):
                 model_name=model_name,
                 temperature=temperature,
                 streaming=stream,
-                openai_api_key=self.api_key,
-                timeout=30,  # 添加超时设置
-                max_retries=2,  # 限制重试次数
+                openai_api_key=self.api_key
             )
         if provider == "Anthropic":
             if not self.api_key:
@@ -406,8 +404,6 @@ class LanguageModelComponent(LCModelComponent):
                 temperature=temperature,
                 streaming=stream,
                 anthropic_api_key=self.api_key,
-                timeout=30,
-                max_retries=2,
             )
         if provider == "Google":
             if not self.api_key:
@@ -418,8 +414,6 @@ class LanguageModelComponent(LCModelComponent):
                 temperature=temperature,
                 streaming=stream,
                 google_api_key=self.api_key,
-                request_timeout=30,
-                max_retries=2,
             )
         if provider == "WorldSeek API":
             if not self.api_key:
@@ -537,8 +531,6 @@ class LanguageModelComponent(LCModelComponent):
                     streaming=stream,
                     openai_api_key=self.api_key,
                     openai_api_base=api_base,
-                    request_timeout=30,  # 添加30秒超时
-                    max_retries=2,  # 限制重试次数防止资源泄漏
                     **extra_kwargs
                 )
             except Exception as e:
