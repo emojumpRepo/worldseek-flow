@@ -16,6 +16,29 @@ from langflow.inputs.inputs import BoolInput
 from langflow.io import DropdownInput, MessageInput, MultilineInput, SecretStrInput, SliderInput
 from langflow.schema.dotdict import dotdict
 
+# 验证缓存 - 避免重复验证相同的API连接
+import time
+_verification_cache = {}
+_cache_ttl = 300  # 缓存5分钟
+
+
+def _get_cache_key(api_base: str, api_key: str, model_name: str) -> str:
+    """生成缓存键"""
+    return f"{api_base}:{api_key[:10]}:{model_name}"
+
+
+def _is_cache_valid(cache_key: str) -> bool:
+    """检查缓存是否有效"""
+    if cache_key not in _verification_cache:
+        return False
+    cached_time, cached_result = _verification_cache[cache_key]
+    return time.time() - cached_time < _cache_ttl
+
+
+def _set_cache(cache_key: str, result: bool):
+    """设置缓存"""
+    _verification_cache[cache_key] = (time.time(), result)
+
 
 def get_worldseek_models_sync() -> list[str]:
     """同步获取WorldSeek模型列表"""
@@ -155,32 +178,142 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
 
 
 async def verify_model_connection(api_base: str, api_key: str, model_name: str) -> bool:
-    """验证模型连接是否有效"""
+    """
+    验证模型连接是否有效 - 快速检测各种错误情况
+    
+    Args:
+        api_base: API基础URL  
+        api_key: API密钥
+        model_name: 模型名称
+        
+    Returns:
+        bool: 连接是否有效
+        
+    Raises:
+        ValueError: 当检测到具体错误时立即抛出，避免长时间等待
+    """
+    # 🚀 检查缓存，避免重复验证
+    cache_key = _get_cache_key(api_base, api_key, model_name)
+    if _is_cache_valid(cache_key):
+        cached_result = _verification_cache[cache_key][1]
+        logger.debug(f"使用缓存的验证结果: {cache_key} -> {cached_result}")
+        if cached_result:
+            return True
+        else:
+            # 缓存中是失败结果，立即抛出错误
+            raise ValueError(f"模型 '{model_name}' 连接验证失败 (缓存结果)")
+    
     try:
         import httpx
         import asyncio
         
-        # 构建测试URL
-        test_url = f"{api_base}/models" if not api_base.endswith('/models') else api_base
+        # 🔥 关键：使用极短的超时，让线上环境快速检测错误
+        timeout = httpx.Timeout(
+            connect=3.0,    # 连接超时3秒
+            read=5.0,       # 读取超时5秒  
+            write=3.0,      # 写入超时3秒
+            pool=3.0        # 连接池超时3秒
+        )
         
         headers = {
             "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "User-Agent": "Langflow/1.0"
         }
         
-        # 使用短超时进行连接测试
-        timeout = httpx.Timeout(connect=5.0, read=5.0, write=5.0, pool=5.0)
-        
         async with httpx.AsyncClient(timeout=timeout) as client:
+            # 步骤1：快速测试基础连接 🔌
             try:
-                response = await client.get(test_url, headers=headers)
-                return response.status_code < 500  # 4xx可能是认证问题，5xx是服务器问题
-            except (httpx.ConnectError, httpx.TimeoutException, httpx.RequestError):
-                return False
+                base_url = api_base.rstrip('/') + '/models'
+                logger.debug(f"测试基础连接: {base_url}")
                 
+                response = await client.get(base_url, headers=headers)
+                
+                # 🚨 立即检测常见错误并抛出具体异常
+                if response.status_code == 401:
+                    error_msg = f"Error code: 401 - API密钥无效或已过期: {api_key[:10]}..."
+                    _set_cache(cache_key, False)  # 缓存失败结果
+                    raise ValueError(error_msg)
+                elif response.status_code == 403:
+                    error_msg = f"Error code: 403 - API密钥权限不足"
+                    _set_cache(cache_key, False)
+                    raise ValueError(error_msg)
+                elif response.status_code == 404:
+                    error_msg = f"Error code: 404 - API端点不存在: {base_url}"
+                    _set_cache(cache_key, False)
+                    raise ValueError(error_msg)
+                elif response.status_code == 429:
+                    error_msg = f"Error code: 429 - API请求频率限制"
+                    # 不缓存429错误，可能是临时的
+                    raise ValueError(error_msg)
+                elif response.status_code >= 500:
+                    error_msg = f"Error code: {response.status_code} - 服务器错误"
+                    # 不缓存服务器错误，可能是临时的
+                    raise ValueError(error_msg)
+                    
+            except httpx.ConnectError as e:
+                error_msg = f"Error building Component: 无法连接到API服务器 {api_base}. 请检查网络连接和URL是否正确"
+                _set_cache(cache_key, False)
+                raise ValueError(error_msg) from e
+            except httpx.TimeoutException as e:
+                error_msg = f"Error building Component: 连接超时 {api_base}. 请检查网络连接"
+                _set_cache(cache_key, False)
+                raise ValueError(error_msg) from e
+            except httpx.RequestError as e:
+                error_msg = f"Error building Component: 网络请求错误 {str(e)}"
+                _set_cache(cache_key, False)
+                raise ValueError(error_msg) from e
+            
+            # 步骤2：验证模型是否存在 🤖  
+            if response.status_code == 200:
+                try:
+                    models_data = response.json()
+                    available_models = []
+                    
+                    # 解析不同API格式的模型列表
+                    if isinstance(models_data, dict):
+                        if 'data' in models_data:
+                            # OpenAI格式: {"data": [{"id": "model1"}, ...]}
+                            available_models = [model.get('id', '') for model in models_data['data']]
+                        elif 'models' in models_data:
+                            # 其他格式: {"models": ["model1", "model2", ...]}
+                            available_models = models_data['models']
+                    elif isinstance(models_data, list):
+                        # 直接的模型列表: ["model1", "model2", ...]
+                        available_models = models_data
+                    
+                    # 🔍 检查模型是否存在
+                    if available_models and model_name not in available_models:
+                        available_str = ', '.join(available_models[:5])  # 显示前5个可用模型
+                        if len(available_models) > 5:
+                            available_str += f" (还有{len(available_models)-5}个模型...)"
+                        error_msg = f"Error code: 404 - 模型 '{model_name}' 不存在. 可用模型: {available_str}"
+                        _set_cache(cache_key, False)
+                        raise ValueError(error_msg)
+                    
+                    logger.info(f"✅ 模型验证成功: {model_name}")
+                    _set_cache(cache_key, True)  # 缓存成功结果
+                    return True
+                    
+                except (ValueError, KeyError, TypeError) as e:
+                    # JSON解析失败，但连接成功，可能是兼容性问题
+                    logger.warning(f"模型列表解析失败，但API连接正常: {e}")
+                    _set_cache(cache_key, True)  # 认为连接有效
+                    return True
+            
+            # 其他状态码认为连接有效但可能有其他问题
+            logger.warning(f"API响应状态码: {response.status_code}, 但连接正常")
+            _set_cache(cache_key, True)
+            return True
+                
+    except ValueError:
+        # 重新抛出ValueError，这些是我们想要立即暴露给用户的错误
+        raise
     except Exception as e:
+        # 其他未预期的错误
         logger.warning(f"模型连接验证失败: {e}")
-        return False
+        _set_cache(cache_key, False)
+        raise ValueError(f"Error building Component: 模型连接验证失败: {str(e)}") from e
 
 
 class LanguageModelComponent(LCModelComponent):
@@ -261,7 +394,7 @@ class LanguageModelComponent(LCModelComponent):
                 temperature=temperature,
                 streaming=stream,
                 openai_api_key=self.api_key,
-                timeout=60,  # 添加超时设置
+                timeout=30,  # 添加超时设置
                 max_retries=2,  # 限制重试次数
             )
         if provider == "Anthropic":
@@ -273,7 +406,7 @@ class LanguageModelComponent(LCModelComponent):
                 temperature=temperature,
                 streaming=stream,
                 anthropic_api_key=self.api_key,
-                timeout=60,
+                timeout=30,
                 max_retries=2,
             )
         if provider == "Google":
@@ -314,15 +447,81 @@ class LanguageModelComponent(LCModelComponent):
             # 保留关键调试信息
             logger.info(f"WorldSeek API - 模型: {actual_model}, API端点: {api_base}")
             
-            # 验证连接 (可选 - 如果需要快速验证)
-            # 注意：这可能会增加延迟，可以根据需要启用
-            # try:
-            #     import asyncio
-            #     is_connected = asyncio.run(verify_model_connection(api_base, self.api_key, actual_model))
-            #     if not is_connected:
-            #         logger.warning(f"无法连接到模型 {actual_model}，但仍然尝试创建模型实例")
-            # except Exception as e:
-            #     logger.warning(f"连接验证失败: {e}")
+            # 🔥 快速验证连接，失败时立即抛出错误
+            # 这是解决线上环境Worker超时问题的关键
+            try:
+                import httpx
+                
+                logger.info(f"🔍 验证WorldSeek API连接: {api_base}")
+                
+                # 使用同步验证逻辑，避免asyncio问题
+                def _verify_connection_sync():
+                    # 检查缓存
+                    cache_key = _get_cache_key(api_base, self.api_key, actual_model)
+                    if _is_cache_valid(cache_key):
+                        cached_result = _verification_cache[cache_key][1]
+                        if cached_result:
+                            return True
+                        else:
+                            raise ValueError(f"模型 '{actual_model}' 连接验证失败 (缓存结果)")
+                    
+                    # 极短超时设置
+                    timeout = httpx.Timeout(connect=3.0, read=5.0, write=3.0, pool=3.0)
+                    headers = {
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json",
+                        "User-Agent": "Langflow/1.0"
+                    }
+                    
+                    # 使用同步Client
+                    with httpx.Client(timeout=timeout) as client:
+                        try:
+                            base_url = api_base.rstrip('/') + '/models'
+                            response = client.get(base_url, headers=headers)
+                            
+                            # 立即检测错误
+                            if response.status_code == 401:
+                                _set_cache(cache_key, False)
+                                raise ValueError(f"Error code: 401 - API密钥无效或已过期: {self.api_key[:10]}...")
+                            elif response.status_code == 403:
+                                _set_cache(cache_key, False)
+                                raise ValueError(f"Error code: 403 - API密钥权限不足")
+                            elif response.status_code == 404:
+                                _set_cache(cache_key, False)
+                                raise ValueError(f"Error code: 404 - API端点不存在: {base_url}")
+                            elif response.status_code == 429:
+                                raise ValueError(f"Error code: 429 - API请求频率限制")
+                            elif response.status_code >= 500:
+                                raise ValueError(f"Error code: {response.status_code} - 服务器错误")
+                            
+                            # 验证成功
+                            _set_cache(cache_key, True)
+                            return True
+                            
+                        except httpx.ConnectError as e:
+                            _set_cache(cache_key, False)
+                            raise ValueError(f"无法连接到API服务器 {api_base}. 请检查网络连接和URL是否正确") from e
+                        except httpx.TimeoutException as e:
+                            _set_cache(cache_key, False)
+                            raise ValueError(f"连接超时 {api_base}. 请检查网络连接") from e
+                        except httpx.RequestError as e:
+                            _set_cache(cache_key, False)
+                            raise ValueError(f"网络请求错误 {str(e)}") from e
+                
+                # 执行同步验证
+                _verify_connection_sync()
+                
+                logger.info(f"✅ WorldSeek API连接验证成功")
+                
+            except ValueError as e:
+                # 重新抛出验证错误，让用户立即看到具体错误信息
+                logger.error(f"❌ WorldSeek API连接验证失败: {e}")
+                raise  # 直接抛出，不再继续创建模型
+            except Exception as e:
+                # 其他异常也转换为ValueError并抛出
+                error_msg = f"连接验证过程出错: {str(e)}"
+                logger.error(f"❌ {error_msg}")
+                raise ValueError(error_msg) from e
             
             # 构建额外参数，处理特定模型的要求
             extra_kwargs = {}
@@ -338,7 +537,7 @@ class LanguageModelComponent(LCModelComponent):
                     streaming=stream,
                     openai_api_key=self.api_key,
                     openai_api_base=api_base,
-                    timeout=60,  # 添加60秒超时
+                    request_timeout=30,  # 添加30秒超时
                     max_retries=2,  # 限制重试次数防止资源泄漏
                     **extra_kwargs
                 )
