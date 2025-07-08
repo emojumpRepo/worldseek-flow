@@ -119,6 +119,11 @@ const useHandleOnNewValue = ({
       };
 
       if (shouldUpdate && changes.value !== undefined) {
+        // 检查是否是从后端返回的字段更新（通过_updated标记识别）
+        const isBackendUpdate = changes._updated === true;
+        // 对于后端返回的更新，不使用防抖，立即执行
+        const useDebounce = shouldDebounce && !isBackendUpdate;
+        
         if (!debouncedMutateRef.current) {
           debouncedMutateRef.current = debounce(
             async (
@@ -137,7 +142,7 @@ const useHandleOnNewValue = ({
                 setErrorDataFn,
               );
             },
-            shouldDebounce ? DEBOUNCE_TIME_1_SECOND : 0,
+            useDebounce ? DEBOUNCE_TIME_1_SECOND : 0,
           );
         }
         debouncedMutateRef.current(

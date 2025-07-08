@@ -59,6 +59,13 @@ export const mutateTemplate = async (
                 newTemplate.outputs ?? [],
               );
               newNode.tool_mode = toolMode ?? node.tool_mode;
+              
+              // 检查是否有字段带有_updated标记，如果有则通知前端立即更新
+              Object.entries(newTemplate.template || {}).forEach(([fieldName, fieldConfig]) => {
+                if (fieldConfig && typeof fieldConfig === 'object' && fieldConfig._updated) {
+                  console.log(`🔄 检测到后端更新字段: ${fieldName}`, fieldConfig);
+                }
+              });
             }
             try {
               setNodeClass(newNode);

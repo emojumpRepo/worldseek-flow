@@ -582,15 +582,21 @@ class LanguageModelComponent(LCModelComponent):
                 build_config["api_key"]["display_name"] = "WorldSeek API Key"
         elif field_name == "model_name":
             if build_config["provider"]["value"] == "WorldSeek API" and field_value:
-                logger.debug(f"切换WorldSeek模型: {field_value}")
+                logger.debug(f"🔄 切换WorldSeek模型: {field_value}")
                 
                 model_config = get_worldseek_model_config_sync(field_value)
                 
                 if model_config and model_config.get("api_key"):
                     old_api_key = build_config["api_key"].get("value", "")
                     new_api_key = model_config["api_key"]
+                    
+                    # 更新API Key值
                     build_config["api_key"]["value"] = new_api_key
-                    logger.info(f"API Key已更新: {old_api_key[:10] if old_api_key else '空'}... → {new_api_key[:10] if new_api_key else '空'}...")
+                    
+                    # 添加_updated标记，告诉前端这是后端返回的更新，不需要防抖
+                    build_config["api_key"]["_updated"] = True
+                    
+                    logger.info(f"✅ API Key同步成功: {old_api_key[:10] if old_api_key else '空'}... → {new_api_key[:10] if new_api_key else '空'}...")
                 else:
-                    logger.warning(f"未找到模型 '{field_value}' 的配置，API Key不会自动切换")
+                    logger.warning(f"❌ 未找到模型 '{field_value}' 的配置，API Key不会自动切换")
         return build_config
