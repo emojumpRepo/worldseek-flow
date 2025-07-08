@@ -18,12 +18,13 @@ from langflow.schema.dotdict import dotdict
 
 
 def get_worldseek_models_sync() -> list[str]:
-    """同步方式获取WorldSeek模型名称列表"""
+    """同步获取WorldSeek模型列表"""
     try:
         from langflow.services.deps import get_db_service
         from langflow.services.database.models.model.crud import get_models
         import threading
         import queue
+        import gc  # 添加垃圾回收
         
         db_service = get_db_service()
         
@@ -49,6 +50,8 @@ def get_worldseek_models_sync() -> list[str]:
                 result_queue.put([])
             finally:
                 loop.close()
+                # 强制垃圾回收释放内存
+                gc.collect()
         
         thread = threading.Thread(target=run_async)
         thread.start()
@@ -57,6 +60,11 @@ def get_worldseek_models_sync() -> list[str]:
         
         if thread.is_alive():
             logger.warning("获取模型列表超时")
+            # 强制清理线程资源
+            try:
+                thread.join(timeout=5)  # 再给5秒时间
+            except:
+                pass
             return []
         
         try:
@@ -68,6 +76,10 @@ def get_worldseek_models_sync() -> list[str]:
     except Exception as e:
         logger.error(f"获取WorldSeek模型列表失败: {e}")
         return []
+    finally:
+        # 确保内存清理
+        import gc
+        gc.collect()
 
 
 def get_worldseek_model_config_sync(model_name: str) -> dict:
@@ -77,6 +89,7 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
         from langflow.services.database.models.model.crud import get_model_by_name
         import threading
         import queue
+        import gc
 
         db_service = get_db_service()
         
@@ -111,6 +124,7 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
                 result_queue.put({})
             finally:
                 loop.close()
+                gc.collect()
         
         thread = threading.Thread(target=run_async)
         thread.start()
@@ -119,6 +133,11 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
         
         if thread.is_alive():
             logger.warning(f"获取模型 '{model_name}' 的配置超时")
+            # 强制清理线程资源
+            try:
+                thread.join(timeout=5)
+            except:
+                pass
             return {}
         
         try:
@@ -130,6 +149,38 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
     except Exception as e:
         logger.error(f"获取WorldSeek模型 '{model_name}' 配置失败: {e}")
         return {}
+    finally:
+        import gc
+        gc.collect()
+
+
+async def verify_model_connection(api_base: str, api_key: str, model_name: str) -> bool:
+    """验证模型连接是否有效"""
+    try:
+        import httpx
+        import asyncio
+        
+        # 构建测试URL
+        test_url = f"{api_base}/models" if not api_base.endswith('/models') else api_base
+        
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+        
+        # 使用短超时进行连接测试
+        timeout = httpx.Timeout(connect=5.0, read=5.0, write=5.0, pool=5.0)
+        
+        async with httpx.AsyncClient(timeout=timeout) as client:
+            try:
+                response = await client.get(test_url, headers=headers)
+                return response.status_code < 500  # 4xx可能是认证问题，5xx是服务器问题
+            except (httpx.ConnectError, httpx.TimeoutException, httpx.RequestError):
+                return False
+                
+    except Exception as e:
+        logger.warning(f"模型连接验证失败: {e}")
+        return False
 
 
 class LanguageModelComponent(LCModelComponent):
@@ -210,6 +261,8 @@ class LanguageModelComponent(LCModelComponent):
                 temperature=temperature,
                 streaming=stream,
                 openai_api_key=self.api_key,
+                timeout=60,  # 添加超时设置
+                max_retries=2,  # 限制重试次数
             )
         if provider == "Anthropic":
             if not self.api_key:
@@ -220,6 +273,8 @@ class LanguageModelComponent(LCModelComponent):
                 temperature=temperature,
                 streaming=stream,
                 anthropic_api_key=self.api_key,
+                timeout=60,
+                max_retries=2,
             )
         if provider == "Google":
             if not self.api_key:
@@ -230,6 +285,8 @@ class LanguageModelComponent(LCModelComponent):
                 temperature=temperature,
                 streaming=stream,
                 google_api_key=self.api_key,
+                request_timeout=30,
+                max_retries=2,
             )
         if provider == "WorldSeek API":
             if not self.api_key:
@@ -257,6 +314,16 @@ class LanguageModelComponent(LCModelComponent):
             # 保留关键调试信息
             logger.info(f"WorldSeek API - 模型: {actual_model}, API端点: {api_base}")
             
+            # 验证连接 (可选 - 如果需要快速验证)
+            # 注意：这可能会增加延迟，可以根据需要启用
+            # try:
+            #     import asyncio
+            #     is_connected = asyncio.run(verify_model_connection(api_base, self.api_key, actual_model))
+            #     if not is_connected:
+            #         logger.warning(f"无法连接到模型 {actual_model}，但仍然尝试创建模型实例")
+            # except Exception as e:
+            #     logger.warning(f"连接验证失败: {e}")
+            
             # 构建额外参数，处理特定模型的要求
             extra_kwargs = {}
             
@@ -264,19 +331,31 @@ class LanguageModelComponent(LCModelComponent):
             if not self.stream:
                 extra_kwargs['extra_body'] = {'enable_thinking': False}
             
-            return ChatOpenAI(
-                model=actual_model,
-                temperature=temperature,
-                streaming=stream,
-                openai_api_key=self.api_key,
-                openai_api_base=api_base,
-                **extra_kwargs
-            )
+            try:
+                return ChatOpenAI(
+                    model=actual_model,
+                    temperature=temperature,
+                    streaming=stream,
+                    openai_api_key=self.api_key,
+                    openai_api_base=api_base,
+                    timeout=60,  # 添加60秒超时
+                    max_retries=2,  # 限制重试次数防止资源泄漏
+                    **extra_kwargs
+                )
+            except Exception as e:
+                logger.error(f"创建WorldSeek模型实例失败: {e}")
+                # 提供更友好的错误信息
+                if "connection" in str(e).lower() or "timeout" in str(e).lower():
+                    raise ValueError(f"无法连接到WorldSeek API，请检查网络连接和API配置。错误: {e}")
+                else:
+                    raise ValueError(f"WorldSeek模型配置错误: {e}")
+        
         msg = f"Unknown provider: {provider}"
         raise ValueError(msg)
 
     def update_build_config(self, build_config: dotdict, field_value: Any, field_name: str | None = None) -> dotdict:
         if field_name == "provider":
+            build_config["model_name"]["placeholder"] = "请选择模型"
             if field_value == "OpenAI":
                 build_config["model_name"]["refresh_button"] = False
                 build_config["api_key"]["value"] = ""
