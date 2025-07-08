@@ -77,5 +77,5 @@ def setup_clean_logging():
 
 
 # 在模块导入时自动设置
-setup_warning_filters()
-setup_clean_logging() 
+# setup_warning_filters()
+# setup_clean_logging() 

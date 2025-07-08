@@ -42,14 +42,20 @@ def _set_cache(cache_key: str, result: bool):
 
 def get_worldseek_models_sync() -> list[str]:
     """同步获取WorldSeek模型列表"""
+    
     try:
         from langflow.services.deps import get_db_service
         from langflow.services.database.models.model.crud import get_models
         import threading
         import queue
-        import gc  # 添加垃圾回收
+        import gc
         
-        db_service = get_db_service()
+        # 检查数据库服务是否可用
+        try:
+            db_service = get_db_service()
+        except Exception as e:
+            logger.error(f"无法获取数据库服务: {e}")
+            return []
         
         result_queue = queue.Queue()
         
@@ -58,7 +64,9 @@ def get_worldseek_models_sync() -> list[str]:
                 try:
                     async with db_service.with_session() as session:
                         models = await get_models(session, skip=0, limit=1000)
-                        return [model.name for model in models if model.name]
+                        model_names = [model.name for model in models if model.name]
+                        logger.info(f"找到 {len(model_names)} 个模型")
+                        return model_names
                 except Exception as e:
                     logger.error(f"数据库查询错误: {e}")
                     return []
@@ -73,40 +81,34 @@ def get_worldseek_models_sync() -> list[str]:
                 result_queue.put([])
             finally:
                 loop.close()
-                # 强制垃圾回收释放内存
                 gc.collect()
         
         thread = threading.Thread(target=run_async)
         thread.start()
-        # 将超时时间从5秒增加到15秒，以适应线上环境
         thread.join(timeout=15)
         
         if thread.is_alive():
-            logger.warning("获取模型列表超时")
-            # 强制清理线程资源
-            try:
-                thread.join(timeout=5)  # 再给5秒时间
-            except:
-                pass
+            logger.error("获取模型列表超时(15秒)")
             return []
         
         try:
-            return result_queue.get_nowait()
+            result = result_queue.get_nowait()
+            return result
         except queue.Empty:
-            logger.warning("获取模型列表时队列为空")
+            logger.error("获取模型列表时队列为空")
             return []
             
     except Exception as e:
         logger.error(f"获取WorldSeek模型列表失败: {e}")
         return []
     finally:
-        # 确保内存清理
         import gc
         gc.collect()
 
 
 def get_worldseek_model_config_sync(model_name: str) -> dict:
     """根据模型名称获取模型配置"""
+    
     try:
         from langflow.services.deps import get_db_service
         from langflow.services.database.models.model.crud import get_model_by_name
@@ -114,7 +116,12 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
         import queue
         import gc
 
-        db_service = get_db_service()
+        # 检查数据库服务是否可用
+        try:
+            db_service = get_db_service()
+        except Exception as e:
+            logger.error(f"无法获取数据库服务: {e}")
+            return {}
         
         result_queue = queue.Queue()
         
@@ -124,15 +131,18 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
                     async with db_service.with_session() as session:
                         model = await get_model_by_name(session, model_name)
                         if model:
-                            return {
+                            config = {
                                 "id": model.id,
                                 "name": model.name,
                                 "model_id": getattr(model, 'model_id', ''),
                                 "api_path": model.api_path,
                                 "api_key": model.api_key
                             }
-                        logger.warning(f"在数据库中未找到模型: {model_name}")
-                        return {}
+                            logger.info(f"找到模型配置: {model_name} -> {model.api_path}")
+                            return config
+                        else:
+                            logger.warning(f"未找到模型: {model_name}")
+                            return {}
                 except Exception as e:
                     logger.error(f"数据库查询错误: {e}")
                     return {}
@@ -151,26 +161,21 @@ def get_worldseek_model_config_sync(model_name: str) -> dict:
         
         thread = threading.Thread(target=run_async)
         thread.start()
-        # 将超时时间从5秒增加到15秒
         thread.join(timeout=15)
         
         if thread.is_alive():
-            logger.warning(f"获取模型 '{model_name}' 的配置超时")
-            # 强制清理线程资源
-            try:
-                thread.join(timeout=5)
-            except:
-                pass
+            logger.error(f"获取模型 '{model_name}' 配置超时")
             return {}
         
         try:
-            return result_queue.get_nowait()
+            result = result_queue.get_nowait()
+            return result
         except queue.Empty:
-            logger.warning(f"获取模型 '{model_name}' 配置时队列为空")
+            logger.error(f"获取模型 '{model_name}' 配置时队列为空")
             return {}
             
     except Exception as e:
-        logger.error(f"获取WorldSeek模型 '{model_name}' 配置失败: {e}")
+        logger.error(f"获取模型 '{model_name}' 配置失败: {e}")
         return {}
     finally:
         import gc
@@ -192,11 +197,10 @@ async def verify_model_connection(api_base: str, api_key: str, model_name: str) 
     Raises:
         ValueError: 当检测到具体错误时立即抛出，避免长时间等待
     """
-    # 🚀 检查缓存，避免重复验证
+    # 检查缓存，避免重复验证
     cache_key = _get_cache_key(api_base, api_key, model_name)
     if _is_cache_valid(cache_key):
         cached_result = _verification_cache[cache_key][1]
-        logger.debug(f"使用缓存的验证结果: {cache_key} -> {cached_result}")
         if cached_result:
             return True
         else:
@@ -207,13 +211,8 @@ async def verify_model_connection(api_base: str, api_key: str, model_name: str) 
         import httpx
         import asyncio
         
-        # 🔥 关键：使用极短的超时，让线上环境快速检测错误
-        timeout = httpx.Timeout(
-            connect=3.0,    # 连接超时3秒
-            read=5.0,       # 读取超时5秒  
-            write=3.0,      # 写入超时3秒
-            pool=3.0        # 连接池超时3秒
-        )
+        # 使用短超时，快速检测错误
+        timeout = httpx.Timeout(connect=3.0, read=5.0, write=3.0, pool=3.0)
         
         headers = {
             "Authorization": f"Bearer {api_key}",
@@ -222,14 +221,12 @@ async def verify_model_connection(api_base: str, api_key: str, model_name: str) 
         }
         
         async with httpx.AsyncClient(timeout=timeout) as client:
-            # 步骤1：快速测试基础连接 🔌
+            # 测试基础连接
             try:
                 base_url = api_base.rstrip('/') + '/models'
-                logger.debug(f"测试基础连接: {base_url}")
-                
                 response = await client.get(base_url, headers=headers)
                 
-                # 🚨 立即检测常见错误并抛出具体异常
+                # 立即检测常见错误并抛出具体异常
                 if response.status_code == 401:
                     error_msg = f"Error code: 401 - API密钥无效或已过期: {api_key[:10]}..."
                     _set_cache(cache_key, False)  # 缓存失败结果
@@ -264,7 +261,7 @@ async def verify_model_connection(api_base: str, api_key: str, model_name: str) 
                 _set_cache(cache_key, False)
                 raise ValueError(error_msg) from e
             
-            # 步骤2：验证模型是否存在 🤖  
+            # 验证模型是否存在
             if response.status_code == 200:
                 try:
                     models_data = response.json()
@@ -282,7 +279,7 @@ async def verify_model_connection(api_base: str, api_key: str, model_name: str) 
                         # 直接的模型列表: ["model1", "model2", ...]
                         available_models = models_data
                     
-                    # 🔍 检查模型是否存在
+                    # 检查模型是否存在
                     if available_models and model_name not in available_models:
                         available_str = ', '.join(available_models[:5])  # 显示前5个可用模型
                         if len(available_models) > 5:
@@ -291,7 +288,6 @@ async def verify_model_connection(api_base: str, api_key: str, model_name: str) 
                         _set_cache(cache_key, False)
                         raise ValueError(error_msg)
                     
-                    logger.info(f"✅ 模型验证成功: {model_name}")
                     _set_cache(cache_key, True)  # 缓存成功结果
                     return True
                     
@@ -438,15 +434,11 @@ class LanguageModelComponent(LCModelComponent):
             # 使用配置中的model_id作为实际请求的模型名称，如果没有则使用model_name
             actual_model = model_config.get('model_id', model_name) if model_config else model_name
             
-            # 保留关键调试信息
             logger.info(f"WorldSeek API - 模型: {actual_model}, API端点: {api_base}")
             
-            # 🔥 快速验证连接，失败时立即抛出错误
-            # 这是解决线上环境Worker超时问题的关键
+            # 快速验证连接，失败时立即抛出错误
             try:
                 import httpx
-                
-                logger.info(f"🔍 验证WorldSeek API连接: {api_base}")
                 
                 # 使用同步验证逻辑，避免asyncio问题
                 def _verify_connection_sync():
@@ -505,16 +497,14 @@ class LanguageModelComponent(LCModelComponent):
                 # 执行同步验证
                 _verify_connection_sync()
                 
-                logger.info(f"✅ WorldSeek API连接验证成功")
-                
             except ValueError as e:
                 # 重新抛出验证错误，让用户立即看到具体错误信息
-                logger.error(f"❌ WorldSeek API连接验证失败: {e}")
+                logger.error(f"WorldSeek API连接验证失败: {e}")
                 raise  # 直接抛出，不再继续创建模型
             except Exception as e:
                 # 其他异常也转换为ValueError并抛出
                 error_msg = f"连接验证过程出错: {str(e)}"
-                logger.error(f"❌ {error_msg}")
+                logger.error(error_msg)
                 raise ValueError(error_msg) from e
             
             # 构建额外参数，处理特定模型的要求
@@ -545,6 +535,7 @@ class LanguageModelComponent(LCModelComponent):
         raise ValueError(msg)
 
     def update_build_config(self, build_config: dotdict, field_value: Any, field_name: str | None = None) -> dotdict:
+        logger.debug(f"update_build_config: {field_name}={field_value}")
         if field_name == "provider":
             build_config["model_name"]["placeholder"] = "请选择模型"
             if field_value == "OpenAI":
@@ -568,30 +559,38 @@ class LanguageModelComponent(LCModelComponent):
             elif field_value == "WorldSeek API":
                 # 展示刷新按钮
                 build_config["model_name"]["refresh_button"] = True
+                
                 # 获取WorldSeek模型列表
                 worldseek_models = get_worldseek_models_sync()
+                
                 # 如果获取到模型列表，则展示模型列表
                 if worldseek_models:
                     build_config["model_name"]["options"] = worldseek_models
                     build_config["model_name"]["value"] = worldseek_models[0]
+                    
                     # 获取模型配置
                     model_config = get_worldseek_model_config_sync(build_config["model_name"]["value"])
-                    if model_config:
-                        if "api_key" in model_config and model_config["api_key"]:
-                            build_config["api_key"]["value"] = model_config["api_key"]
+                    if model_config and model_config.get("api_key"):
+                        build_config["api_key"]["value"] = model_config["api_key"]
+                        logger.debug(f"设置默认API Key: {model_config['api_key'][:10]}...")
                 # 如果获取不到模型列表，则展示空列表
                 else:
                     build_config["model_name"]["options"] = []
                     build_config["model_name"]["placeholder"] = "请先在设置面板中配置模型"
                     build_config["model_name"]["value"] = ""
+                    logger.warning("没有获取到任何WorldSeek模型")
                 build_config["api_key"]["display_name"] = "WorldSeek API Key"
         elif field_name == "model_name":
             if build_config["provider"]["value"] == "WorldSeek API" and field_value:
+                logger.debug(f"切换WorldSeek模型: {field_value}")
+                
                 model_config = get_worldseek_model_config_sync(field_value)
-                if model_config:
-                    # 同时设置build_config和组件属性
-                    if "api_key" in build_config and "api_key" in model_config:
-                        build_config["api_key"]["value"] = model_config["api_key"]              
+                
+                if model_config and model_config.get("api_key"):
+                    old_api_key = build_config["api_key"].get("value", "")
+                    new_api_key = model_config["api_key"]
+                    build_config["api_key"]["value"] = new_api_key
+                    logger.info(f"API Key已更新: {old_api_key[:10] if old_api_key else '空'}... → {new_api_key[:10] if new_api_key else '空'}...")
                 else:
-                    pass  # 未找到配置时保持静默
+                    logger.warning(f"未找到模型 '{field_value}' 的配置，API Key不会自动切换")
         return build_config
